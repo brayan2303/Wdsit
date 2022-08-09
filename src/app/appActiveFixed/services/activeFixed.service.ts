@@ -6,6 +6,8 @@ import { ResponseModel } from 'src/app/shared/models/response.model';
 import { ActiveFixedEntity } from '../entities/activeFixed.entity';
 
 
+
+
 @Injectable({
     providedIn:'root'
 })
