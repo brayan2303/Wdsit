@@ -1,0 +1,39 @@
+<div class="pro-container">
+    <p class="title">Listado de Objetivos </p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Proceso</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione un proceso</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="percentage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Porcentaje</th>
+            <td mat-cell *matCellDef="let item">{{item.percentage}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Proceso</th>
+            <td mat-cell *matCellDef="let item">{{item.perspective}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

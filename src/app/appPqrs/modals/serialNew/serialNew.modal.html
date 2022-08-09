@@ -1,0 +1,87 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{this.pqrFomModalE.titleModal}}</p>
+    <p class="pqr-parrafo">{{this.pqrFomModalE.paragraphTitleModal}}</p>
+    <br>
+    <form [formGroup]="form">
+        <div *ngIf="pqrMasterList.length > 0 ; else notEqual">
+            <div class="groupDir">
+                <label class="primaryColor">Tipo de PQRS</label>
+                <select formControlName="categoryId" class="form-control">
+                    <option class="ligthColor" value=null>Seleccione un tipo de PQRS</option>
+                    <option *ngFor="let c of pqrMasterList" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+        </div>
+        <ng-template #notEqual>
+            <div class="groupDir">
+                <label hidden class="primaryColor">Tipo de PQRS</label>
+                <select hidden formControlName="categoryId" class="form-control">
+                    <option class="ligthColor" value=null>Seleccione un tipo de PQRS</option>
+                    <option *ngFor="let c of pqrMasterList" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+        </ng-template>
+        <div class="acts-form form">
+            <div class="groupDir">
+                <label class="primaryColor">{{this.pqrFomModalE.identification}}</label>
+                <input formControlName="identification" matTooltip="{{this.pqrFomModalE.identificationFunction}}"
+                    class="form-control" type="text" placeholder="{{this.pqrFomModalE.identification}}">
+            </div>
+            <div class="groupDir">
+                <label class="primaryColor">{{this.pqrFomModalE.serial}}</label>
+                <input formControlName="serial" matTooltip="{{this.pqrFomModalE.serialFunction}}" class="form-control"
+                    type="text" placeholder="{{this.pqrFomModalE.serial}}">
+            </div>
+            <div class="groupDir">
+                <label class="primaryColor">{{this.pqrFomModalE.imei}}</label>
+                <input formControlName="imei" matTooltip="{{this.pqrFomModalE.imeiFunction}}" class="form-control"
+                    type="text" placeholder="{{this.pqrFomModalE.imei}}">
+            </div>
+            <div class="groupDir">
+                <label class="primaryColor">{{this.pqrFomModalE.movil}}</label>
+                <input formControlName="phoneMovil" matTooltip="{{this.pqrFomModalE.movilFunction}}"
+                    class="form-control" type="text" placeholder="{{this.pqrFomModalE.movil}}">
+            </div>
+            <div class="groupDirArea">
+                <label class="primaryColor">{{this.pqrFomModalE.description}}</label>
+                <textarea formControlName="description" matTooltip="{{this.pqrFomModalE.descriptionFunction}}"
+                    class="form-control input-group">{{this.pqrFomModalE.description}}</textarea>
+            </div>
+            <button mat-mini-fab class="button-float green" matTooltip="{{this.pqrFomModalE.buttonOne}}"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="save()">
+                <mat-icon>done</mat-icon>
+            </button>
+            <div class="group">
+                <label class="primaryColor">{{this.pqrFomModalE.filesAttachments}}</label>
+                <div class="pqr-attachment">
+                    <div class="pqr-attachment-content" matTooltip="{{this.pqrFomModalE.filesAttachmentsFuntion}}">
+                        <ng-container>
+                            <div *ngFor="let f of fileList;let i=index;" class="pqr-container-file"
+                                matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                                <p>{{f.name}}</p>
+                                <div class="pqr-container-actions">
+                                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                        matTooltipClass="tooltip" (click)="removeFile(i)">
+                                        <mat-icon class="red-color">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="pqr-attachment-attach">
+                        <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                        <button mat-icon-button matTooltip="{{this.pqrFomModalE.filesAttachmentsButton}}"
+                            matTooltipPosition="left" matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="orange-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,93 @@
+<div mat-dialog-content>
+    <div class="lod-container-button">
+        <div class="lod-container-button">
+        </div>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Titulo, parrafo de introduccion y entradas de texto (Pagina cliente inicio)</p>
+    <div class="lod-container-button-flex">
+        <div class="lod-group">
+            <input type="text" class="forms-control" placeholder="" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table class="lod-table" mat-table [dataSource]="dataSource" #table>
+        <ng-container matColumnDef="nameLastName">
+            <th mat-header-cell *matHeaderCellDef>Nombres y apellidos</th>
+            <td mat-cell *matCellDef="let item">{{item.nameLastName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nameLastNameFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion de nombre y apellidos</th>
+            <td mat-cell *matCellDef="let item">{{item.nameLastNameFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let item">{{item.email}}</td>
+        </ng-container>
+        <ng-container matColumnDef="emailFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion de email</th>
+            <td mat-cell *matCellDef="let item">{{item.emailFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="emailAnex">
+            <th mat-header-cell *matHeaderCellDef>Email anexos</th>
+            <td mat-cell *matCellDef="let item">{{item.emailAnex}}</td>
+        </ng-container>
+        <ng-container matColumnDef="emailAnexFuntion">
+            <th mat-header-cell *matHeaderCellDef>Funcion de email de anexos</th>
+            <td mat-cell *matCellDef="let item">{{item.emailAnexFuntion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="detailGeneral">
+            <th mat-header-cell *matHeaderCellDef>Detalles generales</th>
+            <td mat-cell *matCellDef="let item">{{item.detailGeneral}}</td>
+        </ng-container>
+        <ng-container matColumnDef="detailGeneralFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion de detalles generales</th>
+            <td mat-cell *matCellDef="let item">{{item.detailGeneralFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="documentsAnex">
+            <th mat-header-cell *matHeaderCellDef>Documentos anexos</th>
+            <td mat-cell *matCellDef="let item">{{item.documentsAnex}}</td>
+        </ng-container>
+        <ng-container matColumnDef="documentsAnexFuntion">
+            <th mat-header-cell *matHeaderCellDef>Funcion de documentos anexos</th>
+            <td mat-cell *matCellDef="let item">{{item.documentsAnexFuntion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="titlePrincipal">
+            <th mat-header-cell *matHeaderCellDef>Titulo de pagina</th>
+            <td mat-cell *matCellDef="let item">{{item.titlePrincipal}}</td>
+        </ng-container>
+        <ng-container matColumnDef="paragraphTitle">
+            <th mat-header-cell *matHeaderCellDef>Parrafo deltitulo de la pagina principal</th>
+            <td mat-cell *matCellDef="let item">{{item.paragraphTitle}}</td>
+        </ng-container>
+        <ng-container matColumnDef="language">
+            <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
+            <td mat-cell *matCellDef="let item">{{item.language}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

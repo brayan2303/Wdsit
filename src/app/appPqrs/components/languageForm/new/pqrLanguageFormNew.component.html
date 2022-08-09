@@ -1,0 +1,113 @@
+<div class="pqr-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Titulo</label>
+            <input name="name" formControlName="tittlePqr" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('tittlePqr').invalid && form.get('tittlePqr').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Parrafo del titulo</label>
+            <input name="paragraphTittle" formControlName="paragraphTittle" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('paragraphTittle').invalid && form.get('paragraphTittle').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input name="names" formControlName="names" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('names').invalid && form.get('names').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Email</label>
+            <input name="email" formControlName="email" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('email').invalid && form.get('email').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Email anexos</label>
+            <input name="emailAnex" formControlName="emailAnex" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('emailAnex').invalid && form.get('emailAnex').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Detalle general</label>
+            <input name="detailGeneral" formControlName="detailGeneral" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('detailGeneral').invalid && form.get('detailGeneral').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Archivos adjuntos</label>
+            <input name="documents" formControlName="documents" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('documents').invalid && form.get('documents').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Titulo de la tabla</label>
+            <input name="titleTable" formControlName="titleTable" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('titleTable').invalid && form.get('titleTable').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Columna 1</label>
+            <input name="columOne" formControlName="columOne" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('columOne').invalid && form.get('columOne').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Columna 2</label>
+            <input name="columTwo" formControlName="columTwo" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('columTwo').invalid && form.get('columTwo').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Columna 3</label>
+            <input name="columTheer" formControlName="columTheer" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('columTheer').invalid && form.get('columTheer').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Columna 4</label>
+            <input name="columFour" formControlName="columFour" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('columFour').invalid && form.get('columFour').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Columna 5</label>
+            <input name="columFive" formControlName="columFive" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('columFive').invalid && form.get('columFive').touched">Ingrese un registro valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Boton de guardar</label>
+            <input name="buttonSend" formControlName="buttonSend" class="form-control text-may">
+            <div class="invalid-text" *ngIf="form.get('buttonSend').invalid && form.get('buttonSend').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Lenguaje</label>
+            <select formControlName="languageId" class="form-control">
+            <option class="ligthColor" value="">Seleccione una opcion</option>
+            <option *ngFor="let c of languageList" value="{{c.id}}">{{c.name}}</option>
+        </select>
+        </div>
+        <div *ngIf="formId != 0" class="pqr-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pqr-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pqr-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="pqr-container-button">
+                <button class="pqr-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

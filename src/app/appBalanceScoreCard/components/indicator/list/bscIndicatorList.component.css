@@ -1,0 +1,97 @@
+.bsc-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.bsc-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.bsc-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.bsc-active{
+    height: 13px;
+    width: 13px;
+    background-color: var(--green);
+    border-radius: 50%;
+    margin: auto;
+}
+.bsc-group >input{
+    margin: 0px 5px 0px 0px;
+}
+mat-paginator{
+    margin-top: 10px;
+}
+.bsc-table{
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    margin-right: 20px !important;
+    max-width: 100%;
+}
+th{
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+}
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.mat-column-id{
+    text-align: center !important;
+    width: 30px;
+    padding-left: 0px !important;
+}
+.bsc-container-loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.bsc-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

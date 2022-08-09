@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <div class="observations-container-closeButton">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Observaciones</p>
+    <form class="observations-form">
+        <div class="observations-group">
+            <label class="primaryColor">Notas</label>
+            <textarea [(ngModel)]="observations" name="observations" class="form-control" placeholder="Notas"></textarea>
+        </div>
+        <div class="observations-container-button">
+            <button class="observations-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

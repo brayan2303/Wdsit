@@ -1,0 +1,45 @@
+<div class="administration-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="newForm" class="administration-form">
+        <div class="administration-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="administration-group">
+            <label class="primaryColor">Tipo Consulta</label>
+            <select formControlName="typeQuery" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo de consulta</option>
+                <option value="Procedimiento Almacenado">Procedimiento Almacenado</option>
+                <option value="Direccion URL">Direccion URL</option>
+            </select>
+        </div>
+        <div *ngIf="newForm.controls.typeQuery.value!=''" class="administration-group">
+            <label class="primaryColor">{{newForm.controls.typeQuery.value}}</label>
+            <input formControlName="storeProcedure" type="text" class="form-control" placeholder="{{newForm.controls.typeQuery.value}}">
+        </div>
+        <div class="administration-group">
+            <label class="primaryColor">Seccion</label>
+            <select formControlName="sectionId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una seccion</option>
+                <option *ngFor="let s of sectionList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="reportId != 0" class="administration-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="administration-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="administration-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="administration-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="administration-container-button">
+            <button class="administration-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!newForm.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

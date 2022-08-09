@@ -1,0 +1,59 @@
+<div class="mee-container">
+    <p class="title">Diligenciar Formularios</p>
+    <div fxLayout fxLayoutAlign="start flex-end" class="mee-container-search">
+        <div fxFlex="300px" fxLayout="column" style="margin-right:20px;">
+            <span class="mee-title">Fecha de Inicio</span>
+            <div fxLayout>
+                <input readonly [(ngModel)]="date1" id="startDate" matInput [matDatepicker]="startDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div fxFlex="300px" fxLayout="column" style="margin-right:20px;">
+            <span class="mee-title">Fecha de Fin</span>
+            <div fxLayout>
+                <input readonly [(ngModel)]="date2" id="endDate" matInput [matDatepicker]="endDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="left" matTooltipClass="tooltip"
+            (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="loading" class="mee-container-loader">
+        <div class="mee-loader"></div>
+    </div>
+    <table class="mee-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario creacion</th> 
+            <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nameGroup">
+            <th mat-header-cell *matHeaderCellDef>Grupos</th> 
+            <td mat-cell *matCellDef="let item">{{item.nameGroup}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Diligenciar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="fillOut(item.id,item.name,item.periodicity)">
+                    <mat-icon class="orange-color">checklist</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

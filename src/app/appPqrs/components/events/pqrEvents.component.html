@@ -1,0 +1,331 @@
+<div class="pqr-container">
+    <p class="title">Administracion eventos {{title}}</p>
+    <div class="pqr-form" [ngStyle]="{'position':isRelative?'relative':'static'}">
+        <div class="pqr-container-action" [ngStyle]="{'top':isRelative?'-20px':'10px','right':isRelative?'0px':'30px'}">
+        <!--    <mat-icon class="pqr-action esa-color" matTooltip="Terminar escalacion" matTooltipPosition="below" matTooltipClass="tooltip"  (click)="escalationFinish(pqrPqrsEntity.ticket,pqrPqrsEntity.number,pqrPqrsEntity.creationPersonId)" >cancel_presentation</mat-icon>-->
+            <mat-icon class="pqr-action purple" matTooltip="Buscar" matTooltipPosition="below" matTooltipClass="tooltip" (click)="detail(pqrPqrsEntity.serial)" >search</mat-icon>
+            <mat-icon class="pqr-action green" matTooltip="Actualizar Eventos" matTooltipPosition="below" matTooltipClass="tooltip" (click)="update()">done</mat-icon>
+            <input #files hidden type="file" (change)="attachFile($event.target.files)">
+            <mat-icon class="pqr-action orange" matTooltip="Adjuntar Archivo" matTooltipPosition="below" matTooltipClass="tooltip" (click)="files.click()">attach_file</mat-icon>
+            <mat-icon class="pqr-action red" matTooltip="Cerrar Pqrs" matTooltipPosition="below" matTooltipClass="tooltip" (click)="finish()">close</mat-icon>
+            <div *ngIf="pqrPqrsEntity.automaticManual==false; else notEqual">
+            <mat-icon disabled class="pqr-action blue" matTooltip="Escalar con el Cliente" matTooltipPosition="below" matTooltipClass="tooltip"  (click)="escalation(pqrPqrsEntity.number, pqrPqrsEntity.assignedPersonId, pqrPqrsEntity.creationPersonId)" >3p</mat-icon>
+        </div>  
+        <ng-template #notEqual>
+         
+        </ng-template>  
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Numero</label>
+            <input [(ngModel)]="pqrPqrsEntity.number" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ticket</label>
+            <input [(ngModel)]="pqrPqrsEntity.ticket" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <input [(ngModel)]="pqrPqrsEntity.assignedPersonId" type="hidden" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <input [(ngModel)]="pqrPqrsEntity.creationPersonId" type="hidden" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tipo Cliente</label>
+            <input [(ngModel)]="pqrPqrsEntity.customerType" type="text" class="form-control" disabled>
+        </div><div class="pqr-group">
+            <label class="primaryColor">Proyecto</label>
+            <input [(ngModel)]="pqrPqrsEntity.proyect" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombres</label>
+            <input [(ngModel)]="pqrPqrsEntity.firstName" type="text" class="form-control"
+                disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Apellidos</label>
+            <input [(ngModel)]="pqrPqrsEntity.lastName" type="text" class="form-control"
+                disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Usuario Creacion</label>
+            <input [(ngModel)]="pqrPqrsEntity.creationPerson" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Usuario Asignado</label>
+            <input [(ngModel)]="pqrPqrsEntity.assignedPerson" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Pais</label>
+            <input [(ngModel)]="pqrPqrsEntity.country" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Departamento</label>
+            <input [(ngModel)]="pqrPqrsEntity.department" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ciudad</label>
+            <input [(ngModel)]="pqrPqrsEntity.city" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Regional</label>
+            <input [(ngModel)]="pqrPqrsEntity.regional" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Marca</label>
+            <input [(ngModel)]="pqrPqrsEntity.tradeMark" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Metodo Contacto</label>
+            <input [(ngModel)]="pqrPqrsEntity.contactMethod" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Correo Contacto</label>
+            <input [(ngModel)]="pqrPqrsEntity.contactEmail" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Categoria</label>
+            <input [(ngModel)]="pqrPqrsEntity.category" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Area Responsable</label>
+            <input [(ngModel)]="pqrPqrsEntity.responsibleArea" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Serial/Imei</label>
+            <input [(ngModel)]="pqrPqrsEntity.serial" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Cantidad Equipos</label>
+            <input [(ngModel)]="pqrPqrsEntity.equipmentQuantity" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tipo PQRS</label>
+            <input [(ngModel)]="pqrPqrsEntity.type" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nivel</label>
+            <input [(ngModel)]="pqrPqrsEntity.levelNumber" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Resumen Solicitud</label>
+            <input [(ngModel)]="pqrPqrsEntity.summary" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Fecha Creacion</label>
+            <input [(ngModel)]="pqrPqrsEntity.creationDate" type="text" class="form-control" disabled>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Numero Ingresos</label>
+            <input [(ngModel)]="pqrPqrsEntity.entryNumber" type="number" class="form-control">
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tecnico Responsable</label>
+            <select [(ngModel)]="pqrPqrsEntity.technicalId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Tecnico</option>
+                <option *ngFor="let t of technicalList" value="{{t.id}}">{{t.firstName}} {{t.lastName}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Registro Fotografico</label>
+            <select [(ngModel)]="pqrPqrsEntity.photographicRecordId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Registro Fotografico</option>
+                <option *ngFor="let p of photographicRecordList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Diagnostico Tecnico/Reparacion</label>
+            <select [(ngModel)]="pqrPqrsEntity.diagnosticId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Diagnostico Tecnico</option>
+                <option *ngFor="let d of technicalDiagnostic" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">    
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Escalacion Cliente</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="customerEscalationDate" matInput
+                            [matDatepicker]="customerEscalationD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="customerEscalationD"></mat-datepicker-toggle>
+                        <mat-datepicker #customerEscalationD></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="customerEscalationHour" type="number" class="form-control" >
+                        <input [(ngModel)]="customerEscalationMinute" type="number" class="form-control" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Respuesta Escalacion Cliente</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="customerEscalationResponseDate" matInput
+                            [matDatepicker]="customerEscalationResponseD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="customerEscalationResponseD"></mat-datepicker-toggle>
+                        <mat-datepicker #customerEscalationResponseD></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="customerEscalationResponseHour" type="number" class="form-control" >
+                        <input [(ngModel)]="customerEscalationResponseMinute" type="number" class="form-control" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Agente Escalacion Interna</label>
+            <select [(ngModel)]="pqrPqrsEntity.internalEscalationAgentId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Agente</option>
+                <option *ngFor="let a of agentList" value="{{a.personId}}">{{a.firstName}} {{a.lastName}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Escalacion Interna</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="internalEscalationDate" matInput
+                            [matDatepicker]="internalEscalationD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="internalEscalationD"></mat-datepicker-toggle>
+                        <mat-datepicker #internalEscalationD></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="internalEscalationHour" type="number" class="form-control">
+                        <input [(ngModel)]="internalEscalationMinute" type="number" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Respuesta Escalacion Interna</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="internalEscalationResponseDate" matInput
+                            [matDatepicker]="internalEscalationResponseD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="internalEscalationResponseD"></mat-datepicker-toggle>
+                        <mat-datepicker #internalEscalationResponseD></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="internalEscalationResponseHour" type="number" class="form-control">
+                        <input [(ngModel)]="internalEscalationResponseMinute" type="number" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Estado Gestion</label>
+            <select [(ngModel)]="pqrPqrsEntity.managementStatusId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Estado Gestion</option>
+                <option *ngFor="let m of managementStatusList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">PQRS Atribuible</label>
+            <select [(ngModel)]="pqrPqrsEntity.attributablePqrsId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una Pqrs Atribuible</option>
+                <option *ngFor="let a of attributablePqrsList" value="{{a.id}}">{{a.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Observaciones</label>
+            <input [(ngModel)]="pqrPqrsEntity.observations" type="text" class="form-control">
+        </div>
+        <div class="pqr-group">
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Envio Unidades</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="unitShipmentDate" matInput
+                            [matDatepicker]="unitShipmentD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="unitShipmentD"></mat-datepicker-toggle>
+                        <mat-datepicker #unitShipmentD disabled="false"></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="unitShipmentHour" type="number" class="form-control">
+                        <input [(ngModel)]="unitShipmentMinute" type="number" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <div class="pqr-form-control">
+                <div class="pqr-group" [ngStyle]="{'flex-grow':'1','margin-bottom':'0px'}">
+                    <label class="primaryColor">Fecha Llegada Unidades</label>
+                    <div class="pqr-form-control">
+                        <input [(ngModel)]="unitArrivalDate" matInput
+                            [matDatepicker]="unitArrivalD" class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="unitArrivalD"></mat-datepicker-toggle>
+                        <mat-datepicker #unitArrivalD disabled="false"></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group" [ngStyle]="{'max-width':'150px','margin-right':'0px','margin-bottom':'0px'}">
+                    <label class="primaryColor">Hora</label>
+                    <div class="pqr-form-control">
+                        <input [ngStyle]="{'margin-right':'5px'}" [(ngModel)]="unitArrivalHour" type="number" class="form-control">
+                        <input [(ngModel)]="unitArrivalMinute" type="number" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Estado Final</label>
+            <select [(ngModel)]="pqrPqrsEntity.finalStatusId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Estado Final</option>
+                <option *ngFor="let f of finalStatusList" value="{{f.id}}">{{f.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="filesList.length>0" class="pqr-group" [ngStyle]="{'width':'100%'}">
+            <label class="primaryColor">Listado Archivos PQRS</label>
+            <div class="pqr-container-file">
+                <div *ngFor="let f of filesList" class="pqr-file" matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                    <p>{{f.type}}</p>
+                    <div class="files-card-actions">
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                            (click)="download(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below" matTooltipClass="tooltip"
+                            (click)="delete(f.name)">
+                            <mat-icon class="red-color">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="fileCustomerList.length>0" class="pqr-group" [ngStyle]="{'width':'100%'}">
+            <label class="primaryColor">Listado Archivos General</label>
+            <div class="pqr-container-file">
+                <div *ngFor="let f of fileCustomerList" class="pqr-file" matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                    <p>{{f.type}}</p>
+                    <div class="files-card-actions">
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                            (click)="download(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below" matTooltipClass="tooltip"
+                            (click)="delete(f.name)">
+                            <mat-icon class="red-color">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

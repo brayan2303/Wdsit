@@ -1,0 +1,243 @@
+<div class="cyclic-container">
+    <p class="title">Conteos Proceso</p>
+    <div class="cyclic-form">
+        <div class="cyclic-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getCyclic()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="cyclic-group">
+            <label class="primaryColor">Ciclicos</label>
+            <select id="cyclic" [(ngModel)]="cyclicId" class="form-control" (change)="getCouting()">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="coutingList.length>0" class="cyclic-container-couting">
+        <p class="title" [ngStyle]="{'margin-bottom':'20px'}">Listado de Conteos</p>
+        <div class="cyclic-content-couting">
+            <div *ngFor="let c of coutingList" class="cyclic-couting">
+                <div class="cyclic-container-information">
+                    <div class="cyclic-information">
+                        <p class="cyclic-couting-title">Pallet</p>
+                        <p class="cyclic-couting-subtitle">{{c.pallet}}</p>
+                    </div>
+                    <div class="cyclic-information">
+                        <p class="cyclic-couting-title">CodigoSap</p>
+                        <p class="cyclic-couting-subtitle">{{c.sapCode}}</p>
+                    </div>
+                    <div class="cyclic-information">
+                        <p class="cyclic-couting-title">Ubicacion</p>
+                        <p class="cyclic-couting-subtitle">{{c.location}}</p>
+                    </div>
+                    <div class="cyclic-information">
+                        <p class="cyclic-couting-title">Tipo</p>
+                        <p class="cyclic-couting-subtitle">{{c.type}}</p>
+                    </div>
+                </div>
+                <div class="cyclic-information">
+                    <button *ngIf="c.status==='Pendiente'" mat-icon-button matTooltip="Iniciar"
+                        matTooltipPosition="right" matTooltipClass="tooltip">
+                        <mat-icon class="green-color" (click)="startEnd(c,'Iniciado')">done</mat-icon>
+                    </button>
+                    <button *ngIf="c.status==='Iniciado'" mat-icon-button matTooltip="Terminar"
+                        matTooltipPosition="right" matTooltipClass="tooltip">
+                        <mat-icon class="red-color" (click)="startEnd(c,'Terminado')">close</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="coutingEntity.pallet!=''" class="cyclic-container-serials">
+        <div *ngIf="coutingEntity.type==='Serializar'" class="cyclic-count">
+            <p class="cyclic-count-title">Ingresados</p>
+            <p class="cyclic-count-subtitle">{{dataSource1.data.length}}</p>
+        </div>
+        <div [ngStyle]="{'display':'flex'}">
+            <ng-container *ngIf="coutingEntity.type==='Serializar'">
+                <div class="cyclic-group">
+                    <label class="primaryColor">Serial</label>
+                    <div class="cyclic-group-control">
+                        <div *ngIf="qr" class="cyclic-qr">
+                            <span>Escaneo QR activo</span>
+                        </div>
+                        <input id="serial" type="text" class="form-control" placeholder="Serial" autocomplete="off"
+                            (keydown)="addSerial($event)">
+                        <button mat-mini-fab matTooltip="Activar QR" class="green" [ngStyle]="{'margin-left':'5px'}"
+                            matTooltipPosition="above" matTooltipClass="tooltip" (click)="qr=!qr">
+                            <mat-icon>qr_code_2</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="coutingEntity.type==='Contar'">
+                <div class="cyclic-group">
+                    <label class="primaryColor">Cantidad</label>
+                    <input id="quantity" [(ngModel)]="quantity" type="number" class="form-control"
+                        placeholder="Cantidad" autocomplete="off" (keydown)="addQuantity($event)">
+                </div>
+            </ng-container>
+            <ng-container *ngIf="coutingEntity.type==='Validar Pallet'">
+                <div class="cyclic-group">
+                    <button mat-mini-fab matTooltip="Buscar Seriales" class="blue"
+                        matTooltipPosition="right" matTooltipClass="tooltip" (click)="validatePallet()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <table *ngIf="coutingEntity.type==='Serializar'" class="cyclic-table" mat-table [dataSource]="dataSource1">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef>Serial</th>
+                <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+            </ng-container>
+            <!--
+            <ng-container matColumnDef="mac">
+                <th mat-header-cell *matHeaderCellDef>Mac</th>
+                <td mat-cell *matCellDef="let item">{{item.mac}}</td>
+            </ng-container>
+        -->
+            <ng-container matColumnDef="sapCode">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCode}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeSap">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeWms">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeWms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeBase">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap Base</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeBase}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item">{{item.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusSap">
+                <th mat-header-cell *matHeaderCellDef>Estado Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.statusSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusWms">
+                <th mat-header-cell *matHeaderCellDef>Estado Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.statusWms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusBase">
+                <th mat-header-cell *matHeaderCellDef>Estado Base</th>
+                <td mat-cell *matCellDef="let item">{{item.statusBase}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pallet">
+                <th mat-header-cell *matHeaderCellDef>Pallet</th>
+                <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+            </ng-container>
+            <ng-container matColumnDef="palletSap">
+                <th mat-header-cell *matHeaderCellDef>Pallet Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.palletSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="palletWms">
+                <th mat-header-cell *matHeaderCellDef>Pallet Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.palletWms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="adjustment">
+                <th mat-header-cell *matHeaderCellDef>Ajuste</th>
+                <td mat-cell *matCellDef="let item">{{item.adjustment}}</td>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                        (click)="removeSerial(item.id)">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+        </table>
+        <mat-paginator #paginator1 *ngIf="coutingEntity.type==='Serializar'"
+            [pageSizeOptions]="[5,10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+        <table *ngIf="coutingEntity.type==='Contar'" class="cyclic-table" mat-table [dataSource]="dataSource2">
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                        (click)="removeQuantity()">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns2;"></tr>
+        </table>
+        <table *ngIf="coutingEntity.type==='Validar Pallet'" class="cyclic-table" mat-table [dataSource]="dataSource3">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef>Serial</th>
+                <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+            </ng-container>
+            <!--
+            <ng-container matColumnDef="mac">
+                <th mat-header-cell *matHeaderCellDef>Mac</th>
+                <td mat-cell *matCellDef="let item">{{item.mac}}</td>
+            </ng-container>
+            -->
+            <ng-container matColumnDef="sapCode">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCode}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeSap">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeWms">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeWms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCodeBase">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap Base</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCodeBase}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item">{{item.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusSap">
+                <th mat-header-cell *matHeaderCellDef>Estado Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.statusSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusWms">
+                <th mat-header-cell *matHeaderCellDef>Estado Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.statusWms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="statusBase">
+                <th mat-header-cell *matHeaderCellDef>Estado Base</th>
+                <td mat-cell *matCellDef="let item">{{item.statusBase}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pallet">
+                <th mat-header-cell *matHeaderCellDef>Pallet</th>
+                <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+            </ng-container>
+            <ng-container matColumnDef="palletSap">
+                <th mat-header-cell *matHeaderCellDef>Pallet Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.palletSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="palletWms">
+                <th mat-header-cell *matHeaderCellDef>Pallet Wms</th>
+                <td mat-cell *matCellDef="let item">{{item.palletWms}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns3"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns3;"></tr>
+        </table>
+        <mat-paginator #paginator2 *ngIf="coutingEntity.type==='Validar Pallet'"
+            [pageSizeOptions]="[5,10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

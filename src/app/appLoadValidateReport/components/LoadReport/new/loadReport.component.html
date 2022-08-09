@@ -1,0 +1,93 @@
+<div class="valReportLoad-container">
+    <p class="title">Archivos</p>
+    <div class="valReportLoad-form">
+        <div class="valReportLoad-group">
+            <label class="primaryColor-c">Cargar archivo</label>
+            <div class="validatRe-group">
+                <label class="primaryColor">Elija un País</label>
+                <select [(ngModel)]="countryId" (change)="FindCountry()" class="form-control text-may">
+                    <option class="ligthColor" value=0>Seleccione un País</option>
+                    <option *ngFor="let c of CountryList" value="{{c.idCountry}}">{{c.country}}</option>
+                </select>
+                <label class="primaryColor">Tipo de Archivo</label>
+                <select [(ngModel)]="typeName" (change)="captura()" class="form-control text-may">
+                    <option class="ligthColor" value="">Seleccione un tipo de Archivo</option>
+                    <option value="xlsx"> xlsx </option>
+                </select>
+                <div class="valReport-buttns">
+                    <div class="valReportLoad-group">
+                        <label class="primaryColor"> Cargar Archivo </label>
+                        <input id="idFile" #idFile hidden type="file" accept=".xlsx,.csv"
+                            (change)="addFile($event.target.files)">
+                        <div class="valReportLoad-container-button">
+                            <button class="valReportLoad-button1"
+                                [disabled]="this.b == true || this.countryId == 0 || this.typeName==''"
+                                mat-raised-button matTooltipClass="tooltip" matTooltipPosition="right"
+                                matTooltip="Cargar archivo" (click)="idFile.click()">
+                                <mat-icon>upload_file</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="this.validate==true" class="valReportLoad-group">
+                        <label class="primaryColor"> Validar </label>
+                        <div class="valReportLoad-container-button">
+                            <button [disabled]="this.a == true" class="valReportLoad-button2" mat-raised-button
+                                matTooltip="Validar" matTooltipPosition="right" matTooltipClass="tooltip"
+                                (click)="validateArchive()">
+                                <mat-icon>published_with_changes</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="this.validateRep == true" class="valReportLoad-group">
+                        <label class="primaryColor"> Subir archivo </label>
+                        <div class="valReportLoad-container-button">
+                            <button [disabled]="this.c == true" class="valReportLoad-button3" mat-raised-button
+                                matTooltip="Subir archivo" matTooltipPosition="right" matTooltipClass="tooltip"
+                                (click)="uploadFile()">
+                                <mat-icon>cloud_upload</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="this.validateRep == true" class="valReportLoad-group">
+                        <label class="primaryColor"> Eliminar </label>
+                        <div class="valReportLoad-container-button">
+                            <button [disabled]="this.c == true" class="valReportLoad-button4" mat-raised-button
+                                matTooltip="Validar" matTooltipPosition="right" matTooltipClass="tooltip"
+                                (click)="deleteArchive()">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="valReport-buttns" style="text-align: center;">
+                        <mat-progress-bar  mode="determinate" value="{{this.value}}"></mat-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table #table class="valReportLoad-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Nombre Usuario">
+            <th mat-header-cell *matHeaderCellDef>Nombre Usuario</th>
+            <td mat-cell *matCellDef="let item">{{item.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Nombre País">
+            <th mat-header-cell *matHeaderCellDef>Nombre País</th>
+            <td mat-cell *matCellDef="let item">{{item.nameCountry}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Fecha de carga">
+            <th mat-header-cell *matHeaderCellDef>Fecha de carga</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Descargar">
+            <th mat-header-cell *matHeaderCellDef>Descargar</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Descargar archivo" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="download(item)">
+                    <mat-icon class="blue-color">cloud_download</mat-icon>
+                </button>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>

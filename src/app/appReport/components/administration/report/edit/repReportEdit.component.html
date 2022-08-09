@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="administration-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-repReportNew (closeDialog)="onClose()" [reportId]="reportId"></app-repReportNew>
+</div>

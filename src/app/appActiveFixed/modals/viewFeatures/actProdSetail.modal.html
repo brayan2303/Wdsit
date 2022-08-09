@@ -1,0 +1,24 @@
+<div mat-dialog-content>
+    <p class="title">Detalle </p>
+    <div class="act-detail-container">
+        <div *ngFor ="let c  of actFixedEntity" class="act-detail-card">
+            <div class="act-detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#3E4DC5'}">dns</mat-icon>
+            </div>
+            <div class="act-detail-content">
+                <p class="act-detail-title">Nombre</p>
+                <p class="act-detail-subtitle">{{c.name}}</p>
+            </div>
+            <div class="act-detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#3EA8C5'}">description</mat-icon>
+            </div>
+            <div class="act-detail-content">
+                <p class="act-detail-title">Descripcion</p>
+                <p class="act-detail-subtitle">{{c.description}}</p>
+            </div>
+        </div>
+        </div>
+    <div *ngIf="loading" class="act-detail-container-loader">
+        <div class="act-detail-loader"></div>
+    </div>
+</div>

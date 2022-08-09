@@ -1,0 +1,44 @@
+<div class="income-main" *ngIf="exist">
+    <div class="income-content">
+        <p class="income-content-title">Por favor ingresa tu número de identificación</p>
+        <form class="income-form" [formGroup]="form1" (ngSubmit)="search(form1)">
+            <div class="income-container-input">
+                <mat-icon>perm_contact_calendar</mat-icon>
+                <input type="text" placeholder="Identificación"
+                    formControlName="identification" (focus)="onFocus()">
+            </div>
+            <button class="income-form-button" mat-raised-button [disabled]="!form1.valid">
+                <mat-icon>search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <div class="income-container-keyboard" *ngIf="keyboard">
+        <div>
+            <div class="income-keyboard-row">
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">1</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">2</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">3</button>
+            </div>
+            <div class="income-keyboard-row">
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">4</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">5</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">6</button>
+            </div>
+            <div class="income-keyboard-row">
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">7</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">8</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">9</button>
+            </div>
+            <div class="income-keyboard-row">
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">0</button>
+                <button type="button" mat-raised-button (click)="onPressed($event.srcElement)">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="income-main income-main-column" *ngIf="!exist">
+    <p class="income-content-title">¡ El número de identificación no existe !</p>
+    <div class="income-content">
+        <button type="button" class="income-form-button" mat-raised-button (click)="onReturn()">Volver</button>
+    </div>
+</div>

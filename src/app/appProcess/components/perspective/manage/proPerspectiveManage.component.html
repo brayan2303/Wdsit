@@ -1,0 +1,143 @@
+<div class="pro-container">
+    <p class="title">Nuevo Proceso</p>
+    <form [formGroup]="form" class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Codigo</label>
+            <input formControlName="code" type="text" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select formControlName="year" class="form-control">
+                <option class="ligthColor" value="">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Pais</label>
+            <select formControlName="countryId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Color</label>
+            <input formControlName="color" type="color" class="form-control" placeholder="Color"
+                matTooltip="{{form.controls.color.value}}" matTooltipPosition="above" matTooltipClass="tooltip">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Lider</label>
+            <select formControlName="leaderId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un lider</option>
+                <option *ngFor="let l of leaderList" value="{{l.id}}">{{l.firstName}} {{l.lastName}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Objetivo</label>
+            <textarea formControlName="objetive" rows="10" cols="1" class="form-control"
+                placeholder="Objetivo"></textarea>
+        </div>
+        <div *ngIf="editing !=0" class="pro-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pro-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pro-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pro-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pro-container-button">
+            <button class="pro-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado de procesos</p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let item">{{item.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="objetive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetivo</th>
+            <td mat-cell *matCellDef="let item">{{item.objetive}}</td>
+        </ng-container>
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Año</th>
+            <td mat-cell *matCellDef="let item">{{item.year}}</td>
+        </ng-container>
+        <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="pro-color" [ngStyle]="{'background-color': item.color}" matTooltip="{{item.color}}"
+                    matTooltipPosition="above" matTooltipClass="tooltip"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pais</th>
+            <td mat-cell *matCellDef="let item">{{item.country}}</td>
+        </ng-container>
+        <ng-container matColumnDef="leader">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lider</th>
+            <td mat-cell *matCellDef="let item">{{item.leader}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Usuarios" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="getUsers(item.id)">
+                    <mat-icon class="orange-color">account_circle</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

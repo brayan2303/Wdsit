@@ -1,0 +1,61 @@
+<div class="mail-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="mail-form">
+        <div class="mail-group">
+            <label class="primaryColor">Titulo</label>
+            <input formControlName="title" type="text" class="form-control" placeholder="Titulo">
+        </div>
+        <div class="mail-group">
+            <label class="primaryColor">Mensaje</label>
+            <textarea formControlName="message" rows="1" cols="1" class="form-control" placeholder="Mensaje"></textarea>
+        </div>
+        <div class="mail-group">
+            <label class="primaryColor">Periodo</label>
+            <select formControlName="period" class="form-control">
+                <option class="ligthColor" value="">Seleccione un periodo</option>
+                <option *ngFor="let p of periodList" value="{{p}}">{{p}}</option>
+            </select>
+        </div>
+        <div [ngStyle]="{'display':'flex','flex-grow':'1'}">
+            <div class="mail-group" [ngStyle]="{'flex-grow':'1'}">
+                <label class="primaryColor">Fecha Inicio</label>
+                <div class="mail-form-control">
+                    <input formControlName="startDate" matInput [matDatepicker]="startDate" class="form-control">
+                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                    <mat-datepicker #startDate disabled="false"></mat-datepicker>
+                </div>
+            </div>
+            <div class="mail-group" [ngStyle]="{'max-width':'160px'}">
+                <label class="primaryColor">Hora inicio</label>
+                <div [ngStyle]="{'display':'flex'}">
+                    <input [(ngModel)]="startHour" [ngModelOptions]="{standalone: true}" type="number" class="form-control" [ngStyle]="{'margin-right':'10px'}">
+                    <input [(ngModel)]="startMinute" [ngModelOptions]="{standalone: true}" type="number" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mail-group">
+            <label class="primaryColor">Reporte</label>
+            <select formControlName="reportId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un reporte</option>
+                <option *ngFor="let c of reportList" value="{{c.id}}">{{c.name}} | {{c.section}}</option>
+            </select>
+        </div>
+        <div *ngIf="mailId != 0" class="mail-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="mail-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="mail-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="mail-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mail-container-button">
+            <button class="mail-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,250 @@
+<div class="agent-container">
+    <p class="title">Nuevo Cliente</p>
+    <form [formGroup]="form" class="agent-form">
+        <div class="agent-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Sigla</label>
+            <input formControlName="sigla" type="text" class="form-control" placeholder="Sigla">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Pais</label>
+            <select formControlName="paisId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un pais</option>
+                <option *ngFor="let p of paisList" value="{{p.id}}">{{p.nombre}}</option>
+            </select>
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Telefono</label>
+            <input formControlName="telefono" type="text" class="form-control" placeholder="Telefono">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Correo</label>
+            <input formControlName="correo" type="text" class="form-control" placeholder="Correo">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Pie 1</label>
+            <input formControlName="pie1" type="text" class="form-control" placeholder="Pie 1">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Pie 2</label>
+            <input formControlName="pie2" type="text" class="form-control" placeholder="Pie 2">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Chat</label>
+            <input formControlName="chat" type="text" class="form-control" placeholder="Chat">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Whatsapp</label>
+            <input formControlName="whatsapp" type="text" class="form-control" placeholder="Whatsapp">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Color</label>
+            <input formControlName="color" type="color" class="form-control" placeholder="Color" matTooltip="{{form.controls.color.value}}" matTooltipPosition="above" matTooltipClass="tooltip">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Tipo Campaña</label>
+            <select formControlName="tipoCampana" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo de campaña</option>
+                <option value="Predictive">Predictive</option>
+                <option value="Previe">Previe</option>
+            </select>
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Campaña</label>
+            <input formControlName="campana" type="text" class="form-control" placeholder="Campaña">
+        </div>
+        <div *ngIf="form.controls.politicaDato.value" class="agent-group">
+            <label class="primaryColor">URL Política</label>
+            <input formControlName="urlPolitica" type="text" class="form-control" placeholder="URL Política">
+        </div>
+        <div *ngIf="form.controls.politicaDato.value" class="agent-group">
+            <label class="primaryColor">URL T&C</label>
+            <input formControlName="urlTyC" type="text" class="form-control" placeholder="URL T&C">
+        </div>
+        <div class="agent-group-checkbox">
+            <label class="primaryColor">Publicidad</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="publicidad" formControlName="publicidad" type="checkbox">
+                    <label class="agent-label" for="publicidad">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agent-group-checkbox">
+            <label class="primaryColor">Política Datos</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="politicaDatos" formControlName="politicaDato" type="checkbox">
+                    <label class="agent-label" for="politicaDatos">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agent-group-checkbox">
+            <label class="primaryColor">Envio Información</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="envioInformacion" formControlName="envioInformacion" type="checkbox">
+                    <label class="agent-label" for="envioInformacion">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agent-group-checkbox">
+            <label class="primaryColor">Envio Notificación</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="envioNotificacion" formControlName="envioNotificacion" type="checkbox">
+                    <label class="agent-label" for="envioNotificacion">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="editing !=0" class="agent-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="check" formControlName="activo" type="checkbox">
+                    <label class="agent-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agent-container-button">
+            <button class="agent-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado Clientes</p>
+    <div class="agent-search-container-button">
+        <div class="agent-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="agent-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.nombre}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sigla">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sigla</th>
+            <td mat-cell *matCellDef="let item">{{item.sigla}}</td>
+        </ng-container>
+        <ng-container matColumnDef="pais">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pais</th>
+            <td mat-cell *matCellDef="let item">{{item.pais}}</td>
+        </ng-container>
+        <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
+            <td mat-cell *matCellDef="let item">{{item.telefono}}</td>
+        </ng-container>
+        <ng-container matColumnDef="correo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+            <td mat-cell *matCellDef="let item">{{item.correo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="chat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Chat</th>
+            <td mat-cell *matCellDef="let item">{{item.chat}}</td>
+        </ng-container>
+        <ng-container matColumnDef="whatsapp">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Whatsapp</th>
+            <td mat-cell *matCellDef="let item">{{item.whatsapp}}</td>
+        </ng-container>
+        <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="application-color" [ngStyle]="{'background-color': item.color}" matTooltip="{{item.color}}" matTooltipPosition="above" matTooltipClass="tooltip"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="tipoCampana">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Campaña</th>
+            <td mat-cell *matCellDef="let item">{{item.tipoCampana}}</td>
+        </ng-container>
+        <ng-container matColumnDef="campana">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Campaña</th>
+            <td mat-cell *matCellDef="let item">{{item.campana}}</td>
+        </ng-container>
+        <ng-container matColumnDef="publicidad">
+            <th mat-header-cell *matHeaderCellDef>Publicidad</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.publicidad" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.publicidad" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="politicaDato">
+            <th mat-header-cell *matHeaderCellDef>Política Datos</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.politicaDato" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.politicaDato" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="urlPolitica">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>URL Política</th>
+            <td mat-cell *matCellDef="let item">{{item.urlPolitica}}</td>
+        </ng-container>
+        <ng-container matColumnDef="urlTyC">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>URL T&C</th>
+            <td mat-cell *matCellDef="let item">{{item.urlTyC}}</td>
+        </ng-container>
+        <ng-container matColumnDef="envioInformacion">
+            <th mat-header-cell *matHeaderCellDef>Envio Información</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.envioInformacion" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.envioInformacion" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="envioNotificacion">
+            <th mat-header-cell *matHeaderCellDef>Envio Notificación</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.envioNotificacion" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.envioNotificacion" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="activo">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.activo" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.activo" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let item">
+            <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="edit(item)">
+                <mat-icon class="blue-color">create</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="delete(item.id)">
+                <mat-icon class="red-color">delete</mat-icon>
+            </button>
+        </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="agent-container-loader">
+        <div class="agent-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

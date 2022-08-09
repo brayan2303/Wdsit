@@ -1,0 +1,93 @@
+<div class="dashboard-container">
+    <p class="title">Dashboard Conteos Ubicacion</p>
+    <div class="dashboard-form">
+        <div class="dashboard-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getCyclic()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="dashboard-group">
+            <label class="primaryColor">Ciclicos</label>
+            <select id="cyclic" [(ngModel)]="cyclicId" class="form-control" (change)="getLocation()">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="loadingLocation" class="dashboard-container-loader">
+        <div class="dashboard-loader"></div>
+    </div>
+    <ng-container *ngIf="locationList.length>0">
+        <div *ngFor="let l of locationListSlice" [ngStyle]="{'margin-right':'20px'}">
+            <div id="l.location" class="dashboard-location" [ngStyle]="{'margin-bottom':open===l.location?'0px':'8px'}">
+                <div class="dashboard-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                    <p class="dashboard-location-title">Numero</p>
+                    <p class="dashboard-location-subtitle">{{l.location}}</p>
+                </div>
+                <div class="dashboard-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                    <p class="dashboard-location-title">Primer Conteo</p>
+                    <p class="dashboard-location-subtitle">{{l.coutingFirst}}</p>
+                </div>
+                <div class="dashboard-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                    <p class="dashboard-location-title">Segundo Conteo</p>
+                    <p class="dashboard-location-subtitle">{{l.coutingSecond}}</p>
+                </div>
+                <div class="dashboard-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                    <p class="dashboard-location-title">Tercer Conteo</p>
+                    <p class="dashboard-location-subtitle">{{l.coutingThird}}</p>
+                </div>
+                <div class="dashboard-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                    <p class="dashboard-location-title">Cuarto Conteo</p>
+                    <p class="dashboard-location-subtitle">{{l.coutingFourth}}</p>
+                </div>
+                <div *ngIf="loadingSapCode" class="dashboard-location-information">
+                    <div class="dashboard-container-loader">
+                        <div class="dashboard-loader-mini"></div>
+                    </div>
+                </div>
+                <div *ngIf="!loadingSapCode" class="dashboard-location-information">
+                    <mat-icon class="dashboard-section-icon primaryColor"
+                        [ngClass]="{'dashboard-section-icon-open' : open === l.location}" (click)="onClick(l.location)">keyboard_arrow_down</mat-icon>
+                </div>
+            </div>
+            <div id="sapCode{{l.location}}" class="dashboard-container-pallet"
+                [ngStyle]="{'height': open === l.location? height :'0px','transition':'height 0.2s linear','margin-bottom':open===l.location?'8px':'0px'}">
+                <ng-container *ngIf="sapCodeList.length>0">
+                    <ng-container *ngFor="let p of sapCodeList">
+                        <div *ngIf="p.location===l.location" class="dashboard-pallet">
+                            <div class="dashboard-location-information"
+                                [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                <p class="dashboard-location-title">Codigo Sap</p>
+                                <p class="dashboard-location-subtitle">{{p.sapCode}}</p>
+                            </div>
+                            <div class="dashboard-location-information"
+                                [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                <p class="dashboard-location-title">Primer Conteo</p>
+                                <p class="dashboard-location-subtitle">{{p.coutingFirst}}</p>
+                            </div>
+                            <div class="dashboard-location-information"
+                                [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                <p class="dashboard-location-title">Segundo Conteo</p>
+                                <p class="dashboard-location-subtitle">{{p.coutingSecond}}</p>
+                            </div>
+                            <div class="dashboard-location-information"
+                                [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                <p class="dashboard-location-title">Tercer Conteo</p>
+                                <p class="dashboard-location-subtitle">{{p.coutingThird}}</p>
+                            </div>
+                            <div class="dashboard-location-information"
+                                [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                <p class="dashboard-location-title">Cuarto Conteo</p>
+                                <p class="dashboard-location-subtitle">{{p.coutingFourth}}</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" [pageSize]="5" [length]="locationList.length"
+        showFirstLastButtons (page)="change($event)"></mat-paginator>
+</div>

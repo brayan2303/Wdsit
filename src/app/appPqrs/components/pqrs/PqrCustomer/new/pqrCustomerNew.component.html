@@ -1,0 +1,164 @@
+<div class="pqr-container">
+    <p class="title">{{this.PqrPageClientInitE.titlePrincipal}}</p>
+    <br>
+    <div class="pqr-content">
+        <p class="pqr-tex">{{this.PqrPageClientInitE.paragraphTitle}}</p>
+    </div>
+    <br>
+
+    <form [formGroup]="form">
+        <div *ngIf="this.PqrTicketPersonE.length > 0 ; else notEqual">
+            <div class="pqr-up">
+                <label class="primaryColor">Digite el número de Ticket, Código de reclamo o SS</label>
+                <input name="ticket" [(ngModel)]="ticketVoid" matTooltip="N° de ticket" formControlName="ticket"
+                    class="form-control pqr-space" placeholder="N° de ticket">
+            </div>
+        </div>
+        <ng-template #notEqual>
+            <div class="pqr-up">
+                <label hidden class="primaryColor">Digite el número de Ticket, Código de reclamo o SS</label>
+                <input hidden name="ticket" matTooltip="N° de ticket" formControlName="ticket"
+                    class="form-control pqr-space" placeholder="N° de ticket">
+            </div>
+        </ng-template>
+        <div class="pqr-form">
+            <div class="pqr-up">
+                <label class="primaryColor">{{this.PqrPageClientInitE.nameLastName}}</label>
+                <input name="name" [(ngModel)]="name"  matTooltip="{{this.PqrPageClientInitE.nameLastNameFunction}}" formControlName="name"
+                    class="form-control pqr-space" placeholder="{{this.PqrPageClientInitE.nameLastName}}">
+                <div class="pqr-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre y
+                    apellido valido</div>
+            </div>
+            <div class="pqr-up">
+                <label class="primaryColor">{{this.PqrPageClientInitE.email}}</label>
+                <input formControlName="emails" [(ngModel)]="email" matTooltip="{{this.PqrPageClientInitE.emailFunction}}" multiple
+                    type="email" class="form-control  pqr-space" placeholder="{{this.PqrPageClientInitE.email}}"
+                    multiple pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$">
+                <div class="pqr-text" *ngIf="form.get('emails').invalid && form.get('emails').touched">Ingrese un correo
+                    valido</div>
+            </div>
+            <div class="pqr-up">
+                <label class="primaryColor">{{this.PqrPageClientInitE.emailAnex}}</label>
+                <input type="email" formControlName="emailAnnexed"
+                    matTooltip="{{this.PqrPageClientInitE.emailAnexFuntion}}" multiple class="form-control pqr-space"
+                    placeholder="{{this.PqrPageClientInitE.emailAnex}}" multiple
+                    pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$">
+                <div class="pqr-text" *ngIf="form.get('emailAnnexed').invalid && form.get('emailAnnexed').touched">
+                    Ingrese
+                    un correo valido</div>
+            </div>
+            <div class="pqr-group">
+                <label class="primaryColor">{{this.PqrPageClientInitE.detailGeneral}}</label>
+                <textarea formControlName="description" [(ngModel)]="detail" matTooltip="{{this.PqrPageClientInitE.detailGeneralFunction}}"
+                    rows="10" cols="1" class="pqr-gro form-control" placeholder="{{this.PqrPageClientInitE.detailGeneral}}
+                "></textarea>
+                <div class="pqr-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese
+                    un
+                    detalle  valido</div>
+            </div>
+            <div class="pqr-group">
+                <label class="primaryColor">{{this.PqrPageClientInitE.documentsAnex}}</label>
+                <div class="pqr-attachment">
+                    <div class="pqr-attachment-content" matTooltip="{{this.PqrPageClientInitE.documentsAnexFuntion}}">
+                        <ng-container *ngIf="pqrCustformId ===0">
+                            <div *ngFor="let f of fileList;let i=index;" class="pqr-container-file"
+                                matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                                <p>{{f.name}}</p>
+                                <div class="pqr-container-actions">
+                                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                        matTooltipClass="tooltip" (click)="removeFile(i)">
+                                        <mat-icon class="red-color">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="pqr-attachment-attach">
+                        <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                        <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                            matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="orange-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="pqrCustformId != 0" class="pqr-group-checkbox">
+                <label class="primaryColor">Activo</label>
+                <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="pqr-checkbox">
+                        <input id="check" formControlName="active" type="checkbox">
+                        <label class="pqr-label" for="check">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mee-container-support ">
+                <br>
+                <label class="primaryColor labels">{{this.PqrFormTableE.titleTable}}</label>
+                <br>
+                <div *ngIf="loading" class="mee-container-loader">
+                    <div class="mee-loader"></div>
+                </div>
+                <table class="mee-table" mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="ticket">
+                        <th mat-header-cell *matHeaderCellDef>{{this.PqrFormTableE.columnOne}}</th>
+                        <td mat-cell *matCellDef="let item">{{item.ticket}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="number">
+                        <th mat-header-cell *matHeaderCellDef>{{this.PqrFormTableE.columnTwo}}</th>
+                        <td mat-cell *matCellDef="let item">{{item.number}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="serial">
+                        <th mat-header-cell *matHeaderCellDef>{{this.PqrFormTableE.columnTheer}}</th>
+                        <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="summary">
+                        <th mat-header-cell *matHeaderCellDef>{{this.PqrFormTableE.columnFour}}</th>
+                        <td mat-cell *matCellDef="let item">{{item.summary}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>{{this.PqrFormTableE.columnFive}}</th>
+                        <td mat-cell *matCellDef="let item">
+                            <button mat-icon-button class="mee-button" matTooltip="Archivos" matTooltipPosition="above"
+                                matTooltipClass="tooltip" (click)="getFiles(item.number)">
+                                <mat-icon class="orange-color">assignment</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                </table>
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+                </mat-paginator>
+                <div *ngIf="this.PqrTicketPersonE.length > 0 ; else notEqualSerial">
+                    <button mat-mini-fab (onClick)="saveNewField(ticketVoid,name,email,detail)" [disabled]="!ticketVoid || !name || !email || !detail"
+                        class="mee-float-button green" matTooltip="{{this.PqrFormTableE.buttonOne}}"
+                        matTooltipPosition="left" matTooltipClass="tooltip" (click)="getRegisSerial()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <ng-template #notEqualSerial>
+                    <button mat-mini-fab class="mee-float-button green" matTooltip="{{this.PqrFormTableE.buttonOne}}"
+                        matTooltipPosition="left" matTooltipClass="tooltip" (click)="getRegisSerial()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
+            <br>
+            <div *ngIf="this.dataSource.data.length != 0; else notEqual" style="margin-top: 1cm" class="pqr-group">
+                <label class="primaryColor">{{this.PqrFormTableE.buttonTwo}}</label>
+                <div class="pqr-container-button">
+                    <button class="pqr-button" mat-raised-button matTooltip="{{this.PqrFormTableE.buttonTwo}}"
+                        mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip"
+                        routerLink="/wdcs/pqr/listClient" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <ng-template #notEqual>           
+            </ng-template>
+        </div>
+    </form>
+</div>

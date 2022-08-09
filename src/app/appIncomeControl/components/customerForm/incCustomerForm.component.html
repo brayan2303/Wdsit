@@ -1,0 +1,8 @@
+<div class="customer-main">
+    <p class="customer-title">Por favor selecciona un cliente</p>
+    <div class="customer-content">
+        <button *ngFor="let customer of customerList" class="customer-button" type="button"
+            mat-raised-button (click)="onClick($event.srcElement)"
+            value="{{customer.id}}">{{customer.description}}</button>
+    </div>
+</div>

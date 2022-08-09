@@ -1,0 +1,45 @@
+<div class="abre-container">
+    <p class="title">Listado Ciudades</p>
+    <div class="abre-container-button">
+        <div class="abre-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="abre-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pais</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="abbreviation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>abreviatura</th>
+            <td mat-cell *matCellDef="let item">{{item.abbreviation}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="edit(item.id)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="city-container-loader">
+        <div class="city-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

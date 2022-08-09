@@ -1,0 +1,185 @@
+<div class="pro-container">
+    <p class="title">Listado de Mediciones</p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Proceso</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione un proceso</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Objetivo </label>
+            <select [(ngModel)]="strategicObjetiveId" class="form-control" (change)="getIndicator()">
+                <option class="ligthColor" value="0">Seleccione un objetivo </option>
+                <option *ngFor="let s of strategicObjetiveList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Indicador</label>
+            <select [(ngModel)]="indicatorId" class="form-control" (change)="getMeasurement()">
+                <option class="ligthColor" value="0">Seleccione un indicador</option>
+                <option *ngFor="let i of indicatorList" value="{{i.id}}">{{i.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="pro-table-cursor" mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">
+                <div *ngIf="item.id===measurementEntity.id" class="pro-active"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="proyectPlan">
+            <th mat-header-cell *matHeaderCellDef>Plan de trabajo</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.proyectPlan}}</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef>Proceso</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.perspective}}</td>
+        </ng-container>
+        <ng-container matColumnDef="strategicObjetive">
+            <th mat-header-cell *matHeaderCellDef>Objetivo </th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.strategicObjetive}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="indicator">
+            <th mat-header-cell *matHeaderCellDef>Indicador</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.indicator}}</td>
+        </ng-container>
+        <ng-container matColumnDef="direction">
+            <th mat-header-cell *matHeaderCellDef>Direccion</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">
+                <mat-icon *ngIf="item.direction==='Arriba'" class="green-color" matTooltip="{{item.direction}}" matTooltipPosition="above" matTooltipClass="tooltip">trending_up</mat-icon>
+                <mat-icon *ngIf="item.direction==='Abajo'" class="red-color" matTooltip="{{item.direction}}" matTooltipPosition="above" matTooltipClass="tooltip">trending_down</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="formula">
+            <th mat-header-cell *matHeaderCellDef>Formula</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.formula}}</td>
+        </ng-container>
+        <ng-container matColumnDef="frecuency">
+            <th mat-header-cell *matHeaderCellDef>Frecuencia</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.frecuency}}</td>
+        </ng-container>
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Año</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.year}}</td>
+        </ng-container>
+        <ng-container matColumnDef="goalType">
+            <th mat-header-cell *matHeaderCellDef>Tipo Meta</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.goalType}}</td>
+        </ng-container>
+        <ng-container matColumnDef="goal">
+            <th mat-header-cell *matHeaderCellDef>Meta</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">
+                <ng-container *ngIf="item.goalType==='Porcentual'">{{item.goal}} %</ng-container>
+                <ng-container *ngIf="item.goalType==='Monetario'">$ {{item.goal}}</ng-container>
+                <ng-container *ngIf="item.goalType==='Numerico'">{{item.goal}}</ng-container>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="responsibleUser">
+            <th mat-header-cell *matHeaderCellDef>Responsable</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">{{item.responsibleUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item" (click)="selected(item)">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    <div *ngIf="measurementEntity.id!=0 && measurementEntity.responsibleUserId===genPersonEntity.id" class="pro-container-button">
+        <p class="title">Listado de Meses</p>
+        <button mat-mini-fab class="green" matTooltip="Agregar Mes" matTooltipPosition="left" matTooltipClass="tooltip"
+        (click)="getMonth()">
+        <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <p *ngIf="measurementEntity.id!=null && measurementDetailList.length===0" class="pro-month-title">No tienes meses agregados!</p>
+    <div *ngIf="measurementEntity.id!=null && measurementDetailList.length>0" class="pro-detail">
+        <div id="month_{{m.id}}" *ngFor="let m of measurementDetailList" class="pro-month">
+            <div class="pro-dialog" [ngStyle]="{'display': id===m.id?'flex':'none','bottom':bottom}">
+                <ng-container *ngFor="let v of variableList">
+                    <ng-container *ngIf="v.type==='Variable' && v.defaultValue=='0'">
+                        <p class="pro-dialog-title">{{v.name}}</p>
+                        <p class="pro-dialog-subtitle">{{v.value}}</p>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <mat-icon *ngIf="m.result !=0" id="month_{{m.id}}" class="pro-button-information orange" matTooltip="Informacion" matTooltipPosition="above" matTooltipClass="tooltip">priority_high</mat-icon>
+            <mat-icon *ngIf="m.status==='Abierto' && measurementEntity.responsibleUserId===genPersonEntity.id" class="pro-button-delete red" matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="delete(m.id)">delete</mat-icon>
+            <p class="pro-month-title">{{m.month}}</p>
+            <p class="pro-month-subtitle">Meta</p>
+            <div class="pro-month-group">
+                <input id="{{m.id}}" type="text" [disabled]="m.status==='Cerrado'" value="{{m.goal}}">
+                <mat-icon *ngIf="m.status==='Abierto'" mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="green-color" matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(m.id)">done</mat-icon>
+            </div>
+            <p class="pro-month-subtitle">Resultado</p>
+            <div class="pro-month-group">
+                <p class="pro-month-title">{{m.result}}</p>
+                <mat-icon *ngIf="m.status==='Abierto'" mat-ripple [matRippleCentered]="true" [matRippleRadius]="18" class="blue-color" matTooltip="Editar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="edit(m.id)">create</mat-icon>
+            </div>
+            <p class="pro-month-subtitle">Cumplimiento</p>
+            <p class="pro-month-title">{{m.compliance}}%</p>
+            <mat-icon class="pro-button-analysis" matTooltip="Analisis" matTooltipPosition="above" matTooltipClass="tooltip" (click)="analysis(m,0,'')">bar_chart</mat-icon>
+            <mat-icon *ngIf="m.status==='Abierto'" class="pro-button-close" matTooltip="Cerrar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="openClose(m.id,'Cerrado')">close</mat-icon>
+            <mat-icon class="pro-button-attach" matTooltip="Archivos" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getFiles(m.id,m.status)">attach_file</mat-icon>
+        </div>
+    </div>
+    <p *ngIf="measurementDetailEntity.id>0" class="title">Analisis de Resultado Mes {{measurementDetailEntity.month}}</p>
+    <p *ngIf="measurementDetailEntity.id>0 && dataSource2.data.length===0" class="pro-month-title">Sin analisis!</p>
+    <table *ngIf="measurementDetailEntity.id>0 && dataSource2.data.length>0" #table class="pro-table" [ngStyle]="{'margin-bottom': '20px'}" mat-table [dataSource]="dataSource2" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let item"></td>
+        </ng-container>
+        <ng-container matColumnDef="analysis">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Analisis</th>
+            <td mat-cell *matCellDef="let item">{{item.analysis}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actionPlan">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Plan de Accion</th>
+            <td mat-cell *matCellDef="let item">
+                <ng-container *ngIf="item.actionPlan==='Sin Plan de Accion'">{{item.actionPlan}}</ng-container>
+                <ng-container *ngIf="item.actionPlan!='Sin Plan de Accion'">
+                    <span class="pro-link" matTooltip="Ver Plan de Accion" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getActionPlan(item.id)">{{item.actionPlan}}</span>
+                </ng-container>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="deleteAnalysis(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="analysis(measurementDetailEntity,item.id,item.analysis)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Agregar Plan de Accion" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="addActionPlan(item.id,item.actionPlan)">
+                    <mat-icon class="orange-color">event</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns2;"></tr>
+    </table>
+</div>

@@ -1,0 +1,60 @@
+<div mat-dialog-content>
+    <div class="cyclic-container-button" [ngStyle]="{'justify-content':'flex-end'}">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <ng-container *ngIf="data.status!='Terminado'">
+        <p class="title">Nuevo Conteo</p>
+        <div class="cyclic-form">
+            <div class="cyclic-group">
+                <label class="primaryColor">Ciclico</label>
+                <input [(ngModel)]="data.cyclic" type="text" class="form-control" placeholder="Ciclico" disabled>
+            </div>
+            <div class="cyclic-group">
+                <label class="primaryColor">Pallet</label>
+                <input [(ngModel)]="data.number" type="text" class="form-control" placeholder="Pallet" disabled>
+            </div>
+            <div class="cyclic-group">
+                <label class="primaryColor">Tipo</label>
+                <select [(ngModel)]="coutingType" class="form-control">
+                    <option class="ligthColor" value="0">Seleccione un tipo</option>
+                    <option value="Contar">Contar</option>
+                    <option *ngIf="data.type!='Accesorios'" value="Serializar">Serializar</option>
+                    <option *ngIf="data.type!='Accesorios'" value="Validar Pallet">Validar Pallet</option>
+                </select>
+            </div>
+            <div class="cyclic-group">
+                <label class="primaryColor">Tarjeta</label>
+                <div class="cyclic-form-control">
+                    <input [(ngModel)]="cardCode" name="person" type="text" class="form-control" disabled
+                        placeholder="Tarjeta">
+                    <button mat-icon-button matTooltip="Tarjetas" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getCards()">
+                        <mat-icon class="green-color">wysiwyg</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="cyclic-group">
+                <label class="primaryColor">Porcentaje Muestra</label>
+                <input [(ngModel)]="sampling" type="number" min="0" max="100" class="form-control"
+                    placeholder="Porcentaje Muestra">
+            </div>
+            <div *ngIf="editing!=0" class="cyclic-group">
+                <label class="primaryColor">Estado</label>
+                <select [(ngModel)]="status" class="form-control">
+                    <option class="ligthColor" value="0">Seleccione un estado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Iniciado">Iniciado</option>
+                    <option value="Terminado">Terminado</option>
+                    <option value="Cerrado">Cerrado</option>
+                </select>
+            </div>
+            <div class="cyclic-container-button">
+                <button class="cyclic-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                    matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>

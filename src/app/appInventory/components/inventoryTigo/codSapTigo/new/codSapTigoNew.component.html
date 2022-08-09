@@ -1,0 +1,29 @@
+<div class="report-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="report-form">
+        <div class="report-group">
+            <label class="primaryColor">Codigo SAP</label>
+            <input name="codSap" formControlName="codSap" class="form-control" placeholder="Codigo Sap">
+            <div class="invalid-text" *ngIf="form.get('codSap').invalid && form.get('codSap').touched">Ingrese un nombre valido</div>
+        </div>
+        <div class="report-group">
+            <label class="primaryColor">Inicio de recorte</label>
+            <input formControlName="initTrim" type="number" class="form-control" placeholder="Inicio">
+            <div class="invalid-text" *ngIf="form.get('initTrim').invalid && form.get('initTrim').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="report-group">
+            <label class="primaryColor">Final de recorte</label>
+            <input formControlName="endTrim" type="number" class="form-control" placeholder="Final">
+            <div class="invalid-text" *ngIf="form.get('endTrim').invalid && form.get('endTrim').touched">Ingrese una descripcion valida</div>
+        </div>
+
+        <div class="report-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="report-container-button">
+                <button type="reset" class="report-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+<div class="scp-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="scp-form">
+
+        <div class="scp-group">
+            <label class="primaryColor">Auditoria Previa</label>
+            <select formControlName="auditPreviousId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una auditoria Previa</option>
+                <option *ngFor="let l of auditPreviousList" value="{{l.id}}">{{l.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('auditPreviousId').invalid && form.get('auditPreviousId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Nivel</label>
+            <select formControlName="levelRuleId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un Nivel</option>
+                <option *ngFor="let l of levelRuleList" value="{{l.id}}">{{l.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('levelRuleId').invalid && form.get('levelRuleId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Tipo Auditoria</label>
+            <select formControlName="typeAudit" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un tipo de auditoria</option>
+                <option *ngFor="let l of typeAuditList" value="{{l.code}}">{{l.description}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('typeAudit').invalid && form.get('typeAudit').touched">Seleccione una opcion valida</div>
+        </div>
+     
+        <div *ngIf="auditId != 0" class="scp-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="scp-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="scp-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="scp-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="scp-container-button">
+                <button type="reset" class="scp-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

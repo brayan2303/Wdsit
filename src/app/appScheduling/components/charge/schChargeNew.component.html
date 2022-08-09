@@ -1,0 +1,85 @@
+<div class="agent-container">
+    <div class>
+
+        <div class="agent-group">
+            <label class="primaryColor">Cliente</label>
+            <select [(ngModel)]="customerId" (change)="list()" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let p of customerList" value="{{p.customerId}}">{{p.customer}}</option>
+            </select>
+        </div>
+
+        <input id="serials" #serials hidden type="file" accept=".xlsx" (change)="load($event.target.files)">
+        <button mat-mini-fab class="blue" matTooltip="{{uploading?'Cargando ':'Cargar '}}" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="serials.click()" >
+            <mat-icon >cloud_upload</mat-icon>
+        </button>
+
+        <button reset mat-mini-fab class="blue loc-but" matTooltip="Exportar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="download()">
+            <mat-icon>cloud_download</mat-icon>
+        </button>
+
+       <button mat-mini-fab class="red loc-but" matTooltip="Eliminar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </div>
+    <br>
+    <div class="agent-search-container-button">
+        <div class="agent-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table class="agent-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef>CLIENTE</th>
+            <td mat-cell *matCellDef="let item">{{item.customer}}</td>
+        </ng-container>
+        <ng-container matColumnDef="identification">
+            <th mat-header-cell *matHeaderCellDef>IDENTIFICACION</th>
+            <td mat-cell *matCellDef="let item">{{item.identification}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nameComplete">
+            <th mat-header-cell *matHeaderCellDef>NOMBRE COMPLETO</th>
+            <td mat-cell *matCellDef="let item">{{item.nameComplete}}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>EMAIL</th>
+            <td mat-cell *matCellDef="let item">{{item.email}}</td>
+        </ng-container>
+        <ng-container matColumnDef="telephone">
+            <th mat-header-cell *matHeaderCellDef>TELEFONO</th>
+            <td mat-cell *matCellDef="let item">{{item.telephone}}</td>
+        </ng-container>
+        <ng-container matColumnDef="celphone">
+            <th mat-header-cell *matHeaderCellDef>CELULAR</th>
+            <td mat-cell *matCellDef="let item">{{item.celphone}}</td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>DIRECCION</th>
+            <td mat-cell *matCellDef="let item">{{item.address}}</td>
+        </ng-container>
+        <ng-container matColumnDef="departament">
+            <th mat-header-cell *matHeaderCellDef>DEPARTAMENTO</th>
+            <td mat-cell *matCellDef="let item">{{item.departament}}</td>
+        </ng-container>
+        <ng-container matColumnDef="province">
+            <th mat-header-cell *matHeaderCellDef>PROVINCIA</th>
+            <td mat-cell *matCellDef="let item">{{item.province}}</td>
+        </ng-container>
+        <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef>DISTRITO</th>
+            <td mat-cell *matCellDef="let item">{{item.district}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+    <div *ngIf="loading" class="agent-container-loader">
+        <div class="agent-loader"></div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="acts-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="acts-form">
+     
+        <div class="acts-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="yearId" formControlName="yearId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y.id}}">{{y.year}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('yearId').invalid && form.get('yearId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="acts-group">
+            <label class="primaryColor">Certificado</label>
+            <select [(ngModel)]="certificateId" formControlName="certificateId" class="form-control" (change)="getPeriodicity(certificateId)">
+                <option class="ligthColor" value="0">Seleccione un certificado</option>
+                <option *ngFor="let c of certificateList" value="{{c.id}}">{{c.name +  " " + c.porcentaje + "%"}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('certificateId').invalid && form.get('certificateId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="acts-group">
+            <label class="primaryColor">Periodicidad</label>
+            <select [(ngModel)]="periodicityId" formControlName="periodicityId" class="form-control" (change)="getMonth(periodicityId)">
+                <option class="ligthColor" value="0">Seleccione una opcion</option>
+                <option *ngFor="let p of periodicityList" value="{{p.id}}">{{p.periodicity}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('periodicityId').invalid && form.get('periodicityId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="acts-group">
+            <label class="primaryColor">Rango</label>
+            <select [(ngModel)]="monthId" formControlName="monthId" class="form-control" >
+                <option class="ligthColor" value="0">Seleccione un Rango</option>
+                <option *ngFor="let m of monthList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('monthId').invalid && form.get('monthId').touched">Seleccione una opcion valida</div>
+        </div>
+
+
+        <div class="acts-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button">
+                <button type="reset" class="acts-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="getDocument(yearId, certificateId, periodicityId, monthId)">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

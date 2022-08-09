@@ -1,0 +1,56 @@
+<div class="application-container">
+    <p class="title">Listado de Aplicaciones</p>
+    <div class="application-container-button">
+        <div class="application-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+        <button routerLink="/principal/application/new" mat-mini-fab class="green" matTooltip="Crear" matTooltipPosition="left" matTooltipClass="tooltip">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <table #table class="application-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Icono</th>
+            <td mat-cell *matCellDef="let item">{{item.icon}}</td>
+        </ng-container>
+        <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="application-color" [ngStyle]="{'background-color': item.color}" matTooltip="{{item.color}}" matTooltipPosition="above" matTooltipClass="tooltip"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Link</th>
+            <td mat-cell *matCellDef="let item">{{item.link}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="edit(item.id)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="application-container-loader">
+        <div class="application-loader"></div>
+    </div> 
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

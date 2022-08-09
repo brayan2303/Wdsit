@@ -1,0 +1,44 @@
+<div class="controlPanel-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="newForm" class="controlPanel-form">
+        <div class="controlPanel-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="controlPanel-group">
+            <label class="primaryColor">Link</label>
+            <textarea formControlName="link" rows="1" cols="1" class="form-control" placeholder="Link"></textarea>
+        </div>
+        <div class="controlPanel-group">
+            <label class="primaryColor">Cliente</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+            </select>
+        </div>
+        <div class="controlPanel-group">
+            <label class="primaryColor">Seccion</label>
+            <select formControlName="sectionId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una seccion</option>
+                <option *ngFor="let s of sectionList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="controlPanelId != 0" class="controlPanel-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="controlPanel-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="controlPanel-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="controlPanel-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="controlPanel-container-button">
+            <button class="controlPanel-button" mat-raised-button [disabled]="!newForm.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,78 @@
+<div class="profile-container">
+    <p class="title">Listado Etiquetas</p>
+    <div class="profile-container-button">
+        <div class="profile-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+        <button mat-mini-fab class="green" matTooltip="Crear Etiqueta" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="create(null)">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <table #table class="profile-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="printCount">
+            <th mat-header-cell *matHeaderCellDef>Cantidad de Impresiones</th>
+            <td mat-cell *matCellDef="let item">{{item.printCount}}</td>
+        </ng-container>
+        <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef>Link</th>
+            <td mat-cell *matCellDef="let item">{{item.link}}</td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef>Cliente</th>
+            <td mat-cell *matCellDef="let item">{{item.customer}}</td>
+        </ng-container>
+        <ng-container matColumnDef="section">
+            <th mat-header-cell *matHeaderCellDef>Seccion</th>
+            <td mat-cell *matCellDef="let item">{{item.section}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="create(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Mas" matTooltipPosition="above" matTooltipClass="tooltip" [matMenuTriggerFor]="menuUser">
+                    <mat-icon class="orange-color">more_vert</mat-icon>
+                </button>
+                <mat-menu #menuUser="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="getCodePrn(item.id)">
+                        <mat-icon>code</mat-icon>
+                        <span>Codigo Prn</span>
+                    </button>
+                    <button mat-menu-item (click)="getField(item.id)">
+                        <mat-icon>dns</mat-icon>
+                        <span>Campos</span>
+                    </button>
+                    <button mat-menu-item (click)="getFieldParametirezation(item.id)">
+                        <mat-icon>description</mat-icon>
+                        <span>Parametrizar</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="profile-container-loader">
+        <div class="profile-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

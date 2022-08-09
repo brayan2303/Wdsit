@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+    <div class="cyclic-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de {{data.typeSampling}}</p>
+    <div class="cyclic-form">
+        <div class="cyclic-group">
+            <label class="primaryColor">Tipo</label>
+            <select [(ngModel)]="type" class="form-control" (change)="getSampling()">
+                <option class="ligthColor" value="">Seleccione un tipo</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Seriales">Seriales</option>
+            </select>
+        </div>
+    </div>
+    <div class="cyclic-container-search">
+        <div class="cyclic-group">
+            <div class="cyclic-group-control">
+                <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+                <mat-icon class="blue-color">search</mat-icon>
+            </div>
+        </div>
+    </div>
+    <table #table class="cyclic-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.value}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Asignar">
+            <th mat-header-cell *matHeaderCellDef>Asignar</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="cyclic-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="cyclic-checkbox">
+                        <input [id]="item.value" type="checkbox" [checked]="item.active" (click)="checked($event.srcElement,item.value)">
+                        <label class="cyclic-label" [for]="item.value">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="cyclic-container-loader">
+        <div class="cyclic-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

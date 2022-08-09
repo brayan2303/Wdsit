@@ -1,0 +1,82 @@
+<div class="bsc-container">
+    <p class="title">Nueva Formula</p>
+    <form [formGroup]="form" class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div *ngIf="editing !=0" class="bsc-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="bsc-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="bsc-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="bsc-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="bsc-container-button">
+            <button class="bsc-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado de Formulas</p>
+    <div class="bsc-search-container-button">
+        <div class="bsc-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="bsc-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="calculation">
+            <th mat-header-cell *matHeaderCellDef>Calculo</th>
+            <td mat-cell *matCellDef="let item">{{item.calculation}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Calcular" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="calculate(item.id)">
+                    <mat-icon class="orange-color">calculate</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="bsc-container-loader">
+        <div class="bsc-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

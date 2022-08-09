@@ -1,0 +1,94 @@
+.docLoadM-table{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+th{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+}
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.docLoadM-container-button{
+    display: flex;
+    justify-content: flex-end;
+}
+.docLoadM-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.docLoadM-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.docLoadM-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.docLoadM-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .docLoadM-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .docLoadM-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.forms-control {
+    color: var(--primary);
+    margin-top: 15px;
+    height: 30px;
+    font-size: 14px;
+    font-family: 'Roboto';
+    border: 1px solid var(--ligth);
+    border-radius: 5px;
+    padding: 0px 50px;
+    outline: none;
+    margin-right: 3in;
+    width: 50%;
+}
+.close{
+text-align: end;
+}

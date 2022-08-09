@@ -1,0 +1,61 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Direccion ip</label>
+            <input formControlName="ip" type="text" class="form-control" placeholder="Direccion ip">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Puerto</label>
+            <input formControlName="port" type="number" class="form-control" placeholder="Puerto">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Usuario</label>
+            <input formControlName="userName" type="text" class="form-control" placeholder="Usuario">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Contraseña</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Tipo</label>
+            <select formControlName="type" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo</option>
+                <option value="Servidor local">Servidor local</option>
+                <option value="Servidor en la nube">Servidor en la nube</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">SGDB</label>
+            <select formControlName="sgdb" class="form-control">
+                <option class="ligthColor" value="">Seleccione un sgdb</option>
+                <option value="MariaDB">MariaDB</option>
+                <option value="Microsoft SQL Server">Microsoft SQL Server</option>
+                <option value="MySQL">MySQL</option>
+                <option value="Oracle">Oracle</option>
+                <option value="PostgreSQL">PostgreSQL</option>
+                <option value="SQLite">SQLite</option>
+            </select>
+        </div>
+        <div *ngIf="data.serverEntity!=null" class="group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button mat-mini-fab class="button green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid" [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

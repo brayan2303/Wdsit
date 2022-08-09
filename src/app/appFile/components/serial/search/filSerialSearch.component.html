@@ -1,0 +1,32 @@
+<div class="fil-container">
+    <p class="title">Consulta Serial</p>
+    <div class="fil-form">
+        <div class="fil-group">
+            <label class="primaryColor">Serial</label>
+            <div [ngStyle]="{'display':'flex'}">
+                <input [(ngModel)]="serial" [ngStyle]="{'margin-right':'5px'}" type="text" class="form-control" placeholder="Serial">
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <p *ngIf="filSerialModel !=null" class="title">Informacion</p>
+    <div *ngIf="filSerialModel !=null" class="fil-container-data">
+        <p>{{filSerialModel.estado}}</p>
+    </div>
+    <ng-container *ngIf="fileList.length>0">
+        <p class="title">Archivos</p>
+    <div class="fil-container-files">
+        <div *ngFor="let f of fileList" class="fil-card-files" matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+            <p>{{f.type}}</p>
+            <div class="fil-card-actions">
+                <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip" (click)="download(f)">
+                    <mat-icon class="blue-color">cloud_download</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+</div>

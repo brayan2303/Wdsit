@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+    <div class="pro-close-button">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Objetivo</label>
+            <input formControlName="objetive" type="text" class="form-control" placeholder="Objetivo">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Fecha de Finalizacion</label>
+            <div class="pro-form-control">
+                <input formControlName="endDate" matInput [matDatepicker]="endDate" disabled class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Usuario Responsable</label>
+            <select formControlName="responsibleUserId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un usuario responsable</option>
+                <option *ngFor="let r of responsibleUserList" value="{{r.id}}">{{r.firstName}} {{r.lastName}}</option>
+            </select>
+        </div>
+        <button mat-mini-fab class="pro-float-button" matTooltip="Guardar" matTooltipPosition="left" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+<div class="pqr-container">
+    <p class="title pqr-title-center">Categorias Cliente</p>
+    <br>
+    <div *ngIf="pqrsList.length > 0 && !loading" class="pqr-content">
+        <div *ngFor="let p of pqrsList" class="pqr-card" (click)="tracing(p.name)">
+            <p class="pqr-card-title">{{p.name}}</p>
+            <p class="pqr-card-content">{{p.description}}</p>
+        </div>
+    </div>
+     <br>
+     <ng-container *ngIf="name!=''">
+     <p class="title pqr-title-cuestions pqr-center">Preguntas Cliente</p>
+     <br>
+        <div *ngIf="this.tracingList.length > 0 && !loadingPqrs" class="pqr-content-cuestion">
+            <div *ngFor="let c of tracingList" class="pqr-card-cuestion">
+                <button mat-button [matMenuTriggerFor]="menu" (click)="file(c.name)">{{c.name}}</button>
+              <!--  <p class="pqr-card-title-cuestion"></p>-->
+              <mat-menu class="my-class" #menu="matMenu" class="pqr-res">
+                <p class="pqr-card-content-cuestion pqr-text  pqr-res" >{{c.description}}</p>
+                <br>
+                <div *ngIf="!loadingDay" class="pqr-content-files">
+                    <div *ngFor="let f of fileListStart" class="pqr-card-files" matTooltipPosition="above"
+                        matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                                (click)="download(f)">
+                                <mat-icon class="blue-color">cloud_download</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                </mat-menu>
+            </div>
+        </div>
+    </ng-container>
+</div>

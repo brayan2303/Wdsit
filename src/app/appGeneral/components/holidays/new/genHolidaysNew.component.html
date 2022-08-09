@@ -1,0 +1,30 @@
+<div class="meeg-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="meeg-form">
+        <div class="meeg-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="holidays" formControlName="holidays" class="form-control" type="date">
+            <div class="invalid-text" *ngIf="form.get('holidays').invalid && form.get('holidays').touched">Ingrese una fecha valida</div>
+        </div>
+        <div *ngIf="genHolidaysformId != 0" class="meeg-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="meeg-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="meeg-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="meeg-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="meeg-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="meeg-container-button">
+                <button type="reset" class="meeg-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

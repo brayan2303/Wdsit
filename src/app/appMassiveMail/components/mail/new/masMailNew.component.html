@@ -1,0 +1,30 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Asunto</label>
+            <input formControlName="subject" type="text" class="form-control" placeholder="Asunto">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Cuenta de Envio</label>
+            <select formControlName="accountId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una cuenta de envio</option>
+                <option *ngFor="let c of accountList" value="{{c.id}}">{{c.mail}}</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex="100" class="group">
+            <label class="primaryColor">Mensaje</label>
+            <editor apiKey="bkuz5ueok7zigqjele2henv1yyi6pkkkk4hkcqnh71iyp2tb" formControlName="message" [init]="{plugins: 'link'}"></editor>
+        </div>
+        <button mat-mini-fab class="button green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid"
+            [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

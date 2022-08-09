@@ -1,0 +1,27 @@
+<div class="activity-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="activity-form">
+        <div class="activity-group">
+            <label class="primaryColor">Titulo</label>
+            <input formControlName="title" type="text" class="form-control" placeholder="Titulo">
+        </div>
+        <div class="activity-group">
+            <label class="primaryColor">Estado</label>
+            <select formControlName="status" class="form-control">
+                <option class="ligthColor" value="">Seleccione un estado</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Terminada">Terminada</option>
+            </select>
+        </div>
+        <div class="activity-group">
+            <label class="primaryColor">Notas</label>
+            <textarea formControlName="note" class="form-control" placeholder="Notas"></textarea>
+        </div>
+        <div class="activity-container-button">
+            <button class="activity-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

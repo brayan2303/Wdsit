@@ -1,0 +1,204 @@
+.pqr-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.pqr-container-search{
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    margin: 0px 20px;
+    border-bottom: 1px solid var(--ligth);
+}
+.pqr-group{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+.pqr-control{
+    display: flex;
+    height: 40px;
+}
+.pqr-content{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+.pqr-container-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-bottom: 5px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.pqr-container-card >.title{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.pqr-flex-button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.pqr-content-card{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow: auto;
+    padding: 5px 20px;
+    margin-top: 20px;
+    max-height: 500px;
+}
+.pqr-card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 5px 5px 0px 5px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.pqr-card-button{
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    height: 15px;
+    width: 15px;
+    background-color: var(--green);
+    border-radius: 100%;
+}
+.pqr-card-information{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.pqr-information-content{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 5px 0px 5px;
+}
+.pqr-card-actions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pqr-title{
+    font-size: 14px;
+    color: var(--primary);
+    margin:0px;
+}
+.pqr-subtitle{
+    font-size: 14px;
+    color: var(--ligth);
+    margin:0px;
+}
+.pqr-tat{
+    font-size: 14px;
+    width: 35px;
+    text-align: center;
+    margin: 0px;
+    color: white;
+}
+.pqr-container-download{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.pqr-container-tracing{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0px 20px 15px 20px;
+}
+.pqr-tracking-content{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.pqr-tracking-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: var(--green);
+    margin-right: 5px;
+}
+.pqr-tracking-circle mat-icon{
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    color: white;
+}
+.pqr-tracking-information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+.pqr-tracking-line{
+    height: 2px;
+    width: 100px;
+    background-color: var(--green);
+}
+.pqr-tracking-title{
+    font-size: 14px;
+    color: var(--primary);
+}
+.pqr-tracking-subtitle{
+    font-size: 12px;
+    color: var(--ligth);
+}
+.pqr-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+.pqr-footer p{
+    font-size: 20px;
+    color: var(--primary);
+}
+.pqr-container-loader {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.pqr-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

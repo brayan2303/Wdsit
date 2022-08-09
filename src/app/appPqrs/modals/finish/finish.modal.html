@@ -1,0 +1,84 @@
+<div mat-dialog-content>
+    <div class="finish-container-closeButton">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">PQRS: {{data.number}}</p>
+    <p class="title">Ticket: {{data.ticket}}</p>
+    <div class="finish-container">
+        <div class="finish-group">
+            <label class="primaryColor">Estado Gestion</label>
+            <select [(ngModel)]="managementStatusId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un estado de gestion</option>
+                <option *ngFor="let m of managementStatusList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="finish-group">
+            <label class="primaryColor">Metodo de Contacto Final</label>
+            <select [(ngModel)]="finalContactMethodId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un metodo de contacto final</option>
+                <option *ngFor="let m of finalContactMethodList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div [ngStyle]="{'display':'flex','flex-grow':'1'}">
+            <div class="finish-group" [ngStyle]="{'flex-grow':'1'}">
+                <label class="primaryColor">Fecha Reporte</label>
+                <div class="finish-form-control">
+                    <input [(ngModel)]="date" matInput [matDatepicker]="creationDate" class="form-control" [max]="getMaxDate()" [min]="getMinDate()">
+                    <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #creationDate disabled="false"></mat-datepicker>
+                </div>
+            </div>
+            <div class="finish-group" [ngStyle]="{'max-width':'160px'}">
+                <label class="primaryColor">Hora creacion</label>
+                <div [ngStyle]="{'display':'flex'}">
+                    <input [(ngModel)]="hour" type="number" class="form-control" [ngStyle]="{'margin-right':'10px'}">
+                    <input [(ngModel)]="minute" type="number" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="finish-group">
+            <label class="primaryColor">Tramite</label>
+            <select [(ngModel)]="procedureId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un tramite</option>
+                <option *ngFor="let m of procedureList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="finish-group">
+            <label class="primaryColor">Archivos adjuntos</label>
+            <div class="finish-attachment">
+                <div class="finish-attachment-content">
+                    <div *ngFor="let f of fileList;let i=index;" class="finish-container-file" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <div class="finish-container-actions">
+                            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                matTooltipClass="tooltip" (click)="deleteFile(f.name)">
+                                <mat-icon class="red-color">delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="finish-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="loadFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="data.typeModal==='Rechazada'" class="finish-group">
+            <label class="primaryColor">Observaciones</label>
+            <textarea [(ngModel)]="observations" name="observations" class="form-control"
+                placeholder="observations"></textarea>
+        </div>
+        <div class="finish-container-button">
+            <button class="finish-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                matTooltipClass="tooltip" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

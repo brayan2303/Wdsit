@@ -1,0 +1,115 @@
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.dashboard-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.dashboard-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.dashboard-location{
+    display: flex;
+    height: 60px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.dashboard-location-information{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.dashboard-location-title{
+    font-size: 14px;
+    color: var(--primary);
+    margin:0px;
+}
+.dashboard-location-subtitle{
+    font-size: 14px;
+    color: var(--ligth);
+    margin:0px;
+}
+.dashboard-section-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    transition: all 0.2s linear;
+}
+.dashboard-section-icon-open{
+    transform: rotate(180deg);
+    transition: transform 0.2s linear;
+}
+.dashboard-container-pallet{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0px 30px;
+}
+.dashboard-pallet{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    padding: 0px 10px;
+    border: 1px solid var(--ligth);
+}
+.dashboard-container-loader {
+    display: flex;
+    justify-content: center;
+}
+.dashboard-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+.dashboard-loader-mini{
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid rgb(53, 74, 95);
+    border-bottom: 3px solid rgb(53, 74, 95);
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

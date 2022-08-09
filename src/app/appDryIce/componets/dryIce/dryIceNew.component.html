@@ -1,0 +1,53 @@
+<div class="loc-container">
+    <p class="title">Lista de seriales inicio </p>
+    <br>
+    <form [formGroup]="form">
+        <div class="loc-group">
+            <label class="primaryColor">Serial</label>
+            <input class="form-control" #serials formControlName="serial" type="text" placeholder="Serial" (keyup.enter)="validador($event)" (keydown.Tab)="validador($event)" >
+            <br>
+        </div>
+    </form>
+    <div class="loc-group">
+        <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+        <mat-icon class="blue-color">search</mat-icon>
+    </div>
+    <table #table class="loc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let item">{{item.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="serial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de inicio</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let item">{{item.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+            <td mat-cell *matCellDef="let item">{{item.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="codSap">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo Sap</th>
+            <td mat-cell *matCellDef="let item">{{item.codSap}}</td>
+        </ng-container>
+        <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+            <td mat-cell *matCellDef="let item">{{item.model}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDatefinish">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha final</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDatefinish}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

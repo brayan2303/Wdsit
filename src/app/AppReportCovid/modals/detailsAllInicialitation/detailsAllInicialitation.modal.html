@@ -1,0 +1,63 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalle Inicio</p>
+    <div class="act-detail-container">
+        <div *ngFor="let c  of covFormEntity">
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#61A73C'}">date_range</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha notificacion al area</p>
+                    <p class="act-detail-subtitle">{{c.dateArea}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#811849'}">fact_check</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Tipo de caso</p>
+                    <p class="act-detail-subtitle">{{c.typeCase}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#A75B3C'}">event</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cita programada</p>
+                    <p class="act-detail-subtitle">{{c.scheduledAppointment}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3C8DA7'}">calendar_today</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de cita</p>
+                    <p class="act-detail-subtitle">{{c.dateAppointment}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#6A58A2'}">calendar_today</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de inicio de cuarentena</p>
+                    <p class="act-detail-subtitle">{{c.dateInitiation}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3CA79D'}">description</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Estado de salud puntual</p>
+                    <p class="act-detail-subtitle">{{c.statusHealthPunctual}}</p>
+                </div>
+            </div>
+            <div *ngIf="loading" class="act-detail-container-loader">
+                <div class="act-detail-loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

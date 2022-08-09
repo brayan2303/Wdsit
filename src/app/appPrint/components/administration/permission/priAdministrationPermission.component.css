@@ -1,0 +1,35 @@
+.pri-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+.pri-table{
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-top: 10px;
+    border: 1px solid var(--ligth);
+}
+th{
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+    text-align: center !important;
+    padding-right: 5px !important;
+}
+td{
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+    text-align: center !important;
+    padding-right: 0px !important;
+}
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.mat-column-actions{
+    width: 80px !important;
+}

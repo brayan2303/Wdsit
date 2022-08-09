@@ -1,0 +1,121 @@
+<div class="loc-container">
+    <div *ngIf="this.dataSource.data.length == 0; else notEqual">
+        <div class="loc-close">
+            <button mat-icon-button (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+    <ng-template #notEqual>
+    </ng-template>
+    <p class="title">Registro de inventario </p>
+    <br>
+    <div class="loc-form">
+        <div class="loc-group-total">
+            <p class="primaryColor">Cantidad de seriales registrados: {{this.dataSource.data.length}}</p>
+        </div>
+
+        <div class="loc-group-total">
+            <p class="loc-red" (click)="this.showTable('NOVEDAD');"> Novedades: {{this.total1}}</p>
+        </div>
+<!--
+        <div class="loc-group-total">
+            <p class="loc-blu" (click)="this.showTable('SOBRANTES');"> Sobrantes: {{this.total3}}</p>
+        </div>
+-->
+<!--        <div class="loc-group-total">
+            <p class="loc-org" (click)="this.showTable('FALTANTES');"> Faltante: {{this.total2}}</p>
+        </div>-->
+        <br>
+        <div class="loc-group-total">
+            <p class="loc-green" (click)="this.showTable('EXITO');"> Exitoso: {{this.total4}}</p>
+        </div>
+    </div>
+
+    <div class="loc-form">
+        <div class="loc-group">
+            <label class="primaryColor">Serial</label>
+            <div *ngIf="qr" class="cyclic-qr">
+                <span>Escaneo QR activo</span>
+            </div>
+            <input class="form-control" [(ngModel)]="serial" #serials type="text" placeholder="Serial" id="serial" name="serial"
+            (keyup.enter)="focusMac($event)" (keydown.tab)="focusMac($event)">
+            <br>
+            <!--
+            <button mat-mini-fab matTooltip="Activar QR" class="green" [ngStyle]="{'margin-left':'5px'}"
+            matTooltipPosition="above" matTooltipClass="tooltip" (click)="qr=!qr">
+            <mat-icon>qr_code_2</mat-icon>
+        </button>-->
+        </div>
+        <div class="loc-group" *ngIf="!this.qr">
+            <label class="primaryColor" >Mac</label>
+            <input class="form-control" [(ngModel)]="mac" #macs type="text" placeholder="Mac" id="mac" name="mac"
+                (keyup.enter)="validador($event)" (keydown.tab)="validador($event)">
+            <br>
+            
+        </div>
+        <div *ngIf="this.dataAll.length > 0">
+            <div class="loc-group loc-end">
+                <label class="primaryColor"></label>
+                <br>
+                <button class="inv-button" mat-raised-button matTooltip="Cerrar conteo" (click)="init()">
+                    <mat-icon>highlight_off</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+    class="example-viewport"> 
+    <table #table class="loc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="serial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="mac">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mac</th>
+            <td mat-cell *matCellDef="let item">{{item.mac}}</td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicacion</th>
+            <td mat-cell *matCellDef="let item">{{item.location}}</td>
+        </ng-container>
+        <ng-container matColumnDef="codigoSap">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo Sap</th>
+            <td mat-cell *matCellDef="let item">{{item.codigoSap}}</td>
+        </ng-container>
+        <ng-container matColumnDef="typology">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipologia</th>
+            <td mat-cell *matCellDef="let item">{{item.typology}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let item">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="pallet">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pallet</th>
+            <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</cdk-virtual-scroll-viewport>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

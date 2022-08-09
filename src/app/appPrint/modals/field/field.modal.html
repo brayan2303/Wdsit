@@ -1,0 +1,100 @@
+<div mat-dialog-content>
+    <div class="label-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Campos</p>
+    <form [formGroup]="form" class="label-form">
+        <div class="label-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="label-group">
+            <label class="primaryColor">Codigo</label>
+            <input formControlName="code" type="text" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="label-group">
+            <label class="primaryColor">Posicion</label>
+            <input formControlName="position" type="number" class="form-control" placeholder="Posicion">
+        </div>
+        <div *ngIf="editing !=0">
+            <div class="label-box">
+                <label class="primaryColor">Activo</label>
+                <div class="label-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="label-checkbox">
+                        <input id="check" formControlName="active" type="checkbox">
+                        <label class="label-label" for="check">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="label-box-automatic">
+            <label class="primaryColor">Automatico</label>
+            <div class="label-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="label-checkbox">
+                    <input id="checks" formControlName="automatic" type="checkbox">
+                    <label class="label-label" for="checks">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+
+            <label class="primaryColor">Manual</label>
+            <div class="label-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="label-checkbox">
+                    <input id="checks1" formControlName="manual" type="checkbox">
+                    <label class="label-label" for="checks1">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="label-group">
+            <button mat-mini-fab class="green " matTooltip="Guardar" matTooltipPosition="right"
+                matTooltipClass="tooltip" (click)="onClick()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </form>
+    <table class="label-table" mat-table [dataSource]="dataSource" #table>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Codigo</th>
+            <td mat-cell *matCellDef="let item">{{item.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Posicion</th>
+            <td mat-cell *matCellDef="let item">{{item.position}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id,item.name,item.code,item.position,item.active,item.automatic,item.manual)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

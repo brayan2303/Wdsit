@@ -1,0 +1,21 @@
+<div class="data-main">
+    <div class="data-information">
+        <div class="data-item">
+            <p class="data-title">Centro de costo</p>
+            <p class="data-subtitle">{{genPersonModel.centerCost}}</p>
+        </div>
+        <div class="data-item">
+            <p class="data-title">Cargo</p>
+            <p class="data-subtitle">{{genPersonModel.position}}</p>
+        </div>
+        <div class="data-item">
+            <p class="data-title">Ciudad</p>
+            <p class="data-subtitle">{{genPersonModel.city}}</p>
+        </div>
+    </div>
+    <p class="data-title data-title-font">¿ Trabajaras en el mismo Centro de Costo ?</p>
+    <div class="data-content-button">
+        <button type="button" class="data-button" mat-raised-button (click)="onClick(true)">Si</button>
+        <button type="button" class="data-button" mat-raised-button (click)="onClick(false)">No</button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+.cyclic-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.cyclic-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.cyclic-form-control{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.cyclic-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.cyclic-container-button{
+    display: flex;
+    width: 100%;
+}
+.cyclic-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}

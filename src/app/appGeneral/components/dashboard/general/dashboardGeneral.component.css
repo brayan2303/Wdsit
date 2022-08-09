@@ -1,0 +1,16 @@
+.dashboardGeneral-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.dashboardGeneral-container-chart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+canvas{
+    max-width: 100%;
+    margin-bottom: 30px;
+}

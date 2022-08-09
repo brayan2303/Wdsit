@@ -1,0 +1,85 @@
+<mat-toolbar class="con-toolbar primaryBackground">
+    <div class="con-toolbar-image primaryBackground">
+        <img src="./assets/images/Logo.png" (click)="goWoden()">
+        <span class="con-toolbar-title secundaryColor">TABLEROS DE CONTROL</span>
+    </div>
+    <div class="con-toolbar-options">
+        <button class="secundaryColor" mat-icon-button (click)="onToogle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div>
+            <button class="secundaryColor" mat-icon-button [matMenuTriggerFor]="apps">
+                <mat-icon>apps</mat-icon>
+            </button>
+            <button class="secundaryColor" mat-icon-button [matMenuTriggerFor]="closeSeccion">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-toolbar>
+<mat-menu #apps="matMenu">
+    <button *ngFor="let app of applicationList" routerLink="/{{app.link}}" class="ligthColor" mat-menu-item>
+        <mat-icon [ngStyle]="{'color':app.color}">{{app.icon}}</mat-icon>
+        <span>{{app.name}}</span>
+    </button>
+</mat-menu>
+<mat-menu #closeSeccion="matMenu">
+    <button class="ligthColor" mat-menu-item (click)="updatePassword()">
+        <mat-icon>cached</mat-icon>
+        <span>Cambiar contraseña</span>
+    </button>
+    <button class="ligthColor" mat-menu-item (click)="logout()">
+        <mat-icon class="red-color">power_settings_new</mat-icon>
+        <span>Cerrar sesión</span>
+    </button>
+</mat-menu>
+<div class="con-container">
+    <div class="con-sidenav" [ngClass]="{'con-sidenav-close' : !isOpen}">
+        <div class="con-sidenav-header secundaryBackground">
+            <input #image hidden type="file" accept="images" (change)="loadImage($event.target.files)">
+            <img src={{photo}} (click)="image.click()">
+            <div class="con-sidenav-title">
+                <span class="primaryColor">{{genPersonEntity.firstName |titlecase}}
+                    {{genPersonEntity.lastName |titlecase}}</span>
+                <span class="ligthColor">{{genPersonEntity.position |titlecase}}</span>
+            </div>
+        </div>
+        <div #sidenavContent class="con-sidenav-content secundaryBackground" (mouseover)="enableScroll()"
+            (mouseleave)="disableScroll()">
+            <span class="con-navigation primaryColor">Navegación</span>
+            <ng-container *ngIf="optionList.length >0">
+                <div *ngFor="let s of sectionList" class="con-section-container"
+                    [ngClass]="{'con-section-container-active' : open === s.name}">
+                    <ng-container *ngIf="s.active">
+                        <div id="s.name" class="con-section primaryColor" (click)="onClick(s.name)">
+                            <div class="con-section-title">
+                                <mat-icon class="con-section-icon primaryColor" [ngStyle]="{'color' : s.color}">
+                                    {{s.icon}}
+                                </mat-icon>
+                                <a>{{s.name |titlecase}}</a>
+                            </div>
+                            <mat-icon class="con-section-icon primaryColor"
+                                [ngClass]="{'con-section-icon-open' : open === s.name}">
+                                keyboard_arrow_down</mat-icon>
+                        </div>
+                        <ul id="module_{{s.name}}" class="con-module"
+                            [ngStyle]="{'height': open === s.name? height :'1px','transition':'height 0.2s linear'}">
+                            <ng-container *ngFor="let o of optionList[0]">
+                                <a *ngIf="o.sectionId === s.id" [routerLink]="[o.link]"
+                                    class="ligthColor">{{o.name}}</a>
+                            </ng-container>
+                            <ng-container *ngFor="let o of optionList[1]">
+                                <a *ngIf="o.sectionId === s.id" class="ligthColor"
+                                    routerLink="/conPrincipal/controlPanel/controlPanelId/{{o.id}}"
+                                    (click)="controlPanelName=o.name">{{o.name}}</a>
+                            </ng-container>
+                        </ul>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="con-content" [ngClass]="{'con-content-close' : !isOpen}">
+        <router-outlet></router-outlet>
+    </div>
+</div>

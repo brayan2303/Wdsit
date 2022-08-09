@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Registro de prueba N°3</p>
+    <br>
+    <form [formGroup]="form" class="acts-form form">
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de prueba</label>
+            <input formControlName="dateThirdProof" class="form-control" type="date" >
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de ejecucion</label>
+            <input formControlName="dateExecutionThirdProof" class="form-control" type="date" >
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Resultado de la prueba</label>
+            <select class="form-control" formControlName="resultThirdProof" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de notificacion de resultados</label>
+            <input formControlName="dateNotificationResultThird" class="form-control" type="date" >
+        </div>
+        
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

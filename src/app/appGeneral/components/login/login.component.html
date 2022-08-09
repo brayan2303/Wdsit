@@ -1,0 +1,43 @@
+<div class="login-container">
+    <div class="login-container-information">
+        <div class="login-container-logo">
+            <div class="login-container-image"></div>
+            <p>Woden Services Information Technology</p>
+        </div>
+        <p class="login-footer">Woden Colombia S.A.S todos los derechos reservados</p>
+    </div>
+    <div class="login-container-form">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form" autocomplete="off">
+            <p class="login-title">Inicio de Sesión</p>
+            <label>Nombre de Usuario</label>
+            <div class="login-group">
+                <input formControlName="userName" type="text" class="primaryColor">
+            </div>
+            <span class="login-alert red-color"
+                *ngIf="loginForm.controls['userName'].invalid && (loginForm.controls['userName'].dirty || loginForm.controls['userName'].touched)">El
+                nombre de usuario es requerido</span>
+            <label>Contraseña</label>
+            <div class="login-group">
+                <mat-icon (click)="hide = !hide">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                <input formControlName="password" [type]="hide ? 'password' : 'text'" class="primaryColor">
+            </div>
+            <span class="login-alert red-color"
+                *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">La
+                contraseña es requerida</span>
+            <label>Pais</label>
+            <div class="login-group">
+                <select class="form-control" formControlName="countryId">
+                    <option class="ligthColor" value="">Selecciona un pais</option>
+                    <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+            <button type="submit" mat-raised-button [disabled]="!loginForm.valid"
+                [ngStyle]="{'color':!loginForm.valid?'var(--ligth)':'var(--primary)'}">
+                <span *ngIf="!loading">Iniciar</span>
+                <div *ngIf="loading" class="login-container-loader">
+                    <div class="login-loader"></div>
+                </div>
+            </button>
+        </form>
+    </div>
+</div>

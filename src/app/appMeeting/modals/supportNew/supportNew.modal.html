@@ -1,0 +1,68 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <div [formGroup]="form" class="form">
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Apoyo</label>
+            <textarea formControlName="support" rows="10" cols="1" class="form-control" placeholder="Apoyo"></textarea>
+        </div>
+        <div *ngIf="data.support!=null" fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Estado</label>
+            <select formControlName="status" class="form-control">
+                <option class="ligthColor" value="">Seleccione un estado</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Terminado">Terminado</option>
+                <option value="Rechazado">Rechazado</option>
+                
+            </select>
+        </div>
+        <div *ngIf="data.support!=null" fxFlex="50%" class="group">
+            <label class="primaryColor">Fecha Inicio</label>
+            <div fxLayout>
+                <input formControlName="startDate" id="startDate" matInput [matDatepicker]="startDate"
+                    class="form-control" disabled>
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div *ngIf="data.support!=null" fxFlex="50%" class="group">
+            <label class="primaryColor">Fecha Fin</label>
+            <div fxLayout>
+                <input formControlName="endDate" id="endDate" matInput [matDatepicker]="endDate"
+                    class="form-control" disabled>
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <label class="primaryColor">{{person.firstName}}</label>   
+  
+      <div *ngIf="data.support===null"  fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Grupo</label>     
+            <select [(ngModel)]="groupId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getGroup(groupId)">
+                <option class="ligthColor" value="0">Seleccione un grupo</option>
+                <option *ngFor="let d of groupList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+
+        <div *ngIf="data.support===null"  fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Usuario Responsable</label>
+            <select [(ngModel)]="personId" formControlName="responsibleUserId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un usuario responsable</option>
+                <option *ngFor="let u of userList" value="{{u.id}}">{{u.nameUser}}</option>
+            </select>
+        </div>
+        <div *ngIf="data.support!=null" fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Respuesta de solicitud de apoyo</label>
+            <textarea formControlName="answerFinish" class="form-control" placeholder="Respuesta"></textarea>
+        </div>
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip"
+            [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</div>

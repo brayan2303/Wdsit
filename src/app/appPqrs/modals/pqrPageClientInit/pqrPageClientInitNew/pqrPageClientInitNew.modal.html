@@ -1,0 +1,97 @@
+<div mat-dialog-content>
+    <div class="pqr-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Formulario N°2 Titulo, parrafo de introduccion y entradas de texto (Pagina cliente inicio)</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre y apellidos</label>
+            <input  name="nameLastName" formControlName="nameLastName" class="form-control" placeholder="Nombre y apellidos">
+            <div class="invalid-text" *ngIf="form.get('nameLastName').invalid && form.get('nameLastName').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Funcion especifica de nombres y apellidos</label>
+            <input  name="nameLastNameFunction" formControlName="nameLastNameFunction" class="form-control text-may" placeholder="Funcion especifica de nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('nameLastNameFunction').invalid && form.get('nameLastNameFunction').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Email</label>
+            <input  name="email" formControlName="email" class="form-control text-may" placeholder="Email">
+            <div class="invalid-text" *ngIf="form.get('email').invalid && form.get('email').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Funcion especifica de email</label>
+            <input  name="emailFunction" formControlName="emailFunction" class="form-control text-may" placeholder="Funcion especifica de email">
+            <div class="invalid-text" *ngIf="form.get('emailFunction').invalid && form.get('emailFunction').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Email anexos</label>
+            <input  name="emailAnex" formControlName="emailAnex" class="form-control text-may" placeholder="Email anexos">
+            <div class="invalid-text" *ngIf="form.get('emailAnex').invalid && form.get('emailAnex').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Funcion especifica de email anexos</label>
+            <input  name="emailAnexFuntion" formControlName="emailAnexFuntion" class="form-control text-may" placeholder="Funcion especifica de email anexos">
+            <div class="invalid-text" *ngIf="form.get('emailAnexFuntion').invalid && form.get('emailAnexFuntion').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Detalles generales</label>
+            <input  name="detailGeneral" formControlName="detailGeneral" class="form-control text-may" placeholder="Detalles generales">
+            <div class="invalid-text" *ngIf="form.get('detailGeneral').invalid && form.get('detailGeneral').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Funcion especifica de detalles generales</label>
+            <input  name="detailGeneralFunction" formControlName="detailGeneralFunction" class="form-control text-may" placeholder="Funcion especifica de detalles generales">
+            <div class="invalid-text" *ngIf="form.get('detailGeneralFunction').invalid && form.get('detailGeneralFunction').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Documentos adjuntos</label>
+            <input  name="documentsAnex" formControlName="documentsAnex" class="form-control text-may" placeholder="Documentos adjuntos">
+            <div class="invalid-text" *ngIf="form.get('documentsAnex').invalid && form.get('documentsAnex').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Funcion especifica de documentos adjuntos</label>
+            <input  name="documentsAnexFuntion" formControlName="documentsAnexFuntion" class="form-control text-may" placeholder="Funcion especifica de documentos adjuntos">
+            <div class="invalid-text" *ngIf="form.get('documentsAnexFuntion').invalid && form.get('documentsAnexFuntion').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Titulo principal de la pagina clientes</label>
+            <input  name="titlePrincipal" formControlName="titlePrincipal" class="form-control text-may" placeholder="Titulo principal de la pagina clientes">
+            <div class="invalid-text" *ngIf="form.get('titlePrincipal').invalid && form.get('titlePrincipal').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Parrafo principal de la pagina clientes</label>
+            <input  name="paragraphTitle" formControlName="paragraphTitle" class="form-control text-may" placeholder="Parrafo principal de la pagina clientes">
+            <div class="invalid-text" *ngIf="form.get('paragraphTitle').invalid && form.get('paragraphTitle').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Lenguaje</label>
+            <select formControlName="languageId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una opcion</option>
+                <option *ngFor="let c of languageList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+            <div *ngIf="this.data.formId != 0" class="pqr-group-checkbox">
+                <label class="primaryColor">Activo</label>
+                <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="pqr-checkbox">
+                        <input id="check" formControlName="active" type="checkbox">
+                        <label class="pqr-label" for="check">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="pqr-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="pqr-container-button">
+                    <button class="pqr-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" mat-raised-button (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+        </div>
+    </form>
+</div>

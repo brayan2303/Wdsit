@@ -1,0 +1,52 @@
+<div class="scp-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="scp-form">
+
+        <div class="scp-group">
+            <label class="primaryColor">Nivel de Auditoria</label>
+            <select formControlName="levelRuleId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un Nivel</option>
+                <option *ngFor="let l of levelRuleList" value="{{l.id}}">{{l.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('levelRuleId').invalid && form.get('levelRuleId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Rango Minimo</label>
+            <input type="number" name="quantityMin" formControlName="quantityMin" class="form-control" placeholder="Minimo">
+            <div class="invalid-text" *ngIf="form.get('quantityMin').invalid && form.get('quantityMin').touched">Ingrese un valor valido</div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Rango Maximo</label>
+            <input type="number" name="quantityMax" formControlName="quantityMax" class="form-control" placeholder="Maximo">
+            <div class="invalid-text" *ngIf="form.get('quantityMax').invalid && form.get('quantityMax').touched">Ingrese un valor valido</div>
+        </div>
+        <div class="scp-group">
+            <label class="primaryColor">Muestra</label>
+            <input type="number" name="show" formControlName="show" class="form-control" placeholder="Muestra">
+            <div class="invalid-text" *ngIf="form.get('show').invalid && form.get('show').touched">Ingrese un valor valido</div>
+        </div>
+     
+        <div *ngIf="levelRuleQuantityId != 0" class="scp-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="scp-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="scp-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="scp-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="scp-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="scp-container-button">
+                <button type="reset" class="scp-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

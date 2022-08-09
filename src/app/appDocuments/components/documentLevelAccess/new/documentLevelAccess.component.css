@@ -1,0 +1,118 @@
+.docLevel-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.docLevel-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.docLevel-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.docLevel-text{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.docLevel-container-button{
+    display: flex;
+    width: 100%;
+}
+.docLevel-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.docLevel-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #197763;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+
+.docLevel-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.docLevel-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.docLevel-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.docLevel-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.docLevel-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .docLevel-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .docLevel-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.docLevel-control{
+    display: flex;
+    height: 40px;
+}
+
+
+
+

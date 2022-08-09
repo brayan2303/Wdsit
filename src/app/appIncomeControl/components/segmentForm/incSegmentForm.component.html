@@ -1,0 +1,7 @@
+<div class="segment-main">
+    <p class="segment-title">Por favor selecciona un segmento</p>
+    <div class="segment-content">
+        <button *ngFor="let segment of segmentList" class="segment-button" type="button" mat-raised-button
+            (click)="onClick($event.srcElement)" value="{{segment.id}}">{{segment.description}}</button>
+    </div>
+</div>

@@ -1,0 +1,249 @@
+<div class="cov-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="cov-form">
+        <div class="cov-group">
+            <label class="primaryColor">Numero de identificacion</label>
+            <div class="cov-control-group">
+                <input matInput  formControlName="identificationUser" type="number" class="form-control" placeholder="N° Cedula">
+                <div class="invalid-text" *ngIf="form.get('identificationUser').invalid && form.get('identificationUser').touched">Ingrese un número de identificacion</div>
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="cov-group cov-margin">
+            <label class="primaryColor">Tipo de documento</label>
+            <select class="form-control" formControlName="typeDocument">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="CC">CC</option>
+                <option value="CE">CE</option>
+                <option value="Pasaporte">Pasaporte</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('typeDocument').invalid && form.get('typeDocument').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Empresa</label>
+            <select class="form-control" formControlName="company">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Woden Colombia">Woden Colombia</option>
+                <option value="Temporal Extras">Temporal Extras</option>
+                <option value="Temporal Accion Plus">Temporal Accion Plus</option>
+                <option value="Temporal Extras">Proveedor</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('company').invalid && form.get('company').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre y apellido valido</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Cargo</label>
+            <select formControlName="position" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cargo</option>
+                <option *ngFor="let p of positionList" value="{{p.id}}">{{p.description}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('position').invalid && form.get('position').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Nombre de jefe inmediato</label>
+            <input formControlName="bossName" type="text" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('bossName').invalid && form.get('bossName').touched">Ingrese un nombre y apellido valido</div>
+        </div>
+        
+        <div class="cov-group">
+            <label class="primaryColor">EPS a la que se encuentra afiliado</label>
+            <input formControlName="eps" type="text" class="form-control text-may" placeholder="EPS/IPS">
+            <div class="invalid-text" *ngIf="form.get('eps').invalid && form.get('eps').touched">Ingrese un nombre valido</div>
+        </div>
+        
+        <div class="cov-group">
+            <label class="primaryColor">Direccion</label>
+            <input formControlName="direction" type="text" class="form-control text-may" placeholder="KR/Cll 00 # 00 - 00">
+            <div class="invalid-text" *ngIf="form.get('direction').invalid && form.get('direction').touched">Ingrese una direccion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Telefono fijo</label>
+            <input maxlength="7" formControlName="phone" type="number" class="form-control" placeholder="0000-00-00"S>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Celular</label>
+            <input maxlength="10" formControlName="mobile" type="number" class="form-control" placeholder="000-000-00-00" >
+            <div class="invalid-text" *ngIf="form.get('mobile').invalid && form.get('mobile').touched">Ingrese un numero de celular valido</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Correo Electronico</label>
+            <input formControlName="email" type="email" name="email" ngModel [email]="true" class="form-control"  placeholder="*****-**@**.com">
+            <div class="invalid-text" *ngIf="form.get('email').invalid && form.get('email').touched">Ingrese un email valido</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="countryId" [ngModelOptions]="{standalone: true}" class="form-control"
+                (change)="getDepartment()">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId" [ngModelOptions]="{standalone: true}" class="form-control"
+                (change)="getCity()">
+                <option class="ligthColor" value="0">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Ciudad</label>
+            <select formControlName="cityId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una ciudad</option>
+                <option *ngFor="let c of cityList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('cityId').invalid && form.get('cityId').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">¿Tiene sintomas?</label>
+            <label class="primaryColor">   <input type="radio" (click)="toggleShow()" formControlName="hasSymptoms" value="Si" >Si</label>
+         <label class="primaryColor">   <input type="radio" formControlName="hasSymptoms" value="No">No</label>
+        </div>
+        <div *ngIf="date" class="cov-group">
+            <label class="primaryColor">Fecha de los sintomas</label>
+            <input formControlName="symptomsDate" type="date" class="form-control" [max]="getToday()"
+                placeholder="0000-00-00">
+        </div>
+        <div class="cov-text">
+            <label class="primaryColor">Describa sus sintomas</label>
+            <textarea class="text-area text-may" id="textarea" formControlName="descripSymptims" 
+                maxlength="255" placeholder="Maximo 255 caracteres" required></textarea>
+                <div class="invalid-text" *ngIf="form.get('descripSymptims').invalid && form.get('descripSymptims').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div class="cov-group cov-bot">
+            <label class="primaryColor">Lugar de inicio de los sintomas</label>
+            <select class="form-control cov-marg " formControlName="placeSymptoms">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Casa">Casa</option>
+                <option value="Instalaciones de la empresa">Instalaciones de la empresa</option>
+                <option
+                    value="lugar de trabajo (tiendas, puntos de servicio, transporte logístico, domicilio de titulares)">
+                    lugar de trabajo (tiendas, puntos de servicio, transporte logístico, domicilio de titulares)
+                </option>
+                <option value="centros de atención medica">centros de atención medica</option>
+                <option value="transporte publico">transporte publico</option>
+                <option value="espacios públicos (supermercados, tiendas, parques, bancos, etc.)">espacios públicos
+                    (supermercados, tiendas, parques, bancos, etc.)</option>
+                <option value="no aplica">no aplica</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">¿Ha tenido contacto estrecho con otras personas?</label>
+            <select class="form-control" formControlName="concatPerson" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <div class="invalid-text" *ngIf="form.get('concatPerson').invalid && form.get('concatPerson').touched">Seleccione una opcion valida</div>
+            </select>
+            <p class="cov-pars">El contacto estrecho es aquel en el cual dos o más personas se encuentran sin tapabocas, a menos de 2 metros y por un tiempo mayor a 15 minutos</p>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">¿Que parentezco tiene?</label>
+            <select class="form-control" formControlName="parentsPerson">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Familiar">Familiar</option>
+                <option value="Amigo / Conocido">Amigo / Conocido</option>
+                <option value="Compañeros de trabajo">Compañeros de trabajo</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Fecha inicio de la cuarentena</label>
+            <input formControlName="cuarentDate" type="date" class="form-control" placeholder="0000-00-00" [max]="getToday()">
+        </div>
+
+        <div class="cov-group">
+            <label class="primaryColor" required>¿Tiene familiares en la empresa?</label>
+            <select class="form-control" formControlName="famBusiness">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('famBusiness').invalid && form.get('famBusiness').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">¿Que parentezco tiene?</label>
+            <select class="form-control" formControlName="famParents">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Padre">Padre</option>
+                <option value="Madre">Madre</option>
+                <option value="Esposa">Esposa</option>
+                <option value="Esposo">Esposo</option>
+                <option value="Novia">Novia</option>
+                <option value="Novio">Novio</option>
+                <option value="Hijo">Hijos</option>
+                <option value="Abuelo">Abuelos</option>
+                <option value="Nieto">Nietos</option>
+                <option value="Hermano">Hermano</option>
+                <option value="Tio">Tio</option>
+                <option value="Sobrino">Sobrino</option>
+                <option value="Primo">Primo</option>
+                <option value="Cuñado">Cuñado</option>
+                <option value="Suegro">Suegro</option>
+            </select>
+        </div>
+
+        <div class="cov-group">
+            <label class="primaryColor">¿Tiene algun documento?</label>
+            <select class="form-control" formControlName="documentHos">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Certificado de aislamiento">Certificado de aislamiento</option>
+                <option value="Incapacidad">Incapacidad</option>
+                <option value="Alta medica">Alta medica</option>
+                <option value="Enfermedad diagnosticada por un medico">Enfermedad diagnosticada por un medico</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Archivos adjuntos</label>
+            <div class="cov-attachment">
+                <div class="cov-attachment-content">
+                    <ng-container *ngIf="formId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="cov-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="cov-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="cov-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="formId != 0" class="cov-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="cov-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="cov-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="cov-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="cov-container-button">
+                <button type="reset" class="cov-button" mat-raised-button matTooltip="Guardar"
+                    matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button [disabled]="!form.valid"  routerLink="/forms" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

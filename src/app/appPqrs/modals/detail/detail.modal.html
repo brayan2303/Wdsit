@@ -1,0 +1,379 @@
+<div mat-dialog-content>
+    <p class="title">Detalle {{pqrPqrsEntity.number}}</p>
+    <div class="detail-container">
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#f44336'}">local_offer</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Ticket</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.ticket}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#2196f3'}">format_list_numbered</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Numero</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.number}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff9800'}">account_box</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Usuario de Creacion</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.creationPerson}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e5ff'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha de Reporte</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.creationDate}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00bcd4'}">how_to_reg</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Tipo de Cliente</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.customerType}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#009688'}">leaderboard</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Proyecto</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.proyect}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#fdd835'}">account_circle</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Usuario Solicitante</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.firstName}} {{pqrPqrsEntity.lastName}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#607d8b'}">contact_page</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Agente Asignado</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.assignedPerson}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#673ab7'}">airplanemode_active</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Pais</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.country}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff80ab'}">flight_takeoff</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Departamento</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.department}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e676'}">flight_land</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Ciudad</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.city}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#e040fb'}">flight_takeoff</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Regional</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.regional}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#f44336'}">class</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Marca/Modelo</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.tradeMark}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#2196f3'}">list</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Categoria</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.category}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff9800'}">trending_down</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Metodo de Contacto</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.contactMethod}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e5ff'}">email</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Correo de contacto</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.contactEmail}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00bcd4'}">supervisor_account</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Area Responsable</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.responsibleArea}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#009688'}">grading</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Seriales</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.serial}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#fdd835'}">gavel</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Tipo de PQRS</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.type}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#607d8b'}">assignment</mat-icon>
+            </div>
+            <div *ngIf="pqrPqrsEntity.summary == null; else notequal " class="detail-content">
+                <p class="detail-title">Resumen de la Solicitud</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.summaryAlternative}}</p>
+            </div>
+            <ng-template #notequal>
+                <div class="detail-content">
+                    <p class="detail-title">Resumen de la Solicitud</p>
+                    <p class="detail-subtitle">{{pqrPqrsEntity.summary}}</p>
+                </div>
+            </ng-template>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#673ab7'}">looks_one</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Cantidad de Ingresos</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.entryNumber}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff80ab'}">donut_large</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Estado</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.status}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e676'}">close_fullscreen</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Estado Final</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.finalStatus}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#e040fb'}">face</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Tecnico Responsable</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.technical}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#f44336'}">add_a_photo</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Registro Fotografico</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.photographicRecord}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#2196f3'}">build</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Diagnostico Tecnico-Reparacion</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.diagnostic}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Escalamiento Cliente Woden</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.customerEscalationDate}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e5ff'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Respuesta Escalamiento Cliente Woden</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.customerEscalationResponseDate}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00bcd4'}">face</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Agente Escalamiento Interno</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.internalEscalationAgent}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#009688'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Escalamiento Interno</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.internalEscalationDate}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#fdd835'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Respuesta Escalamiento Interno</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.internalEscalationResponseDate}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#607d8b'}">format_list_numbered</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Nivel</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.levelNumber}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#673ab7'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Respuesta Cliente PQRS</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.responseDateCustomerPqrs}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff80ab'}">timeline</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Estado Gestion</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.managementStatus}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e676'}">trending_down</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Metodo Contacto Final</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.finalContactMethod}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#e040fb'}">looks_one</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Cantidad de Equipos</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.equipmentQuantity}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#f44336'}">list</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">PQRS Atribuible</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.attributablePqrs}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#2196f3'}">assignment</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Observaciones Woden</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.observations}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Envio Unidades</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.unitShipmentDate}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e5ff'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha Llegada Unidades</p>
+                <p class="detail-subtitle">{{pqrPqrsEntity.unitArrivalDate}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#f44336'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Archivos apertura</p>
+                <div class="detail-container-file">
+                    <p *ngIf="fileList.length===0" class="detail-subtitle"></p>
+                    <div *ngFor="let f of fileList;" class="detail-content-file" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="right"
+                            matTooltipClass="tooltip" (click)="downloadFile(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                    </div>
+                    <p *ngIf="fileStartList.length ===0" class="detail-subtitle"></p>
+                    <div *ngFor="let f of fileStartList;" class="detail-content-file" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="right"
+                            matTooltipClass="tooltip" (click)="downloadFile(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#2196f3'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Archivos cierre</p>
+                <div class="detail-container-file">
+                    <p *ngIf="fileEndList.length===0" class="detail-subtitle">Sin Archivos</p>
+                    <div *ngFor="let f of fileEndList;" class="detail-content-file" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="right"
+                            matTooltipClass="tooltip" (click)="downloadFile(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="loading" class="detail-container-loader">
+        <div class="detail-loader"></div>
+    </div>
+</div>

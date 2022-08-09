@@ -1,0 +1,123 @@
+<div class="acts-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="acts-form">
+        <div class="acts-group">
+            <label class="primaryColor">Serial</label>
+            <div class="acts-control-group">
+                <input matInput formControlName="serial" type="text" class="form-control"
+                    placeholder="000--00--00000">
+                <div class="invalid-text"
+                    *ngIf="form.get('serial').invalid && form.get('serial').touched">Ingrese un número
+                    de serial</div>
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="acts-group acts-margin">
+            <label class="primaryColor">N° de identificacion</label>
+            <input readonly name="identification" formControlName="identification" class="form-control text-may" placeholder="7700774OI480484">
+            <div class="invalid-text" *ngIf="form.get('identification').invalid && form.get('identification').touched">Ingrese un N° de identificacion
+                valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input readonly name="name" formControlName="name" class="form-control text-may"
+                placeholder="Nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre y
+                apellido valido</div>
+        </div>
+        <div class="acts-group ">
+            <label class="primaryColor">Email</label>
+            <input readonly name="mail" formControlName="mail" class="form-control text-may"
+                placeholder="*****@asa***.com">
+            <div class="invalid-text" *ngIf="form.get('mail').invalid && form.get('mail').touched">Ingrese un correo
+                valido</div>
+        </div>
+        <div class="acts-group ">
+            <label class="primaryColor">Centro de costo</label>
+            <input readonly name="costCenter" formControlName="costCenter" class="form-control text-may"
+                placeholder="Centro de costo">
+            <div class="invalid-text" *ngIf="form.get('costCenter').invalid && form.get('costCenter').touched">Ingrese
+                un centro de costo valido</div>
+        </div>
+        <div class="acts-group ">
+            <label class="primaryColor">Cargo</label>
+            <input readonly name="position" formControlName="position" class="form-control text-may"
+                placeholder="Cargo">
+            <div class="invalid-text" *ngIf="form.get('position').invalid && form.get('position').touched">Ingrese un
+                cargo valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Ciudad</label>
+            <input readonly name="city" formControlName="city" class="form-control text-may" placeholder="Ciudad">
+            <div class="invalid-text" *ngIf="form.get('city').invalid && form.get('city').touched">Ingrese una ciudad
+                valida</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Responsable de equipo</label>
+            <input readonly name="personRes" formControlName="personRes" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('personRes').invalid && form.get('personRes').touched">Ingrese un nombre
+                valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Equipo</label>
+            <input readonly name="equipment" formControlName="equipment" class="form-control text-may" placeholder="equipo">
+            <div class="invalid-text" *ngIf="form.get('equipment').invalid && form.get('equipment').touched">Ingrese un equipo
+                valido</div>
+        </div>
+        <div class="act-text">
+            <label class="primaryColor">Comentarios y/o observaciones</label>
+            <textarea class="text-area" id="textarea" formControlName="commentary"placeholder="Comentarios y/o observaciones" required></textarea>
+                <div class="invalid-text" *ngIf="form.get('commentary').invalid && form.get('commentary').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Evidencias y actas de entrega</label>
+            <div class="acts-attachment">
+                <div class="acts-attachment-content">
+                    <ng-container *ngIf="ActFixAsigformId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="acts-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="acts-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="acts-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="ActFixAsigformId != 0" class="acts-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="acts-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="acts-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="acts-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button">
+                <button class="acts-button" mat-raised-button matTooltip="Guardar"
+                    matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button [disabled]="!form.valid"
+                    (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

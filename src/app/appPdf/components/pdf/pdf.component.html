@@ -1,0 +1,33 @@
+<div class="album py-5">
+    <div class="container" id="contenido">
+      <h2>Serial</h2>
+      <div class="row">            
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <P>{{var1}}</P>
+            <div class="card-body">
+              <p class="card-text">El mencionado serial fue rechazo por</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <P>{{var2}}</P>
+            <div class="card-body">
+              <p class="card-text">Y ademas se encuentra en un estado</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <P>{{var3}}</P>
+            <div class="card-body">
+              <p class="card-text">Dedido a esto y se informa a la fecha</p>
+              <P>{{var4}}</P>
+            </div>
+          </div>
+        </div>
+      </div>          
+    </div>
+    <button (click)="generarPDF()" class="btn btn-info">Crear PDF</button>
+</div>

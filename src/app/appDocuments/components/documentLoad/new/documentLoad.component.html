@@ -1,0 +1,131 @@
+<div class="docLoad-container">
+    <p class="title">{{tittle}}</p>
+    <form [formGroup]="form" class="docLoad-form">
+        <div class="docLoad-group">
+            <label class="primaryColor"> Ingrese número de identificación </label>
+            <div class="docLoad-group-pd">
+                <input *ngIf="docLoadformId ===0" class="form-control" [(ngModel)]="documentPropertyIdentification"
+                    formControlName="documentPropertyIdentification" type="number" placeholder=" INGRESE N° CEDULA ">
+                <input *ngIf="docLoadformId != 0" value="0" readonly class="form-control"
+                    [(ngModel)]="documentPropertyIdentification" formControlName="documentPropertyIdentification"
+                    type="number" placeholder=" INGRESE N° CEDULA ">
+                <button *ngIf="docLoadformId ===0" mat-mini-fab class="blue margin" matTooltip="Buscar"
+                    matTooltipPosition="above" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="docLoad-group docLoad-margin">
+            <label class="primaryColor"> Nombres y Apellidos </label>
+            <input name="nameUser" formControlName="nameUser" readonly class="form-control text-may"
+                placeholder="Nombres y Apellidos">
+        </div>
+
+        <div class="docLoad-group">
+            <label class="primaryColor"> Número de cedula </label>
+            <input readonly name="identification" formControlName="identification" class="form-control text-may"
+                placeholder="Número de documento">
+        </div>
+
+        <div class="docLoad-group">
+            <label class="primaryColor">Centro de costo</label>
+            <input readonly name="costCenter" formControlName="costCenter" class="form-control text-may"
+                placeholder="Centro de costo">
+        </div>
+
+        <div class="docLoad-group">
+            <label class="primaryColor">Tipo de documento</label>
+            <div class="docLoad-group-pd" *ngIf="docLoadformId ===0">
+                <select [(ngModel)]="documentId" class="form-control" formControlName="documentId">
+                    <option value=0> Seleccione un tipo de documento</option>
+                    <option *ngFor="let c of TypeList" value="{{c.id}}">{{c.groupDocument}}</option>
+                </select>
+                <div *ngIf="documentId == 0 ; else disabled1">
+                    <button disabled mat-mini-fab class="blue margin" matTooltip="Listar" matTooltipPosition="above"
+                        (click)="searchVersionDocument()">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+                <ng-template #disabled1>
+                    <button mat-mini-fab class="blue margin" matTooltip="Listar" matTooltipPosition="above"
+                        (click)="searchVersionDocument()">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                </ng-template>
+            </div>
+            <input *ngIf="docLoadformId !=0" readonly name="documentId" formControlName="documentId"
+                class="form-control text-may">
+        </div>
+
+        <div class="docLoad-group">
+            <label class="primaryColor">Versión</label>
+            <input readonly name="version" formControlName="version" class="form-control text-may"
+                placeholder="Version">
+        </div>
+
+        <div class="docLoad-group">
+            <label class="primaryColor">Cargar archivo</label>
+            <div class="docLoad-attachment">
+                <div class="docLoad-attachment-content">
+                    <ng-container *ngIf="docLoadformId === 0 ; else d">
+                        <div *ngFor="let f of fileList;let i=index;" class="docLoad-container-file"
+                            matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="docLoad-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #d>
+                        <div *ngFor="let f of fileList;let i=index;" class="docLoad-container-file"
+                            matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="docLoad-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-container *ngIf="docLoadformId != 0">
+                        <div *ngFor="let f of documentFile;let i=index;" class="docLoad-container-file"
+                            matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name+ '.' +f.type}}</p>
+                            <div class="docLoad-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                                <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="download(f)">
+                                    <mat-icon class="blue-color">cloud_download</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="docLoad-attachment-attach">
+                        <input #image hidden type="file" (change)="addFile($event.target.files)">
+                        <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                            matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="orange-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="docLoad-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="docLoad-container-button">
+                <button type="reset" class="docLoad-button" mat-raised-button matTooltip="Guardar" mat-raised-button
+                    [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

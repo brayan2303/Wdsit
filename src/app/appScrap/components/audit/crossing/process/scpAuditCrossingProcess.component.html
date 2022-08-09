@@ -1,0 +1,137 @@
+<div class="scp-container">
+
+    <p class="title">Carga de Pallet</p>
+    <div class="scp-container-button">
+        <div class="scp-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table class="scp-table" mat-table [dataSource]="dataSource" matSort>
+     
+        <ng-container matColumnDef="codeAudit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.codeAudit}}</td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.customer}}</td>
+        </ng-container>
+        <ng-container matColumnDef="auditPreviousName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Auditoria Previa</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.auditPreviousName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="typeAuditName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Auditoria</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.typeAuditName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.state}}</td>
+        </ng-container>
+        <ng-container matColumnDef="levelRuleName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nivel</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.levelRuleName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="searchAudit(item)" >{{item.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" (click)="searchAudit(item)" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" (click)="searchAudit(item)" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+    <!-- CARGA DE PALLET -->
+    <div *ngIf="this.ScpAuditE != null" class="scp-container-serials">
+
+        <div class="scp-countAudit">
+            <p class="scp-count-title">Codigo Auditoria</p>
+            <p class="scp-count-subtitle">{{this.ScpAuditE.codeAudit}}</p>
+        </div>
+
+        <div class="scp-count">
+            <p class="scp-count-title">Ingresados</p>
+            <p class="scp-count-subtitleSerial">{{this.ScpAuditPalletE.length}}</p>
+        </div>
+       <div class="scp-flex">
+        <div class="scp-group">
+            <label class="primaryColor">Validar</label>
+            <div class="scp-container-button">
+                <button class="scp-button" mat-raised-button matTooltip="Validar" [disabled]="id!=0" [ngClass]="{'ligthBackground':id!=0,'blue':id ===0}" mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip" (click)="crossingPallet()">
+                    <mat-icon>autorenew</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="scp-group">
+            <label class="primaryColor">Cerrar validacion</label>
+            <div class="scp-container-button">
+                <button class="scp-button-green" [disabled]="id===0 || this.wms!=100 ||this.wdist!=100" [ngClass]="{'ligthBackground':id===0 || this.wms!=100 || this.wdist!=100}" mat-raised-button matTooltip="Cerrar" mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateClose(this.ScpAuditE.id)">
+                    <mat-icon>highlight_off</mat-icon>
+                </button>
+            </div>
+        </div>
+        
+        <div class="scp-group">
+            <!-- -->
+            <label class="primaryColor">No cruza</label>
+            <div class="scp-container-button">
+                <button class="scp-button-red" [disabled]="this.wms===100 || id===0" [ngClass]="{'ligthBackground':this.wms===100 || id===0 }" mat-raised-button matTooltip="Cerrar" mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip"(click)="
+                getRegisResult(this.ScpAuditE.id)">
+                    <mat-icon>remove_circle</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="scp-group">
+            <!---->
+            <label class="primaryColor">No hay informacion</label>
+            <div class="scp-container-button">
+                <button class="scp-button-red"[disabled]="this.wdist===100 || id===0 " [ngClass]="{'ligthBackground':this.wdist===100 || id===0 }" mat-raised-button matTooltip="Cerrar" mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip" (click)="getRegisSerial(this.ScpAuditE.id)">
+                    <mat-icon>disabled_by_default</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+        <div class="scp-group" *ngIf="this.process != ''" >
+            <p class="scp-count-title">{{this.process}}</p>
+            <mat-progress-bar mode="indeterminate" *ngIf="this.process != 'Informacion lista!'"></mat-progress-bar>
+        </div>
+    </div>
+    <div *ngIf="id !=0">
+        <table #tableCroosing class="scp-table-crossing" mat-table [dataSource]="dataSourceCrossing" matSort>    
+            <ng-container matColumnDef="wdsit">
+                <th mat-header-cell *matHeaderCellDef >WDSIT {{this.wdist}}%</th>
+                <td mat-cell *matCellDef="let item">{{item.wdsit}}</td>
+            </ng-container>
+            <ng-container matColumnDef="wms">
+                <th mat-header-cell *matHeaderCellDef>WMS {{this.wms}}%</th>
+                <td mat-cell *matCellDef="let item">{{item.wms}}</td>
+            </ng-container>
+            <ng-container matColumnDef="wmsVsWdist">
+                <th mat-header-cell *matHeaderCellDef>WMS VS WDSIT</th>
+                <td mat-cell *matCellDef="let item">{{item.wmsVsWdist}}</td>
+            </ng-container>
+            <ng-container matColumnDef="wdistVswms">
+                <th mat-header-cell *matHeaderCellDef>WDSIT VS WMS</th>
+                <td mat-cell *matCellDef="let item">{{item.wdistVswms}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsCrossing"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsCrossing;"></tr>
+        </table>
+        <div *ngIf="loadingCroosing" class="report-container-loader">
+            <div class="report-loader"></div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

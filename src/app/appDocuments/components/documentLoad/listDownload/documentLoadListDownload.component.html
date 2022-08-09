@@ -1,0 +1,70 @@
+<div class="docLoad-container">
+    <p class="title"> Descarga Documentos </p>
+    <div class="docLoadD-form">
+        <div class="docLoad-group">
+            <label class="primaryColor"> Ingrese número de identificación </label>
+            <input class="docLoad-group-d" [(ngModel)]="documentPropertyIdentification" type="number"
+                placeholder=" Ingrese N° Cedula ">
+        </div>
+        
+        <div class="docLoad-group">
+            <label class="primaryColor">Tipo de documento</label>
+            <select class="docLoad-group-d" [(ngModel)]="documentId">
+                <option value=0> Seleccione un tipo de documento</option>
+                <option *ngFor="let c of TypeList" value="{{c.id}}">{{c.groupDocument}}</option>
+            </select>
+        </div>
+        <button mat-mini-fab class="docLoad-buttom" matTooltip="Buscar" matTooltipPosition="above" (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+
+    </div>
+    <table #table class="docLoad-table" mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="userPropertyIdentification">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Identificacion</th>
+            <td mat-cell *matCellDef="let item">{{item.userPropertyIdentification}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="userPropertyName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Completo </th>
+            <td mat-cell *matCellDef="let item">{{item.userPropertyName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="documentName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de documento</th>
+            <td mat-cell *matCellDef="let item">{{item.documentName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="version">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Versión</th>
+            <td mat-cell *matCellDef="let item">{{item.version}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Descargar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="searchDocument(item)">
+                    <mat-icon class=" blue-color">download</mat-icon>
+                </button>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+</div>

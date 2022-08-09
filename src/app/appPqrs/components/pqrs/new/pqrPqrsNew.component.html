@@ -1,0 +1,223 @@
+<div class="pqr-container">
+    <p class="title">{{title}}</p>
+    <div *ngIf="title==='Nueva PQRS'" class="pqr-content">
+        <p class="pqr-text">De acuerdo con la normatividad vigente, Woden® responderá sus requerimientos en un plazo no
+            mayor a quince (15) días hábiles siguientes a su presentación.</p>
+        <p class="pqr-text">Para registrar su petición, queja, reclamación, sugerencia y/o felicitación diligencie el
+            formulario.</p>
+    </div>
+    <div class="pqr-group" [ngStyle]="{'margin-top': '20px'}">
+        <label class="primaryColor">Asignar PQRS a:</label>
+        <select [(ngModel)]="agentId" class="form-control" (change)="selectAgent()">
+            <option class="ligthColor" value="0">Seleccione un agente</option>
+            <option *ngFor="let a of agentList" value="{{a.personId}}">{{a.firstName}} {{a.lastName}}</option>
+        </select>
+    </div>
+    <form [formGroup]="form" class="pqr-form" [ngStyle]="{'position':isRelative?'relative':'static'}">
+        <div *ngIf="pqrsId !=0">
+            <div class="pqr-container-action"
+                [ngStyle]="{'top':isRelative?'-20px':'10px','right':isRelative?'10px':'30px'}">
+                <mat-icon class="pqr-action blue" matTooltip="Buscar" matTooltipPosition="below"
+                    matTooltipClass="tooltip" (click)="detail(pqrPqrsEntity.serial)">search</mat-icon>
+            </div>
+
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ticket</label>
+            <input formControlName="ticket" name="pqrPqrsEntity.ticket" type="text" class="form-control"
+                placeholder="Ticket">
+        </div>
+        <div [ngStyle]="{'display':'flex','flex-grow':'1'}">
+            <div class="pqr-group" [ngStyle]="{'flex-grow':'1'}">
+                <label class="primaryColor">Fecha Reporte</label>
+                <div class="pqr-form-control">
+                    <input formControlName="creationDate" id="creationDate" name="pqrPqrsEntity.creationDate" matInput
+                        [matDatepicker]="creationDate" class="form-control" disabled>
+                    <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
+                    <mat-datepicker #creationDate disabled="false"></mat-datepicker>
+                </div>
+            </div>
+            <div class="pqr-group" [ngStyle]="{'max-width':'160px'}">
+                <label class="primaryColor">Hora creacion</label>
+                <div [ngStyle]="{'display':'flex'}">
+                    <input [(ngModel)]="creationHour" [ngModelOptions]="{standalone: true}" name="creationHour"
+                        type="number" class="form-control" [ngStyle]="{'margin-right':'10px'}">
+                    <input [(ngModel)]="creationMinute" [ngModelOptions]="{standalone: true}" name="creationMinute"
+                        type="number" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tipo de cliente</label>
+            <select formControlName="customerTypeId" name="pqrPqrsEntity.customerTypeId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerTypeList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Proyecto</label>
+            <select formControlName="proyectId" name="pqrPqrsEntity.proyectId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un proyecto</option>
+                <option *ngFor="let p of proyectList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombres</label>
+            <input formControlName="firstName" name="pqrPqrsEntity.firstName" type="text" class="form-control"
+                placeholder="Nombres">
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Apellidos</label>
+            <input formControlName="lastName" name="pqrPqrsEntity.lastName" type="text" class="form-control"
+                placeholder="Apellidos">
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Paises</label>
+            <select formControlName="countryId" name="pqrPqrsEntity.countryId" class="form-control"
+                (change)="selectCountry()">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Departamentos</label>
+            <select formControlName="departmentId" name="pqrPqrsEntity.departmentId" class="form-control"
+                (change)="selectDepartment()">
+                <option class="ligthColor" value="0">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ciudades</label>
+            <select formControlName="cityId" name="pqrPqrsEntity.cityId" class="form-control" (change)="selectCity()">
+                <option class="ligthColor" value="0">Seleccione un ciudades</option>
+                <option *ngFor="let c of cityList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Regionales</label>
+            <select formControlName="regionalId" name="pqrPqrsEntity.regionalId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una regional</option>
+                <option *ngFor="let c of regionalList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Serial/Imei</label>
+            <input formControlName="serial" name="pqrPqrsEntity.serial" type="text" class="form-control"
+                placeholder="Serial">
+
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tipo de PQRS</label>
+            <select formControlName="typeId" name="pqrPqrsEntity.typeId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un tipo de PQRS</option>
+                <option *ngFor="let t of typeList" value="{{t.id}}">{{t.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nivel</label>
+            <select formControlName="levelNumber" name="pqrPqrsEntity.levelNumber" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un nivel</option>
+                <option value="0">Nivel 0</option>
+                <option value="1">Nivel 1</option>
+                <option value="2">Nivel 2</option>
+                <option value="3">Nivel 3</option>
+                <option value="4">Nivel 4</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Numero de Ingresos</label>
+            <input formControlName="entryNumber" name="pqrPqrsEntity.entryNumber" value="0" type="number"
+                class="form-control" placeholder="Numero de Ingresos">
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Marca/Modelo</label>
+            <select formControlName="tradeMarkId" name="pqrPqrsEntity.tradeMarkId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una marca/modelo</option>
+                <option *ngFor="let t of tradeMarkList" value="{{t.id}}">{{t.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Metodos de contacto</label>
+            <select formControlName="contactMethodId" name="pqrPqrsEntity.contactMethodId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un metodo de contacto</option>
+                <option *ngFor="let c of contactMethodList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Correo de contacto</label>
+            <select formControlName="contactEmailId" name="pqrPqrsEntity.contactEmailId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un correo</option>
+                <option *ngFor="let c of contactEmailList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Area responsable</label>
+            <select formControlName="responsibleAreaId" name="pqrPqrsEntity.responsibleAreaId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una area responsable</option>
+                <option *ngFor="let a of areaList" value="{{a.id}}">{{a.description}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Categoria</label>
+            <select formControlName="categoryId" name="pqrPqrsEntity.categoryId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una categoria</option>
+                <option *ngFor="let c of categoryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Cantidad de equipos</label>
+            <input formControlName="equipmentQuantity" name="pqrPqrsEntity.equipmentQuantity" value="0" type="number"
+                class="form-control" placeholder="Cantidad de equipos">
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Resumen solicitud</label>
+            <textarea formControlName="summary" name="pqrPqrsEntity.summary" rows="10" cols="1" class="form-control"
+                placeholder="Máximo 8000 caracteres"></textarea>
+            <span *ngIf="form.controls['summary'].invalid" class="pqr-error">Solo numeros y letras</span>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Archivos adjuntos</label>
+            <div class="pqr-attachment">
+                <div class="pqr-attachment-content">
+                    <ng-container *ngIf="pqrsId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="pqr-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name | Split}}</p>
+                            <div class="pqr-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="pqrsId !=0">
+                        <div *ngFor="let f of pqrPqrsFileModel;let i=index;" class="pqr-container-file"
+                            matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name | Split}}</p>
+                            <div class="pqr-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="pqr-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-container-button">
+            <button class="pqr-button" mat-raised-button [disabled]="!form.valid" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

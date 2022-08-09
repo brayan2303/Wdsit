@@ -1,0 +1,72 @@
+<mat-toolbar class="toolbar">
+  <div class="toolbar-information">
+    <img src="./assets/images/Logo.png" (click)="goWoden()">
+    <span matTooltip="Certificados" matTooltipPosition="below" matTooltipClass="tooltip">CERTIFICADOS</span>
+  </div>
+  <div class="toolbar-options">
+    <button mat-icon-button (click)="onToogle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="apps">
+        <mat-icon>apps</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="closeSeccion">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+<mat-menu #apps="matMenu">
+  <button *ngFor="let app of applicationList" routerLink="/{{app.link}}" class="ligthColor" mat-menu-item>
+    <mat-icon [ngStyle]="{'color':app.color}">{{app.icon}}</mat-icon>
+    <span>{{app.name}}</span>
+    
+  </button>
+</mat-menu>
+<mat-menu #closeSeccion="matMenu">
+  <button class="ligthColor" mat-menu-item (click)="logout()">
+    <mat-icon class="red-color">power_settings_new</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+</mat-menu>
+<div class="container">
+  <div class="sidenav" [ngClass]="{'sidenav-close' : !isOpen}">
+    <div class="sidenav-information">
+      <input #image hidden type="file" accept="images" (change)="loadImage($event.target.files)">
+      <img src={{photo}} (click)="image.click()">
+      <span class="primaryColor">{{genPersonEntity.firstName |titlecase}}
+        {{genPersonEntity.lastName |titlecase}}</span>
+      <span class="ligthColor">{{genPersonEntity.position |titlecase}}</span>
+    </div>
+    <div #sidenavContent class="sidenav-body" (mouseover)="enableScroll()" (mouseleave)="disableScroll()">
+      <span>Navegación</span>
+      <ng-container>
+        <div *ngFor="let s of sectionList">
+          <ng-container *ngIf="s.active">
+            <div id="s.name" class="sidenav-section" (click)="onClick(s.name)">
+              <div class="section">
+                <mat-icon class="section-icon" [ngStyle]="{'color' : s.color}">
+                  {{s.icon}}
+                </mat-icon>
+                <a>{{s.name |titlecase}}</a>
+              </div>
+              <mat-icon class="section-arrow" [ngClass]="{'section-arrow-open' : open === s.name}">
+                keyboard_arrow_down</mat-icon>
+            </div>
+            <ul id="module_{{s.name}}" class="module"
+              [ngStyle]="{'height': open === s.name? height :'1px','transition':'height 0.2s linear'}">
+              <ng-container *ngFor="let mod of moduleList">
+                <a *ngIf="mod.sectionId === s.id" [routerLink]="[mod.link]" class="ligthColor">{{mod.name}}</a>
+              </ng-container>
+            </ul>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="body" [ngClass]="{'body-close' : !isOpen}">
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

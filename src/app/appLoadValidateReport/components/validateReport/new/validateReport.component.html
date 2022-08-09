@@ -1,0 +1,83 @@
+<div class="validatRe-container">
+    <p class="title">{{tittle}}</p>
+    <form [formGroup]="form">
+        <div class="validatRe-group-a">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)] ="countryId" (change)="listColumns()" formControlName="idCountry" class="form-control text-may">
+                <option class="ligthColor" value=0>Seleccione un País</option>
+                <option *ngFor="let c of CountryList" value="{{c.idCountry}}">{{c.country}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('idCountry').invalid && form.get('idCountry').touched">Seleccione
+                una opción valida</div>
+        </div>
+
+        <div class="validatRe-form">
+            <div class="validatRe-group">
+                <label class="primaryColor">MODEL_CODE</label>
+                <input name="modelCode" formControlName="modelCode" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('modelCode').invalid && form.get('modelCode').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">MODEL_DESCRIPTION</label>
+                <input name="modelDescription" formControlName="modelDescription" type="text"
+                    style="text-transform:uppercase" class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text"
+                    *ngIf="form.get('modelDescription').invalid && form.get('modelDescription').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">DX_TYPE</label>
+                <input name="dxType" formControlName="dxType" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('dxType').invalid && form.get('dxType').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">SERIAL EQUIPO</label>
+                <input name="serialEquipo" formControlName="serialEquipo" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('serialEquipo').invalid && form.get('serialEquipo').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">ADDRESS</label>
+                <input name="address" formControlName="address" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('address').invalid && form.get('address').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">REGION</label>
+                <input name="region" formControlName="region" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('region').invalid && form.get('region').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">CITY</label>
+                <input name="city" formControlName="city" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('city').invalid && form.get('city').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">DEPARTMENT</label>
+                <input name="department" formControlName="department" type="text" style="text-transform:uppercase"
+                    class="form-control text-may" placeholder="Ingrese Nombre Columna">
+                <div class="invalid-text" *ngIf="form.get('department').invalid && form.get('department').touched">
+                    Ingrese Nombre de Columna</div>
+            </div>
+            <div class="validatRe-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="validatRe-container-button">
+                    <button class="validatRe-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

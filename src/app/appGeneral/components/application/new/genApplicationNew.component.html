@@ -1,0 +1,38 @@
+<div class="application-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="application-form">
+        <div class="application-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="application-group">
+            <label class="primaryColor">Icono</label>
+            <input formControlName="icon" type="text" class="form-control" placeholder="Icono">
+        </div>
+        <div class="application-group">
+            <label class="primaryColor">Color</label>
+            <input formControlName="color" type="color" class="form-control" placeholder="Color" matTooltip="{{form.controls.color.value}}" matTooltipPosition="above" matTooltipClass="tooltip">
+        </div>
+        <div class="application-group">
+            <label class="primaryColor">Link</label>
+            <input id="link" formControlName="link" type="text" class="form-control" placeholder="Link">
+        </div>
+        <div *ngIf="applicationId != 0" class="application-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="application-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="application-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="application-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="application-container-button">
+            <button class="application-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="task-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-tasTaskNew (closeDialog)="onClose()" [taskId]="taskId"></app-tasTaskNew>
+</div>

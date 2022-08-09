@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="application-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-loadClientRuleNew (closeDialog)="onClose()" [formId]="formId"></app-loadClientRuleNew>
+</div>

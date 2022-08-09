@@ -1,0 +1,76 @@
+<div mat-dialog-content>
+    <div class="cyclic-container-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Ubicaciones</p>
+    <div class="cyclic-form">
+        <div class="cyclic-group">
+            <label class="primaryColor">Tipo</label>
+            <select [(ngModel)]="type" class="form-control" (change)="getLocation()">
+                <option class="ligthColor" value="">Seleccione un tipo</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Seriales">Seriales</option>
+            </select>
+        </div>
+    </div>
+    <div class="cyclic-container">
+        <div *ngIf="loadingLocation" class="cyclic-container-loader">
+            <div class="cyclic-loader"></div>
+        </div>
+        <ng-container *ngIf="locationList.length>0">
+            <div *ngFor="let l of locationListSlice">
+                <div id="l.number" class="cyclic-location" [ngStyle]="{'margin-bottom':open===l.number?'0px':'8px'}">
+                    <div class="cyclic-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                        <p class="cyclic-location-title">Numero</p>
+                        <p class="cyclic-location-subtitle">{{l.number}}</p>
+                    </div>
+                    <div class="cyclic-location-information" [ngStyle]="{'width':'calc(50% - 15px)'}">
+                        <p class="cyclic-location-title">Pallets</p>
+                        <p class="cyclic-location-subtitle">{{l.pallets}}</p>
+                    </div>
+                    <div *ngIf="loadingPallet" class="cyclic-location-information">
+                        <div class="cyclic-container-loader">
+                            <div class="cyclic-loader-mini"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="!loadingPallet" class="cyclic-location-information">
+                        <mat-icon class="cyclic-section-icon primaryColor"
+                            [ngClass]="{'cyclic-section-icon-open' : open === l.number}" (click)="onClick(l.number)">
+                            keyboard_arrow_down</mat-icon>
+                    </div>
+                </div>
+                <div id="pallet_{{l.number}}" class="cyclic-container-pallet"
+                    [ngStyle]="{'height': open === l.number? height :'0px','transition':'height 0.2s linear','margin-bottom':open===l.number?'8px':'0px'}">
+                    <ng-container *ngIf="palletList.length>0">
+                        <ng-container *ngFor="let p of palletList">
+                            <div *ngIf="p.location===l.number" class="cyclic-pallet">
+                                <div class="cyclic-location-information"
+                                    [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                    <p class="cyclic-location-title">Numero</p>
+                                    <p class="cyclic-location-subtitle">{{p.number}}</p>
+                                </div>
+                                <div class="cyclic-location-information"
+                                    [ngStyle]="{'width':'calc(100% / 2)','text-align':'center'}">
+                                    <p class="cyclic-location-title">Seriales</p>
+                                    <p class="cyclic-location-subtitle">{{p.quantity}}</p>
+                                </div>
+                                <div class="cyclic-location-information">
+                                    <mat-icon *ngIf="!p.active" class="cyclic-section-icon green-color"
+                                        matTooltip="Agregar" matTooltipPosition="above" matTooltipClass="tooltip"
+                                        (click)="add(p.number,p.sapCode,p.location)">done</mat-icon>
+                                    <mat-icon *ngIf="p.active" class="cyclic-section-icon red-color"
+                                        matTooltip="Remover" matTooltipPosition="above" matTooltipClass="tooltip"
+                                        (click)="remove(p.number)">close</mat-icon>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" [pageSize]="5"
+            [length]="locationList.length" showFirstLastButtons (page)="change($event)"></mat-paginator>
+    </div>
+</div>

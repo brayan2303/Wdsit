@@ -1,0 +1,37 @@
+<div class="load-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="load-form">
+        <div class="load-group">
+            <label class="primaryColor">Cliente</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+            </select>
+        </div>
+     
+        <div class="load-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control text-may" placeholder="Descripcion">
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div *ngIf="formId != 0" class="load-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="load-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="load-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="load-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="load-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="load-container-button">
+                <button type="reset" class="load-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

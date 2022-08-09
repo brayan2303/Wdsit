@@ -1,0 +1,44 @@
+<div class="pro-container">
+    <p class="title">Listado de procesos</p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let item">{{item.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="objetive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetivo</th>
+            <td mat-cell *matCellDef="let item">{{item.objetive}}</td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pais</th>
+            <td mat-cell *matCellDef="let item">{{item.country}}</td>
+        </ng-container>
+        <ng-container matColumnDef="leader">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lider</th>
+            <td mat-cell *matCellDef="let item">{{item.leader}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

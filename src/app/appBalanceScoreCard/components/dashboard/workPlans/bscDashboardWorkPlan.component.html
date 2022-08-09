@@ -1,0 +1,49 @@
+<div class="bsc-container">
+    <p class="title">Dashboard Planes de Trabajo</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectivas</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Objetivos Estrategicos</label>
+            <select [(ngModel)]="strategicObjetiveId" class="form-control" (change)="getWorkPlan()">
+                <option class="ligthColor" value="0">Seleccione un objetivo estrategico</option>
+                <option *ngFor="let s of strategicObjetiveList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+    </div>
+    <p *ngIf="workPlanList.length>0" class="title">Planes de Trabajo</p>
+        <div class="bsc-container-perspective">
+            <div *ngFor="let w of workPlanList" class="bsc-perspective" (click)="getPercentageAdvances(w.id,w.name)">
+                <p class="bsc-perspective-title">{{w.name}}</p>
+                <p class="bsc-perspective-subtitle">Actividades</p>
+                <p class="bsc-perspective-title">{{w.activities}}</p>
+                <p class="bsc-perspective-subtitle">Avances</p>
+                <p class="bsc-perspective-title">{{w.advances}}</p>
+            </div>
+        </div>
+        <div class="bsc-container-chart">
+            <div class="bsc-chart">
+                <canvas *ngIf="data1.dataX.length>0" baseChart [datasets]="pieDonutChart.data" [labels]="pieDonutChart.labels" [options]="pieDonutChart.options"
+                    [legend]="pieDonutChart.legend" [chartType]="pieDonutChart.type">
+                </canvas>
+            </div>
+            <div class="bsc-chart">
+                <canvas *ngIf="data2.dataX.length>0" baseChart [datasets]="lineChart.data" [labels]="lineChart.labels"
+                    [options]="lineChart.options" [colors]="lineChart.color" [legend]="lineChart.legend"
+                    [chartType]="lineChart.type" [plugins]="lineChart.plugins">
+                </canvas>
+            </div>
+        </div>
+</div>

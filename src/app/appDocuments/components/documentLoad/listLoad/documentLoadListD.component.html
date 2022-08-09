@@ -1,0 +1,66 @@
+<div class="docLoad-container">
+    <p class="title">Listado </p>
+    <div class="docLoad-container-button">
+        <div class="docLoad-group">
+            <input type="text" class="inputs" placeholder="Filtrar por número de documento" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+
+    <table #table class="docLoad-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="userPropertyIdentification">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>identificación</th>
+            <td mat-cell *matCellDef="let item">{{item.userPropertyIdentification}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="userPropertyName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres </th>
+            <td mat-cell *matCellDef="let item">{{item.userPropertyName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="documentName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo documento</th>
+            <td mat-cell *matCellDef="let item">{{item.documentName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="version">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Version</th>
+            <td mat-cell *matCellDef="let item">{{item.version}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

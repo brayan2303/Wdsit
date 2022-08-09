@@ -1,0 +1,56 @@
+<div class="bsc-container">
+    <p class="title">Listado de Indicadores</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Objetivo Estrategico</label>
+            <select [(ngModel)]="strategicObjetiveId" class="form-control" (change)="getIndicator()">
+                <option class="ligthColor" value="0">Seleccione un objetivo estrategico</option>
+                <option *ngFor="let s of strategicObjetiveList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="bsc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let item" (click)="getMeasurement(item.id)">
+                <div *ngIf="item.id===indicatorId" class="bsc-active"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item" (click)="getMeasurement(item.id)">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="direction">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion</th>
+            <td mat-cell *matCellDef="let item" (click)="getMeasurement(item.id)">{{item.direction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perspectiva</th>
+            <td mat-cell *matCellDef="let item" (click)="getMeasurement(item.id)">{{item.perspective}}</td>
+        </ng-container>
+        <ng-container matColumnDef="strategicObjetive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Objetivo Estrategico</th>
+            <td mat-cell *matCellDef="let item" (click)="getMeasurement(item.id)">{{item.strategicObjetive}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="bsc-container-loader">
+        <div class="bsc-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,103 @@
+.dis-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.dis-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.dis-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.dis-container-button{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+.dis-container-proyect{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.dis-container-operation{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.dis-operation{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.dis-title{
+    font-size: 14px;
+    color: var(--ligth);
+    margin: 5px 0px;
+}
+.dis-subtitle{
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0px;
+    text-align: center;
+}
+.dis-button-day{
+    position: absolute;
+    top: 50px;
+    right: -10px;
+    text-align: center;
+    font-size: 18px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    color: white;
+    background-color: var(--green);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.dis-button-goal{
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    text-align: center;
+    font-size: 18px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    color: white;
+    background-color: var(--green);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.dis-input{
+    font-size: 14px;
+    font-family: 'Roboto';
+    text-align: center;
+    width: 100%;
+    color: var(--primary);
+    border: 1px solid var(--ligth) !important;
+    border-radius: 5px;
+    outline: none;
+}

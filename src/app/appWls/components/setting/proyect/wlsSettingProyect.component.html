@@ -1,0 +1,94 @@
+<div class="wls-container">
+  <p class="title">Configuracion de Proyectos</p>
+  <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear proyecto" matTooltipPosition="left"
+    matTooltipClass="tooltip" (click)="create(null)">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div *ngIf="loading1" class="wls-container-loader">
+    <div class="wls-loader"></div>
+  </div>
+  <table *ngIf="!loading1" class="wls-table" mat-table [dataSource]="dataSource1">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let item">{{item.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="prefix">
+      <th mat-header-cell *matHeaderCellDef>Prefijo</th>
+      <td mat-cell *matCellDef="let item">{{item.prefix}}</td>
+    </ng-container>
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef>Pais</th>
+      <td mat-cell *matCellDef="let item">{{item.country}}</td>
+    </ng-container>
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef>Cliente</th>
+      <td mat-cell *matCellDef="let item">{{item.customer}}</td>
+    </ng-container>
+    <ng-container matColumnDef="server">
+      <th mat-header-cell *matHeaderCellDef>Servidor</th>
+      <td mat-cell *matCellDef="let item">{{item.server}}</td>
+    </ng-container>
+    <ng-container matColumnDef="dataBaseName">
+      <th mat-header-cell *matHeaderCellDef>Base de datos</th>
+      <td mat-cell *matCellDef="let item">{{item.dataBaseName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="creationDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha creacion</th>
+      <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="creationUser">
+      <th mat-header-cell *matHeaderCellDef>Usuario creacion</th>
+      <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>Activo</th>
+      <td mat-cell *matCellDef="let item">
+        <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+        <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button matTooltip="Detalles" matTooltipPosition="above" matTooltipClass="tooltip"
+          (click)="detail(item.id)">
+          <mat-icon class="orange-color">list</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+          (click)="create(item)">
+          <mat-icon class="blue-color">create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+          (click)="delete(item.id)">
+          <mat-icon class="red-color">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+  </table>
+  <mat-paginator #paginatorConnection [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+  </mat-paginator>
+  <div *ngIf="proyectId!=0" class="wls-container-tabs">
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===1}" (click)="select(1)"><span>Codigos Sap</span></div>
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===2}" (click)="select(2)"><span>Tarifas</span></div>
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===3}" (click)="select(3)"><span>Origenes</span></div>
+    <div fxFlex [ngStyle]="{'border-bottom':'2px solid var(--primary)'}"></div>
+  </div>
+  <ng-container *ngIf="tab===1">
+    <div fxFlexAlign="flex-end">
+      <button mat-mini-fab class="green" [ngStyle]="{'margin-right':'10px'}" matTooltip="Crear" matTooltipPosition="above"
+        matTooltipClass="tooltip">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-mini-fab class="blue" [ngStyle]="{'margin-right':'10px'}" matTooltip="{{uploading?'Cargando':'Cargar archivo'}}" matTooltipPosition="above"
+        matTooltipClass="tooltip" (click)="upload()">
+        <mat-icon [ngClass]="{'wls-upDown':uploading}">cloud_upload</mat-icon>
+      </button>
+      <button mat-mini-fab class="orange" matTooltip="{{syncing?'Sincronizando':'Sincronizar'}}" matTooltipPosition="above"
+        matTooltipClass="tooltip" (click)="syncronize()">
+        <mat-icon [ngClass]="{'wls-rotate':syncing}">cached</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,35 @@
+<div class="pqr-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+     
+        <div class="pqr-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control text-may" placeholder="Descripcion">
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div *ngIf="formId != 0" class="pqr-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pqr-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pqr-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="pqr-container-button">
+                <button class="pqr-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

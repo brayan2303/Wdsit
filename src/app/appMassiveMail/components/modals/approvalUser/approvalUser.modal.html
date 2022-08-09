@@ -1,0 +1,37 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(null)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado Usuarios</p>
+    <div *ngIf="loading" class="mas-container-loader">
+        <div class="mas-loader"></div>
+    </div>
+    <div fxLayout fxLayoutAlign="start center" [ngStyle]="{'margin-top':'30px'}">
+        <input fxFlex="300px" type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+        <mat-icon class="blue-color">search</mat-icon>
+    </div>
+    <table *ngIf="!loading" class="mas-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let item" (click)="select(item)">{{item.firstName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let item" (click)="select(item)">{{item.lastName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef>Usuario</th>
+            <td mat-cell *matCellDef="let item" (click)="select(item)">{{item.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let item" (click)="select(item)">{{item.mail}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

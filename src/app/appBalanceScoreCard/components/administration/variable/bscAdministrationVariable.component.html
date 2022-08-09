@@ -1,0 +1,98 @@
+<div class="agent-container">
+    <p class="title">Nueva Variable</p>
+    <form [formGroup]="form" class="agent-form">
+        <div class="agent-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Tipo de Valor</label>
+            <select formControlName="valueType" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un tipo de valor</option>
+                <option value="Porcentual">Porcentual (%)</option>
+                <option value="Monetario">Monetario ($)</option>
+                <option value="Numerico">Numerico (1)</option>
+            </select>
+        </div>
+        <div class="agent-group">
+            <label class="primaryColor">Valor por Defecto</label>
+            <input formControlName="defaultValue" type="number" min="0" class="form-control" placeholder="Valor por Defecto">
+        </div>
+        <div *ngIf="editing !=0" class="agent-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="agent-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="agent-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="agent-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agent-container-button">
+            <button class="agent-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado de Variables</p>
+    <div class="agent-search-container-button">
+        <div class="agent-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="agent-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="valueType">
+            <th mat-header-cell *matHeaderCellDef>Tipo de Valor</th>
+            <td mat-cell *matCellDef="let item">{{item.valueType}}</td>
+        </ng-container>
+        <ng-container matColumnDef="defaultValue">
+            <th mat-header-cell *matHeaderCellDef>Valor por Defecto</th>
+            <td mat-cell *matCellDef="let item">
+                <ng-container *ngIf="item.valueType==='Porcentual'">{{item.defaultValue}} %</ng-container>
+                <ng-container *ngIf="item.valueType==='Monetario'">$ {{item.defaultValue}}</ng-container>
+                <ng-container *ngIf="item.valueType==='Numerico'">{{item.defaultValue}}</ng-container>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let item">
+            <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="edit(item)">
+                <mat-icon class="blue-color">create</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="delete(item.id)">
+                <mat-icon class="red-color">delete</mat-icon>
+            </button>
+        </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="agent-container-loader">
+        <div class="agent-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

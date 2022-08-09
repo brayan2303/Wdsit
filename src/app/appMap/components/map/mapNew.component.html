@@ -1,0 +1,52 @@
+<!--
+<div class="mapGroup-container">
+  <p class="title">Ubicación</p>
+  <form [formGroup]="form" class="mapGroup-form">
+      <div class="mapGroup-group">
+          <label class="primaryColor">Ingrese dirección</label>
+          <input name="direction" formControlName="direction" type="text" class="form-control text-may" placeholder="Ingrese una dirección">
+          <div class="invalid-text" *ngIf="form.get('direction').invalid && form.get('direction').touched">Ingrese la dirección
+          </div>
+      </div>
+
+      <div class="mapGroup-group">
+          <label class="primaryColor">Latitud</label>
+          <input name="description" formControlName="description" readOnly class="form-control text-may">
+          <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched"></div>
+      </div>
+      <div class="mapGroup-group">
+        <label class="primaryColor">Longitud</label>
+        <input name="description" formControlName="description" readOnly class="form-control text-may">
+        <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched"></div>
+    </div>
+
+      <div *ngIf="mapGroupformId != 0" class="mapGroup-group-checkbox">
+          <label class="primaryColor">Activo</label>
+          <div class="mapGroup-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+              <div class="mapGroup-checkbox">
+                  <input id="check" formControlName="active" type="checkbox">
+                  <label class="mapGroup-label" for="check">
+                      <mat-icon>done</mat-icon>
+                  </label>
+              </div>
+          </div>
+      </div>
+
+      <div class="mapGroup-group">
+          <label class="primaryColor">Guardar</label>
+          <div class="mapGroup-container-button">
+              <button class="mapGroup-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                  matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                  <mat-icon>save</mat-icon>
+              </button>
+          </div>
+      </div>
+  </form>
+ 
+</div>
+ -->
+<div class="map-container">
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+</div>

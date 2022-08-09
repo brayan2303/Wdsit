@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="moduleEdit-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-genModuleNew (closeDialog)="onClose()" [moduleId]="moduleId"></app-genModuleNew>
+</div>

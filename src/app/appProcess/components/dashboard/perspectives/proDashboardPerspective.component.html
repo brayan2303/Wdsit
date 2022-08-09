@@ -1,0 +1,35 @@
+<div class="pro-container">
+    <p class="title">Dashboard Proceso</p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+    </div>
+    <p *ngIf="perspectiveList.length>0" class="title">Proceso</p>
+        <div class="pro-container-perspective">
+            <div *ngFor="let p of perspectiveList" class="pro-perspective" (click)="getPerspectiveMonth(p.id,p.name)">
+                <p class="pro-perspective-title">{{p.name}}</p>
+                <p class="pro-perspective-subtitle">Objetivos Estrategicos</p>
+                <p class="pro-perspective-title">{{p.strategicObjetives}}</p>
+                <p class="pro-perspective-subtitle">Indicadores</p>
+                <p class="pro-perspective-title">{{p.indicators}}</p>
+            </div>
+        </div>
+        <div class="pro-container-chart">
+            <div class="pro-chart">
+                <canvas *ngIf="data1.dataX.length>0" baseChart [datasets]="pieDonutChart.data" [labels]="pieDonutChart.labels" [options]="pieDonutChart.options"
+                    [legend]="pieDonutChart.legend" [chartType]="pieDonutChart.type">
+                </canvas>
+            </div>
+            <div class="pro-chart">
+                <canvas *ngIf="data2.dataX.length>0" baseChart [datasets]="lineChart.data" [labels]="lineChart.labels"
+                    [options]="lineChart.options" [colors]="lineChart.color" [legend]="lineChart.legend"
+                    [chartType]="lineChart.type" [plugins]="lineChart.plugins">
+                </canvas>
+            </div>
+        </div>
+</div>

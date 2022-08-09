@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Obervaciones</p>
+    <br>
+    <form [formGroup]="form" class="acts-form form" >
+     
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Cerco epidemiologico</label>
+            <textarea formControlName="siegeEpimiodological" class="form-control input-group">Cerco epidemiologico</textarea>
+        </div>
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Observaciones</label>
+            <textarea formControlName="observation" class="form-control input-group">Observaciones</textarea>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Hospitalizacion</label>
+            <select class="form-control" formControlName="hospitalization" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

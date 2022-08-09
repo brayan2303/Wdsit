@@ -1,0 +1,44 @@
+<div class="inv-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="inv-form">
+        <div class="inv-group">
+            <label class="primaryColor">Codigo</label>
+            <input name="cod" formControlName="cod" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('cod').invalid && form.get('cod').touched">Ingrese un nombre valido</div>
+        </div>
+     
+        <div class="inv-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control text-may" placeholder="Descripcion">
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div class="inv-group ">
+            <label class="primaryColor">Tipo de inventario</label>
+            <select class="form-control" formControlName="countingType">
+                <option class="ligthColor" value=null>Selecciona una opcion</option>
+                <option value="Serializado">Serializado</option>
+                <option value="Conteo uno a uno">Conteo uno a uno</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('countingType').invalid && form.get('countingType').touched">Seleccione una opcion valida</div>
+        </div>
+        <div *ngIf="formId != 0" class="inv-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="inv-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="inv-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="inv-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="inv-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="inv-container-button">
+                <button type="reset" class="inv-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

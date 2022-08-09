@@ -1,0 +1,58 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalle Prueba N°1</p>
+    <div class="act-detail-container">
+        <div *ngFor="let c  of covFormEntity">
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#136514'}">coronavirus</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Prueba covid</p>
+                    <p class="act-detail-subtitle">{{c.proofCovid}}</p>
+                </div>
+
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#143F81'}">grading</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Aplica</p>
+                    <p class="act-detail-subtitle">{{c.noApply}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#19A950'}">article</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Resultado de prueba</p>
+                    <p class="act-detail-subtitle">{{c.resultProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#19A9A7'}">event_note</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de notificacion</p>
+                    <p class="act-detail-subtitle">{{c.dateNotificationResult}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#411881'}">today</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de prueba</p>
+                    <p class="act-detail-subtitle">{{c.dateProofOne}}</p>
+                </div>
+
+            </div>
+            <div *ngIf="loading" class="act-detail-container-loader">
+                <div class="act-detail-loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

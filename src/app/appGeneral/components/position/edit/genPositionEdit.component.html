@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="position-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-genPositionNew (closeDialog)="onClose()" [positionId]="positionId"></app-genPositionNew>
+</div>

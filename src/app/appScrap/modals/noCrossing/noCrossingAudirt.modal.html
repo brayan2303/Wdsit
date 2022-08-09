@@ -1,0 +1,157 @@
+<div class="scp-container">
+    <p class="title">Auditoria</p>
+    
+
+    <div class="scp-container-serials">
+
+  
+     
+       <div class="scp-flex">
+           
+        <div class="scp-count-two">
+            <p class="scp-count-title">Codigo Auditoria</p>
+            <p class="scp-count-subtitle">{{this.scpAuditSerialM.codeAudit}}</p>
+        </div>
+       
+
+        <div class="scp-count-three">
+            <p class="scp-count-title">Rechazados Permitidos</p>
+            <p class="scp-count-subtitleSerial-blue">{{this.scpAuditSerialM.noveltyAccepted}}</p>
+        </div>
+        
+        <div class="scp-count-four">
+            <p class="scp-count-title">Rechazados Maximos</p>
+            <p class="scp-count-subtitleSerial-yellow">{{this.scpAuditSerialM.noveltyRejected}}</p>
+        </div>
+
+        <div class="scp-count">
+            <p class="scp-count-title">Seriales a Auditar</p>
+            <p class="scp-count-subtitleSerial-green">{{this.scpAuditSerialM.levelRuleQuantity}}</p>
+        </div>
+
+        <div class="scp-count-five">
+            <p class="scp-count-title">WDSIT</p>
+            <p class="scp-count-subtitleSerial-yellow">{{this.dataSourceSerial.data.length}}</p>
+        </div>
+
+        <div class="scp-count-six">
+            <p class="scp-count-title">WMS</p>
+            <p class="scp-count-subtitleSerial-blue">{{this.dataSource.data.length}}</p>
+        </div>
+        
+    </div>
+</div>
+    <div>
+        <table class="scp-table-crossing" mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial</th>
+                <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+            </ng-container>
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion Previa</th>
+                <td mat-cell *matCellDef="let item">{{item.descripcion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pallet">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pallet</th>
+                <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+            </ng-container>
+            <ng-container matColumnDef="codigoSap">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo sap</th>
+                <td mat-cell *matCellDef="let item">{{item.codigoSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="motivoScrap">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Motivo de Scrap</th>
+                <td mat-cell *matCellDef="let item">{{item.motivoScrap}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
+        <div *ngIf="loading" class="report-container-loader">
+            <div class="report-loader"></div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <div>
+        <table class="scp-table-crossing" mat-table [dataSource]="dataSourceSerial" matSort>
+
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial</th>
+                <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+            </ng-container>
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion Previa</th>
+                <td mat-cell *matCellDef="let item">{{item.descripcion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="pallet">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pallet</th>
+                <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+            </ng-container>
+            <ng-container matColumnDef="codigoSap">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo sap</th>
+                <td mat-cell *matCellDef="let item">{{item.codigoSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="motivoScrap">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Motivo de Scrap</th>
+                <td mat-cell *matCellDef="let item">{{item.motivoScrap}}</td>
+            </ng-container>
+           
+            <tr mat-header-row *matHeaderRowDef="columnsSerial"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsSerial;"></tr>
+        </table>
+        <div *ngIf="loading" class="report-container-loader">
+            <div class="report-loader"></div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+    <div class="scp-container">
+        <form [formGroup]="form" class="scp-form">
+            <div class="scp-group" >
+                <label class="primaryColor">Motivo de rechazo</label>
+                <select formControlName="description" class="form-control" >
+                    <option class="ligthColor" value=null>Seleccione una opcion</option>
+                    <option *ngFor="let c of ScpMotifList" value="{{c.description}}">{{c.description}}</option>
+                </select>
+                <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Seleccione una opcion valida</div>
+            </div>
+            <div class="scp-group">
+                <label class="primaryColor">Evidencia foto grafica</label>
+                <div class="scp-attachment">
+                    <div class="scp-attachment-content">
+                        <ng-container *ngIf="formId ===0">
+                            <div *ngFor="let f of fileList;let i=index;" class="scp-container-file" matTooltip="{{f.name}}"
+                                matTooltipPosition="above" matTooltipClass="tooltip">
+                                <p>{{f.name}}</p>
+                                <div class="scp-container-actions">
+                                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                        matTooltipClass="tooltip" (click)="removeFile(i)">
+                                        <mat-icon class="red-color">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="scp-attachment-attach">
+                        <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                        <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                            matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="orange-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+         
+    
+            <div class="scp-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="scp-container-button">
+                    <button type="reset" class="scp-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="close(false)" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

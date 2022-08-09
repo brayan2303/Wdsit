@@ -1,0 +1,259 @@
+<div mat-dialog-content>
+    <div class="detail-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">WTS</p>
+    <br>
+    <div *ngIf="loading" class="loc-container-loader">
+        <div class="loc-loader"></div>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="center center">
+        <span *ngIf="wtspModelPhoneList.length===0" class="mee-title">¡Sin registros en telefono!</span>
+    </div>
+    <p class="title">Telefono</p>
+    <ng-container *ngFor="let t of wtspModelPhoneList">
+      
+        <div class="detail-container">
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#f44336'}">local_offer</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">ODS</p>
+                    <p class="detail-subtitle">{{t.ods}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#2196f3'}">format_list_numbered</mat-icon>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#fdd835'}">phone</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Telefono</p>
+                    <p class="detail-subtitle">{{t.telephone}}</p>
+                </div>
+
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Fecha</p>
+                    <p class="detail-subtitle">{{t.fecha}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00e5ff'}">business</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Sucursal</p>
+                    <p class="detail-subtitle">{{t.sucursal}}</p>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00bcd4'}">leaderboard</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Serial</p>
+                    <p class="detail-subtitle">{{t.serial}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#009688'}">how_to_reg</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Usuario</p>
+                    <p class="detail-subtitle">{{t.user}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="detail-container-loader">
+            <div class="detail-loader"></div>
+        </div>
+    </ng-container>
+    <div fxFlex fxLayout fxLayoutAlign="center center">
+        <span *ngIf="wtspModelDocumentList.length===0" class="mee-title">¡Sin registros en documento!</span>
+    </div>
+    <p class="title">Documento</p>
+    <ng-container *ngFor="let t of wtspModelDocumentList">
+       
+        <div class="detail-container">
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#f44336'}">local_offer</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">ODS</p>
+                    <p class="detail-subtitle">{{t.ods}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#fdd835'}">phone</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Telefono</p>
+                    <p class="detail-subtitle">{{t.telephone}}</p>
+                </div>
+
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Fecha</p>
+                    <p class="detail-subtitle">{{t.fecha}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00e5ff'}">business</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Sucursal</p>
+                    <p class="detail-subtitle">{{t.sucursal}}</p>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00bcd4'}">leaderboard</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Serial</p>
+                    <p class="detail-subtitle">{{t.serial}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#009688'}">how_to_reg</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Usuario</p>
+                    <p class="detail-subtitle">{{t.user}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="detail-container-loader">
+            <div class="detail-loader"></div>
+        </div>
+    </ng-container>
+    <div fxFlex fxLayout fxLayoutAlign="center center">
+        <span *ngIf="wtspModelDocumentList.length===0" class="mee-title">¡Sin registros en IMEI!</span>
+    </div>
+    <p class="title">IMEI</p>
+    <ng-container *ngFor="let t of wtspModelImeiList">
+        
+        <div class="detail-container">
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#f44336'}">local_offer</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">ODS</p>
+                    <p class="detail-subtitle">{{t.ods}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#fdd835'}">phone</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Telefono</p>
+                    <p class="detail-subtitle">{{t.telephone}}</p>
+                </div>
+
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Fecha</p>
+                    <p class="detail-subtitle">{{t.fecha}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00e5ff'}">business</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Sucursal</p>
+                    <p class="detail-subtitle">{{t.sucursal}}</p>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#00bcd4'}">leaderboard</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Serial</p>
+                    <p class="detail-subtitle">{{t.serial}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#009688'}">how_to_reg</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Usuario</p>
+                    <p class="detail-subtitle">{{t.user}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="detail-container-loader">
+            <div class="detail-loader"></div>
+        </div>
+    </ng-container>
+    <div fxFlex fxLayout fxLayoutAlign="center center">
+        <span *ngIf="wtspModelSerialList.length===0" class="mee-title">¡Sin registros en serial!</span>
+    </div>
+    <p class="title">SERIAL</p>
+    <ng-container *ngFor="let t of wtspModelSerialList">
+       
+        <div class="detail-container">
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#f44336'}">local_offer</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">ODS</p>
+                    <p class="detail-subtitle">{{t.ods}}</p>
+                </div>
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#fdd835'}">phone</mat-icon>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-title">Telefono</p>
+                    <p class="detail-subtitle">{{t.telephone}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#ff9800'}">date_range</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Fecha</p>
+                <p class="detail-subtitle">{{t.fecha}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00e5ff'}">business</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Sucursal</p>
+                <p class="detail-subtitle">{{t.sucursal}}</p>
+            </div>
+        </div>
+        <div class="detail-card">
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#00bcd4'}">leaderboard</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Serial</p>
+                <p class="detail-subtitle">{{t.serial}}</p>
+            </div>
+            <div class="detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#009688'}">how_to_reg</mat-icon>
+            </div>
+            <div class="detail-content">
+                <p class="detail-title">Usuario</p>
+                <p class="detail-subtitle">{{t.user}}</p>
+            </div>
+        </div>
+        <div *ngIf="loading" class="detail-container-loader">
+            <div class="detail-loader"></div>
+        </div>
+    </ng-container>
+</div>

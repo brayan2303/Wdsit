@@ -1,0 +1,51 @@
+<div class="recep-container">
+        <div class="recep-close">
+            <button mat-icon-button (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+        <form [formGroup]="form"  class="recep-form">  
+            <div class="recep-group">
+                <label class="primaryColor">Nombre</label>
+                <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+                <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+            </div>
+        <div class="recep-group recep-end">
+            <label class="primaryColor"></label>
+                <br>
+            <button class="recep-button"   [disabled]="!form.valid" mat-raised-button matTooltip="Guardar" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <table #table class="recep-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

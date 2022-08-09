@@ -1,0 +1,25 @@
+.pqr-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 50px;
+}
+.pqr-subtitle{
+    color: var(--primary);
+}
+.pqr-text{
+    color: var(--ligth);
+    width: 100%;
+}
+button{
+    width: 150px;
+    height: 50px;
+    background-color: var(--secundary);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    margin-bottom: 30px;
+}
+button:hover{
+    background-color: var(--primary);
+    color: var(--secundary);
+}

@@ -1,0 +1,76 @@
+<div class="mas-container">
+    <p class="title">Listado de Correos</p>
+    <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear Correo" matTooltipPosition="left"
+        matTooltipClass="tooltip" (click)="create(null)">
+        <mat-icon>add</mat-icon>
+    </button>
+    <div *ngIf="loading1" class="mas-container-loader">
+        <div class="mas-loader"></div>
+    </div>
+    <table *ngIf="!loading1" class="mas-table" mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef>Asunto</th>
+            <td mat-cell *matCellDef="let item" (click)="getRecipients(item.id)">{{item.subject}}</td>
+        </ng-container>
+        <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Mensaje</th>
+            <td mat-cell *matCellDef="let item" (click)="getRecipients(item.id)">{{item.message}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getRecipients(item.id)">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getRecipients(item.id)">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <input #recipients hidden type="file" accept=".xlsx" (change)="loadRepients(item.id,$event.target.files)">
+                <button mat-icon-button matTooltip="Cargar Destinatarios" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="recipients.click()">
+                    <mat-icon class="orange-color">cloud_upload</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Enviar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="send(item.id)">
+                    <mat-icon class="green-color" [ngClass]="{'mas-rotate':rotate}">send</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="create(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+    </table>
+    <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+    <p class="title">Listado de Destinatarios</p>
+    <button fxFlexAlign="flex-end" mat-mini-fab class="red" matTooltip="Eliminar Destinatarios"
+        matTooltipPosition="left" matTooltipClass="tooltip" (click)="deleteRecipients()">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <div *ngIf="loading2" class="mas-container-loader">
+        <div class="mas-loader"></div>
+    </div>
+    <table *ngIf="!loading2" class="mas-table" mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let item">{{item.mail}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo de Envio</th>
+            <td mat-cell *matCellDef="let item">{{item.type}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns2;"></tr>
+    </table>
+    <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

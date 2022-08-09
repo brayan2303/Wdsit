@@ -1,0 +1,18 @@
+mat-dialog-container{
+    padding: 0px !important;
+}
+.mat-dialog-content{
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100%;
+}
+.mat-dialog-content > p{
+    text-align: center;
+    flex-grow: 1;
+    font-size: 20px;
+    color: var(--primary);
+}
+.information-container-button{
+    display: flex;
+    justify-content: flex-end;
+}

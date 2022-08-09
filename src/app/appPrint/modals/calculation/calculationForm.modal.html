@@ -1,0 +1,36 @@
+<div mat-dialog-content>
+    <div class="calculation-container-closeButton">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Parametrizacion</p>
+    <div class="calculation-content">
+        <div class="calculation-container-operation">
+            <button *ngFor="let o of operatorList" mat-mini-fab class="green" value="{{o.id}}"
+                matTooltip="{{o.description}}" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="add(o.id,o.name)">
+                <p>{{o.name}}</p>
+            </button>
+            <button mat-mini-fab class="purple" matTooltip="Variables" matTooltipPosition="above"
+                matTooltipClass="tooltip" (click)="getVariable()">
+                <mat-icon>blur_on</mat-icon>
+            </button>
+            <button mat-mini-fab class="orange" matTooltip="Automaticos" matTooltipPosition="above"
+                matTooltipClass="tooltip" (click)="getAutomatic(this.data.formulaId)">
+                <mat-icon>grading</mat-icon>
+            </button>
+        </div>
+        <div class="calculation-result">
+            <div *ngFor="let c of calculationList" class="calculation-card">
+                <p>{{c.variable}}</p>
+                <mat-icon class="calculation-float-icon red" matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="remove(c.id,c.type)">close</mat-icon>
+            </div>
+            <button mat-mini-fab class="calculation-float-button green" matTooltip="Guardar" matTooltipPosition="left"
+                matTooltipClass="tooltip" (click)="close()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

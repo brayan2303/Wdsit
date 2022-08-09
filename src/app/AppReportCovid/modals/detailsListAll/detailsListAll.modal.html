@@ -1,0 +1,505 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalle generales</p>
+    <div class="act-detail-container">
+        <div *ngFor="let c  of covFormEntity">
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#4884DF'}">badge</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Numero de identificacion</p>
+                    <p class="act-detail-subtitle">{{c.identificationUser}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#67C239'}">card_membership</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Tipo de documento</p>
+                    <p class="act-detail-subtitle">{{c.typeDocument}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#6D336B'}">apartment</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Empresa</p>
+                    <p class="act-detail-subtitle">{{c.company}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#CB9B34'}">drive_file_rename_outline</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Nombres y apellidos</p>
+                    <p class="act-detail-subtitle">{{c.name}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#D43BE6'}">supervised_user_circle</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cargo</p>
+                    <p class="act-detail-subtitle">{{c.positions}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#5E1C20'}">event</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Total de dias</p>
+                    <p class="act-detail-subtitle">{{c.daysTotal}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#147C7C'}">engineering</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Nombre de jefe inmediato</p>
+                    <p class="act-detail-subtitle">{{c.bossName}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0C5A4F'}">medication</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">EPS a la que se encuentra afiliado</p>
+                    <p class="act-detail-subtitle">{{c.eps}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#4EA950'}">house</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Direccion</p>
+                    <p class="act-detail-subtitle">{{c.direction}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#A352D2'}">call</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Telefono fijo</p>
+                    <p class="act-detail-subtitle">{{c.phone}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#25097E'}">smartphone</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Celular</p>
+                    <p class="act-detail-subtitle">{{c.mobile}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#255697E'}">calendar_view_day</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Total dias incapacidad - aislamiento</p>
+                    <p class="act-detail-subtitle">{{c.totalInfo}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#DEF308'}">mail</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Correo Electronico</p>
+                    <p class="act-detail-subtitle">{{c.email}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#686C41'}">location_city</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Ciudad</p>
+                    <p class="act-detail-subtitle">{{c.city}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#E83215'}">healing</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Sintomas</p>
+                    <p class="act-detail-subtitle">{{c.hasSymptoms}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#662F26'}">date_range</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de los sintomas</p>
+                    <p class="act-detail-subtitle">{{c.symptomsDate}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3F46D9'}">description</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Descripcion de sintomas</p>
+                    <p class="act-detail-subtitle">{{c.descripSymptims}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3FD94B'}">public</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Lugar de inicio de los sintomas</p>
+                    <p class="act-detail-subtitle">{{c.placeSymptoms}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#D9703F'}">group</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Contacto con personas</p>
+                    <p class="act-detail-subtitle">{{c.concatPerson}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3FD96E'}">groups</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Parentezco</p>
+                    <p class="act-detail-subtitle">{{c.parentsPerson}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#295E39'}">event_available</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha inicio de la cuarentena</p>
+                    <p class="act-detail-subtitle">{{c.cuarentDate}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#295E56'}">how_to_reg</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Familiares en la empresa</p>
+                    <p class="act-detail-subtitle">{{c.famBusiness}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#293D5E'}">tips_and_updates</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Parentezco</p>
+                    <p class="act-detail-subtitle">{{c.famParents}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3E295E'}">article</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Documento</p>
+                    <p class="act-detail-subtitle">{{c.documentHos}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#E719EA'}">post_add</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Contrato</p>
+                    <p class="act-detail-subtitle">{{c.contract}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#32504E'}">insert_drive_file</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Segmento</p>
+                    <p class="act-detail-subtitle">{{c.segment}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#16BD25'}">record_voice_over</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cliente</p>
+                    <p class="act-detail-subtitle">{{c.customer}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#008BFF'}">content_paste</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Centro de costo</p>
+                    <p class="act-detail-subtitle">{{c.costCenter}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#3EFF00'}">event_note</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha notificacion al area</p>
+                    <p class="act-detail-subtitle">{{c.dateArea}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#154606'}">insert_invitation</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de inicio de cuarentena</p>
+                    <p class="act-detail-subtitle">{{c.dateInitiation}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#A55896'}">library_add_check</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Tipo de caso</p>
+                    <p class="act-detail-subtitle">{{c.typeCase}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#2E061D'}">domain_verification</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cita programada</p>
+                    <p class="act-detail-subtitle">{{c.scheduledAppointment}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0A5E5E'}">calendar_today</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de cita</p>
+                    <p class="act-detail-subtitle">{{c.dateAppointment}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0A1B5E'}">source</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Estado de salud puntual</p>
+                    <p class="act-detail-subtitle">{{c.statusHealthPunctual}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#4D2393'}">create_new_folder</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Prueba Covid</p>
+                    <p class="act-detail-subtitle">{{c.proofCovid}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#EB0B26'}">grading</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de prueba</p>
+                    <p class="act-detail-subtitle">{{c.dateProofOne}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#EE8F0F'}">date_range</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de ejecucion</p>
+                    <p class="act-detail-subtitle">{{c.dateExecutionProof}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#553406'}">fact_check</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Resultado de la prueba</p>
+                    <p class="act-detail-subtitle">{{c.resultProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0C5A4F'}">badge</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de notificacion de resultados</p>
+                    <p class="act-detail-subtitle">{{c.dateNotificationResult}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#20A081'}">verified_user</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Aplica</p>
+                    <p class="act-detail-subtitle">{{c.noApply}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#6837AA'}">event_available</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de prueba N°2</p>
+                    <p class="act-detail-subtitle">{{c.dateSecondProof}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#37AA72'}">event_note</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de ejecucion N°2</p>
+                    <p class="act-detail-subtitle">{{c.dateExecutionSecondProof}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#F0F714'}">grading</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Resultado de la prueba N°2</p>
+                    <p class="act-detail-subtitle">{{c.resultSecondProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#000000'}">event_busy</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de notificacion de resultados N°2</p>
+                    <p class="act-detail-subtitle">{{c.dateNotificationResultSecond}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#E90E0E'}">event</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de prueba N°3</p>
+                    <p class="act-detail-subtitle">{{c.dateThirdProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#116F2F'}">date_range</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de ejecucion N°#</p>
+                    <p class="act-detail-subtitle">{{c.dateExecutionThirdProof}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#EBC82A'}">fact_check</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Resultado de la prueba N°3</p>
+                    <p class="act-detail-subtitle">{{c.resultThirdProof}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#67EB2A'}">event_available</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de notificacion de resultados N°3</p>
+                    <p class="act-detail-subtitle">{{c.dateNotificationResultThird}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0BAB1A'}">insert_invitation</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de reintegro</p>
+                    <p class="act-detail-subtitle">{{c.dateReinstate}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0BAB9C'}">history_toggle_off</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Tiempo de incapacidad</p>
+                    <p class="act-detail-subtitle">{{c.timeIsolation}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0B0DAB'}">calendar_view_day</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Obervaciones de entrega</p>
+                    <p class="act-detail-subtitle">{{c.observationDelivery}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0B98AB'}">text_snippet</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Obervaciones laborales</p>
+                    <p class="act-detail-subtitle">{{c.observationWorking}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0B62AB'}">post_add</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Dia de aislamiento</p>
+                    <p class="act-detail-subtitle">{{c.dayIsolation}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#411881'}">people_alt</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Consolidado de trabajo</p>
+                    <p class="act-detail-subtitle">{{c.consolidatedWork}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#5A0C17'}">fact_check</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Seguimiento</p>
+                    <p class="act-detail-subtitle">{{c.followUp}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#D43BE6'}">supervised_user_circle</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Estado de salud actual</p>
+                    <p class="act-detail-subtitle">{{c.statusHealth}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#1A5A0C'}">gavel</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Segmento de resultado</p>
+                    <p class="act-detail-subtitle">{{c.segmentResult}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#0C5A4F'}">badge</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cerco epidemiologico</p>
+                    <p class="act-detail-subtitle">{{c.siegeEpimiodological}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#411881'}">description</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Observaciones</p>
+                    <p class="act-detail-subtitle">{{c.observation}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#5A0C17'}">local_hospital</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Hospitalizacion</p>
+                    <p class="act-detail-subtitle">{{c.hospitalization}}</p>
+                </div>
+            </div>
+            <div *ngIf="loading" class="act-detail-container-loader">
+                <div class="act-detail-loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

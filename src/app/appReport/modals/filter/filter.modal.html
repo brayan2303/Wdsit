@@ -1,0 +1,89 @@
+<div mat-dialog-content>
+    <div class="report-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Filtros</p>
+    <form [formGroup]="form" class="report-form">
+        <div class="report-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="report-group">
+            <label class="primaryColor">Tipo</label>
+            <select formControlName="type" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo</option>
+                <option value="number">Numero</option>
+                <option value="text">Texto</option>
+                <option value="date">Fecha</option>
+                <option value="list">Lista</option>
+                <option value="array">Arreglo</option>
+            </select>
+        </div>
+        <div *ngIf="form.controls.type.value === 'list' || form.controls.type.value === 'array'" class="report-group">
+            <label class="primaryColor">Consulta</label>
+            <textarea formControlName="query" rows="10" cols="1" class="form-control" placeholder="Consulta"></textarea>
+        </div>
+        <div *ngIf="editing !=0" class="report-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="report-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="report-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="report-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button mat-mini-fab class="green" matTooltip="Guardar"
+            matTooltipPosition="right" matTooltipClass="tooltip" (click)="onClick()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </form>
+    <table class="report-table" mat-table [dataSource]="dataSource" #table>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let item">{{item.type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="query">
+            <th mat-header-cell *matHeaderCellDef>Consulta</th>
+            <td mat-cell *matCellDef="let item">{{item.query}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id,item.name,item.type,item.query,item.active)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+<div class="moduleNew-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="moduleNew-form">
+        <div class="moduleNew-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="moduleNew-group">
+            <label class="primaryColor">Link</label>
+            <input formControlName="link" type="text" class="form-control" placeholder="Link">
+        </div>
+        <div class="moduleNew-group">
+            <select class="form-control" formControlName="sectionId">
+                <option class="ligthColor" value="0">Selecciona una seccion</option>
+                <option *ngFor="let s of sectionList" value="{{s.id}}">{{s.name}} | {{s.application}}</option>
+            </select>
+        </div>
+        <div *ngIf="moduleId != 0" class="moduleNew-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="moduleNew-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="moduleNew-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="moduleNew-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="moduleNew-container-button">
+            <button class="moduleNew-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

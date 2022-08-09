@@ -1,0 +1,96 @@
+.application-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.application-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.application-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.application-container-button{
+    display: flex;
+    width: 100%;
+}
+.application-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.application-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.application-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.application-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+input[type=color]{
+    background-color: white;
+    cursor: pointer;
+}
+.application-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.application-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .application-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .application-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}

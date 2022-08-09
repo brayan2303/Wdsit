@@ -1,0 +1,79 @@
+<div class="pqr-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Tipo Usuario</label>
+            <select formControlName="typeClient" class="form-control" >
+                <option  class="ligthColor" value=null>Seleccione una opcion</option>
+                <option value="Cliente"> Cliente </option>
+                <option value="Agente"> Agente </option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('typeClient').invalid && form.get('typeClient').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Categoría</label>
+            <select formControlName="categoryId" class="form-control" >
+                <option  class="ligthColor" value=null>Seleccione una opcion</option>
+                <option *ngFor="let p of pqrFilesList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('categoryId').invalid && form.get('categoryId').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="pqr-group-text">
+            <label class="primaryColor">Descripción</label>
+            <textarea formControlName="description" type="text" class="form-control input-group"></textarea>
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una descripcion valida</div>
+        </div>
+        
+        <div class="pqr-group">
+            <label class="primaryColor">Archivos adjuntos</label>
+            <div class="pqr-attachment">
+                <div class="pqr-attachment-content">
+                    <ng-container *ngIf="formId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="pqr-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="pqr-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="pqr-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="formId != 0" class="pqr-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pqr-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pqr-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pqr-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="pqr-container-button">
+                <button type="reset" class="pqr-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

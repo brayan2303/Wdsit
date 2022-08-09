@@ -1,0 +1,44 @@
+.cov-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 50px;
+}
+.cov-subtitle{
+    color: var(--primary);
+    text-align: center;
+}
+.cov-text{
+    color: var(--ligth);
+    width: 100%;
+}
+button{
+    width: 150px;
+    height: 50px;
+    background-color: var(--secundary);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    margin-bottom: 30px;
+}
+button:hover{
+    background-color: var(--primary);
+    color: var(--secundary);
+}
+.cov-paragraph {
+    text-align: center;
+}
+.cov-paragraphT{
+    text-align: right;
+}
+.cov-checkboton {
+    
+    text-align: center;
+}
+.cov-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(10% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-align: center   ;
+}

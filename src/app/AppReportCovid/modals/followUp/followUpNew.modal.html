@@ -1,0 +1,52 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Seguimiento</p>
+    <br>
+    <form [formGroup]="form" class="acts-form form" >
+     
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Seguimiento</label>
+            <textarea formControlName="followUp" class="form-control input-group">Seguimiento</textarea>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Estado de salud actual</label>
+            <select class="form-control" formControlName="statusHealth" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Asintomatico">Asintomatico</option>
+                <option value="Sintomas leves">Sintomas leves</option>
+                <option value="Sintomas graves">Sintomas graves</option>
+                <option value="Hospitalizado">Hospitalizado</option>
+                <option value="En recuperacion">En recuperacion</option>
+                <option value="Alta medica">Alta medica</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Segmento de resultado</label>
+            <select class="form-control" formControlName="segmentResult" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+                <option value="Positivo">Pdte Prueba</option>
+                <option value="Negativo">Pdte Resultado</option>
+                <option value="Positivo">No aplica</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Estado del trabajador</label>
+            <select class="form-control" formControlName="statusWokin">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Cuarentena">Cuarentena</option>
+                <option value="Laborando">Laborando</option>
+                <option value="Laborando en casa">Laborando en casa</option>
+            </select>
+        </div>
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

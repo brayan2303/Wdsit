@@ -1,0 +1,31 @@
+<div class="acts-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="acts-form">
+        <div class="acts-group">
+            <label class="primaryColor">Mes</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Mes">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un valor valido</div>
+        </div>
+     
+        <div *ngIf="MonthId != 0" class="acts-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="acts-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="acts-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="acts-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="acts-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button">
+                <button type="reset" class="acts-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

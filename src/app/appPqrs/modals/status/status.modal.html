@@ -1,0 +1,43 @@
+<div mat-dialog-content>
+    <div class="pqr-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Estados</p>
+    <table #table class="pqr-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="icon">
+            <th mat-header-cell *matHeaderCellDef>icono</th>
+            <td mat-cell *matCellDef="let item">{{item.icon}}</td>
+        </ng-container>
+        <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="pqr-color" [ngStyle]="{'background-color': item.color}" matTooltip="{{item.color}}" matTooltipPosition="above" matTooltipClass="tooltip"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Asignar">
+            <th mat-header-cell *matHeaderCellDef>Asignar</th>
+            <td mat-cell *matCellDef="let item">
+                <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="pqr-checkbox">
+                        <input [id]="item.id" type="checkbox" [checked]="item.active" (click)="checked($event.srcElement,item.id)">
+                        <label class="pqr-label" [for]="item.id">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pqr-container-loader">
+        <div class="pqr-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,73 @@
+<div class="dai-container">
+    <p class="title">Dashboard Daily Operation</p>
+    <div class="dai-form">
+        <div class="dai-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="country" class="form-control" (change)="getGoal()">
+                <option class="ligthColor" value="">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.name}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="dai-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="cliente">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'border-top-left-radius':'10px','border-bottom-left-radius':'10px'}">Cliente</th>
+            <td mat-cell *matCellDef="let item" [ngStyle]="{'border-bottom-left-radius':'10px'}">{{item.cliente}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dia">
+            <th mat-header-cell *matHeaderCellDef>Dia</th>
+            <td mat-cell *matCellDef="let item">{{item.dia}}</td>
+        </ng-container>
+        <ng-container matColumnDef="semana">
+            <th mat-header-cell *matHeaderCellDef>Semana</th>
+            <td mat-cell *matCellDef="let item">{{item.semana}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acumulado">
+            <th mat-header-cell *matHeaderCellDef>Acumulado</th>
+            <td mat-cell *matCellDef="let item">{{item.acumulado}}</td>
+        </ng-container>
+        <ng-container matColumnDef="meta">
+            <th mat-header-cell *matHeaderCellDef>Meta</th>
+            <td mat-cell *matCellDef="let item">{{item.meta}}</td>
+        </ng-container>
+        <ng-container matColumnDef="cumplimiento">
+            <th mat-header-cell *matHeaderCellDef>Cumplimiento</th>
+            <td mat-cell *matCellDef="let item">{{item.cumplimiento}}</td>
+        </ng-container>
+        <ng-container matColumnDef="gap">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'border-top-right-radius':'10px','border-bottom-right-radius':'10px'}">Gap</th>
+            <td mat-cell *matCellDef="let item" [ngStyle]="{'border-bottom-right-radius':'10px'}">{{item.gap}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="dai-container-loader">
+        <div class="dai-loader"></div>
+    </div>
+    <div class="dai-container-chart" [ngStyle]="{'justify-content':'center'}">
+        <div *ngIf="data1.length>0" class="dai-chart" [ngStyle]="{'width':'70%'}">
+            <canvas baseChart [datasets]="multiBarChart.data" [labels]="multiBarChart.labels" [options]="multiBarChart.options"
+                [legend]="multiBarChart.legend" [chartType]="multiBarChart.type">
+            </canvas>
+        </div>
+    </div>
+    <div class="dai-container-chart">
+        <div *ngIf="dataEntry.dataX.length>0" class="dai-chart" [ngStyle]="{'width':'50%'}">
+            <canvas baseChart [datasets]="chartEntry.data" [labels]="chartEntry.labels" [options]="chartEntry.options"
+                [legend]="chartEntry.legend" [chartType]="chartEntry.type">
+            </canvas>
+        </div>
+        <div *ngIf="dataDispatch.dataX.length>0" class="dai-chart" [ngStyle]="{'width':'50%','margin-left':'20px'}">
+            <canvas baseChart [datasets]="chartDispatch.data" [labels]="chartDispatch.labels" [options]="chartDispatch.options"
+                [legend]="chartDispatch.legend" [chartType]="chartDispatch.type">
+            </canvas>
+        </div>
+    </div>
+    <div class="dai-container-chart" [ngStyle]="{'justify-content':'center'}">
+        <div *ngIf="dataRepair.dataX.length>0" class="dai-chart" [ngStyle]="{'width':'50%'}">
+            <canvas baseChart [datasets]="chartRepair.data" [labels]="chartRepair.labels" [options]="chartRepair.options"
+                [legend]="chartRepair.legend" [chartType]="chartRepair.type">
+            </canvas>
+        </div>
+    </div>
+</div>

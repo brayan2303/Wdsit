@@ -1,0 +1,80 @@
+<div class="report-container">
+    <p class="title">Listado de Pallets</p>
+    <div class="report-form">
+        <div class="report-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getCyclic()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="report-group">
+            <label class="primaryColor">Ciclico</label>
+            <select [(ngModel)]="cyclicId" class="form-control" (change)="search()">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="report-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef>Numero</th>
+            <td mat-cell *matCellDef="let item">{{item.number}}</td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef>Ubicacion</th>
+            <td mat-cell *matCellDef="let item">{{item.location}}</td>
+        </ng-container>
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+            <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+        </ng-container>
+        <ng-container matColumnDef="couting1">
+            <th mat-header-cell *matHeaderCellDef>Primer Conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.couting1}}</td>
+        </ng-container>
+        <ng-container matColumnDef="couting2">
+            <th mat-header-cell *matHeaderCellDef>Segundo Conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.couting2}}</td>
+        </ng-container>
+        <ng-container matColumnDef="couting3">
+            <th mat-header-cell *matHeaderCellDef>Tercer Conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.couting3}}</td>
+        </ng-container>
+        <ng-container matColumnDef="couting4">
+            <th mat-header-cell *matHeaderCellDef>Cuarto Conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.couting4}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let item">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Aprobar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="approveReject(item,'Aprobado')">
+                    <mat-icon class="green-color">done</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Rechazar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="approveReject(item,'Rechazado')">
+                    <mat-icon class="red-color">close</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Abrir" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="open(item.id)">
+                    <mat-icon class="orange-color">vpn_key</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Conteos" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="getCouting(item.id)">
+                    <mat-icon class="primaryColor">slow_motion_video</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

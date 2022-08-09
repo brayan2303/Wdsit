@@ -1,0 +1,106 @@
+.label-table{
+    border: 1px solid var(--ligth);
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+th{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+    padding-left: 0px !important;
+}
+.mat-column-Id{
+    width: 40px;
+}
+.label-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+    padding:10px;
+    border: 1px solid var(--ligth);
+}
+.label-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.label-group > input{
+    margin-right: 10px;
+}
+.label-container-button{
+    display: flex;
+    justify-content: flex-end;
+}
+.label-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.label-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.label-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.label-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.label-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .label-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .label-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.label-box{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin-bottom: 10px;
+}

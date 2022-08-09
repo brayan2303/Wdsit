@@ -1,0 +1,39 @@
+<div class="bsc-container">
+    <p class="title">Listado de Objetivos estrategicos</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="bsc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="percentage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Porcentaje</th>
+            <td mat-cell *matCellDef="let item">{{item.percentage}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perspectiva</th>
+            <td mat-cell *matCellDef="let item">{{item.perspective}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="bsc-container-loader">
+        <div class="bsc-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,71 @@
+<div class="task-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="task-form">
+        <div class="task-group">
+            <label class="primaryColor">Titulo</label>
+            <input formControlName="title" type="text" class="form-control" placeholder="Titulo">
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Prioridad</label>
+            <select formControlName="priority" class="form-control">
+                <option class="ligthColor" value="">Seleccione una prioridad</option>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Estado</label>
+            <select formControlName="status" class="form-control">
+                <option class="ligthColor" value="">Seleccione un estado</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Terminada">Terminada</option>
+            </select>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Tipo</label>
+            <select formControlName="type" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo</option>
+                <option value="Desarrollo">Desarrollo</option>
+                <option value="Correccion">Correccion</option>
+                <option value="Mejora">Mejora</option>
+            </select>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Fecha de inicio</label>
+            <div class="task-form-control">
+                <input formControlName="startDate" matInput [matDatepicker]="startDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Fecha de finalizacion</label>
+            <div class="task-form-control">
+                <input formControlName="endDate" matInput [matDatepicker]="endDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Usuario Solicitante</label>
+            <select formControlName="requestPersonId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un usuario</option>
+                <option *ngFor="let p of personList" value="{{p.id}}">{{p.firstName}}|{{p.lastName}}|{{p.userName}}</option>
+            </select>
+        </div>
+        <div class="task-group">
+            <label class="primaryColor">Usuario Asignado</label>
+            <select formControlName="assignedPersonId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un usuario</option>
+                <option *ngFor="let p of personList" value="{{p.id}}">{{p.firstName}}|{{p.lastName}}|{{p.userName}}</option>
+            </select>
+        </div>
+        <div class="task-container-button">
+            <button class="task-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

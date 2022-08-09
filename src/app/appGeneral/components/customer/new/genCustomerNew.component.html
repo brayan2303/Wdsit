@@ -1,0 +1,30 @@
+<div class="customer-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="customer-form">
+        <div class="customer-group">
+            <label class="primaryColor">Codigo</label>
+            <input formControlName="code" type="text" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="customer-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control" placeholder="Descripcion">
+        </div>
+        <div *ngIf="customerId != 0" class="customer-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="customer-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="customer-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="customer-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="customer-container-button">
+            <button class="customer-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

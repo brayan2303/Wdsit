@@ -1,0 +1,10 @@
+<div class="application-container">
+    <p class="title">Mis Aplicaciones</p>
+    <div class="application-content">
+        <div *ngFor="let app of applicationList" class="application-card" [ngStyle]="{'color' : app.color}">
+            <a target="_blank" routerLink="/{{app.link}}"></a>
+            <span class="application-card-title">{{app.name}}</span>
+            <mat-icon class="application-card-icon">{{app.icon}}</mat-icon>
+        </div>
+    </div>
+</div>

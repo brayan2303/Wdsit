@@ -1,0 +1,197 @@
+<div class="cyclic-container">
+    <p class="title">Nueva Tarjeta</p>
+    <div class="cyclic-form">
+        <div class="cyclic-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId1" class="form-control" (change)="getCyclic(customerId1,1)">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="cyclic-group">
+            <label class="primaryColor">Ciclicos</label>
+            <select [(ngModel)]="invCardEntity.cyclicId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList1" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="cyclic-group">
+            <label class="primaryColor">Total de tarjetas</label>
+            <input [(ngModel)]="total" type="number" min="0" class="form-control" placeholder="Total de tarjetas">
+        </div>
+        <div class="cyclic-group">
+            <label class="primaryColor">Tipo de conteo</label>
+            <select [(ngModel)]="invCardEntity.coutingType" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un tipo de conteo</option>
+                <option value="Primer Conteo">Primer Conteo</option>
+                <option value="Segundo Conteo">Segundo Conteo</option>
+                <option value="Tercer Conteo">Tercer Conteo</option>
+            </select>
+        </div>
+        <button class="cyclic-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Tarjetas</p>
+    <div class="cyclic-form">
+        <div class="cyclic-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId2" class="form-control" (change)="getCyclic(customerId2,2)">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="cyclic-group">
+            <label class="primaryColor">Ciclicos</label>
+            <select [(ngModel)]="cyclicId" class="form-control" (change)="search()">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList2" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="loading" class="cyclic-container-loader">
+        <div class="cyclic-loader"></div>
+    </div>
+    <div *ngIf="cardList.length>0"
+        [ngStyle]="{'display': 'flex','justify-content':'flex-end','margin-right':'20px','margin-bottom':'10px'}">
+        <button [ngStyle]="{'margin-right': '10px'}" mat-mini-fab matTooltip="Imprimir Todo" class="blue"
+            matTooltipPosition="above" matTooltipClass="tooltip" >
+            <mat-icon>print</mat-icon>
+        </button>
+        <button mat-mini-fab matTooltip="Eliminar Todo" class="red" matTooltipPosition="above" matTooltipClass="tooltip"
+            (click)="delete(0)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="cardList.length>0" class="cyclic-card-container">
+        <div *ngFor="let c of cardListSlice" id="{{c.id}}"
+            [ngStyle]="{'border-color': c.coutingType==='Primer Conteo'?'#ffea00':(c.coutingType==='Segundo Conteo'?'var(--green)':'var(--red)')}"
+            class="cyclic-card">
+            <div [ngStyle]="{'display': 'flex'}">
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p *ngIf="c.cyclic!=null" class="cyclic-information">{{c.cyclic}}-</p>
+                    <p *ngIf="c.cyclic===null" class="cyclic-information">Sin Asignar-</p>
+                    <p class="cyclic-information">CLIENTE {{c.customer}}</p>
+                </div>
+                <div class="cyclic-logo"></div>
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1','justify-content':'flex-end'}">
+                    <p class="cyclic-information"><b>Codigo&emsp;</b></p>
+                    <p class="cyclic-information">{{c.code}}</p>
+                </div>
+            </div>
+            <div [ngStyle]="{'display': 'flex'}">
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Fecha&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.date}}</p>
+                    </div>
+                </div>
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Fecha Cargue&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.loadDate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div [ngStyle]="{'display': 'flex'}">
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Auditado&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.auditor}}</p>
+                    </div>
+                </div>
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Tipo Conteo&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.coutingType}}</p>
+                    </div>
+                </div>
+            </div>
+            <div [ngStyle]="{'display': 'flex'}">
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Ubicacion&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.location}}</p>
+                    </div>
+                </div>
+                <div [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <p class="cyclic-information"><b>Pallet&emsp;</b></p>
+                    <div
+                        [ngStyle]="{'border-bottom': '1px solid var(--ligth)','display':'flex','flex-grow':'1','justify-content':'center'}">
+                        <p class="cyclic-information">{{c.pallet}}</p>
+                    </div>
+                </div>
+            </div>
+            <div [ngStyle]="{'display': 'flex'}">
+                <div [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1'}">
+                    <div class="cyclic-container-signed">
+                        <p *ngIf="c.signed1===null || c.signed1===''" (click)="signed(c.id,'signed1','')">Firmar</p>
+                        <img *ngIf="c.signed1!=null && c.signed1!=''" src="{{c.signed1}}" (click)="signed(c.id,'signed1',c.signed1)">
+                    </div>
+                    <div
+                        [ngStyle]="{'display':'flex','justify-content':'center','border-top': '1px solid var(--ligth)'}">
+                        <p class="cyclic-information" [ngStyle]="{'margin-top': '0px'}">Aprobado Control Interno</p>
+                    </div>
+                </div>
+                <div [ngStyle]="{'width': '10px'}"></div>
+                <div [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1'}">
+                    <div class="cyclic-container-signed">
+                        <p *ngIf="c.signed2===null || c.signed2===''" (click)="signed(c.id,'signed2','')">Firmar</p>
+                        <img *ngIf="c.signed2!=null && c.signed2!=''" src="{{c.signed2}}" (click)="signed(c.id,'signed2',c.signed2)">
+                    </div>
+                    <div
+                        [ngStyle]="{'display':'flex','justify-content':'center','border-top': '1px solid var(--ligth)'}">
+                        <p class="cyclic-information" [ngStyle]="{'margin-top': '0px'}">Aprobado Jefe Bodega</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                [ngStyle]="{'display': 'flex','justify-content':'flex-end','margin-top':'10px','border-top':'1px solid var(--ligth)'}">
+                <div *ngIf="c.pallet !='SIN PALLET'" [ngStyle]="{'display': 'flex','flex-grow':'1'}">
+                    <div
+                        [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1','align-items':'center'}">
+                        <p class="cyclic-percentage"><b>Total</b></p>
+                        <p class="cyclic-percentage">{{c.total}}</p>
+                    </div>
+                    <div
+                        [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1','align-items':'center'}">
+                        <p class="cyclic-percentage"><b>Muestra</b></p>
+                        <p class="cyclic-percentage">{{c.sampling}}%</p>
+                    </div>
+                    <div
+                        [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1','align-items':'center'}">
+                        <p class="cyclic-percentage"><b>Conteo</b></p>
+                        <p class="cyclic-percentage">{{c.couting}}</p>
+                    </div>
+                    <div
+                        [ngStyle]="{'display': 'flex','flex-direction':'column','flex-grow':'1','align-items':'center'}">
+                        <p class="cyclic-percentage"><b>Porcentaje</b></p>
+                        <p class="cyclic-percentage">{{(c.couting * 100 / c.total)|cut}}%</p>
+                    </div>
+                </div>
+                <button mat-icon-button matTooltip="Imprimir" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="print(c,0)">
+                    <mat-icon class="blue-color">print</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Aprobar" matTooltipPosition="above" matTooltipClass="tooltip">
+                    <mat-icon class="green-color">done</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Rechazar" matTooltipPosition="above" matTooltipClass="tooltip">
+                    <mat-icon class="red-color">close</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(c.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" [pageSize]="5" [length]="cardList.length"
+        showFirstLastButtons (page)="change($event)"></mat-paginator>
+</div>

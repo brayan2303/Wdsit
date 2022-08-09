@@ -1,0 +1,169 @@
+<div class="mee-container">
+    <p class="title">Listado de Reuniones</p>
+    <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear Reunión" matTooltipPosition="left"
+        matTooltipClass="tooltip" (click)="create(null)">
+        <mat-icon>add</mat-icon>
+    </button>
+    <div fxLayout fxLayoutAlign="start flex-end" class="mee-container-search">
+        <div fxFlex="300px" fxLayout="column" style="margin-right:20px;">
+            <span class="mee-title">Fecha de Inicio</span>
+            <div fxLayout>
+                <input readonly [(ngModel)]="date1" id="startDate" matInput [matDatepicker]="startDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div fxFlex="300px" fxLayout="column" style="margin-right:20px;">
+            <span class="mee-title">Fecha de Fin</span>
+            <div fxLayout>
+                <input readonly [(ngModel)]="date2" id="endDate" matInput [matDatepicker]="endDate" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="left" matTooltipClass="tooltip"
+            (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="loading" class="mee-container-loader">
+        <div class="mee-loader"></div>
+    </div>
+    <table class="mee-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="periodicity">
+            <th mat-header-cell *matHeaderCellDef>Periodicidad</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.periodicity}}</td>
+        </ng-container>
+        <ng-container matColumnDef="startHour">
+            <th mat-header-cell *matHeaderCellDef>Hora Inicio</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.startHour}}</td>
+        </ng-container>
+        <ng-container matColumnDef="endHour">
+            <th mat-header-cell *matHeaderCellDef>Hora Fin</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.endHour}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nameGroup">
+            <th mat-header-cell *matHeaderCellDef>Grupos</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.nameGroup}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.id,item.name,item.periodicity)">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="create(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+    <ng-container *ngIf="id!=0">
+        <p class="title">Respuestas</p>
+        <div *ngIf="loadingResponse" class="mee-container-loader">
+            <div class="mee-loader"></div>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="center center">
+            <span *ngIf="dataResponse.data.length===0" class="mee-title">¡Sin respuestas!</span>
+        </div>
+        <table *ngIf="dataResponse.data.length>0" class="mee-table" mat-table [dataSource]="dataResponse">
+            <ng-container matColumnDef="identification">
+                <th mat-header-cell *matHeaderCellDef>identificacion</th>
+                <td mat-cell *matCellDef="let item">{{item.identification}}</td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>Nombres</th>
+                <td mat-cell *matCellDef="let item">{{item.firstName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+                <td mat-cell *matCellDef="let item">{{item.lastName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell *matHeaderCellDef>Usuario</th>
+                <td mat-cell *matCellDef="let item">{{item.userName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Ver Respuestas" matTooltipPosition="above" matTooltipClass="tooltip" (click)="fillOut(item.id)">
+                        <mat-icon class="orange-color">checklist</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsResponse"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsResponse;"></tr>
+        </table>
+        <mat-paginator #paginatorResponse [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+        </mat-paginator>
+    </ng-container>
+    <ng-container *ngIf="id!=0">
+        <p class="title">Listado de Apoyos</p>
+        <div *ngIf="loadingSupport" class="mee-container-loader">
+            <div class="mee-loader"></div>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="center center">
+            <span *ngIf="dataSupport.data.length===0" class="mee-title">¡Sin apoyos!</span>
+        </div>
+        <table *ngIf="dataSupport.data.length>0" class="mee-table" mat-table [dataSource]="dataSupport">
+            <ng-container matColumnDef="support">
+                <th mat-header-cell *matHeaderCellDef>Apoyo</th>
+                <td mat-cell *matCellDef="let item">{{item.support}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item" [ngStyle]="{'color':item.status==='Pendiente'?'var(--red)':'var(--green)'}">{{item.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+                <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+                <td mat-cell *matCellDef="let item">{{item.startDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="endDate">
+                <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
+                <td mat-cell *matCellDef="let item">{{item.endDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="creationUser">
+                <th mat-header-cell *matHeaderCellDef>Usuario Creacion</th>
+                <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+            </ng-container>
+            <ng-container matColumnDef="responsibleUser">
+                <th mat-header-cell *matHeaderCellDef>Usuario Responsable</th>
+                <td mat-cell *matCellDef="let item">{{item.responsibleUser}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Archivos" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getFiles(item.meetingId,item.id)">
+                        <mat-icon class="orange-color">assignment</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsSupport"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsSupport;"></tr>
+        </table>
+        <mat-paginator #paginatorSupport [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+        </mat-paginator>
+    </ng-container>
+</div>

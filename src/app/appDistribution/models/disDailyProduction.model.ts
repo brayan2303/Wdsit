@@ -1,0 +1,31 @@
+export class DisDailyOperationModel{
+    id:number;
+    customerId:number;
+    customer:string;
+    countryId:number;
+    country:string;
+    departmentId:number;
+    department:string;
+    cityId:number;
+    city:string;
+    year:number;
+    monthId:number;
+    logistic:number;
+    accumulatedLogistic:number;
+    goalLogistic:number;
+    production:number;
+    accumulatedProduction:number;
+    goalProduction:number;
+    reaconditioning:number;
+    accumulatedReaconditioning:number;
+    goalReaconditioning:number;
+    makeover:number;
+    accumulatedMakeover:number;
+    goalMakeover:number;
+    repair:number;
+    accumulatedRepair:number;
+    goalRepair:number;
+    dispatch:number;
+
+    constructor(){}
+}

@@ -1,0 +1,12 @@
+<mat-toolbar class="toolbar">
+  <div class="toolbar-information">
+    <img src="./assets/images/Logo.png" (click)="goWoden()">
+    <span matTooltip="Linea Covid" matTooltipPosition="below" matTooltipClass="tooltip">Linea Covid</span>
+  </div>
+</mat-toolbar>
+<div class="container">
+  <div class="body" [ngClass]="{'body-close' : !isOpen}">
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

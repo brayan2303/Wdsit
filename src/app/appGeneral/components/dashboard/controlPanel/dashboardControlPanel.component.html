@@ -1,0 +1,11 @@
+<div class="dashboardControlPanel-container">
+    <p class="title">Dashboard Tableros de Control</p>
+    <div class="dashboardControlPanel-container-chart">
+        <apx-chart *ngIf="data1.dataX.length > 0" #chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+            [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions" [yaxis]="barChartOptions.yaxis"
+            [xaxis]="barChartOptions.xaxis" [fill]="barChartOptions.fill" [title]="barChartOptions.title">
+        </apx-chart>
+        <apx-chart *ngIf="data2.dataX.length > 0" [series]="pieChartOptions.series" [chart]="pieChartOptions.chart" [labels]="pieChartOptions.labels"
+            [title]="pieChartOptions.title" [responsive]="pieChartOptions.responsive"></apx-chart>
+    </div>
+</div>

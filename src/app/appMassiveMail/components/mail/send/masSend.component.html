@@ -1,0 +1,71 @@
+<div class="mas-container">
+    <p class="title">Listado de Envios</p>
+    <div fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)">
+            <label class="primaryColor">Correo</label>
+            <select class="form-control" [(ngModel)]="mailId" (change)="getSend()">
+                <option value="0" disabled>Selecciona un correo</option>
+                <option *ngFor="let m of mailList" value="{{m.id}}">{{m.subject}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="loading" class="mas-container-loader">
+        <div class="mas-loader"></div>
+    </div>
+    <table *ngIf="!loading" class="mas-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="mail">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let item">{{item.mail}}</td>
+        </ng-container>
+        <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Mensaje</th>
+            <td mat-cell *matCellDef="let item" [ngClass]="{'green-color':item.message==='Aprobado','red-color':item.message==='Rechazado','orange-color':item.message==='Pendiente'}">{{item.message}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="approvalDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Aprobacion</th>
+            <td mat-cell *matCellDef="let item">{{item.approvalDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="approvalUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Aprobacion</th>
+            <td mat-cell *matCellDef="let item">{{item.approvalUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sendingDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Envio</th>
+            <td mat-cell *matCellDef="let item">{{item.sendingDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sendingUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Envio</th>
+            <td mat-cell *matCellDef="let item">{{item.sendingUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Detalle" matTooltipPosition="above" matTooltipClass="tooltip" (click)="detail(item.mailId)">
+                    <mat-icon class="orange-color">article</mat-icon>
+                </button>
+                <button [disabled]="item.message!='Pendiente'" mat-icon-button matTooltip="Aprobar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="approveReject(item.id,'Aprobado')">
+                    <mat-icon [ngClass]="{'ligthColor':item.message!='Pendiente','green-color':item.message==='Pendiente'}">done</mat-icon>
+                </button>
+                <button [disabled]="item.message!='Pendiente'" mat-icon-button matTooltip="Rechazar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="approveReject(item.id,'Rechazado')">
+                    <mat-icon [ngClass]="{'ligthColor':item.message!='Pendiente','red-color':item.message==='Pendiente'}">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+    <div class="mas-detail">
+        <span class="title">Detalle Correo</span>
+        <div id="message"></div>
+    </div>
+</div>

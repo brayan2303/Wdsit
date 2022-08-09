@@ -1,0 +1,91 @@
+<div class="acts-container">
+    <p class="title">Salida e ingresos de equipos</p>
+    <form  (keydown.enter)="$event.preventDefault()" [formGroup]="form" class="acts-form">
+        <div class="acts-group">
+            <label class="primaryColor">Serial</label>
+            <div class="acts-control-group">
+                <input matInput formControlName="serial" type="text" class="form-control"
+                    placeholder="000-00-000-00000-">
+                <div class="invalid-text" *ngIf="form.get('serial').invalid && form.get('serial').touched">Ingrese un
+                    número
+                    de Serial</div> 
+                       
+                <button mat-mini-fab class="green" matTooltip="Salida" matTooltipPosition="above"
+                    matTooltipClass="tooltip" type="submit" (click)="search()">
+                    <mat-icon>login</mat-icon>
+                </button>
+
+                <button mat-mini-fab class="red act-marg" matTooltip="Ingreso" matTooltipPosition="above"
+                    matTooltipClass="tooltip" type="submit" (click)="searchEntry()">
+                    <mat-icon>done</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="acts-group acts-margin">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input readonly name="name" formControlName="name" class="form-control text-may"
+                placeholder="Nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre y
+                apellido valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Numero de identificacion</label>
+            <input readonly name="identification" formControlName="identification" class="form-control text-may"
+                placeholder="N° de identificacion">
+            <div class="invalid-text" *ngIf="form.get('identification').invalid && form.get('identification').touched">
+                Ingrese un N° de identificacion valido</div>
+        </div>
+
+        <div class="acts-group ">
+            <label class="primaryColor">Area</label>
+            <input readonly name="area" formControlName="area" class="form-control text-may" placeholder="Area">
+            <div class="invalid-text" *ngIf="form.get('area').invalid && form.get('area').touched">Ingrese
+                un centro de costo valido</div>
+        </div>
+        <div class="acts-group ">
+            <label class="primaryColor">Cargo</label>
+            <input readonly name="position" formControlName="position" class="form-control text-may"
+                placeholder="Cargo">
+            <div class="invalid-text" *ngIf="form.get('position').invalid && form.get('position').touched">Ingrese un
+                cargo valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Equipo</label>
+            <input readonly name="equipment" formControlName="equipment" class="form-control text-may" placeholder="">
+            <div class="invalid-text" *ngIf="form.get('equipment').invalid && form.get('equipment').touched">Ingrese un
+                equipo
+                valido</div>
+        </div>
+        <div class="acts-group">
+            <label class="primaryColor">Serial de cargador</label>
+            <input name="serialEquipment" formControlName="serialEquipment" class="form-control text-may" placeholder="">
+            <div class="invalid-text" *ngIf="form.get('serialEquipment').invalid && form.get('serialEquipment').touched">Ingrese un
+                serial valido</div>
+        </div>
+        <div class="acts-group">
+            <input type="hidden" name="associatedSerial" formControlName="associatedSerial" class="form-control text-may" placeholder="">
+            <div class="invalid-text" *ngIf="form.get('associatedSerial').invalid && form.get('associatedSerial').touched">Ingrese un
+                serial valido</div>
+        </div>
+       
+        <div class="acts-group" *ngIf="this.activeFixedAssigmentEntity.exitEntry==false">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button">
+                <button class="acts-button act-color-gren" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                    matTooltipClass="tooltip" mat-raised-button (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="acts-group" *ngIf="this.activeFixedAssigmentEntity.exitEntry==true">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button ">
+                <button class="acts-button act-color-red" mat-raised-button matTooltip="Ingreso" matTooltipPosition="right"
+                    matTooltipClass="tooltip" mat-raised-button (click)="saves()" >
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

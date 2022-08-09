@@ -1,0 +1,52 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Registro de prueba N°1</p>
+    <br>
+    <form [formGroup]="form" class="acts-form form" >
+        <div class="groupDir">
+            <label class="primaryColor">Prueba Covid</label>
+            <select class="form-control" formControlName="proofCovid" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de prueba</label>
+            <input formControlName="dateProofOne" class="form-control" type="date" >
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de ejecucion</label>
+            <input formControlName="dateExecutionProof" class="form-control" type="date" >
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Resultado de la prueba</label>
+            <select class="form-control" formControlName="resultProof" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Positivo">Positivo</option>
+                <option value="Negativo">Negativo</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de notificacion de resultados</label>
+            <input formControlName="dateNotificationResult" class="form-control" type="date" >
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Aplica</label>
+            <select class="form-control" formControlName="noApply" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

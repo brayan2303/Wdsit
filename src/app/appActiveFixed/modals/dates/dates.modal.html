@@ -1,0 +1,31 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Registro de fechas</p>
+    <p class="pqr-parrafo">Registre la fecha de salida e ingreso del equipo </p>
+    <br>
+    <form [formGroup]="form" class="acts-form form" >
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de salida</label>
+            <input formControlName="exitDate" matTooltip="Ingrese la fecha de salida " class="form-control" type="date" placeholder="Cedula" [min]="getToday()">
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de ingreso</label>
+            <input formControlName="entryDate" matTooltip="Ingrese la fecha de ingreso" class="form-control" type="date" placeholder="Serial" [min]="getToday()">
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Guardar</label>
+            <div class="acts-container-button">
+                <button class="acts-button" mat-raised-button matTooltip="Guardar"
+                    matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button [disabled]="!form.valid"
+                    (click)="save()" (click)="close(false)">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+      
+    </form>
+</div>

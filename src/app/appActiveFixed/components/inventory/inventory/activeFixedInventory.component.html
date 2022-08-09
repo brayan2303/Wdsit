@@ -1,0 +1,101 @@
+<div class="actInv-container">
+    <p class="title">Inventario</p>
+    <div  class="act-hei actInv-card">
+        <div class="actInv-information">
+            <p class="actInv-title">Equipos totales</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading1" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}">{{total}}</p>
+                <div *ngIf="loading1" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">Equipos con salida permanente</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading2" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar aprobados" routerLink="form/listAprov">{{totalexits}}</p>
+                <div *ngIf="loading2" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">Equipos en la empresa</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading3" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar" routerLink="form/listcompany">{{totalcompanys}}</p>
+                <div *ngIf="loading3" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="act-hei actInv-card">
+        <div class="actInv-information">
+            <p class="actInv-title">Equipos faltantes de respuesta</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading4" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}">{{totalAnswer}}</p>
+                <div *ngIf="loading4" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">Equipos rechazados</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading5" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar rechazados" routerLink="form/listRejec">{{totalreject}}</p>
+                <div *ngIf="loading5" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="act-hei actInv-card">
+        <div class="actInv-information">
+            <p class="actInv-title">Flujo de entradas y salidas de Equipos</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading6" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}">{{totalflow}}</p>
+                <div *ngIf="loading6" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="act-hei actInv-card">
+        <div class="actInv-information">
+            <p class="actInv-title">Woden</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading4" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar Woden" routerLink="form/inventory/listWoden">{{totalwoden}}</p>
+                <div *ngIf="loading4" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">RentaSistemas</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading5" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar RentaSistemas" routerLink="form/inventory/listRenta">{{totalrenta}}</p>
+                <div *ngIf="loading5" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">Alquilando Tecnologia</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading5" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar Alquilando Tecnologia" routerLink="form/inventory/listAlqui">{{totalalqui}}</p>
+                <div *ngIf="loading5" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="actInv-information">
+            <p class="actInv-title">A&S Computadores</p>
+            <div class="actInv-container-subtitle">
+                <p *ngIf="!loading5" class="actInv-subtitle" [ngStyle]="{'color': '#009688'}" matTooltip="Consultar A&S Computadores" routerLink="form/inventory/listAys">{{totalays}}</p>
+                <div *ngIf="loading5" class="actInv-container-loader">
+                    <div class="actInv-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

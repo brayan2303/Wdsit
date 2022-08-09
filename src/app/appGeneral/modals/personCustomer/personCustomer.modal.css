@@ -1,0 +1,81 @@
+.person-form{
+    margin-top: 30px;
+}
+.person-table{
+    border: 1px solid var(--ligth);
+    max-width: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+th{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    text-align: center !important;
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+}
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.person-container-button{
+    display: flex;
+    justify-content: flex-end;
+}
+.person-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.person-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.person-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.person-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .person-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .person-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}

@@ -1,0 +1,33 @@
+<div class="abre-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="abre-form">
+        <div class="abre-group">
+            <label class="primaryColor">Pais</label>
+            <select formControlName="countryId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="abre-group">
+            <label class="primaryColor">abreviatura</label>
+            <input formControlName="abbreviation" type="text" class="form-control text-may" placeholder="abreviatura">
+        </div>
+        <div *ngIf="formId != 0" class="abre-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="abre-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="abre-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="abre-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="abre-container-button">
+            <button class="abre-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

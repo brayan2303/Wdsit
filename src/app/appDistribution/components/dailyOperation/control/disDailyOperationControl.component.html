@@ -1,0 +1,105 @@
+<div class="dis-container">
+    <p class="title">Control</p>
+    <div class="dis-form">
+        <div class="dis-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="country" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getMonth()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Mes</label>
+            <select [(ngModel)]="month" class="form-control" (change)="getDays()">
+                <option class="ligthColor" value="">Seleccione un mes</option>
+                <option *ngFor="let m of monthList" value="{{m.id}},{{m.month}}">{{m.month}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Dia</label>
+            <select [(ngModel)]="day" class="form-control" (change)="getDailyOperation()">
+                <option class="ligthColor" value="0">Seleccione un dia</option>
+                <option *ngFor="let d of daysList" value="{{d}}">{{d}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="dis-container-button">
+        <button mat-mini-fab class="green" matTooltip="Agregar Proyecto" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="createProyect()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div *ngFor="let d of dailyOperationList" class="dis-container-proyect">
+        <p class="dis-title">{{d.customer}} - {{d.city}}</p>
+        <div class="dis-container-operation">
+            <div class="dis-operation">
+                <p class="dis-subtitle">Logistica</p>
+                <p class="dis-title">Dia</p>
+                <input id="{{d.id}}dayLogistic" type="text" class="dis-input" value="{{d.logistic}}">
+                <p class="dis-title">Acumulado</p>
+                <p class="dis-subtitle">{{d.accumulatedLogistic}}</p>
+                <p class="dis-title">Meta</p>
+                <input id="{{d.id}}goalLogistic" type="text" class="dis-input" value="{{d.goalLogistic}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Dia" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateDay(d.id,'Logistic')">event</mat-icon>
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-goal green" matTooltip="Actualizar Meta" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Logistic')">outlined_flag</mat-icon>
+            </div>
+            <div class="dis-operation">
+                <p class="dis-subtitle">Produccion</p>
+                <p class="dis-title">Dia</p>
+                <input id="{{d.id}}dayProduction" type="text" class="dis-input" value="{{d.production}}">
+                <p class="dis-title">Acumulado</p>
+                <p class="dis-subtitle">{{d.accumulatedProduction}}</p>
+                <p class="dis-title">Meta</p>
+                <input id="{{d.id}}goalProduction" type="text" class="dis-input" value="{{d.goalProduction}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Dia" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateDay(d.id,'Production')">event</mat-icon>
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-goal green" matTooltip="Actualizar Meta" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Production')">outlined_flag</mat-icon>
+            </div>
+            <div class="dis-operation">
+                <p class="dis-subtitle">Reacondicionamiento</p>
+                <p class="dis-title">Dia</p>
+                <input id="{{d.id}}dayReconditioning" type="text" class="dis-input" value="{{d.reconditioning}}">
+                <p class="dis-title">Acumulado</p>
+                <p class="dis-subtitle">{{d.accumulatedReconditioning}}</p>
+                <p class="dis-title">Meta</p>
+                <input id="{{d.id}}goalReconditioning" type="text" class="dis-input" value="{{d.goalReconditioning}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Dia" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateDay(d.id,'Reconditioning')">event</mat-icon>
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-goal green" matTooltip="Actualizar Meta" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Reconditioning')">outlined_flag</mat-icon>
+            </div>
+            <div class="dis-operation">
+                <p class="dis-subtitle">Remozamiento</p>
+                <p class="dis-title">Dia</p>
+                <input id="{{d.id}}dayMakeover" type="text" class="dis-input" value="{{d.makeover}}">
+                <p class="dis-title">Acumulado</p>
+                <p class="dis-subtitle">{{d.accumulatedMakeover}}</p>
+                <p class="dis-title">Meta</p>
+                <input id="{{d.id}}goalMakeover" type="text" class="dis-input" value="{{d.goalMakeover}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Dia" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateDay(d.id,'Makeover')">event</mat-icon>
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-goal green" matTooltip="Actualizar Meta" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Makeover')">outlined_flag</mat-icon>
+            </div>
+            <div class="dis-operation">
+                <p class="dis-subtitle">Reparacion</p>
+                <p class="dis-title">Dia</p>
+                <input id="{{d.id}}dayRepair" type="text" class="dis-input" value="{{d.repair}}">
+                <p class="dis-title">Acumulado</p>
+                <p class="dis-subtitle">{{d.accumulatedRepair}}</p>
+                <p class="dis-title">Meta</p>
+                <input id="{{d.id}}goalRepair" type="text" class="dis-input" value="{{d.goalRepair}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Dia" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateDay(d.id,'Repair')">event</mat-icon>
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-goal green" matTooltip="Actualizar Meta" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Repair')">outlined_flag</mat-icon>
+            </div>
+            <div class="dis-operation">
+                <p class="dis-subtitle">Despachos</p>
+                <p class="dis-title">Total</p>
+                <input id="{{d.id}}goalDispatch" type="text" class="dis-input" value="{{d.dispatch}}">
+                <mat-icon mat-ripple [matRippleCentered]="true" [matRippleRadius]="18"  class="dis-button-day green" matTooltip="Actualizar Despacho" matTooltipPosition="right" matTooltipClass="tooltip" (click)="updateGoal(d.id,'Dispatch')">event</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

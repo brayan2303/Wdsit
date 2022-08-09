@@ -1,0 +1,90 @@
+<div class="cov-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="cov-form">
+        <div class="cov-group">
+            <label class="primaryColor">Numero de identificacion</label>
+            <div class="cov-control-group">
+                <input matInput  formControlName="identificationUser" type="number" class="form-control" placeholder="N° Cedula">
+                <div class="invalid-text" *ngIf="form.get('identificationUser').invalid && form.get('identificationUser').touched">Ingrese un número de identificacion</div>
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                matTooltipClass="tooltip" (click)="search()">
+                <mat-icon>search</mat-icon>
+            </button>
+            </div>
+        </div>
+        <div class="cov-group cov-margin">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input formControlName="name" type="text" class="form-control text-may" placeholder="Nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">¿Tiene sintomas?</label>
+            <select class="form-control"  formControlName="hasSymptoms" name="hasSymptoms" required>
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('hasSymptoms').invalid && form.get('hasSymptoms').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Fecha de los sintomas</label>
+            <input formControlName="symptomsDate" type="date" class="form-control" [max]="getToday()" placeholder="0000-00-00">
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Indique la etapa en la cual se encuentra su proceso médico y aislamiento</label>
+            <select class="form-control" formControlName="typeDocument" >
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Pendiente cita de valoración">Pendiente cita de valoración</option>
+                <option value="Cuento con certificado de aislamiento">Cuento con certificado de aislamiento</option>
+                <option value="Pendiente programación para la toma de la prueba de Covid-19">Pendiente programación para la toma de la prueba de Covid-19</option>
+                <option value="Cuento con fecha programada para la toma de la prueba">Cuento con fecha programada para la toma de la prueba</option>
+                <option value="Ya me realizarón la prueba diagnostica para Covid-19">Ya me realizarón la prueba diagnostica para Covid-19</option>
+                <option value="Cuento con resultado de la prueba diagnostica para Covid-19">Cuento con resultado de la prueba diagnostica para Covid-19</option>
+                <option value="Cuento con certificado de incapacidad">Cuento con certificado de incapacidad</option>
+                <option value="Cuento con alta médica">Cuento con alta médica/option>
+            <div class="invalid-text" *ngIf="form.get('typeDocument').invalid && form.get('typeDocument').touched">Seleccione una opcion valida</div>
+            </select>
+        </div>
+        <div class="cov-text">
+            <label class="primaryColor">Describa la etapa en la cual se encuentra su proceso médico y aislamiento:</label>
+             <textarea class="text-area text-may" id="textarea" formControlName="descripSymptims"  maxlength="255" placeholder="Maximo 255 caracteres" name="descripSymptims" ngModel required ></textarea>
+             <div class="invalid-text" *ngIf="form.get('descripSymptims').invalid && form.get('descripSymptims').touched">Describa su proceso</div>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Suba los archivos correspondientes a la etapa en la cual se encuentra su proceso médico y aislamiento:</label>
+            <div class="cov-attachment">
+                <div class="cov-attachment-content">
+                    <ng-container *ngIf="formDayId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="cov-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="cov-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="cov-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+            <div class="cov-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="cov-container-button">
+                    <button type="reset"  class="cov-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+

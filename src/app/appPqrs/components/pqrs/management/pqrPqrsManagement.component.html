@@ -1,0 +1,171 @@
+<div class="pqr-container">
+    <p class="title">Gestion PQRS</p>
+    <div class="pqr-content">
+        <div class="pqr-container-card">
+            <p class="title">Listado PQRS</p>
+            <div class="pqr-container-search">
+                <div class="pqr-group">
+                    <label class="pqr-title">Estado</label>
+                    <div class="pqr-control">
+                        <select [(ngModel)]="status" class="form-control">
+                            <option class="ligthColor" value="0">Seleccione un estado</option>
+                            <option value="Asignada">Asignada</option>
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Escalada">Escalada</option>
+                            <option value="Terminada">Terminada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pqr-group">
+                    <p class="pqr-title">Fecha de Inicio</p>
+                    <div class="pqr-control">
+                        <input id="startDate" matInput [matDatepicker]="startDate" disabled class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                        <mat-datepicker #startDate disabled="false"></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group">
+                    <label class="pqr-title">Fecha de Fin</label>
+                    <div class="pqr-control">
+                        <input id="endDate" matInput [matDatepicker]="endDate" disabled class="form-control">
+                        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                        <mat-datepicker #endDate disabled="false"></mat-datepicker>
+                    </div>
+                </div>
+                <div class="pqr-group">
+                    <label class="pqr-title">N° PQRS</label>
+                    <div class="pqr-control">
+                        <input id="number" class="form-control" [(ngModel)]="number">
+                    </div>
+                </div>
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="right"
+                    matTooltipClass="tooltip" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="loading" class="pqr-container-loader">
+                <div class="pqr-loader"></div>
+            </div>
+            <div *ngIf="pqrsList.data.length >0 && !loading" class="pqr-content-card">
+                <div *ngFor="let pa of list.data" class="pqr-card" (click)="select(pa.id)">
+                    <div *ngIf="pa.id===id" class="pqr-card-button"></div>
+                    <div class="pqr-card-information">
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Ticket</p>
+                            <p class="pqr-subtitle">{{pa.ticket}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Numero</p>
+                            <p class="pqr-subtitle">{{pa.number}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Tipo</p>
+                            <p class="pqr-subtitle">{{pa.type}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Estado</p>
+                            <p class="pqr-subtitle">{{pa.status}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Proyecto</p>
+                            <p class="pqr-subtitle">{{pa.proyect}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Categoria</p>
+                            <p class="pqr-subtitle">{{pa.category}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Tipo de cliente</p>
+                            <p class="pqr-subtitle">{{pa.customerType}}</p>
+                        </div>
+                        <div class="pqr-information-content">
+                            <p class="pqr-title">Fecha</p>
+                            <p class="pqr-subtitle">{{pa.creationDate}}</p>
+                        </div>
+                        <div class="pqr-information-content" [ngStyle]="{'align-items': 'center'}">
+                            <p class="pqr-title">TAT</p>
+                            <p *ngIf="pa.tat==='N/A'" class="pqr-tat" [ngStyle]="{'background-color':'var(--ligth)'}">
+                                {{pa.tat}}</p>
+                            <p *ngIf="pa.tat!='N/A'" class="pqr-tat"
+                                [ngStyle]="{'background-color':pa.tat>=0 && pa.tat <=10?'var(--green)':'var(--red)'}">
+                                {{pa.tat}}</p>
+                        </div>
+                        <div class="pqr-information-content" [ngStyle]="{'align-items': 'center'}">
+                            <p class="pqr-title">TAT ACIDO</p>
+                            <p *ngIf="pa.tatAcido==='N/A'" class="pqr-tat"
+                                [ngStyle]="{'background-color':'var(--ligth)'}">{{pa.tatAcido}}</p>
+                            <p *ngIf="pa.tatAcido!='N/A'" class="pqr-tat"
+                                [ngStyle]="{'background-color':pa.tatAcido>=0 && pa.tatAcido <=10?'var(--green)':'var(--red)'}">
+                                {{pa.tatAcido}}</p>
+                        </div>
+                        <div class="pqr-card-information">
+                            <div class="pqr-information-content">
+                                <p class="pqr-title">Usuario Creacion</p>
+                                <p class="pqr-subtitle">{{pa.assignedPerson}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pqr-card-actions">
+                        <button mat-icon-button matTooltip="Rechazar" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="reject(pa.id,pa.number,pa.ticket,pa.typeId,pa.status)">
+                            <mat-icon class="red-color">call_missed</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Detalles" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="detail(pa.id)">
+                            <mat-icon class="blue-color">receipt</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Seguimiento" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="tracing(pa.number)">
+                            <mat-icon class="primaryColor">timeline</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Escalar" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="scale(pa.id,pa.number,pa.ticket,pa.typeId,pa.status)">
+                            <mat-icon class="green-color">trending_up</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Administrar Eventos" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="manageEvents(pa.id,pa.number,pa.status)">
+                            <mat-icon class="orange-color">miscellaneous_services</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Archivos" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="files(pa.number)">
+                            <mat-icon class="purple-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pqr-container-download">
+                <button *ngIf="pqrsList.data.length>0" mat-mini-fab class="blue" matTooltip="Descargar"
+                    matTooltipPosition="right" matTooltipClass="tooltip" (click)="download(pqrsList)">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" [pageSize]="5"
+                    [length]="pqrsList.data.length" showFirstLastButtons (page)="paginate($event)">
+                </mat-paginator>
+            </div>
+            <div *ngIf="pqrsList.data.length===0 && !loading" class="pqr-footer">
+                <p>SIN PQRS</p>
+            </div>
+        </div>
+        <div class="pqr-container-card">
+            <p class="title">Seguimiento</p>
+            <div *ngIf="loadingTracing" class="pqr-container-loader">
+                <div class="pqr-loader"></div>
+            </div>
+            <div *ngIf="tracingList.length > 0 && !loadingTracing" class="pqr-container-tracing">
+                <ng-container *ngFor="let t of tracingList">
+                    <div class="pqr-tracking-content">
+                        <div class="pqr-tracking-circle" matTooltip="{{t.observations}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <mat-icon>done</mat-icon>
+                        </div>
+                        <div class="pqr-tracking-information">
+                            <span class="pqr-tracking-title">{{t.status}}</span>
+                            <span class="pqr-tracking-subtitle">{{t.user}}</span>
+                            <span class="pqr-tracking-subtitle">{{t.date}}</span>
+                        </div>
+                        <div class="pqr-tracking-line"></div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

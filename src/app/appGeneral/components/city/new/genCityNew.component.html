@@ -1,0 +1,40 @@
+<div class="city-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="city-form">
+        <div class="city-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="city-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="countryId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="selectDepartment()">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="city-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="cityId != 0" class="city-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="city-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="city-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="city-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="city-container-button">
+            <button class="city-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

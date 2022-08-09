@@ -1,0 +1,35 @@
+<div class="actfix-container">
+    <p class="title">Equipos Alquilando Tecnologia</p>
+    <div class="actfix-container-button">
+        <div class="actfix-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="actfix-table" mat-table [dataSource]="dataSource" matSort>
+     
+        <ng-container matColumnDef="identification">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>identificacion</th>
+            <td mat-cell *matCellDef="let item">{{item.identification}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="product">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto asignado</th>
+            <td mat-cell *matCellDef="let item">{{item.product}}</td>
+        </ng-container>
+        <ng-container matColumnDef="serial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+

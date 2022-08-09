@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+    <div class="signed-container-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Firma Digital</p>
+    <div class="signed-container-canvas">
+        <canvas id="canvas"></canvas>
+        <button id="limpiar" mat-mini-fab matTooltip="Limpiar" class="red" matTooltipPosition="above" matTooltipClass="tooltip">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <div class="signed-container-button">
+        <button class="signed-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</div>

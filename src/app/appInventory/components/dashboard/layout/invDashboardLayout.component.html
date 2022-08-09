@@ -1,0 +1,70 @@
+<div class="dashboard-container">
+    <p class="title">Dashboard Layout</p>
+    <div class="dashboard-form">
+        <div class="dashboard-group">
+            <label class="primaryColor">Sistema</label>
+            <select [(ngModel)]="system" class="form-control" (change)="getCustomer()">
+                <option class="ligthColor" value="">Seleccione un Sistema</option>
+                <option value="WMS LOCAL">WMS LOCAL</option>
+                <option value="WMS SAP">WMS SAP</option>
+            </select>
+        </div>
+        <div class="dashboard-group">
+            <label class="primaryColor">Cliente</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getLayout()">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}_{{c.customer}}">{{c.customer}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="dashboard-container-card">
+        <div class="dashboard-couting">
+            <p>Proxima actualizacion en: {{minutes}}:{{seconds}}</p>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">Pallets</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#2196f3','border-bottom-color':'#2196f3'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#2196f3'}">{{invCyclicLayoutModel.pallets}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">Seriales</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#f44336','border-bottom-color':'#f44336'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#f44336'}">{{invCyclicLayoutModel.serials}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">Accesorios</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#cddc39','border-bottom-color':'#cddc39'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#cddc39'}">{{invCyclicLayoutModel.accesories}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">Codigos Sap</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#009688'}">{{invCyclicLayoutModel.sapCodes}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">Ubicaciones</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#ff9800','border-bottom-color':'#ff9800'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#ff9800'}">{{invCyclicLayoutModel.locations}}</p>
+            </div>
+        </div>
+    </div>
+</div>

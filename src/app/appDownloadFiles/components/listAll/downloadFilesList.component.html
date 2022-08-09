@@ -1,0 +1,214 @@
+<div class="dfil-container">
+    <p class="title">Archivos</p>
+    <br>
+    <p class="title">{{this.statusCl}}</p>
+    <div *ngIf="!loadingCl" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileList.length>0 && loadingCl">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileList" class="dfil-card-files" matTooltip="{{f.name}}" matTooltipPosition="above"
+                matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusClS}}</p>
+    <div *ngIf="!loadingClS" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListCLaroSmart.length>0 && loadingClS">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListCLaroSmart" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusClF}}</p>
+    <div *ngIf="!loadingClF" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListClaroFont.length>0 && loadingClF">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListClaroFont" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusRe}}</p>
+    <div *ngIf="!loadingRe" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListRed.length>0 && loadingRe">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListRed" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusPm}}</p>
+    <div *ngIf="!loadingPm" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListPlataforma.length>0 && loadingPm">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListPlataforma" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusDr}}</p>
+    <div *ngIf="!loadingDr" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListDirectv.length>0 && loadingDr">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListDirectv" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusDrS}}</p>
+    <div *ngIf="!loadingDrs" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListDirectvSmart.length>0 && loadingDrs">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListDirectvSmart" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusTib}}</p>
+    <div *ngIf="!loadingTib" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListTigo.length>0 && loadingTib">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListTigo" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusTiM}}</p>
+    <div *ngIf="!loadingTiM" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListTigoM.length>0 && loadingTiM">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListTigoM" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusEt}}</p>
+    <div *ngIf="!loadingEt" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListEtb.length>0 && loadingEt">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListEtb" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <p class="title">{{this.statusHg}}</p>
+    <div *ngIf="!loadingHg" class="dfil-container-loader">
+        <div class="dfil-loader" [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}">
+        </div>
+    </div>
+    <ng-container *ngIf="fileListHughes.length>0 && loadingHg">
+        <div class="dfil-container-files">
+            <div *ngFor="let f of fileListHughes" class="dfil-card-files" matTooltip="{{f.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="dfil-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

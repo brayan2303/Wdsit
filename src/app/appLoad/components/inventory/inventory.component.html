@@ -1,0 +1,46 @@
+<div class="file-container">
+    <p class="title">Inventario</p>
+    <div>
+        <form action="" class="user-form">
+            <div class="user-group">
+                <label class="primaryColor">Cliente</label>
+                <select class="form-control" #ct="ngModel" name="ct" [(ngModel)]="customer" (change)="changeCustomer()">
+                    <option class="ligthColor" value="0">Seleccione</option>
+                    <option *ngFor="let ct of listCustomers" value={{ct.id}}>{{ct.description}}</option>
+                </select>
+            </div>
+            <div class="user-group">
+                <input hidden type="file" #uploader (change)="loadfileIq($event.target.files)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                <div class="report-container-button">
+                    <button mat-raised-button matTooltip="Cargar Archivo" matTooltipPosition="above" matTooltipClass="tooltip" (click)="uploader.click()" [disabled]="customer==0">
+                        <mat-icon>backup</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="deleteInventory()" style="background: white;">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="user-container-button">
+        <div class="user-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+
+        </div>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let c of columns">
+            <ng-container matColumnDef="{{c.field}}">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{c.header}}</th>
+                <td mat-cell *matCellDef="let item">{{item[c.field]}}</td>
+            </ng-container>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+<div *ngIf="loading" class="report-container-loader">
+    <div class="report-loader"></div>
+</div>

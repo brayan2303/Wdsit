@@ -1,0 +1,11 @@
+<div class="dashboardGeneral-container">
+    <p class="title">Dashboard Tiempos de Respuesta</p>
+    <div class="dashboardGeneral-container-chart">
+        <apx-chart *ngIf="data1.dataX.length > 0" [series]="donutChartOptions1.series" [chart]="donutChartOptions1.chart"
+            [labels]="donutChartOptions1.labels" [responsive]="donutChartOptions1.responsive"
+            [title]="donutChartOptions1.title"></apx-chart>
+        <apx-chart *ngIf="data2.dataX.length > 0" [series]="donutChartOptions2.series" [chart]="donutChartOptions2.chart"
+            [labels]="donutChartOptions2.labels" [responsive]="donutChartOptions2.responsive"
+            [title]="donutChartOptions2.title"></apx-chart>
+    </div>
+</div>

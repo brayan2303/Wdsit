@@ -1,0 +1,18 @@
+.dashboardGeneral-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.dashboardGeneral-container-chart{
+    display: flex;
+    height: 100%;
+}
+apx-chart{
+    width: 50%;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}

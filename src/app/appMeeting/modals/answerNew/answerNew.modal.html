@@ -1,0 +1,157 @@
+<div mat-dialog-content fxLayout="column">
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Formulario {{data.meetingName}}</p>
+    <div *ngIf="data.meetingType==='Semanal'" fxLayout="column" class="group">
+        <label class="primaryColor">Seleccione una Fecha</label>
+            <div fxLayout fxFlex="50%">
+                <input [(ngModel)]="answerDate" matInput [matDatepicker]="answerDateId"
+                    class="form-control" disabled (dateChange)="search()">
+                <mat-datepicker-toggle matSuffix [for]="answerDateId"></mat-datepicker-toggle>
+                <mat-datepicker #answerDateId disabled="false"></mat-datepicker>
+            </div>
+    </div>
+    <div class="form">
+        <div *ngFor="let t of topicList" fxFlex="100%" fxLayout="column" class="group">
+            <div>
+                <div>
+                    <span *ngIf="t.title!='0'" class="primaryColor">{{t.title}}</span>
+                </div>
+                <span class="primaryColor" style="font-size: 12px;margin-right: 5px;">{{t.detail}}</span>
+                <span class="ligthColor" style="font-size: 12px;">{{t.description}}</span>
+            </div>
+            <ng-container *ngIf="t.type==='Diaria'">
+                <textarea *ngIf="t.title!='Ronda 4'" id="{{t.id}}" value="{{t.answer}}" rows="10" cols="1"
+                    class="form-control"  style="color: var(--ligth);"></textarea>
+                <div *ngIf="t.title==='Ronda 4'" class="mee-container-support">
+                    <div *ngIf="loading" class="mee-container-loader">
+                        <div class="mee-loader"></div>
+                    </div>
+                    <table class="mee-table" mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="support">
+                            <th mat-header-cell *matHeaderCellDef>Apoyo</th>
+                            <td mat-cell *matCellDef="let item">{{item.support}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef>Estado</th>
+                            <td mat-cell *matCellDef="let item"
+                                [ngStyle]="{'color':item.status==='Pendiente'?'var(--orange)':'var(--green)'}">
+                                {{item.status}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="startDate">
+                            <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+                            <td mat-cell *matCellDef="let item">{{item.startDate}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="endDate">
+                            <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
+                            <td mat-cell *matCellDef="let item">{{item.endDate}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="responsibleUser">
+                            <th mat-header-cell *matHeaderCellDef>Responsable</th>
+                            <td mat-cell *matCellDef="let item">{{item.responsibleUser}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                            <td mat-cell *matCellDef="let item">
+                                <button mat-icon-button class="mee-button" matTooltip="Editar"
+                                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="requestSupport(item)">
+                                    <mat-icon class="blue-color">create</mat-icon>
+                                </button>
+                                <button *ngIf="data.userId===null" mat-icon-button class="mee-button"
+                                    matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                                    (click)="deleteSupport(item.id)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                                <button mat-icon-button class="mee-button" matTooltip="Archivos"
+                                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="getFiles(item.id)">
+                                    <mat-icon class="orange-color">assignment</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                    </table>
+                    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]"
+                        [length]="dataSource.data.length" showFirstLastButtons>
+                    </mat-paginator>
+                    <button mat-mini-fab class="mee-float-button green" matTooltip="Solicitar Apoyo"
+                        matTooltipPosition="left" matTooltipClass="tooltip" 
+                        [ngClass]="{'ligthBackground':data.userId!=null,'green':data.userId===null}"
+                        (click)="requestSupport(null)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="t.type==='Semanal'">
+                <textarea *ngIf="t.title!='Ronda 3'" id="{{t.id}}" value="{{t.answer}}" rows="10" cols="1"
+                    class="form-control"  style="color: var(--ligth);"></textarea>
+                <div *ngIf="t.title==='Ronda 3'" class="mee-container-support">
+                    <div *ngIf="loading" class="mee-container-loader">
+                        <div class="mee-loader"></div>
+                    </div>
+                    <table class="mee-table" mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="support">
+                            <th mat-header-cell *matHeaderCellDef>Apoyo</th>
+                            <td mat-cell *matCellDef="let item">{{item.support}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef>Estado</th>
+                            <td mat-cell *matCellDef="let item"
+                                [ngStyle]="{'color':item.status==='Pendiente'?'var(--orange)':'var(--green)'}">
+                                {{item.status}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="startDate">
+                            <th mat-header-cell *matHeaderCellDef>Fecha Inicio</th>
+                            <td mat-cell *matCellDef="let item">{{item.startDate}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="endDate">
+                            <th mat-header-cell *matHeaderCellDef>Fecha Fin</th>
+                            <td mat-cell *matCellDef="let item">{{item.endDate}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="responsibleUser">
+                            <th mat-header-cell *matHeaderCellDef>Responsable</th>
+                            <td mat-cell *matCellDef="let item">{{item.responsibleUser}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                            <td mat-cell *matCellDef="let item">
+                                <button mat-icon-button class="mee-button" matTooltip="Editar"
+                                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="requestSupport(item)">
+                                    <mat-icon class="blue-color">create</mat-icon>
+                                </button>
+                                <button *ngIf="data.userId===null" mat-icon-button class="mee-button"
+                                    matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                                    (click)="deleteSupport(item.id)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                                <button mat-icon-button class="mee-button" matTooltip="Archivos"
+                                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="getFiles(item.id)">
+                                    <mat-icon class="orange-color">assignment</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                    </table>
+                    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]"
+                        [length]="dataSource.data.length" showFirstLastButtons>
+                    </mat-paginator>
+                    <button mat-mini-fab class="mee-float-button green" matTooltip="Solicitar Apoyo"
+                        matTooltipPosition="left" matTooltipClass="tooltip" 
+                        [ngClass]="{'ligthBackground':data.userId!=null,'green':data.userId===null}"
+                        (click)="requestSupport(null)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+        <button mat-mini-fab color="primary" class="button-float" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip"
+            [ngClass]="{'ligthBackground':answers.length>0,'green':answers.length===0}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</div>

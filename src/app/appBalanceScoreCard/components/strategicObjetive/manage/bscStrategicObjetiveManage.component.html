@@ -1,0 +1,110 @@
+<div class="bsc-container">
+    <p class="title">Nuevo Objetivo Estrategico</p>
+    <form [formGroup]="form" class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getPerspective(year1,1)">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList1" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select formControlName="perspectiveId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList1" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Porcentaje</label>
+            <input formControlName="percentage" type="number" class="form-control" placeholder="Porcentaje">
+        </div>
+        <div *ngIf="editing != 0" class="bsc-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="bsc-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="bsc-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="bsc-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="bsc-container-button">
+            <button class="bsc-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado de Objetivos Estrategicos</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year2" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getPerspective(year2,2)">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList2" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList2" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="bsc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="percentage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Porcentaje</th>
+            <td mat-cell *matCellDef="let item">{{item.percentage}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perspectiva</th>
+            <td mat-cell *matCellDef="let item">{{item.perspective}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="edit(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="bsc-container-loader">
+        <div class="bsc-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+

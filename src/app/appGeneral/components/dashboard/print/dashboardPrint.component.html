@@ -1,0 +1,11 @@
+<div class="dashboardPrint-container">
+    <p class="title">Dashboard Impresion</p>
+    <div class="dashboardPrint-container-chart">
+        <canvas *ngIf="data1.dataX.length>0" baseChart [datasets]="barChart.data" [labels]="barChart.labels" [options]="barChart.options"
+            [legend]="barChart.legend" [chartType]="barChart.type">
+        </canvas>
+        <canvas *ngIf="data2.dataX.length>0" baseChart [datasets]="pieChart.data" [labels]="pieChart.labels" [options]="pieChart.options"
+            [legend]="pieChart.legend" [chartType]="pieChart.type">
+        </canvas>
+    </div>
+</div>

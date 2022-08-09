@@ -1,0 +1,83 @@
+<div mat-dialog-content>
+    <div class="dis-close-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Nuevo Proyecto</p>
+    <div [formGroup]="form" class="dis-form">
+        <div class="dis-group">
+            <label class="primaryColor">Pais</label>
+            <select formControlName="countryId" class="form-control" (change)="getDepartment()">
+                <option class="ligthColor" value="">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Departamento</label>
+            <select formControlName="departmentId" class="form-control" (change)="getCity()">
+                <option class="ligthColor" value="">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Ciudad</label>
+            <select formControlName="cityId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una ciudad</option>
+                <option *ngFor="let c of cityList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Proyecto</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un proyecto</option>
+                <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Año</label>
+            <select formControlName="year" class="form-control" (change)="getMonth()">
+                <option class="ligthColor" value="">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Mes</label>
+            <select id="selectMonth" formControlName="monthId" class="form-control" (change)="getDays()">
+                <option class="ligthColor" value="">Seleccione un mes</option>
+                <option *ngFor="let m of monthList" value="{{m.id}}">{{m.month}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Dia</label>
+            <select [(ngModel)]="day" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un dia</option>
+                <option *ngFor="let d of daysList" value="{{d}}">{{d}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Meta Logistica</label>
+            <input formControlName="goalLogistic" type="number" placeholder="Meta Logistica" class="form-control">
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Meta Produccion</label>
+            <input formControlName="goalProduction" type="number" placeholder="Meta Produccion" class="form-control">
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Meta Reacondicionamiento</label>
+            <input formControlName="goalReconditioning" type="number" placeholder="Meta Reacondicionamiento" class="form-control">
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Meta Remozamiento</label>
+            <input formControlName="goalMakeover" type="number" placeholder="Meta Remozamiento" class="form-control">
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Meta Reparacion</label>
+            <input formControlName="goalRepair" type="number" placeholder="Meta Reparacion" class="form-control">
+        </div>
+        <button mat-mini-fab class="dis-float-button" [ngStyle]="{'background-color': form.valid?'var(--green)':'var(--ligth)'}" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</div>

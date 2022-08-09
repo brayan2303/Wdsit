@@ -1,0 +1,22 @@
+<div class="report-container">
+    <p class="title">Generar Pallet</p>
+    
+    <div class="report-form">
+        <div class="report-group">
+        <div class="report-control-group">
+            <label class="primaryColor">Pallet</label>
+            <input [(ngModel)]="palletId" name="palletId" class="form-control text-may" placeholder="Pallet">
+        </div>
+
+        <div class="report-control-group">
+            <label class="primaryColor">Generar</label>
+            <div class="report-container-button">
+                <button type="reset" class="report-button" mat-raised-button matTooltip="Generar" mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip" (click)="getDocument()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>

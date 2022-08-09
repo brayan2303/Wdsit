@@ -1,0 +1,12 @@
+<div class="dashboardGeneral-container">
+    <p class="title">Dashboard General</p>
+    <div class="bsc-container-chart">
+        <canvas *ngIf="data1.dataX.length>0" baseChart [datasets]="lineChart.data" [labels]="lineChart.labels"
+            [options]="lineChart.options" [colors]="lineChart.color" [legend]="lineChart.legend"
+            [chartType]="lineChart.type" [plugins]="lineChart.plugins">
+        </canvas>
+        <canvas *ngIf="data2.dataX.length>0" baseChart [datasets]="barChart.data" [labels]="barChart.labels" [options]="barChart.options"
+            [legend]="barChart.legend" [chartType]="barChart.type">
+        </canvas>
+    </div>
+</div>

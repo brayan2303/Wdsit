@@ -1,0 +1,44 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Correo</label>
+            <select formControlName="mailId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un correo</option>
+                <option *ngFor="let m of mailList" value="{{m.id}}">{{m.subject}}</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Usuario de Aprobacion</label>
+            <div fxLayout>
+                <input formControlName="approvalUser" type="text" disabled class="form-control"
+                    placeholder="Usuario de Aprobacion">
+                <button mat-mini-fab class="blue" [ngStyle]="{'margin-left':'10px'}" matTooltip="Usuarios" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="getUser()">
+                    <mat-icon>people</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div *ngIf="data.masApproval!=null" class="group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button mat-mini-fab class="button green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid"
+            [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

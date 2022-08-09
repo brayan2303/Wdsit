@@ -1,0 +1,113 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Auditoria de seriales</p>
+    <br>
+    <form [formGroup]="form" class="scp-form">
+        
+            <div class="scp-group">
+                <label class="primaryColor">Serial</label>
+                <input name="serial" formControlName="serial" (keydown)="search($event)"  class="form-control text-may" placeholder="Serial">
+                <div class="invalid-text" *ngIf="form.get('serial').invalid && form.get('serial').touched">Ingrese un
+                    serial</div>
+            </div>
+            <div class="scp-group">
+                <label class="primaryColor">Mac</label>
+                <input readonly name="mac" formControlName="mac"  class="form-control text-may" placeholder="Mac">
+                <div class="invalid-text" *ngIf="form.get('mac').invalid && form.get('mac').touched">Ingrese un
+                    codigo mac</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Codigo Sap</label>
+                <input readonly name="sapCode" formControlName="sapCode"  class="form-control text-may" placeholder="Codigo Sap">
+                <div class="invalid-text" *ngIf="form.get('sapCode').invalid && form.get('sapCode').touched">Ingrese un
+                    codigo sap</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Description</label>
+                <input  name="description" formControlName="description"  class="form-control text-may" placeholder="Description">
+                <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una
+                    description</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Tecnico</label>
+                <input readonly name="technical" formControlName="technical"  class="form-control text-may" placeholder="Tecnico">
+                <div class="invalid-text" *ngIf="form.get('technical').invalid && form.get('technical').touched">Ingrese un
+                    tecnico</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Fecha de reparacion</label>
+                <input readonly name="repairDate" formControlName="repairDate"  class="form-control text-may" placeholder="Fecha de reparacion">
+                <div class="invalid-text" *ngIf="form.get('repairDate').invalid && form.get('repairDate').touched">Ingrese una
+                    fecha de reparacion</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Motivo de Scrap</label>
+                <input readonly name="scrapMotif" formControlName="scrapMotif"  class="form-control text-may" placeholder="Fecha de reparacion">
+                <div class="invalid-text" *ngIf="form.get('scrapMotif').invalid && form.get('scrapMotif').touched">Ingrese una
+                    fecha de reparacion</div>
+            </div>
+
+            <div class="scp-group">
+                <label class="primaryColor">Aprobado / Rechazado</label>
+                <select  [(ngModel)]="valueOption" formControlName="state" class="form-control" (change)="habilitar();">
+                    <option class="ligthColor" value=null>Seleccione una opcion</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Rechazado">Rechazado</option>
+                </select>
+                <div class="invalid-text" *ngIf="form.get('stateMotif').invalid && form.get('stateMotif').touched">Seleccione una opcion valida</div>
+            </div>
+            <div class="scp-group" >
+                <label class="primaryColor">Motivo de rechazo</label>
+                <select id="input"  formControlName="stateMotif" [disabled]="valueOption == null" class="form-control" >
+                    <option class="ligthColor" value=null>Seleccione una opcion</option>
+                    <option *ngFor="let c of ScpMotifList" value="{{c.id}}">{{c.description}}</option>
+                </select>
+                <div class="invalid-text" *ngIf="form.get('stateMotif').invalid && form.get('stateMotif').touched">Seleccione una opcion valida</div>
+            </div>
+            <div class="scp-group">
+                <label class="primaryColor">Evidencia foto grafica</label>
+                <div class="scp-attachment">
+                    <div class="scp-attachment-content">
+                        <ng-container *ngIf="formId ===0">
+                            <div *ngFor="let f of fileList;let i=index;" class="scp-container-file" matTooltip="{{f.name}}"
+                                matTooltipPosition="above" matTooltipClass="tooltip">
+                                <p>{{f.name}}</p>
+                                <div class="scp-container-actions">
+                                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                        matTooltipClass="tooltip" (click)="removeFile(i)">
+                                        <mat-icon class="red-color">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="scp-attachment-attach">
+                        <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                        <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                            matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="orange-color">attach_file</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="scp-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="scp-container-button">
+                    <button class="scp-button" mat-raised-button matTooltip="Guardar"
+                        matTooltipPosition="right" (click)="close(false)" matTooltipClass="tooltip" mat-raised-button [disabled]="!form.valid"
+                        (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+    </form>
+</div>

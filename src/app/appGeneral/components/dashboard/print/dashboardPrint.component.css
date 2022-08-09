@@ -1,0 +1,15 @@
+.dashboardPrint-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.dashboardPrint-container-chart{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+canvas{
+    max-width: 50%;
+    margin-bottom: 30px;
+}

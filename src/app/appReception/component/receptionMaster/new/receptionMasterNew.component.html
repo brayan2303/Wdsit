@@ -1,0 +1,45 @@
+<div class="recep-container">
+    <p class="title">{{title}}</p>
+    <button mat-mini-fab class="green recep-end" matTooltip="Crear Tipo" matTooltipPosition="left"
+        matTooltipClass="tooltip" (click)="getfeatures()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <form [formGroup]="form" class="recep-form">
+        <div class="recep-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre
+                valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Tipo</label>
+            <select formControlName="receptionMasterTypeId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un tipo</option>
+                <option *ngFor="let c of masterList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+            <div class="invalid-text"
+                *ngIf="form.get('receptionMasterTypeId').invalid && form.get('receptionMasterTypeId').touched">Ingrese
+                un tipo valido</div>
+        </div>
+        <div *ngIf="formId != 0" class="recep-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="recep-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="recep-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="recep-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="recep-container-button">
+                <button type="reset" class="recep-button" mat-raised-button matTooltip="Guardar" mat-raised-button
+                    [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,11 @@
+.snack-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0px 0px 0px 10px;
+}
+.snack-container >span{
+    flex-grow: 1;
+    color: white;
+}

@@ -1,0 +1,24 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Selecciona un proyecto</p>
+    <div class="form">
+        <div fxLayout="column" fxFlex class="group">
+            <label class="primaryColor">Cliente</label>
+            <select  class="form-control" [(ngModel)]="customerId" (change)="getProyect()">
+                <option value="0" disabled>Selecciona un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex class="group">
+            <label class="primaryColor">Proyecto</label>
+            <select  class="form-control" [(ngModel)]="proyectId" (change)="selectProyect()">
+                <option value="0">Selecciona un proyecto</option>
+                <option *ngFor="let p of proyectList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+    </div>
+</div>

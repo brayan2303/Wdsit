@@ -1,0 +1,47 @@
+<div class="scp-container">
+    <p class="title">Firmas</p>
+    <form [formGroup]="form" class="scp-form">
+      
+        <div class="scp-group scp-margin">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input formControlName="name" type="text" class="form-control text-may" placeholder="Nombres y apellidos">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+        <div class="scp-group">
+            <label class="primaryColor">Imagen de firma</label>
+            <div class="scp-attachment">
+                <div class="scp-attachment-content">
+                    <ng-container *ngIf="formId ===0">
+                        <div *ngFor="let f of fileList;let i=index;" class="scp-container-file" matTooltip="{{f.name}}"
+                            matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.name}}</p>
+                            <div class="scp-container-actions">
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                    matTooltipClass="tooltip" (click)="removeFile(i)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="scp-attachment-attach">
+                    <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                        matTooltipClass="tooltip" (click)="image.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+            <div class="scp-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="scp-container-button">
+                    <button type="reset"  class="scp-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+

@@ -1,0 +1,64 @@
+<div class="report-container">
+    <p class="title">{{repReportEntity.name}}</p>
+    <div class="report-container-actions">
+        <div  *ngIf="this.repReportEntity.section==='Wms Sap'" class="report-group">
+            <label class="primaryColor">Planta</label>
+            <select [(ngModel)]="plantaId" name="plantaId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una planta</option>
+                <option *ngFor="let c of plantUserList" value="{{c.plantId}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="filterList.length > 0" class="report-form">
+        <div *ngFor="let f of filterList" id="containerFilters" class="report-group">
+            <label class="primaryColor">{{f.name}}</label>
+            <input *ngIf="f.type === 'text'" id="{{f.id}}" type="text" class="form-control" placeholder="{{f.name}}">
+            <input *ngIf="f.type === 'number'" id="{{f.id}}" type="number" class="form-control"
+                placeholder="{{f.name}}">
+           <div *ngIf="f.name === 'FechaFinal'; else not">     
+            <div *ngIf="f.type === 'date'" class="report-form-control">
+                <input id="{{f.id}}" matInput type="date" class="form-control" [(ngModel)]="space"  [max]="getMaxDate()" [min]="getMinDate()" reset> 
+            </div>
+        </div>
+        <ng-template #not>
+            <div *ngIf="f.type === 'date'" class="report-form-control">
+                <input id="{{f.id}}" matInput  type="date" [ngModel]="date" (ngModelChange)="date = $event" (click)="clear()" (change)="getMaxDate()" class="form-control" [max]="getToday()">
+              
+            </div>
+        </ng-template>
+            <select *ngIf="f.type === 'list' || f.type==='array'" id="{{f.id}}" class="form-control">
+                <option class="ligthColor" value="">Seleccione {{f.name}}</option>
+            </select>
+            
+            </div>
+        </div>
+    <div class="report-container-actions">
+        <div class="report-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+        </div>
+        <div>
+            <button mat-mini-fab [ngClass]="{'ligthBackground':loading,'blue':!loading}" [ngStyle]="{'margin-right':'10px'}" [disabled]="loading" matTooltip="Buscar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="search()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-mini-fab class="blue" matTooltip="Exportar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="download()">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </div>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+        <ng-container *ngFor="let c of columns">
+            <ng-container matColumnDef="{{c}}">
+                <th mat-header-cell *matHeaderCellDef>{{c}}</th>
+                <td mat-cell *matCellDef="let item">{{item[c]}}</td>
+            </ng-container>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

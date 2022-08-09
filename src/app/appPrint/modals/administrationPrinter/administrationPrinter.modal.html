@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Ip</label>
+            <input formControlName="ip" type="text" class="form-control" placeholder="Ip">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Ubicacion</label>
+            <select formControlName="location" class="form-control">
+                <option class="ligthColor" value="">Seleccione una ubicacion</option>
+                <option value="Despacho">Despacho</option>
+                <option value="Empaque">Empaque</option>
+                <option value="Etiquetado">Etiquetado</option>
+                <option value="Ingreso">Ingreso</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Cliente</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div *ngIf="data.printerEntity!=null" class="group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button mat-mini-fab class="button green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid"
+            [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

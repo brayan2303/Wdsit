@@ -1,0 +1,140 @@
+<div class="coms-heid-tam">
+    <div class="coms-end">
+        <button mat-icon-button (click)="close()" >
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <div >
+        <div *ngIf="this.data.approved" fxLayout fxLayoutAlign="flex-end">
+            <div class="coms-group">
+                <label class="primaryColor">Finalizar Entrada</label>
+                <div class="coms-container-button">
+                    <button class="coms-button" mat-raised-button matTooltip="Finalizar Entrada" (click)="closeEntry()"
+                        matTooltipClass="tooltip">
+                        <mat-icon>check_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="!this.data.approved" fxLayout fxLayoutAlign="flex-end">
+            <div class="coms-group">
+                <label class="primaryColor">Aprobar Entrada</label>
+                <div class="coms-container-button">
+                    <button class="coms-button-approved" mat-raised-button matTooltip="Aprobar Entrada" (click)="approved()"
+                        matTooltipClass="tooltip">
+                        <mat-icon>verified</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Pallet</label>
+            <input name="pallet" [(ngModel)]="numberEntry" class="form-control text-may text-no-border" readonly>
+        </div>
+
+        <div *ngIf="this.data.approved" class="coms-attachment-content">
+            <div class="coms-group">
+                <label class="primaryColor">Codigo Sap</label>
+                <input name="sapCode" [(ngModel)]="sapCode" class="form-control text-may" readonly>
+
+            </div>
+
+            <div class="coms-group">
+                <button mat-mini-fab class="coms-float-button green" matTooltip="Ingresar Codigo SAP"
+                    matTooltipPosition="left" matTooltipClass="tooltip" (click)="createArticle()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+            <div class="coms-group">
+                <label class="primaryColor">Descripcion</label>
+                <input name="sapCodeDescription" [(ngModel)]="sapCodeDescription" class="form-control text-may" readonly>
+            </div>
+            <div class="coms-group">
+                <label class="primaryColor">Cantidad</label>
+                <input name="quantity" [(ngModel)]="quantity" class="form-control text-may">
+            </div>
+
+            <div class="coms-group">
+                <label class="primaryColor">Crear</label>
+                <button mat-mini-fab class="coms-float-button blue" matTooltip="Guardar"
+                    matTooltipPosition="left" matTooltipClass="tooltip" (click)="saveArticle()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="coms-container-button">
+            <div class="coms-group">
+                <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+                <mat-icon class="blue-color">search</mat-icon>
+            </div>
+        </div>
+        
+        <ng-container>
+            <div class="coms-container-support">
+                <div *ngIf="loading" class="coms-container-loader">
+                    <div class="coms-loader"></div>
+                </div>
+                <table class="coms-table" mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="sapCode">
+                        <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                        <td mat-cell *matCellDef="let item">{{item.sapCode}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="sapCodeDescription">
+                        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                        <td mat-cell *matCellDef="let item">{{item.sapCodeDescription}}</td>
+                    </ng-container>
+                    <ng-container *ngIf="this.data.approved == false"  matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                        <td  ng-controller="quantitys" mat-cell *matCellDef="let item">
+                            <input id="{{item.id}}" type="number" class="coms-input text-may" value="{{item.quantity}}" (keyup)="quantityChange($event)">
+                        </td>
+                    </ng-container>
+                    <ng-container *ngIf="this.data.approved == true"  matColumnDef="quantity">
+                        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                        <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let item">
+                            <button *ngIf="this.data.approved == true" mat-icon-button class="mee-button"
+                                matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                                (click)="delete(item)">
+                                <mat-icon class="red-color">delete</mat-icon>
+                            </button>
+                            <button *ngIf="this.data.approved == false" mat-icon-button class="mee-button"
+                                matTooltip="Actualizar" matTooltipPosition="above" matTooltipClass="tooltip"
+                                (click)="update(item )">
+                                <mat-icon class="green-color">upgrade</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                </table>
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]"
+                    [length]="dataSource.data.length" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf = "isShown == false">
+        <div *ngIf="loading" class="coms-container-loader">
+            <div class="coms-loader"></div>
+        </div>
+        <div class="coms-group-two">
+        <p class="primaryColor">{{this.message1}}</p>
+        <p class="primaryColor">{{this.message2}}</p>
+        <p class="primaryColor">{{this.message3}}</p>
+        <p class="primaryColor">{{this.message4}}</p>
+        <p class="primaryColor">{{this.message5}}</p>
+        <p class="primaryColor">{{this.message6}}</p>
+    </div>
+    </div>
+</div>

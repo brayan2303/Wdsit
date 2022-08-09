@@ -1,0 +1,178 @@
+<div class="dashboard-container">
+    <p class="title">Dashboard Ciclicos</p>
+    <div class="dashboard-form">
+        <div class="dashboard-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getCyclic()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="dashboard-group">
+            <label class="primaryColor">Ciclicos</label>
+            <select id="cyclic" [(ngModel)]="cyclicId" class="form-control" (change)="search()">
+                <option class="ligthColor" value="0">Seleccione un ciclico</option>
+                <option *ngFor="let c of cyclicList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <!--<div class="dashboard-card">
+        <div class="dashboard-information">
+            <p class="dashboard-title">Total Pallets</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalPallets" class="dashboard-subtitle" [ngStyle]="{'color': '#2196f3'}">{{totalPallets}}</p>
+                <div *ngIf="loadingTotalPallets" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#2196f3','border-bottom-color':'#2196f3'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Total Seriales</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalSerials" class="dashboard-subtitle" [ngStyle]="{'color': '#2196f3'}">{{totalSerials}}</p>
+                <div *ngIf="loadingTotalSerials" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#2196f3','border-bottom-color':'#2196f3'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Total Accesorios</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalAccesories" class="dashboard-subtitle" [ngStyle]="{'color': '#2196f3'}">{{totalAccesories}}</p>
+                <div *ngIf="loadingTotalAccesories" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#2196f3','border-bottom-color':'#2196f3'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="dashboard-card">
+        <div class="dashboard-information">
+            <p class="dashboard-title">Muestra Pallets</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingSamplingPallets" class="dashboard-subtitle" [ngStyle]="{'color': '#f44336'}">
+                    {{samplingPallets}}</p>
+                <div *ngIf="loadingSamplingPallets" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#f44336','border-bottom-color':'#f44336'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Muestra Seriales</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingSamplingSerials" class="dashboard-subtitle" [ngStyle]="{'color': '#f44336'}">
+                    {{samplingSerials}}</p>
+                <div *ngIf="loadingSamplingSerials" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#f44336','border-bottom-color':'#f44336'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Muestra Accesorios</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingSamplingAccesories" class="dashboard-subtitle" [ngStyle]="{'color': '#f44336'}">
+                    {{samplingAccesories}}</p>
+                <div *ngIf="loadingSamplingAccesories" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#f44336','border-bottom-color':'#f44336'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="dashboard-card">
+        <div class="dashboard-information">
+            <p class="dashboard-title">Diferencia Pallets</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalPallets && !loadingSamplingPallets" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800'}">{{totalPallets - samplingPallets}}</p>
+                <div *ngIf="loadingTotalPallets || loadingSamplingPallets " class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#ff9800','border-bottom-color':'#ff9800'}"></div>
+                </div>
+            </div>
+            <p *ngIf="samplingPallets!=0" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800','font-size':'30px'}">{{differencePallets}}%</p>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Diferencia Seriales</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalSerials && !loadingSamplingSerials" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800'}">{{totalSerials - samplingSerials}}</p>
+                <div *ngIf="loadingTotalSerials || loadingSamplingSerials " class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#ff9800','border-bottom-color':'#ff9800'}"></div>
+                </div>
+            </div>
+            <p *ngIf="samplingSerials!=0" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800','font-size':'30px'}">{{differenceSerials}}%</p>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Diferencia Accesorios</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingTotalAccesories && !loadingSamplingAccesories" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800'}">{{totalAccesories - samplingAccesories}}</p>
+                <div *ngIf="loadingTotalAccesories || loadingSamplingAccesories" class="dashboard-container-loader">
+                    <div class="dashboard-loader" [ngStyle]="{'border-top-color': '#ff9800','border-bottom-color':'#ff9800'}"></div>
+                </div>
+            </div>
+            <p *ngIf="samplingAccesories!=0" class="dashboard-subtitle" [ngStyle]="{'color': '#ff9800','font-size':'30px'}">{{differenceAccesories}}%</p>
+        </div>
+    </div>-->
+    <div class="dashboard-card">
+        <div class="dashboard-information">
+            <p class="dashboard-title">Auditados</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingAudited" class="dashboard-subtitle" [ngStyle]="{'color': '#009688'}">{{audited}}</p>
+                <div *ngIf="loadingAudited" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Por Auditar</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingNoAudited" class="dashboard-subtitle" [ngStyle]="{'color': '#009688'}">{{noAudited}}
+                </p>
+                <div *ngIf="loadingNoAudited" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">Porcentaje</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingPercentage" class="dashboard-subtitle" [ngStyle]="{'color': '#009688'}">
+                    {{percentage}}%</p>
+                <div *ngIf="loadingPercentage" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#009688','border-bottom-color':'#009688'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <p class="dashboard-title">Tigo Medellin</p>
+    <br>
+    <div class="dashboard-card">
+        <div class="dashboard-information">
+            <p class="dashboard-title">Porcentaje de avance</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingSamplingPallets" class="dashboard-subtitle" [ngStyle]="{'color': '#350D76'}">
+                    {{this.porcentajeTigo | number}}%</p>
+                <div *ngIf="loadingSamplingPallets" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#350D76','border-bottom-color':'#350D76'}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-information">
+            <p class="dashboard-title">IQ09 vs WDSIT</p>
+            <div class="dashboard-container-subtitle">
+                <p *ngIf="!loadingSamplingSerials" class="dashboard-subtitle" [ngStyle]="{'color': '#350D76'}">
+                    {{this.porcentajeIq09 | number}}%</p>
+                <div *ngIf="loadingSamplingSerials" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#350D76','border-bottom-color':'#350D76'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

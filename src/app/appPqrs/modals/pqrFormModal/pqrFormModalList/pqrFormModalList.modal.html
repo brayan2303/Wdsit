@@ -1,0 +1,113 @@
+<div mat-dialog-content>
+    <div class="lod-container-button">
+        <div class="lod-container-button">
+        </div>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Titulo, parrafo de introduccion y entradas de texto (Pagina cliente inicio)</p>
+    <div class="lod-container-button-flex">
+        <div class="lod-group">
+            <input type="text" class="forms-control" placeholder="" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table class="lod-table" mat-table [dataSource]="dataSource" #table>
+        <ng-container matColumnDef="titleModal">
+            <th mat-header-cell *matHeaderCellDef>Titulo</th>
+            <td mat-cell *matCellDef="let item">{{item.titleModal}}</td>
+        </ng-container>
+        <ng-container matColumnDef="paragraphTitleModal">
+            <th mat-header-cell *matHeaderCellDef>Parrafo del titulo</th>
+            <td mat-cell *matCellDef="let item">{{item.paragraphTitleModal}}</td>
+        </ng-container>
+        <ng-container matColumnDef="identification">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo N° de identificacion persona</th>
+            <td mat-cell *matCellDef="let item">{{item.identification}}</td>
+        </ng-container>
+        <ng-container matColumnDef="identificationFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo N° de identificacion personal</th>
+            <td mat-cell *matCellDef="let item">{{item.identificationFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="serial">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="serialFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serialFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="imei">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo imei</th>
+            <td mat-cell *matCellDef="let item">{{item.imei}}</td>
+        </ng-container>
+        <ng-container matColumnDef="imeiFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo imei</th>
+            <td mat-cell *matCellDef="let item">{{item.imeiFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="movil">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo celular (Movil)</th>
+            <td mat-cell *matCellDef="let item">{{item.movil}}</td>
+        </ng-container>
+        <ng-container matColumnDef="movilFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo celular (Movil)</th>
+            <td mat-cell *matCellDef="let item">{{item.movilFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo descripcion</th>
+            <td mat-cell *matCellDef="let item">{{item.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="descriptionFunction">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo descripcion</th>
+            <td mat-cell *matCellDef="let item">{{item.descriptionFunction}}</td>
+        </ng-container>
+        <ng-container matColumnDef="filesAttachments">
+            <th mat-header-cell *matHeaderCellDef>Nombre del campo archivos adjuntos</th>
+            <td mat-cell *matCellDef="let item">{{item.filesAttachments}}</td>
+        </ng-container>
+        <ng-container matColumnDef="filesAttachmentsFuntion">
+            <th mat-header-cell *matHeaderCellDef>Funcion del campo archivos adjuntos</th>
+            <td mat-cell *matCellDef="let item">{{item.filesAttachmentsFuntion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="filesAttachmentsButton">
+            <th mat-header-cell *matHeaderCellDef>Nombre del boton archivos adjuntos</th>
+            <td mat-cell *matCellDef="let item">{{item.filesAttachmentsButton}}</td>
+        </ng-container>
+        <ng-container matColumnDef="buttonOne">
+            <th mat-header-cell *matHeaderCellDef>Nombre del boton guardar</th>
+            <td mat-cell *matCellDef="let item">{{item.buttonOne}}</td>
+        </ng-container>
+        <ng-container matColumnDef="language">
+            <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
+            <td mat-cell *matCellDef="let item">{{item.language}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha de registro</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

@@ -1,0 +1,56 @@
+<div class="loc-container">
+    <p class="title loc-move">Carga masiva</p>
+    <br>
+  
+    <div class="loc-group">
+        <label class="primaryColor">Cliente</label>
+        <select class="form-control" [(ngModel)]="opcionSeleccionado"   (change)="capturar()">
+            <option class="ligthColor" value=0>Seleccione un cliente</option>
+            <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+        </select>
+    </div>
+    <div class="loc-total">
+        
+        <div class="loc-total-container-customer">
+            <p class="loc-subtitle-total-number">{{this.LoadClientParameterizationM.total}}</p>
+        </div>
+        <div class="loc-group-button">
+            <div class="loc-container-button">
+                <input id="serials" #serials hidden type="file" accept=".xlsx" (change)="addFile($event.target.files)">
+                <button class="loc-button" [disabled]="validation==false" [disabled]="opcionSeleccionado==0" mat-raised-button matTooltip="Cargar"
+                    (click)="serials.click()" matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button>
+                    <mat-icon>backup</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="loc-group">
+            <p class="primaryColor">{{this.subtitle}}</p>
+            <div *ngIf="this.uploading == true">
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        </div>
+        <div class="loc-group-button">
+            <div class="loc-container-button">
+                <button class="loc-butto" [disabled]="validation==true" mat-raised-button matTooltip="Validar"
+                    (click)="create()" matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button>
+                    <mat-icon>repeat</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="loc-group">
+            <p class="primaryColor">{{this.subtitleValidation}}</p>
+            <div *ngIf="this.validationA == true">
+                <mat-progress-bar mode="determinate" value="{{this.value}}"></mat-progress-bar>
+            </div>
+        </div>
+        <div class="loc-group-button-down">
+            <div class="loc-container-button">
+                <button class="loc-button-down" mat-raised-button matTooltip="Descargar"
+                    (click)="download()" matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button>
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>        
+    <br>
+</div>

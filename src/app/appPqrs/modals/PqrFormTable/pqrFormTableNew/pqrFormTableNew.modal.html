@@ -1,0 +1,77 @@
+<div mat-dialog-content>
+    <div class="pqr-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Formulario N°3 Titulo y encabezados de tabla (Pagina cliente final)</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Titulo de la tabla</label>
+            <input  name="titleTable" formControlName="titleTable" class="form-control" placeholder="Titulo de la tabla">
+            <div class="invalid-text" *ngIf="form.get('titleTable').invalid && form.get('titleTable').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre de la columna N° de ticket</label>
+            <input  name="columnOne" formControlName="columnOne" class="form-control text-may" placeholder="Nombre de la columna N° de ticket">
+            <div class="invalid-text" *ngIf="form.get('columnOne').invalid && form.get('columnOne').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre de la columna N° de PQRS</label>
+            <input  name="columnTwo" formControlName="columnTwo" class="form-control text-may" placeholder="Nombre de la columna N° de PQRS">
+            <div class="invalid-text" *ngIf="form.get('columnTwo').invalid && form.get('columnTwo').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre de la columna serial</label>
+            <input  name="columnTheer" formControlName="columnTheer" class="form-control text-may" placeholder="Nombre de la columna serial">
+            <div class="invalid-text" *ngIf="form.get('columnTheer').invalid && form.get('columnTheer').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre de la columna descripcion</label>
+            <input  name="columnFour" formControlName="columnFour" class="form-control text-may" placeholder="Nombre de la columna descripcion">
+            <div class="invalid-text" *ngIf="form.get('columnFour').invalid && form.get('columnFour').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre de la columna de las acciones que puede generar el sistema (Eliminar / Editar)</label>
+            <input  name="columnFive" formControlName="columnFive" class="form-control text-may" placeholder="Nombre de la columna de las acciones que puede generar el sistema (Eliminar / Editar)">
+            <div class="invalid-text" *ngIf="form.get('columnFive').invalid && form.get('columnFive').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre del boton del registro de seriales</label>
+            <input  name="buttonOne" formControlName="buttonOne" class="form-control text-may" placeholder="Nombre del boton del registro de seriales">
+            <div class="invalid-text" *ngIf="form.get('buttonOne').invalid && form.get('buttonOne').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre del boton que permite almacenar los registros</label>
+            <input  name="buttonTwo" formControlName="buttonTwo" class="form-control text-may" placeholder="Nombre del boton que permite almacenar los registros">
+            <div class="invalid-text" *ngIf="form.get('buttonTwo').invalid && form.get('buttonTwo').touched">Ingrese un registro valido</div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Lenguaje</label>
+            <select formControlName="languageId" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una opcion</option>
+                <option *ngFor="let c of languageList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+            <div *ngIf="this.data.formId != 0" class="pqr-group-checkbox">
+                <label class="primaryColor">Activo</label>
+                <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="pqr-checkbox">
+                        <input id="check" formControlName="active" type="checkbox">
+                        <label class="pqr-label" for="check">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="pqr-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="pqr-container-button">
+                    <button class="pqr-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" mat-raised-button (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+<div mat-dialog-content>
+    <div class="files-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Documentacion</p>
+    <div class="files-container-files">
+        <p class="title" [ngStyle]="{'text-align':'center'}">Archivos de Inicio</p>
+        <div *ngIf="loadingStart" class="files-container-loader">
+            <div class="files-loader"></div>
+        </div>
+        <div *ngIf="!loadingStart" class="files-content-files">
+            <div *ngFor="let f of fileListStart" class="files-card-files" matTooltip="{{f.name}}" matTooltipPosition="above"
+                matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="files-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="delete(f.name,'INICIO')">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="files-container-float-button">
+            <input #fileStart hidden type="file" multiple (change)="load($event.target.files,'INICIO')">
+            <button mat-mini-fab class="green" matTooltip="Cargar archivo" matTooltipPosition="above" matTooltipClass="tooltip" (click)="fileStart.click()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="files-container-files">
+        <p class="title" [ngStyle]="{'text-align':'center'}">Archivos de Finalizacion</p>
+        <div *ngIf="loadingEnd" class="files-container-loader">
+            <div class="files-loader"></div>
+        </div>
+        <div *ngIf="!loadingEnd" class="files-content-files">
+            <div *ngFor="let f of fileListEnd" class="files-card-files" matTooltip="{{f.name}}" matTooltipPosition="above"
+                matTooltipClass="tooltip">
+                <p>{{f.type}}</p>
+                <div class="files-card-actions">
+                    <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="download(f)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below" matTooltipClass="tooltip"
+                        (click)="delete(f.name,'FIN')">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="files-container-float-button">
+            <input #fileEnd hidden type="file" (change)="load($event.target.files,'FIN')">
+            <button mat-mini-fab class="green" matTooltip="Cargar archivo" matTooltipPosition="above" matTooltipClass="tooltip" (click)="fileEnd.click()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,287 @@
+.valReportLoad-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.valReportLoad-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.valReportLoad-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.valReportLoad-control{
+    display: flex;
+    width: 100%;
+}
+.valReportLoad-text{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.valReportLoad-container-button{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+.mat-raised-button{
+    width: 150px;
+    height: 30px;
+    background: #0091ea;
+    
+}
+
+.valReportLoad-button1{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #197763;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.valReportLoad-button2{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #43b92b;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.valReportLoad-button3{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #1d86af;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.valReportLoad-button4{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #cc2727;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+
+
+.valReportLoad-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.valReportLoad-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.valReportLoad-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.valReportLoad-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.valReportLoad-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .valReportLoad-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .valReportLoad-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.valReportLoad-control{
+    display: flex;
+    height: 40px;
+}
+
+.mat-icon{
+    color: white;
+}
+table{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+    margin-right: 20px !important;
+    max-width: 100% !important;
+    text-align: center;
+}
+th{
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;  
+
+}
+.mat-column-Resumen {
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   max-width: 200px;   
+}
+
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.mat-column-active{
+    text-align: center !important;
+}
+.mat-column-actions{
+    text-align: center !important;
+    padding-right: 0px !important;
+    width: 120px !important;
+}
+.f{
+    width: 10cm;
+}
+.valReportLoad-container-loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.valReportLoad-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+.loc-rotate{
+    animation: rotate 3s linear infinite;
+}
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateX(0deg);
+    }
+    50% {
+        -webkit-transform: rotateX(360deg);
+    }
+    100% {
+        -webkit-transform: rotateX(0deg);
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(360deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.mat-header-cell{
+    text-align: center;
+}
+.mat-progress-bar {
+    width: 100%;
+}
+.valReport-buttns{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
+    height: 100%;
+}
+.primaryColor{
+    margin-top: 20px;
+}
+.primaryColor-c{
+    margin-bottom: 20px;
+    font: 400 25px/20px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+    color: #354a5f
+    
+}
+.form-control{
+    color: var(--primary);
+    margin-top: 5px;
+    height: 30px;
+    font-size: 14px;
+    font-family: 'Roboto';
+    border: 1px solid var(--ligth);
+    border-radius: 5px;
+    padding: 0px 10px;
+    outline: none;
+    width: 100%;
+    margin-bottom: 20px;
+}
+

@@ -1,0 +1,81 @@
+<div class="ciclic-container">
+    <p class="title">Nuevo Ciclico</p>
+    <form [formGroup]="form" class="ciclic-form">
+        <div class="ciclic-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="ciclic-group">
+            <label class="primaryColor">Cliente</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="ciclic-group">
+            <label class="primaryColor">Sistema</label>
+            <select formControlName="system" class="form-control">
+                <option class="ligthColor" value="">Seleccione un sistema</option>
+                <option value="WMS LOCAL">WMS LOCAL</option>
+                <option value="WMS SAP">WMS SAP</option>
+            </select>
+        </div>
+        <div class="ciclic-group">
+            <label class="primaryColor">Tipo de muestra</label>
+            <select formControlName="typeSampling" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo de muestra</option>
+                <option value="Ubicaciones">Ubicaciones</option>
+                <option value="Codigos Sap">Codigos Sap</option>
+            </select>
+        </div>
+        <div class="ciclic-group">
+            <label class="primaryColor">Porcentaje Muestra</label>
+            <input formControlName="sampling" type="number" min="0" max="100" class="form-control" placeholder="Porcentaje Muestra">
+        </div>
+        <div class="cyclic-group-checkbox">
+            <label class="primaryColor">Cruce SAP</label>
+            <div class="cyclic-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="cyclic-checkbox">
+                    <input id="checkSap" formControlName="crossSap" type="checkbox" (click)="addSystem($event.srcElement,'SAP')">
+                    <label class="cyclic-label" for="checkSap">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="cyclic-group-checkbox">
+            <label class="primaryColor">Cruce WMS</label>
+            <div class="cyclic-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="cyclic-checkbox">
+                    <input id="checkWms" formControlName="crossWms" type="checkbox" (click)="addSystem($event.srcElement,'WMS')">
+                    <label class="cyclic-label" for="checkWms">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="cyclic-group-checkbox">
+            <label class="primaryColor">Cruce BASE</label>
+            <div class="cyclic-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="cyclic-checkbox">
+                    <input id="checkBase" formControlName="crossBase" type="checkbox" (click)="addSystem($event.srcElement,'BASE')">
+                    <label class="cyclic-label" for="checkBase">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="ciclic-group">
+            <label class="primaryColor">Sistema principal</label>
+            <select formControlName="principalSystem" class="form-control">
+                <option class="ligthColor" value="">Seleccione un sistema principal</option>
+                <option *ngFor="let s of systemList" value="{{s}}">{{s}}</option>
+            </select>
+        </div>
+        <div class="ciclic-container-button">
+            <button class="ciclic-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

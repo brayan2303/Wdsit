@@ -1,0 +1,212 @@
+<div class="bsc-container">
+    <p class="title">Nuevo Seguimiento</p>
+    <form [formGroup]="form" class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getPerspective(year1,1)">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList1" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getStrategicObjetive(perspectiveId1,1)">
+                <option class="ligthColor" value="">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList1" value="{{p.id}}_{{p.name}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Objetivo Estrategico</label>
+            <select [(ngModel)]="strategicObjetiveId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getIndicator(strategicObjetiveId1,1)">
+                <option class="ligthColor" value="">Seleccione un objetivo estrategico</option>
+                <option *ngFor="let s of strategicObjetiveList1" value="{{s.id}}_{{s.name}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Indicador</label>
+            <select [(ngModel)]="indicatorId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getMeasurement(indicatorId1,1)">
+                <option class="ligthColor" value="">Seleccione un indicador</option>
+                <option *ngFor="let i of indicatorList1" value="{{i.id}}_{{i.name}}">{{i.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Mediciones</label>
+            <select [(ngModel)]="measurementId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getMonth(measurementId1,1)">
+                <option class="ligthColor" value="0">Seleccione una medicion</option>
+                <option *ngFor="let m of measurementList1" value="{{m.id}}">{{m.proyectPlan}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Mes</label>
+            <select [(ngModel)]="monthId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getAnalysis(measurementId1,monthId1,1)">
+                <option class="ligthColor" value="0">Seleccione un mes</option>
+                <option *ngFor="let m of monthList1" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Analisis</label>
+            <select [(ngModel)]="analysisId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getActionPlan(analysisId1,1)">
+                <option class="ligthColor" value="0">Seleccione un analisis</option>
+                <option *ngFor="let a of analysisList1" value="{{a.id}}">{{a.analysis}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Plan de Accion</label>
+            <select [(ngModel)]="actionPlanId1" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option class="ligthColor" value="">Seleccione un plan de accion</option>
+                <option *ngFor="let a of actionPlanList1" value="{{a.id}}_{{a.name}}">{{a.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control" placeholder="Descripcion">
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Fecha de Inicio</label>
+            <div class="bsc-form-control">
+                <input formControlName="startDate" matInput [matDatepicker]="startDate" disabled class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="bsc-container-button">
+            <button class="bsc-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado de Seguimientos</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year2" class="form-control" (change)="getPerspective(year2,2)">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList2" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId2" class="form-control" (change)="getStrategicObjetive(perspectiveId2,2)">
+                <option class="ligthColor" value="">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList2" value="{{p.id}}_{{p.name}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Objetivo Estrategico</label>
+            <select [(ngModel)]="strategicObjetiveId2" class="form-control" (change)="getIndicator(strategicObjetiveId2,2)">
+                <option class="ligthColor" value="">Seleccione un objetivo estrategico</option>
+                <option *ngFor="let s of strategicObjetiveList2" value="{{s.id}}_{{s.name}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Indicador</label>
+            <select [(ngModel)]="indicatorId2" class="form-control" (change)="getMeasurement(indicatorId2,2)">
+                <option class="ligthColor" value="">Seleccione un indicador</option>
+                <option *ngFor="let i of indicatorList2" value="{{i.id}}">{{i.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Mediciones</label>
+            <select [(ngModel)]="measurementId2" class="form-control" (change)="getMonth(measurementId2,2)">
+                <option class="ligthColor" value="0">Seleccione una medicion</option>
+                <option *ngFor="let m of measurementList2" value="{{m.id}}">{{m.proyectPlan}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Mes</label>
+            <select [(ngModel)]="monthId2" class="form-control" (change)="getAnalysis(measurementId2,monthId2,2)">
+                <option class="ligthColor" value="0">Seleccione un mes</option>
+                <option *ngFor="let m of monthList2" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Analisis</label>
+            <select [(ngModel)]="analysisId2" class="form-control" (change)="getActionPlan(analysisId2,2)">
+                <option class="ligthColor" value="0">Seleccione un analisis</option>
+                <option *ngFor="let a of analysisList2" value="{{a.id}}">{{a.analysis}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Plan de Accion</label>
+            <select [(ngModel)]="actionPlanId2" class="form-control" (change)="getTracking()">
+                <option class="ligthColor" value="">Seleccione un plan de accion</option>
+                <option *ngFor="let a of actionPlanList2" value="{{a.id}}_{{a.name}}">{{a.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="bsc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+            <td mat-cell *matCellDef="let item">{{item.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Inicio</th>
+            <td mat-cell *matCellDef="let item">{{item.startDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let item">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actionPlan">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Plan de Accion</th>
+            <td mat-cell *matCellDef="let item">{{item.actionPlan}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="analysis">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Analisis</th>
+            <td mat-cell *matCellDef="let item">{{item.analysis}}</td>
+        </ng-container>
+        <ng-container matColumnDef="month">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mes</th>
+            <td mat-cell *matCellDef="let item">{{item.month}}</td>
+        </ng-container>
+        <ng-container matColumnDef="measurement">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Medicion</th>
+            <td mat-cell *matCellDef="let item">{{item.measurement}}</td>
+        </ng-container>
+        <ng-container matColumnDef="perspective">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perspectiva</th>
+            <td mat-cell *matCellDef="let item">{{item.perspective}}</td>
+        </ng-container>
+        <ng-container matColumnDef="strategicObjetive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>objetivo Estrategico</th>
+            <td mat-cell *matCellDef="let item">{{item.strategicObjetive}}</td>
+        </ng-container>
+        <ng-container matColumnDef="indicator">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Indicador</th>
+            <td mat-cell *matCellDef="let item">{{item.indicator}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="edit(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="bsc-container-loader">
+        <div class="bsc-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+

@@ -1,0 +1,125 @@
+<div class="pqr-container">
+    <p class="title">Nueva Regional</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">País</label>
+            <select [(ngModel)]="countryId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getDepartment(1)">
+                <option class="ligthColor" value="0">Seleccione un País</option>
+                <option *ngFor="let c of countryList1" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId1" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getCity(1)">
+                <option class="ligthColor" value="0">Seleccione un Departamento</option>
+                <option *ngFor="let d of departmentList1" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ciudad</label>
+            <select formControlName="cityId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una Ciudad</option>
+                <option *ngFor="let c of cityList1" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div *ngIf="editing !=0" class="pqr-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pqr-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pqr-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pqr-container-button">
+            <button class="pqr-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado Regionales</p>
+    <div class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">País</label>
+            <select [(ngModel)]="countryId2" class="form-control" (change)="getDepartment(2)">
+                <option class="ligthColor" value="0">Seleccione un País</option>
+                <option *ngFor="let c of countryList2" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId2" class="form-control" (change)="getCity(2)">
+                <option class="ligthColor" value="0">Seleccione un Departamento</option>
+                <option *ngFor="let d of departmentList2" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Ciudad</label>
+            <select [(ngModel)]="cityId" class="form-control" (change)="getRegional()">
+                <option class="ligthColor" value="0">Seleccione una Ciudad</option>
+                <option *ngFor="let c of cityList2" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="pqr-search-container-button">
+        <div class="pqr-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="pqr-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>País</th>
+            <td mat-cell *matCellDef="let item">{{item.country}}</td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Departamento</th>
+            <td mat-cell *matCellDef="let item">{{item.department}}</td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+            <td mat-cell *matCellDef="let item">{{item.city}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let item">
+            <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="edit(item.id,item.name,item.countryId,item.departmentId,item.cityId,item.active)">
+                <mat-icon class="blue-color">create</mat-icon>
+            </button>
+        </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pqr-container-loader">
+        <div class="pqr-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,58 @@
+<div class="loc-container">
+    <p class="title">Listado</p>
+      <br>
+        <div class="loc-group">
+            <label class="primaryColor">Cliente</label>
+            <label class="primaryColor">{{customer.description}}</label>
+           
+        </div>
+        <br>
+        <div class>
+        <input id="serials" #serials hidden type="file" accept=".xlsx" (change)="load($event.target.files)">
+        <button mat-mini-fab class="blue" matTooltip="{{uploading?'Cargando ':'Cargar '}}" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="serials.click()" >
+            <mat-icon >cloud_upload</mat-icon>
+        </button>
+
+        <button reset mat-mini-fab class="blue loc-but" matTooltip="Exportar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="download()">
+            <mat-icon>cloud_download</mat-icon>
+        </button>
+
+        <button mat-mini-fab class="red loc-but" matTooltip="Eliminar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </div>
+    <br>
+    <div *ngIf="loading" class="loc-container-loader">
+        <div class="loc-loader"></div>
+    </div>
+    <table class="loc-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="CLIENTE">
+            <th mat-header-cell *matHeaderCellDef>CLIENTE</th>
+            <td mat-cell *matCellDef="let item">{{item.cliente}}</td>
+        </ng-container>
+        <ng-container matColumnDef="SERIAL EQUIPO">
+            <th mat-header-cell *matHeaderCellDef>SERIAL EQUIPO</th>
+            <td mat-cell *matCellDef="let item">{{item.serial_EQUIPO}}</td>
+        </ng-container>
+        <ng-container matColumnDef="CODIGO SAP">
+            <th mat-header-cell *matHeaderCellDef>CODIGO SAP</th>
+            <td mat-cell *matCellDef="let item">{{item.codigo_SAP}}</td>
+        </ng-container>
+        <ng-container matColumnDef="ESTADO">
+            <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+            <td mat-cell *matCellDef="let item">{{item.estado}}</td>
+        </ng-container>
+        <ng-container matColumnDef="TIPOLOGIA">
+            <th mat-header-cell *matHeaderCellDef>TIPOLOGIA</th>
+            <td mat-cell *matCellDef="let item">{{item.tipologia}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

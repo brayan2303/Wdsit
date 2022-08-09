@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="city-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-genCountryAbbreviationNew (closeDialog)="onClose()" [formId]="formId"></app-genCountryAbbreviationNew>
+</div>

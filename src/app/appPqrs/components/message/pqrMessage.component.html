@@ -1,0 +1,112 @@
+<div class="mes-container">
+    <p class="title">Escalación de cliente</p>
+    <div class="mes-container-button">
+        <div class="mes-group">
+            <input type="text" class="form-control" placeholder="Buscar..." (keyup)="filter($event)">
+        </div>
+    </div>
+    <table #table class="mes-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° PQRS</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.number,item.ticket, item.active)">{{item.number}}</td>
+        </ng-container>
+        <ng-container matColumnDef="ticket">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° ticket</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.number,item.ticket, item.active)">{{item.ticket}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nameUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Agente</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.number, item.ticket,item.active)">{{item.nameUser}}</td>
+
+        </ng-container>
+        <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Cliente</th>
+            <td mat-cell *matCellDef="let item" (click)="getInformation(item.number, item.ticket, item.active)">{{item.customerName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    <ng-container *ngIf="number!=''">
+        <div class="mes-form">
+            <div *ngIf="pqrEscalationEntity!=null" class="pqr-detail-container">
+                <p class="title"><mat-icon class="orange-color">gavel</mat-icon> {{title}}</p>
+                <div *ngIf="messaList.length > 0 && !loadingMessage">
+                    <ng-container *ngFor="let t of messaList">
+                            <div class="detail-card">
+                                <div class="detail-content-icon">
+                                    <mat-icon [ngStyle]="{'color':'#1586CB'}">perm_identity</mat-icon>
+                                </div>
+                                <p class="detail-subtitle">{{t.name}} : {{t.message}} {{t.creationDate}}</p>
+                               
+                                <button mat-icon-button matTooltip="Archivos" matTooltipPosition="above"
+                                matTooltipClass="tooltip" (click)="getFiles(t.number,t.creationDate)">
+                                <mat-icon class="blue-color">receipt</mat-icon></button>
+                            </div>
+                    </ng-container>
+                </div>
+        <div> 
+            <form [formGroup]="form" class="mes-form">
+                <div class="mes-group">
+                    <textarea formControlName="message" class="form-control" placeholder="Escribe un mensaje..."></textarea>
+                    <div class="invalid-text" *ngIf="form.get('message').invalid && form.get('message').touched">Escriba
+                        un mensaje por favor</div>
+                </div>
+                <div class="pqr-group">
+                    <div class="pqr-attachment">
+                        <div class="pqr-attachment-content">
+                            <ng-container *ngIf="formId ===0">
+                                <div *ngFor="let f of fileList;let i=index;" class="pqr-container-file"
+                                    matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                                    <p>{{f.name}}</p>
+                                    <div class="pqr-container-actions">
+                                        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="below"
+                                            matTooltipClass="tooltip" (click)="removeFile(i)">
+                                            <mat-icon class="red-color">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="pqr-attachment-attach">
+                            <input #image hidden type="file" multiple (change)="addFile($event.target.files)">
+                            <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="left"
+                                matTooltipClass="tooltip" (click)="image.click()">
+                                <mat-icon class="orange-color">attach_file</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mes-group">
+                    <div class="mes-container-button">
+                        <button class="mes-button" mat-raised-button matTooltip="Enviar" matTooltipPosition="right"
+                            matTooltipClass="tooltip" type="reset" mat-raised-button [disabled]="!form.valid" (click)="save()">
+                            <mat-icon>send</mat-icon>
+                        </button>
+                        <button mat-mini-fab class="blue cov-butonsearch" matTooltip="Sincronizar" matTooltipPosition="above" matTooltipClass="tooltip"
+                            (click)="getInformation(number, ticket, active)">
+                            <mat-icon >find_replace</mat-icon>
+                        </button>
+
+                        <button *ngIf="this.userId === this.agentId" mat-mini-fab class="red cov-butonsearch" matTooltip="Cerrar escalacion" matTooltipPosition="above" matTooltipClass="tooltip"
+                            (click)="escalationFinish(ticket,number, this.agentId)">
+                            <mat-icon >cancel</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

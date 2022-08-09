@@ -1,0 +1,183 @@
+<div class="recep-container">
+    <p class="title">{{title}}</p>
+    <div class="recep-form">
+        <div class="recep-group">
+            <label class="primaryColor">Buscar</label>
+            <div class="recep-form-control">
+                <input type="number" [(ngModel)]="this.identification" class="form-control text-may"
+                    placeholder="Buscar">
+                <button class="recep-button-search" mat-raised-button matTooltip="Buscar" mat-raised-button
+                    (click)="serachIdentificacion(this.identification)">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="recep-group" *ngIf="this.imageSource !=''&& this.imageSource !=null">
+            <img [src]="this.imageSource" width="135" height="100">
+        </div>
+        <div *ngIf="this.active == true" class="recep-group">
+            <div class="recep-container-button">
+                <button class="recep-button-red" mat-raised-button matTooltip="Salida" mat-raised-button
+                         matTooltipPosition="right" matTooltipClass="tooltip" (click)="saveExit()">
+                    <mat-icon>logout</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="form" class="recep-form">
+        <div class="recep-group">
+            <label class="primaryColor">Tipo de identificacion</label>
+            <select formControlName="typeDocument" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un tipo</option>
+                <option *ngFor="let c of identificationList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('typeDocument').invalid && form.get('typeDocument').touched">
+                Ingrese
+                un tipo valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">N° de identificacion</label>
+            <input formControlName="identification" type="number" class="form-control text-may"
+                placeholder="N° de identificacion">
+            <div class="invalid-text" *ngIf="form.get('identification').invalid && form.get('identification').touched">
+                Ingrese
+                una identification valida</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Nombres</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre
+                valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Apellidos</label>
+            <input formControlName="lastName" type="text" class="form-control text-may" placeholder="Apellido">
+            <div class="invalid-text" *ngIf="form.get('lastName').invalid && form.get('lastName').touched">Ingrese un
+                apellido valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Telefono</label>
+            <input type="number" name="phone" formControlName="phone" class="form-control text-may"
+                placeholder="Telefono">
+            <div class="invalid-text" *ngIf="form.get('phone').invalid && form.get('phone').touched">Ingrese un telefono
+                valido</div>
+        </div>
+
+        <div class="recep-group">
+            <label class="primaryColor">Email</label>
+            <input formControlName="email" type="email" class="form-control text-may" placeholder="Email">
+            <div class="invalid-text" *ngIf="form.get('email').invalid && form.get('email').touched">Ingrese un Email
+                valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Entidad</label>
+            <input name="entity" formControlName="entity" class="form-control text-may" placeholder="Entidad">
+            <div class="invalid-text" *ngIf="form.get('entity').invalid && form.get('entity').touched">Ingrese una
+                entidad valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">EPS</label>
+            <select formControlName="eps" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una EPS</option>
+                <option *ngFor="let c of epsList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">ARL</label>
+            <select formControlName="arl" class="form-control">
+                <option class="ligthColor" value=null>Seleccione una ARL</option>
+                <option *ngFor="let c of arlList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Seleccionar visita</label>
+            <div class="recep-form-control">
+                <input [(ngModel)]="person" formControlName="visit" name="person" type="text" class="form-control"
+                    disabled placeholder="Seleccionar visita">
+                <button mat-mini-fab class="green" matTooltip="Usuarios" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="getPerson()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Carnet</label>
+            <div class="recep-form-control">
+                <input [(ngModel)]="license" formControlName="license" name="license" type="text" class="form-control"
+                    readonly placeholder="Carnet N°">
+                <button *ngIf="license == 0 || license == null" mat-mini-fab class="green" matTooltip="Generar"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="getLicence()">
+                    <mat-icon>published_with_changes</mat-icon>
+                </button>
+            </div>
+            <div class="invalid-text" *ngIf="form.get('license').invalid && form.get('name').touched">Ingrese un nombre
+                valido</div>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Tipo de visita</label>
+            <select formControlName="typeVisit" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un registro</option>
+                <option *ngFor="let c of typeVisitList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="recep-group">
+            <label class="primaryColor">Trae equipo</label>
+            <select [(ngModel)]="team" formControlName="team" class="form-control">
+                <option class="ligthColor" value=null>Seleccione un registro</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('typeDocument').invalid && form.get('typeDocument').touched">
+                Ingrese
+                una opcion valida</div>
+        </div>
+        <div *ngIf="this.team == 'Si'" class="recep-group">
+            <label class="primaryColor">Marca</label>
+            <input formControlName="brand" type="text" class="form-control text-may" placeholder="Marca">
+        </div>
+        <div *ngIf="this.team == 'Si'" class="recep-group">
+            <label class="primaryColor">Serial</label>
+            <input formControlName="serial" type="text" class="form-control text-may" placeholder="Serial">
+        </div>
+        <div *ngIf="!this.capture && !this.imageSource " class="recep-group">
+            <label class="primaryColor">Tomar foto</label>
+            <div class="recep-container-button">
+                <button [disabled]="!form.valid" class="recep-button-capture" mat-raised-button matTooltip="Foto"
+                    mat-raised-button matTooltipPosition="right" matTooltipClass="tooltip" (click)="getFile()">
+                    <mat-icon>linked_camera</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="recep-group" *ngIf="this.capture && !this.imageSource">
+            <div class="recep-form-control">
+                <webcam [height]="100" [width]="400" [trigger]="triggerObservable" (imageCapture)="handleImage($event)">
+                </webcam>
+                <button class="recep-butto" mat-raised-button matTooltip="Tomar foto" mat-raised-button
+                    (click)="triggerSnapshot();">
+                    <mat-icon>camera_enhance</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div id="print-section" class="recep-group" style="display: none;">
+            <div *ngIf="this.imageSource == '' ">            
+                <img [src]="webcamImage.imageAsDataUrl" width="65" height="60">
+            </div>
+            <div *ngIf="this.imageSource != '' && this.imageSource != null ">
+                <img [src]="this.imageSource" width="65" height="60">
+            </div>
+        </div>
+
+        <div class="recep-group" *ngIf="webcamImage && !this.capture">
+            <img [src]="webcamImage.imageAsDataUrl" width="135" height="100">
+        </div>
+        <div *ngIf="this.active  == false" class="recep-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="recep-container-button">
+                <button class="recep-button" mat-raised-button matTooltip="Guardar" mat-raised-button
+                    [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

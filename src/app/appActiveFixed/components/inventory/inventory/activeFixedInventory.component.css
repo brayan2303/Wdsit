@@ -1,0 +1,102 @@
+.actInv-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.actInv-card{
+    display: flex;
+    flex-grow: 1;
+    margin:10px 20px 10px 0px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.actInv-information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+.actInv-title{
+    font-size: 28px;
+    color: var(--ligth);
+    margin: 0px;
+}
+.actInv-container-subtitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+.actInv-subtitle{
+    font-size: 50px;
+    margin: 0px;
+}
+.actInv-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+.actInv-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.dashboard-container-button{
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+}
+.actInv-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 150px;
+    color: white;
+    background-color: var(--blue);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.4);
+}
+.actInv-container-loader {
+    display: flex;
+    justify-content: center;
+}
+.actInv-loader{
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-width: 4px;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.act-hei{
+    height: 150px;
+}

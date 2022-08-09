@@ -1,0 +1,116 @@
+<div mat-dialo-content>
+    <div class="pro-close-button">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Plan de Accion</p>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource1">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="objetive">
+            <th mat-header-cell *matHeaderCellDef>Objetivo</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.objetive}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Finalizacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.endDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="analysis">
+            <th mat-header-cell *matHeaderCellDef>Analisis</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.analysis}}</td>
+        </ng-container>
+        <ng-container matColumnDef="responsibleUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Responsable</th>
+            <td mat-cell *matCellDef="let item" (click)="getAction(item.id,item.status)">{{item.responsibleUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let item" [ngClass]="{'green-color': item.status==='Aprobado','red-color':item.status==='Rechazado'}" (click)="getAction(item.id,item.status)">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button [disabled]="item.status==='Rechazado' || item.status==='Aprobado'" mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="delete(item.id)">
+                    <mat-icon [ngStyle]="{'color': item.status==='Rechazado' || item.status==='Aprobado'?'var(--ligth)':'var(--red)'}">delete</mat-icon>
+                </button>
+                <button [disabled]="item.status==='Rechazado' || item.status==='Aprobado'" mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="edit(item.id)">
+                    <mat-icon [ngStyle]="{'color': item.status==='Rechazado' || item.status==='Aprobado'?'var(--ligth)':'var(--blue)'}">create</mat-icon>
+                </button>
+                <button [disabled]="item.status==='Rechazado' || item.status==='Aprobado'" mat-icon-button matTooltip="Agregar Accion" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="addAction(0,item.id)">
+                    <mat-icon [ngStyle]="{'color': item.status==='Rechazado' || item.status==='Aprobado'?'var(--ligth)':'var(--green)'}">add</mat-icon>
+                </button>
+                <button *ngIf="item.status==='Abierto'" [disabled]="item.status==='Rechazado' || item.status==='Aprobado'" mat-icon-button matTooltip="Cerrar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="openClose(item.id,false)">
+                    <mat-icon [ngStyle]="{'color': item.status==='Rechazado' || item.status==='Aprobado'?'var(--ligth)':'var(--red)'}">close</mat-icon>
+                </button>
+                <button *ngIf="item.status==='Cerrado'" [disabled]="item.status==='Rechazado' || item.status==='Aprobado'" mat-icon-button matTooltip="Abrir" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="openClose(item.id,true)">
+                    <mat-icon [ngStyle]="{'color': item.status==='Rechazado' || item.status==='Aprobado'?'var(--ligth)':'var(--orange)'}">vpn_key</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    <p class="title">Listado de Acciones</p>
+    <p *ngIf="dataSource2.data.length===0" class="pro-title">Sin acciones!</p>
+    <table *ngIf="dataSource2.data.length>0" #table class="pro-table" mat-table [dataSource]="dataSource2">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Finalizacion</th>
+            <td mat-cell *matCellDef="let item">{{item.endDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let item" [ngClass]="{'green-color': item.status==='Cerrado','red-color':item.status==='Abierto'}">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="responsibleUser">
+            <th mat-header-cell *matHeaderCellDef>Usuario Responsable</th>
+            <td mat-cell *matCellDef="let item">{{item.responsibleUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button [disabled]="status==='Cerrado' || status==='Aprobado' || status==='Rechazado'" mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="deleteAction(item.id,item.actionPlanId)">
+                    <mat-icon [ngStyle]="{'color': status==='Cerrado' || status==='Aprobado' || status==='Rechazado'?'var(--ligth)':'var(--red)'}">delete</mat-icon>
+                </button>
+                <button [disabled]="status==='Cerrado' || status==='Aprobado' || status==='Rechazado'" mat-icon-button matTooltip="Editar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="editAction(item.id,item.actionPlanId)">
+                    <mat-icon [ngStyle]="{'color': status==='Cerrado' || status==='Aprobado' || status==='Rechazado'?'var(--ligth)':'var(--blue)'}">create</mat-icon>
+                </button>
+                <button *ngIf="item.status==='Abierto'" [disabled]="status==='Cerrado' || status==='Aprobado' || status==='Rechazado'" mat-icon-button matTooltip="Cerrar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="openCloseAction(item.id,false,item.actionPlanId)">
+                    <mat-icon [ngStyle]="{'color': status==='Cerrado' || status==='Aprobado' || status==='Rechazado'?'var(--ligth)':'var(--red)'}">close</mat-icon>
+                </button>
+                <button *ngIf="item.status==='Cerrado'" [disabled]="status==='Cerrado' || status==='Aprobado' || status==='Rechazado'" mat-icon-button matTooltip="Abrir" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="openCloseAction(item.id,true,item.actionPlanId)">
+                    <mat-icon [ngStyle]="{'color': status==='Cerrado' || status==='Aprobado' || status==='Rechazado'?'var(--ligth)':'var(--orange)'}">vpn_key</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns2;"></tr>
+    </table>
+</div>

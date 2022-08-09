@@ -1,0 +1,54 @@
+<div class="coms-container">
+    <p class="title">{{title}}</p>
+    <div class="coms-form">
+        <div class="coms-group">
+            <label class="primaryColor"> Ingrese número de pallet / N° de Entrada</label>
+            <input [(ngModel)]="pallet" class="coms-group-d" type="text">
+        </div>
+        
+        <button mat-mini-fab matTooltip="Buscar" matTooltipPosition="above" (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <table #table class="coms-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="cantPrevious">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad anterior</th>
+            <td mat-cell *matCellDef="let item">{{item.cantPrevious}}</td>
+        </ng-container>
+        <ng-container matColumnDef="cantSend">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad enviada</th>
+            <td mat-cell *matCellDef="let item">{{item.cantSend}}</td>
+        </ng-container>
+        <ng-container matColumnDef="cantNew">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad nueva</th>
+            <td mat-cell *matCellDef="let item">{{item.cantNew}}</td>
+        </ng-container>
+        <ng-container matColumnDef="codSap">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo SAP</th>
+            <td mat-cell *matCellDef="let item">{{item.codSap}}</td>
+        </ng-container>
+        <ng-container matColumnDef="docEntry">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° de documento de entrada</th>
+            <td mat-cell *matCellDef="let item">{{item.docEntry}}</td>
+        </ng-container>
+        <ng-container matColumnDef="docNum">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° de documento</th>
+            <td mat-cell *matCellDef="let item">{{item.docNum}}</td>
+        </ng-container>
+        <ng-container matColumnDef="pallet">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pallet</th>
+            <td mat-cell *matCellDef="let item">{{item.pallet}}</td>
+        </ng-container>
+        <ng-container matColumnDef="codeStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Respuesta del servidor</th>
+            <td mat-cell *matCellDef="let item">{{item.codeStatus}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="coms-container-loader">
+        <div class="coms-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+</div>

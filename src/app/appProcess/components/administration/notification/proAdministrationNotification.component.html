@@ -1,0 +1,90 @@
+<div class="pro-container">
+    <p class="title">Nueva Notificacion</p>
+    <form [formGroup]="form" class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Variables</label>
+            <input formControlName="variables" type="text" class="form-control" placeholder="Variables">
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Mensaje</label>
+            <!--<angular-editor formControlName="message" [config]="config"></angular-editor>-->
+            <editor apiKey="bkuz5ueok7zigqjele2henv1yyi6pkkkk4hkcqnh71iyp2tb" formControlName="message" plugins="wordcount image code link"></editor>
+        </div>
+        <div *ngIf="editing !=0" class="pro-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="pro-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="pro-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="pro-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="pro-container-button">
+            <button class="pro-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+    <p class="title">Listado Notificaciones</p>
+    <div class="pro-search-container-button">
+        <div class="pro-search-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="variables">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Variables</th>
+            <td mat-cell *matCellDef="let item">{{item.variables}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="edit(item.id,item.name,item.message,item.variables,item.active)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Usuarios" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getUser(item.id)">
+                    <mat-icon class="orange-color">people</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

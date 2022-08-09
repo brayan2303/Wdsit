@@ -1,0 +1,115 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalles</p>
+    <br>
+    <p class="title">N° de caso {{this.data.id}}</p>
+   <div  class="detail-container">
+    <div class="detail-card">
+        <div class="detail-content-general">
+        <label class="detail-title-general">Detalles Generales</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-ini" mat-raised-button matTooltip="Detalles Generales"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="detailGeneral(this.data.id)">
+                <mat-icon>how_to_reg</mat-icon>
+            </button>
+        </div>
+      </div>
+    </div>
+    <div class="detail-card">
+        <div class="detail-content">
+        <label class="detail-title">Inicio</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-green" mat-raised-button matTooltip="Inicio"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="register(this.data.id)">
+                <mat-icon>outlined_flag</mat-icon>
+            </button>
+        </div>
+      </div>
+      <div class="detail-content">
+        <label class="detail-title">Anexos</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-blue" mat-raised-button matTooltip="Anexos"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="annexed(this.data.id)">
+                <mat-icon>source</mat-icon>
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="detail-card">
+        <div class="detail-content">
+        <label class="detail-title">Prueba N°1</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-red" mat-raised-button matTooltip="Prueba N°1"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="proofOne(this.data.id)">
+                <mat-icon>post_add</mat-icon>
+            </button>
+        </div>
+        </div>
+        <div class="detail-content">
+        <label class="detail-title">Prueba N°2</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-orange" mat-raised-button matTooltip=" Prueba N°2"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="proofTwo(this.data.id)">
+                <mat-icon>text_snippet</mat-icon>
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="detail-card">
+        <div class="detail-content">
+        <label class="detail-title">Prueba N°3</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-yellow" mat-raised-button matTooltip="Prueba N°3"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="proofThird(this.data.id)">
+                <mat-icon>insert_drive_file</mat-icon>
+            </button>
+        </div>
+        </div>
+        <div class="detail-content">
+        <label class="detail-title">Seguimiento</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-purple" mat-raised-button matTooltip="Seguimiento"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="followUp(this.data.id)">
+                <mat-icon>record_voice_over</mat-icon>
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="detail-card">
+        <div class="detail-content">
+        <label class="detail-title">Laboral</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-pink" mat-raised-button matTooltip="Laboral"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="working(this.data.id)">
+                <mat-icon>engineering</mat-icon>
+            </button>
+        </div>
+        </div>
+        <div class="detail-content">
+        <label class="detail-title">Observacion</label>
+        <br>
+        <div class="detail-container-button">
+            <button class="detail-button-agua" mat-raised-button matTooltip="Observacion"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="observation(this.data.id)"> 
+                <mat-icon>drive_file_rename_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+  </div>
+   </div>
+    <div *ngIf="loading" class="detail-container-loader">
+        <div class="detail-loader"></div>
+    </div>
+</div>

@@ -1,0 +1,209 @@
+<div class="wls-container">
+  <p class="title">Configuracion de Servidores</p>
+  <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear servidor" matTooltipPosition="left"
+    matTooltipClass="tooltip" (click)="create(null)">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div *ngIf="loading1" class="wls-container-loader">
+    <div class="wls-loader"></div>
+  </div>
+  <table *ngIf="!loading1" class="wls-table" mat-table [dataSource]="dataSource1">
+    <ng-container matColumnDef="ip">
+      <th mat-header-cell *matHeaderCellDef>Ip</th>
+      <td mat-cell *matCellDef="let item">{{item.ip}}</td>
+    </ng-container>
+    <ng-container matColumnDef="port">
+      <th mat-header-cell *matHeaderCellDef>Puerto</th>
+      <td mat-cell *matCellDef="let item">{{item.port}}</td>
+    </ng-container>
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef>Usuario</th>
+      <td mat-cell *matCellDef="let item">{{item.userName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef>Contraseña</th>
+      <td mat-cell *matCellDef="let item">{{item.password}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let item">{{item.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="sgdb">
+      <th mat-header-cell *matHeaderCellDef>Sistema Gestion Base Datos</th>
+      <td mat-cell *matCellDef="let item">{{item.sgdb}}</td>
+    </ng-container>
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef>Activo</th>
+      <td mat-cell *matCellDef="let item">
+        <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+        <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button matTooltip="Detalles" matTooltipPosition="above" matTooltipClass="tooltip"
+          (click)="detail(item.ip)">
+          <mat-icon class="orange-color">list</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+          (click)="create(item)">
+          <mat-icon class="blue-color">create</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="delete(item.id)">
+          <mat-icon class="red-color">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns1"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns1;"></tr>
+  </table>
+  <mat-paginator #paginatorServer [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+  </mat-paginator>
+  <div *ngIf="serverIp!=''" class="wls-container-tabs">
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===1}" (click)="select(1)"><span>Base de datos</span></div>
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===2}" (click)="select(2)"><span>Tablas</span></div>
+    <div class="wls-tab" [ngClass]="{'wls-tab-selected':tab===3}" (click)="select(3)"><span>Campos</span></div>
+    <div fxFlex [ngStyle]="{'border-bottom':'2px solid var(--primary)'}"></div>
+  </div>
+  <ng-container *ngIf="tab===1">
+    <div *ngIf="loading2" class="wls-container-loader">
+      <div class="wls-loader"></div>
+    </div>
+    <button fxFlexAlign="flex-end" mat-mini-fab class="green"
+      matTooltip="Crear base de datos" matTooltipPosition="left" matTooltipClass="tooltip" (click)="createDataBase()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <table *ngIf="!loading2" class="wls-table" mat-table [dataSource]="dataSource2">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="masterFile">
+        <th mat-header-cell *matHeaderCellDef>Archivo Maestro</th>
+        <td mat-cell *matCellDef="let item">{{item.masterFile}}</td>
+      </ng-container>
+      <ng-container matColumnDef="masterSize">
+        <th mat-header-cell *matHeaderCellDef>Tamaño Archivo Maestro</th>
+        <td mat-cell *matCellDef="let item">{{item.masterSize}} Mb</td>
+      </ng-container>
+      <ng-container matColumnDef="logsFile">
+        <th mat-header-cell *matHeaderCellDef>Archivo Log</th>
+        <td mat-cell *matCellDef="let item">{{item.logsFile}}</td>
+      </ng-container>
+      <ng-container matColumnDef="logsSize">
+        <th mat-header-cell *matHeaderCellDef>Tamaño Archivo Log</th>
+        <td mat-cell *matCellDef="let item">{{item.logsSize}} Mb</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns2"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns2;"></tr>
+    </table>
+    <mat-paginator #paginatorDataBase [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </ng-container>
+  <ng-container *ngIf="tab===2">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div class="wls-group">
+        <label class="primaryColor">Bases de datos</label>
+        <select [(ngModel)]="dataBaseName" class="form-control"
+          (change)="getTable()">
+          <option class="ligthColor" value="">Seleccione una base de datos</option>
+          <option *ngFor="let d of dataBaseList" value="{{d.name}}">{{d.name}}</option>
+        </select>
+      </div>
+      <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear tabla" matTooltipPosition="left"
+        matTooltipClass="tooltip">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="loading3" class="wls-container-loader">
+      <div class="wls-loader"></div>
+    </div>
+    <table *ngIf="!loading3" class="wls-table" mat-table [dataSource]="dataSource3">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="rows">
+        <th mat-header-cell *matHeaderCellDef>Filas</th>
+        <td mat-cell *matCellDef="let item">{{item.rows}}</td>
+      </ng-container>
+      <ng-container matColumnDef="reserved">
+        <th mat-header-cell *matHeaderCellDef>Reservado</th>
+        <td mat-cell *matCellDef="let item">{{item.reserved}}</td>
+      </ng-container>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Datos</th>
+        <td mat-cell *matCellDef="let item">{{item.data}}</td>
+      </ng-container>
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef>Indice</th>
+        <td mat-cell *matCellDef="let item">{{item.index}}</td>
+      </ng-container>
+      <ng-container matColumnDef="unused">
+        <th mat-header-cell *matHeaderCellDef>Sin usar</th>
+        <td mat-cell *matCellDef="let item">{{item.unused}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns3"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns3;"></tr>
+    </table>
+    <mat-paginator #paginatorTable [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </ng-container>
+  <ng-container *ngIf="tab===3">
+    <div fxLayout fxLayoutAlign="space-between center">
+      <div class="wls-group">
+        <label class="primaryColor">Bases de datos</label>
+        <select [(ngModel)]="dataBaseName" class="form-control"
+          (change)="selectTable()">
+          <option class="ligthColor" value="">Seleccione una base de datos</option>
+          <option *ngFor="let d of dataBaseList" value="{{d.name}}">{{d.name}}</option>
+        </select>
+      </div>
+      <div class="wls-group">
+        <label class="primaryColor">Tablas</label>
+        <select [(ngModel)]="tableName" class="form-control"
+          (change)="getColumn()">
+          <option class="ligthColor" value="">Seleccione una tabla</option>
+          <option *ngFor="let t of tableList" value="{{t.name}}">{{t.name}}</option>
+        </select>
+      </div>
+      <button fxFlexAlign="flex-end" mat-mini-fab class="green" matTooltip="Crear campo" matTooltipPosition="above"
+        matTooltipClass="tooltip">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="loading4" class="wls-container-loader">
+      <div class="wls-loader"></div>
+    </div>
+    <table *ngIf="!loading4" class="wls-table" mat-table [dataSource]="dataSource4">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let item">{{item.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="dataType">
+        <th mat-header-cell *matHeaderCellDef>Tipo de dato</th>
+        <td mat-cell *matCellDef="let item">{{item.dataType}}</td>
+      </ng-container>
+      <ng-container matColumnDef="length">
+        <th mat-header-cell *matHeaderCellDef>Tamaño</th>
+        <td mat-cell *matCellDef="let item">{{item.length}}</td>
+      </ng-container>
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Datos</th>
+        <td mat-cell *matCellDef="let item">{{item.data}}</td>
+      </ng-container>
+      <ng-container matColumnDef="isNull">
+        <th mat-header-cell *matHeaderCellDef>Permitir nulo</th>
+        <td mat-cell *matCellDef="let item">
+          <ng-container *ngIf="item.isNull==='NO'">No</ng-container>
+          <ng-container *ngIf="item.isNull==='YES'">Si</ng-container>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns4"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns4;"></tr>
+    </table>
+    <mat-paginator #paginatorColumn [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </ng-container>
+</div>

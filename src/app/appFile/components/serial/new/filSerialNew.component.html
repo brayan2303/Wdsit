@@ -1,0 +1,74 @@
+<div class="fil-container">
+    <p class="title">Nuevo Serial</p>
+    <div class="fil-form">
+        <div class="fil-group">
+            <label class="primaryColor">Serial</label>
+            <input [(ngModel)]="serial" type="text" class="form-control" placeholder="Serial">
+        </div>
+        <div fxLayout>
+            <span *ngIf="serialModel!=null">{{serialModel.cardName}}</span>
+            <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="serialSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <input #filed hidden type="file" multiple (change)="load($event.target.files)">
+            <button mat-mini-fab [disabled]="serialModel===null"
+                [ngClass]="{'ligthBackground':serialModel===null,'orange':serialModel !=null}"
+                matTooltip="Adjuntar Archivo" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="filed.click()">
+                <mat-icon>attach_file</mat-icon>
+            </button>
+            <button mat-mini-fab [disabled]="!file" [ngClass]="{'ligthBackground':!file,'green':file}"
+                matTooltip="Guardar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="save()">
+                <mat-icon>done</mat-icon>
+            </button>
+        </div>
+    </div>
+    <p class="title">Listado de Seriales</p>
+    <div class="fil-form">
+        <div class="fil-group">
+            <label class="primaryColor">Cliente</label>
+            <select class="form-control" [(ngModel)]="customerId2" (change)="search()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+            </select>
+        </div>
+    </div>
+    <table class="fil-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="serial">
+            <th mat-header-cell *matHeaderCellDef>Serial</th>
+            <td mat-cell *matCellDef="let item">{{item.serial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef>Pais</th>
+            <td mat-cell *matCellDef="let item">{{item.country}}</td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef>Cliente</th>
+            <td mat-cell *matCellDef="let item">{{item.customer}}</td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef>Usuario</th>
+            <td mat-cell *matCellDef="let item">{{item.user}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.customerId,item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="fil-container-loader">
+        <div class="fil-loader"></div>
+    </div>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

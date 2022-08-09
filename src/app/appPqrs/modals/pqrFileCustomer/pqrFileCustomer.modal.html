@@ -1,0 +1,25 @@
+<div mat-dialog-content>
+    <div class="mee-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Archivos</p>
+    <div *ngIf="loading" class="mee-container-loader">
+        <div class="mee-loader"></div>
+    </div>
+    <div fxLayout fxLayoutAlign="center center" [ngStyle]="{'width':'100%'}">
+        <span *ngIf="fileList.length===0" class="mee-title">¡Sin archivos!</span>
+    </div>
+    <div *ngIf="!loading && fileList.length>0" class="mee-container-files">
+        <div *ngFor="let f of fileList" class="mee-card-file" matTooltip="{{f.name}}" matTooltipPosition="above"
+            matTooltipClass="tooltip">
+            <span class="mee-title">{{f.type}}</span>
+            <div fxLayout fxLayoutAlign="center flex-end" [ngStyle]="{'width':'100%'}">
+                <mat-icon class="blue-color" matTooltip="Descargar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="download(f)">
+                    cloud_download</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

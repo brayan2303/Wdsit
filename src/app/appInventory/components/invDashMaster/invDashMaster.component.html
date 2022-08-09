@@ -1,0 +1,141 @@
+<div class="dashboardControlPanel-container">
+    <br>
+    <div class="dashboard-container-counting">
+        <div class="dashboard-couting">
+            <p>Proxima actualizacion en: {{minutes}}:{{seconds}}</p>
+        </div>
+    </div>
+    <br>
+    <p class="title">Dashboard de Control</p>
+    <div class="dashboardControlPanel-container-chart">
+        <apx-chart *ngIf="data1.dataX.length > 0" #chart [series]="barChartOptions.series"
+            [chart]="barChartOptions.chart" [dataLabels]="barChartOptions.dataLabels"
+            [plotOptions]="barChartOptions.plotOptions" [yaxis]="barChartOptions.yaxis" [xaxis]="barChartOptions.xaxis"
+            [fill]="barChartOptions.fill" [title]="barChartOptions.title">
+        </apx-chart>
+        <apx-chart *ngIf="data2.dataX.length > 0" [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
+            [labels]="pieChartOptions.labels" [title]="pieChartOptions.title" [responsive]="pieChartOptions.responsive">
+        </apx-chart>
+    </div>
+    <br>
+   
+    <p class="title">Personal en conteo</p>
+    <div class="detail-container">
+        <ng-container *ngFor="let t of personList">
+            <div class="detail-card">
+                <div class="detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#1586CB'}">perm_identity</mat-icon>
+                </div>
+                <p class="detail-subtitle">{{t.name}}</p>
+            </div>
+        </ng-container>
+    </div>
+    <br>
+    <p class="title">Cantidad de unidades</p>
+    <br>
+    <div *ngIf="countingList.length > 0 && !loading" class="dashboard-container-card">
+        <div *ngFor="let p of countingList" class="dashboard-card">
+            <p class="dashboard-card-title">{{p.status}}</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#0A2283','border-bottom-color':'#0A2283'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#0A2283'}">{{p.total}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p class="title">SOBRANTES / FALTANTES</p>
+    <br>
+    <div  class="dashboard-container-card">
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">SOBRANTES</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#FFB600','border-bottom-color':'#FFB600'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#FFB600'}">{{total4}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">SOBRANTES ENCONTRADOS</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#237F03','border-bottom-color':'#237F03'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#237F03'}">{{total3}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#CA0903','border-bottom-color':'#CA0903'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#CA0903'}">/</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">FALTANTES</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#0594D6','border-bottom-color':'#0594D6'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#0594D6'}">{{total2}}</p>
+            </div>
+        </div>
+        <div class="dashboard-card">
+            <p class="dashboard-card-title">FALTANTES ENCONTRADOS</p>
+            <div class="dashboard-card-information">
+                <div *ngIf="loading" class="dashboard-container-loader">
+                    <div class="dashboard-loader"
+                        [ngStyle]="{'border-top-color': '#5E03CA','border-bottom-color':'#5E03CA'}"></div>
+                </div>
+                <p *ngIf="!loading" [ngStyle]="{'color':'#5E03CA'}">{{total1}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>    
+    <!--
+    <p class="title">Personal con dos conteos que NO cruza</p>
+    <p class="primaryColor">Cantidad de registros: <b class="dashboard-color">{{this.dataSource.data.length}}</b></p>
+    <br>
+    <table #table class="dashboard-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="store">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Parte Numero</th>
+            <td mat-cell *matCellDef="let item">{{item.store}}</td>
+        </ng-container>
+        <ng-container matColumnDef="goodDeft">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Almacen</th>
+            <td mat-cell *matCellDef="let item">{{item.goodDeft}}</td>
+        </ng-container>
+        <ng-container matColumnDef="countingType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° de conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.countingType}}</td>
+        </ng-container>
+        <ng-container matColumnDef="parameterizationId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ubicacion</th>
+            <td mat-cell *matCellDef="let item">{{item.parameterizationId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="cantidadIngresada">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad de segundo registro ingresada</th>
+            <td mat-cell *matCellDef="let item">{{item.cantidadIngresada}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de Usuario</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+   -->
+</div>

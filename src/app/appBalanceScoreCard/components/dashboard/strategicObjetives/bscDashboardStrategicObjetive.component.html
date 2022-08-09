@@ -1,0 +1,40 @@
+<div class="bsc-container">
+    <p class="title">Dashboard Objetivos Estrategicos</p>
+    <div class="bsc-form">
+        <div class="bsc-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="bsc-group">
+            <label class="primaryColor">Perspectiva</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione una perspectiva</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+    </div>
+    <p *ngIf="strategicObjetiveList.length>0" class="title">Objetivos Estrategicos</p>
+        <div class="bsc-container-perspective">
+            <div *ngFor="let s of strategicObjetiveList" class="bsc-perspective" (click)="getStrategicObjetiveMonth(s.id,s.name)">
+                <p class="bsc-perspective-title">{{s.name}}</p>
+                <p class="bsc-perspective-subtitle">Indicadores</p>
+                <p class="bsc-perspective-title">{{s.indicators}}</p>
+            </div>
+        </div>
+        <div class="bsc-container-chart">
+            <div class="bsc-chart">
+                <canvas *ngIf="data1.dataX.length>0" baseChart [datasets]="pieChart.data" [labels]="pieChart.labels" [options]="pieChart.options"
+                    [legend]="pieChart.legend" [chartType]="pieChart.type">
+                </canvas>
+            </div>
+            <div class="bsc-chart">
+                <canvas *ngIf="data2.dataX.length>0" baseChart [datasets]="lineChart.data" [labels]="lineChart.labels"
+                    [options]="lineChart.options" [colors]="lineChart.color" [legend]="lineChart.legend"
+                    [chartType]="lineChart.type" [plugins]="lineChart.plugins">
+                </canvas>
+            </div>
+        </div>
+</div>

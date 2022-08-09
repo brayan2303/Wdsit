@@ -1,0 +1,95 @@
+<div class="scp-container">
+    <p class="title">Administrar Auditoria Previa</p>
+    <div class="scp-container-button">
+        <div class="scp-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table class="scp-table" mat-table [dataSource]="dataSource" matSort>
+     
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item" matTooltip="Seleccionar auditoria" (click)="findAuditPrevious(item.id)">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+            <td mat-cell *matCellDef="let item" matTooltip="Seleccionar auditoria" (click)="findAuditPrevious(item.id)" >{{item.customerName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item" matTooltip="Seleccionar auditoria" (click)="findAuditPrevious(item.id)" >{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item" matTooltip="Seleccionar auditoria" (click)="findAuditPrevious(item.id)" >{{item.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="edit(item)">
+                    <mat-icon class="blue-color">edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+    <div *ngIf="this.ScpAuditPreviousE != null" class="scp-container-serials">
+
+        <div class="scp-count">
+            <p class="scp-count-title">Ingresados</p>
+            <p class="scp-count-subtitleSerial">{{this.dataSourceSerial.data.length}}</p>
+        </div>
+
+        <div class="scp-countAudit">
+            <p class="scp-count-title">Pre Auditoria</p>
+            <p class="scp-count-subtitle">{{this.ScpAuditPreviousE.name}}</p>
+        </div>
+
+        <table class="scp-table" mat-table matSort id="tableSerials" #tableSerial [dataSource]="dataSourceSerial" *ngIf="this.ScpAuditPreviousE != null">
+            <ng-container matColumnDef="serials">
+                <th mat-header-cell *matHeaderCellDef>Serial</th>
+                <td mat-cell *matCellDef="let charge">{{charge.serial}}</td>
+            </ng-container>
+            <ng-container matColumnDef="codigoSap">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let charge">{{charge.codigoSap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                <td mat-cell *matCellDef="let charge">{{charge.descripcion}}</td>
+            </ng-container>
+            <ng-container matColumnDef="motivoScrap">
+                <th mat-header-cell *matHeaderCellDef>Motivo SCRAP</th>
+                <td mat-cell *matCellDef="let charge">{{charge.motivoScrap}}</td>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let charge">
+                    <mat-icon matTooltip="{{charge.estado}}" *ngIf="charge.estado=='NO TIENE ESTADO SCRAP'" class="red-color">priority_high</mat-icon>
+                    <mat-icon matTooltip="{{charge.estado}}" *ngIf="charge.estado=='Aceptado'" class="green-color">done</mat-icon>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsSerial"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsSerial;"></tr>
+        </table>
+    </div>
+
+</div>

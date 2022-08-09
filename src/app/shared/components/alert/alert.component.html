@@ -1,0 +1,6 @@
+<div class="snack-container" [ngClass]="{'green': data.type ==='success','red': data.type === 'error','orange': data.type === 'warning'}">
+    <span>{{data.message}}</span>
+    <button mat-icon-button>
+        <mat-icon (click)="close()">close</mat-icon>
+    </button>
+</div>

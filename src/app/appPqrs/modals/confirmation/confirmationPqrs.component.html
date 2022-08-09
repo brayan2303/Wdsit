@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+    <span class="title">{{message}}</span>
+    <div class="confirmation-container-button">
+        <button mat-mini-fab [ngStyle]="{'background-color':'var(--red)'}" (click)="onClose(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button class="bot-margin" mat-mini-fab [ngStyle]="{'background-color':'var(--green)'}" routerLink="/wdcs/message/list" (click)="onClose(true)">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</div>

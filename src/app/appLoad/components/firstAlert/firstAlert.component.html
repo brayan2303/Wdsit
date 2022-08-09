@@ -1,0 +1,30 @@
+<div class="file-container">
+    <p class="title">IQ09</p>
+
+    <form action="" class="user-form">
+        <div class="user-group">
+            <label class="primaryColor">Cliente</label>
+            <select class="form-control" #ct="ngModel" name="ct" [(ngModel)]="customer">
+                <option class="ligthColor" value="0">Seleccione</option>
+                <option *ngFor="let ct of listCustomers" value={{ct.id}}>{{ct.description}}</option>
+            </select>
+        </div>
+        <div class="user-group">
+            <input hidden type="file" #uploader (change)="loadfileIq($event.target.files)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+            <div class="report-container-button">
+                <button mat-raised-button matTooltip="Cargar Archivo" matTooltipPosition="above" matTooltipClass="tooltip" (click)="uploader.click()" [disabled]="customer==0">
+                    <mat-icon>backup</mat-icon>
+                </button>
+                <button mat-raised-button matTooltip="Descargar Archivo" matTooltipPosition="above" matTooltipClass="tooltip" >
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"  style="background: white;">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div *ngIf="loading" class="report-container-loader">
+    <div class="report-loader"></div>
+</div>

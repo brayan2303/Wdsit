@@ -1,0 +1,31 @@
+<div mat-dialog-content>
+    <div class="calculation-container-closeButton">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Calculo</p>
+    <div class="calculation-content">
+        <div class="calculation-container-operation">
+            <button *ngFor="let o of operationList" mat-mini-fab class="green" matTooltip="{{o.name}}"
+                matTooltipPosition="above" matTooltipClass="tooltip" (click)="add(o.id,o.code)">
+                <p>{{o.code}}</p>
+            </button>
+            <button mat-mini-fab class="orange" matTooltip="Variables" matTooltipPosition="above"
+                matTooltipClass="tooltip" (click)="getVariable()">
+                <mat-icon>code</mat-icon>
+            </button>
+        </div>
+        <div class="calculation-result">
+            <div *ngFor="let c of calculationList" class="calculation-card">
+                <p>{{c.variable}}</p>
+                <mat-icon class="calculation-float-icon red" matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="remove(c.id,c.type)">close</mat-icon>
+            </div>
+            <button mat-mini-fab class="calculation-float-button green" matTooltip="Guardar" matTooltipPosition="left"
+                matTooltipClass="tooltip" (click)="close()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

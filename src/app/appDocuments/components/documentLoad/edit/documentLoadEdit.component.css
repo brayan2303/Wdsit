@@ -1,0 +1,7 @@
+.docLoad-container-button{
+    display: flex;
+    justify-content: flex-end;
+}
+.close{
+    text-align: end;
+}

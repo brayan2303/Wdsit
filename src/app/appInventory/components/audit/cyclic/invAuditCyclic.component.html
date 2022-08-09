@@ -1,0 +1,150 @@
+<div class="cyclic-container">
+    <p class="title">Auditoria Ciclicos</p>
+    <div class="cyclic-form">
+        <div class="cyclic-control-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getCyclic()">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+    </div>
+    <ng-container *ngIf="dataSource.data.length>0">
+        <p class="title">Listado de Ciclicos</p>
+        <table class="cyclic-table" [ngStyle]="{'margin-top':'30px'}" mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="system">
+                <th mat-header-cell *matHeaderCellDef>Sistema</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.system}}</td>
+            </ng-container>
+            <ng-container matColumnDef="typeSampling">
+                <th mat-header-cell *matHeaderCellDef>Tipo Muestra</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.typeSampling}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sampling">
+                <th mat-header-cell *matHeaderCellDef>Porcentaje Muestra</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.sampling}}%</td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total Muestra</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.total}}%</td>
+            </ng-container>
+            <ng-container matColumnDef="creationDate">
+                <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.creationDate}}</td>
+            </ng-container>
+            <ng-container matColumnDef="crossCustomer">
+                <th mat-header-cell *matHeaderCellDef>Cruce Cliente</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    <mat-icon *ngIf="item.crossCustomer" class="green-color">done</mat-icon>
+                    <mat-icon *ngIf="!item.crossCustomer" class="red-color">clear</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="crossWms">
+                <th mat-header-cell *matHeaderCellDef>Cruce WMS</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    <mat-icon *ngIf="item.crossWms" class="green-color">done</mat-icon>
+                    <mat-icon *ngIf="!item.crossWms" class="red-color">clear</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="customer">
+                <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    {{item.customer}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)"
+                    [ngStyle]="{'color':item.status==='Pendiente'?'var(--red)':'var(--green)'}">
+                    {{item.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="active">
+                <th mat-header-cell *matHeaderCellDef>Activo</th>
+                <td mat-cell *matCellDef="let item" (click)="getAllPallet(item.id,item.system,item.customer)">
+                    <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                    <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Terminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                        (click)="finish(item.id,item.status)">
+                        <mat-icon class="green-color">done</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Pallets" matTooltipPosition="above" matTooltipClass="tooltip"
+                        (click)="getPallet(item.id,item.system,item.typeSampling,item.customer,item.status)">
+                        <mat-icon class="orange-color">drag_indicator</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
+        <mat-paginator #paginatorCyclic [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]"
+            [length]="dataSource.data.length" showFirstLastButtons></mat-paginator>
+    </ng-container>
+    <div *ngIf="loading" class="cyclic-container-loader">
+        <div class="cyclic-loader"></div>
+    </div>
+    <ng-container *ngIf="dataSourcePallet.data.length>0">
+        <p class="title">Listado Pallets</p>
+        <div class="cyclic-container-button" [ngStyle]="{'margin-top':'30px'}">
+            <div class="cyclic-group">
+                <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+                <mat-icon class="blue-color">search</mat-icon>
+            </div>
+        </div>
+        <table class="cyclic-table" mat-table [dataSource]="dataSourcePallet">
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let item">{{item.number}}</td>
+            </ng-container>
+            <ng-container matColumnDef="sapCode">
+                <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+                <td mat-cell *matCellDef="let item">{{item.sapCode}}</td>
+            </ng-container>
+            <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef>Ubicacion</th>
+                <td mat-cell *matCellDef="let item">{{item.location}}</td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                <td mat-cell *matCellDef="let item">{{item.type}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let item">{{item.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+                <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actionsPallet">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let item">
+                    <button mat-icon-button matTooltip="Descargar Seriales" matTooltipPosition="above"
+                        matTooltipClass="tooltip" (click)="download(item.number,item.type)">
+                        <mat-icon class="blue-color">cloud_download</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsPallet"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsPallet;"></tr>
+        </table>
+        <mat-paginator #paginatorPallet [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]"
+            [length]="dataSourcePallet.data.length" showFirstLastButtons></mat-paginator>
+    </ng-container>
+    <div *ngIf="loadingPallet" class="cyclic-container-loader">
+        <div class="cyclic-loader"></div>
+    </div>
+</div>

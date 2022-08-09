@@ -1,0 +1,68 @@
+<div class="dashBoardReport-container">
+    <p class="title">Dashboard Clientes</p>
+    <div class="dashBoardReport-form">
+        <div class="dashBoardReport-group">
+            <label class="primaryColor">Planta</label>
+            <select [(ngModel)]="plantId" name="plantId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione la Planta</option>
+                <option *ngFor="let c of plantList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="dashBoardReport-group">
+            <label class="primaryColor">Clientes</label>
+            <select [(ngModel)]="customerId" name="customerId" class="form-control" (change)="getFamily(customerId)">
+                <option class="ligthColor" value="0">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+        <div class="dashBoardReport-group">
+            <label class="primaryColor">Familia</label>
+            <select [(ngModel)]="familia" name="familia" class="form-control">
+                <option class="ligthColor" value="0">Seleccione la Familia</option>
+                <option *ngFor="let c of familyList" value="{{c.familia}}">{{c.familia}}</option>
+            </select>
+        </div>
+        <button mat-mini-fab class="dashBoardReport-buttom" matTooltip="Buscar" matTooltipPosition="above"
+            (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="loading" class="loc-container-loader">
+        <div class="loc-loader"></div>
+    </div>
+    <p class="title">Dashboard Clientes</p>
+    <div *ngIf="this.familyListF.length>0" class=" dashBoardReport-container-perspective">
+        <div *ngFor="let c of familyListF" class="dashBoardReport-perspective">
+            <p class="dashBoardReport-perspective-title" (click)="getFindfamily(c.cliente, c.codigoFamilia)">Familia</p>
+            <p class="dashBoardReport-perspective-subtitle" (click)="getFindfamily(c.cliente, c.codigoFamilia)">
+                {{c.codigoFamilia}}</p>
+            <p class="dashBoardReport-perspective-title" (click)="getFindfamily(c.cliente, c.codigoFamilia)">Cliente</p>
+            <p class="dashBoardReport-perspective-subtitle" (click)="getFindfamily(c.cliente, c.codigoFamilia)">
+                {{c.cliente}}</p>
+            <p class="dashBoardReport-perspective-title" (click)="getFindfamily(c.cliente, c.codigoFamilia)">Cantidad
+            </p>
+            <p class="dashBoardReport-perspective-subtitle" (click)="getFindfamily(c.cliente, c.codigoFamilia)">
+                {{c.cantidad}}</p>
+        </div>
+    </div>
+    <br>
+    <p class="title">Dashboard Familia</p>
+    <br>
+    <div *ngIf="this.familyListC.length>0" class="dashBoardReport-container-perspective">
+        <div *ngFor="let c of familyListC" class="dashBoardReport-perspective">
+            <p class="dashBoardReport-perspective-title">Familia</p>
+            <p class="dashBoardReport-perspective-subtitle">{{c.codigoFamilia}}</p>
+            <p class="dashBoardReport-perspective-title">Código SAP</p>
+            <p class="dashBoardReport-perspective-subtitle">{{c.codigoSap}}</p>
+            <p class="dashBoardReport-perspective-title">Cantidad</p>
+            <p class="dashBoardReport-perspective-subtitle">{{c.cantidad}}</p>
+        </div>
+    </div>
+    <div class="dashBoardReport-container-chart">
+        <apx-chart *ngIf="this.validador == true" #chart [series]="barChartOptions.series"
+            [chart]="barChartOptions.chart" [dataLabels]="barChartOptions.dataLabels"
+            [plotOptions]="barChartOptions.plotOptions" [yaxis]="barChartOptions.yaxis" [xaxis]="barChartOptions.xaxis"
+            [fill]="barChartOptions.fill" [title]="barChartOptions.title">
+        </apx-chart>
+    </div>
+</div>

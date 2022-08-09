@@ -1,0 +1,25 @@
+<div class="cov-content">
+
+    <p class="cov-subtitle">Bienvenido al area Covid de Woden Colombia S.A.S</p>
+    <br>
+    <p class="cov-text cov-paragraph">Declaro que la información consignada en este formulario es veraz y me comprometo
+        a informar cualquier modificación.</p>
+    <br>
+    <p class="cov-text cov-paragraph">Toda la información se recoge con fines estrictamente de interés público ante la
+        situación decretada por
+        las Autoridades Públicas, para proteger y salvaguardar un interés esencial para la vida de las personas,
+        en consecuencia, autorizo a la Empresa, para el manejo de la información aportada en esta encuesta,
+        acogido al principio de confidencialidad establecido en la Ley de Habeas Data,
+        para desarrollar acciones de promoción y prevención frente al contagio por COVID-19 acorde con lo establecido
+        por
+        el Ministerio de Salud y las demás autoridades competentes.</p>
+        <mat-checkbox #confirmed>Acepto terminos y condiciones</mat-checkbox>
+    <br>
+    <br>
+
+    <button mat-button [disabled]="!confirmed.checked" routerLink="/forms/new">Continuar </button>
+    
+
+
+</div>
+

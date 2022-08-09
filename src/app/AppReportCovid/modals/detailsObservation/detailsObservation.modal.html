@@ -1,0 +1,43 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalle </p>
+    <div class="act-detail-container">
+        <div *ngFor="let c  of covFormEntity">
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#271366'}">home_work</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Cerco epimiodologico</p>
+                    <p class="act-detail-subtitle">{{c.siegeEpimiodological}}</p>
+                </div>
+            </div>
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#136663'}">post_add</mat-icon>
+                </div>
+           
+            <div class="act-detail-content">
+                <p class="act-detail-title">Observation</p>
+                <p class="act-detail-subtitle">{{c.observation}}</p>
+            </div>
+        </div>
+        <div class="act-detail-card">
+            <div class="act-detail-content-icon">
+                <mat-icon [ngStyle]="{'color':'#DF684E'}">local_hospital</mat-icon>
+            </div>
+            <div class="act-detail-content">
+                <p class="act-detail-title">Hospitalizacion</p>
+                <p class="act-detail-subtitle">{{c.hospitalization}}</p>
+            </div>
+        </div>
+        <div *ngIf="loading" class="act-detail-container-loader">
+            <div class="act-detail-loader"></div>
+        </div>
+    </div>
+</div>
+</div>

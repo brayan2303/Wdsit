@@ -1,0 +1,82 @@
+<div class="user-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="newForm" class="user-form">
+        <div class="user-group">
+            <label class="primaryColor">Identificación</label>
+            <input formControlName="identification" type="number" class="form-control" placeholder="Identificación">
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Nombres</label>
+            <input formControlName="firstName" type="text" class="form-control" placeholder="Nombres">
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Apellidos</label>
+            <input formControlName="lastName" type="text" class="form-control" placeholder="Apellidos">
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Usuario</label>
+            <input formControlName="userName" type="text" class="form-control" placeholder="Usuario">
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Contraseña</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="Password"  required pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$" >
+            <div class="invalid-text" *ngIf="newForm.get('password').invalid && newForm.get('password').touched">La contraseña debe contener 8 caracteres y al menos una mayuscula, una minuscula y un número</div>
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Correo</label>
+            <input formControlName="mail" type="text" class="form-control" placeholder="mail">
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Centro de Costo</label>
+            <select formControlName="centerCostId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un centro de costo</option>
+                <option *ngFor="let cc of centerCostList" value="{{cc.id}}">{{cc.description}}</option>
+            </select>
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Cargo</label>
+            <select formControlName="positionId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cargo</option>
+                <option *ngFor="let p of positionList" value="{{p.id}}">{{p.description}}</option>
+            </select>
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="countryId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getDepartment()">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getCity()">
+                <option class="ligthColor" value="0">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="user-group">
+            <label class="primaryColor">Ciudad</label>
+            <select formControlName="cityId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una ciudad</option>
+                <option *ngFor="let c of cityList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div *ngIf="personId != 0" class="user-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="user-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="user-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="user-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="user-container-button">
+            <button class="user-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,63 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Laboral</p>
+    <br>
+    <form [formGroup]="form" class="acts-form form">
+        <div class="groupDir">
+            <label class="primaryColor">Fecha de reintegro</label>
+            <input formControlName="dateReinstate" class="form-control" type="date">
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Tiempo de incapacidad</label>
+            <input formControlName="timeIsolation" class="form-control" type="number">
+        </div>
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Obervaciones de entrega</label>
+            <textarea formControlName="observationDelivery" class="form-control input-group">Obervaciones</textarea>
+        </div>
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Obervaciones laborales</label>
+            <textarea formControlName="observationWorking" class="form-control input-group">Obervaciones</textarea>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Dia de aislamiento</label>
+            <select class="form-control" formControlName="dayIsolation">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miercoles">Miercoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sabado">Sabado</option>
+                <option value="Domingo">Domingo</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Vacunacion</label>
+            <select class="form-control" formControlName="vacunation">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Primera dosis">Primera dosis</option>
+                <option value="Esquema completo">Esquema completo</option>
+                <option value="No esta vacunado">No esta vacunado</option>
+                <option value="Desiste">Desiste</option>
+            </select>
+        </div>
+        <div class="groupDir">
+            <label class="primaryColor">Total de dias aislamiento</label>
+            <input formControlName="totalDayIsolation" class="form-control" type="number">
+        </div>
+        <div fxFlex="100%" fxLayout="column" class="group">
+            <label class="primaryColor">Consolidado de trabajo</label>
+            <textarea formControlName="consolidatedWork"
+                class="form-control input-group">Consolidado de trabajo</textarea>
+        </div>
+        <button mat-mini-fab class="button-float green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

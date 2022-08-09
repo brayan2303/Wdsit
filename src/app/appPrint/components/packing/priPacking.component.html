@@ -1,0 +1,61 @@
+<div class="label-container">
+    <p class="title">{{priLabelEntity.section}} - {{priLabelEntity.name}}</p>
+    <div class="label-form">
+        <div class="label-group">
+            <label class="primaryColor">Impresora</label>
+            <select [(ngModel)]="printerId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una impresora</option>
+                <option *ngFor="let p of printerList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="label-group">
+            <label class="primaryColor">Número de pallet</label>
+            <input id="search" type="text" class="form-control" placeholder="Número de pallet">
+        </div>
+        <div class="label-group">
+            <label class="primaryColor">Número de caja</label>
+            <input id="box" type="text" class="form-control" placeholder="Número de caja">
+        </div>
+        <button mat-mini-fab class="blue" [ngStyle]="{'margin-top':'20px'}" matTooltip="Buscar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="search()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button mat-mini-fab [disabled]="data.length===0" [ngClass]="{'ligthBackground':data.length===0,'green':data.length>0}" [ngStyle]="{'margin-top':'20px'}" mat-raised-button matTooltip="Imprimir" matTooltipPosition="above" matTooltipClass="tooltip" (click)="print()">
+            <mat-icon>print</mat-icon>
+        </button>
+    </div>
+    <table mat-table [dataSource]="data" #table>
+        <ng-container matColumnDef="Serial">
+            <th mat-header-cell *matHeaderCellDef>Serial</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.serial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Mac">
+            <th mat-header-cell *matHeaderCellDef>Mac</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.mac}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Codigo Sap">
+            <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.codigoSap}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Descripcion">
+            <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.descripcion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="SmartCard">
+            <th mat-header-cell *matHeaderCellDef>SmartCard</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.campo1}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.estado}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Caja">
+            <th mat-header-cell *matHeaderCellDef>Caja</th>
+            <td mat-cell *matCellDef="let item;let i=index;">{{item.ncajaEmpaque}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="headers"></tr>
+        <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+    </table>
+    <div *ngIf="loading" class="label-container-loader">
+        <div class="label-loader"></div>
+    </div> 
+</div>

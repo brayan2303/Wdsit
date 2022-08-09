@@ -1,0 +1,68 @@
+<div class="dis-container">
+    <p class="title">Nuevo Mes</p>
+    <div class="dis-form">
+        <div class="dis-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="dis-group">
+            <label class="primaryColor">Mes</label>
+            <select [(ngModel)]="month" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un mes</option>
+                <option *ngFor="let m of monthList" value="{{m.id}}">{{m.name}}</option>
+            </select>
+        </div>
+        <div class="dis-container-button">
+            <button class="dis-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+    <p class="title">Listado Meses</p>
+    <table #table class="dis-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let item">
+                <button *ngIf="item.id === editing" mat-icon-button matTooltip="Cerrar Edicion"
+                    matTooltipPosition="above" matTooltipClass="tooltip" (click)="closeEditing()">
+                    <mat-icon class="ligthColor">close</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Año</th>
+            <td mat-cell *matCellDef="let item">{{item.year}}</td>
+        </ng-container>
+        <ng-container matColumnDef="month">
+            <th mat-header-cell *matHeaderCellDef>Mes</th>
+            <td mat-cell *matCellDef="let item">{{item.monthName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="days">
+            <th mat-header-cell *matHeaderCellDef>Dias</th>
+            <td mat-cell *matCellDef="let item">{{item.days}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let item">
+            <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="edit(item.id,item.year,item.month)">
+                <mat-icon class="blue-color">create</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="delete(item.id)">
+                <mat-icon class="red-color">delete</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Dias" matTooltipPosition="above" matTooltipClass="tooltip" (click)="getDays(item.id,item.year,item.month)">
+                <mat-icon class="orange-color">today</mat-icon>
+            </button>
+        </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="dis-container-loader">
+        <div class="dis-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

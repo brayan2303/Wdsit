@@ -1,0 +1,249 @@
+<div class="cov-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="cov-form">
+        <h4 class="cov-parf">DATOS PERSONALES</h4>
+        <br>
+        <div class="cov-group">
+            <label class="primaryColor">Numero de identificacion</label>
+            <div class="cov-control-group">
+                <input matInput  formControlName="identificationUser" type="number" class="form-control" placeholder="N° Cedula">
+                <div class="invalid-text" *ngIf="form.get('identificationUser').invalid && form.get('identificationUser').touched">Ingrese un número de identificacion</div>
+               <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                matTooltipClass="tooltip" (click)="search()">
+                <mat-icon>search</mat-icon>
+            </button>
+            </div>
+        </div>
+        <div class="cov-group cov-margin">
+            <label class="primaryColor">Nombres y apellidos</label>
+            <input formControlName="name" type="text" class="form-control text-may" placeholder="Nombres y apellidos">
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Area</label>
+            <input formControlName="area" type="text" class="form-control text-may" placeholder="Area">
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Cargo</label>
+            <select formControlName="position" class="form-control">
+                <option class="ligthColor" value="">Seleccione un cargo</option>
+                <option *ngFor="let p of positionList" value="{{p.id}}">{{p.description}}</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Pais</label>
+            <select [(ngModel)]="countryId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getDepartment()">
+                <option class="ligthColor" value="0">Seleccione un pais</option>
+                <option *ngFor="let c of countryList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Departamento</label>
+            <select [(ngModel)]="departmentId" [ngModelOptions]="{standalone: true}" class="form-control" (change)="getCity()">
+                <option class="ligthColor" value="0">Seleccione un departamento</option>
+                <option *ngFor="let d of departmentList" value="{{d.id}}">{{d.name}}</option>
+            </select>
+        </div>
+        <div class="cov-group">
+            <label class="primaryColor">Ciudad</label>
+            <select formControlName="city" class="form-control">
+                <option class="ligthColor" value="">Seleccione una ciudad</option>
+                <option *ngFor="let c of cityList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Al momento de diligenciar esta encuesta, usted se encuentra en:</label>
+            <select class="form-control" formControlName="meetingPlace">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="En su casa / Trabajo remoto">En su casa / Trabajo remoto</option>
+                <option value="En aislamiento ordenado por su EPS">En aislamiento ordenado por su EPS</option>
+                <option value="En aislamiento ordenado por la empresa">En aislamiento ordenado por la empresa</option>
+                <option value="En turno de trabajo">En turno de trabajo</option>
+            </select>
+     
+        </div>
+        <h4 class="cov-parf">SINTOMATOLOGIA DIARIA</h4>
+        <p class="cov-parf">Seleccione si el día de hoy presenta o no, alguno de los siguientes síntomas</p>
+        <br>
+      
+        <div class="cov-group ">
+            <label class="primaryColor">Tos</label>
+            <select class="form-control" formControlName="cough">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+      
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Dolor en el cuerpo</label>
+            <select class="form-control" formControlName="bodyPain">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Fatiga o Cansancio</label>
+            <select class="form-control" formControlName="fatigue">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Dolor de cabeza</label>
+            <select class="form-control" formControlName="headache">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Dolor de garganta</label>
+            <select class="form-control" formControlName="soreThroat">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Secreción (flujo) nasal</label>
+            <select class="form-control" formControlName="runnyNose">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Dificultad Respiratoria</label>
+            <select class="form-control" formControlName="respiratoryDistress">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                </select>
+        </div>
+
+        <div class="cov-group cov-textitle">
+            <label class="primaryColor">Disminución de percepción de olores y sabores</label>
+            <select class="form-control" formControlName="smellStaste">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group cov-textitle">
+            <label class="primaryColor">El día de hoy de acuerdo con el resultado de la temperatura de diaria, favor indique:</label>
+            <select class="form-control" formControlName="temperature">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Resultado normal (Menor a 37,8°C)">Resultado normal (Menor a 37,8°C)</option>
+                <option value="Alterada (Mayor o igual a 37,9°C)">Alterada (Mayor o igual a 37,9°C)</option>
+                <option value="No he verificado">No he verificado</option>
+            </select>
+        
+        </div>
+        <p class="cov-parf">Seleccione si el día de hoy ha presentado o no, alguna de las siguientes situaciones:</p>
+        <br>
+        <div class="cov-group ">
+            <label class="primaryColor">¿Ha tenido contacto con alguna persona que padezca COVID-19, confirmada?</label>
+            <select class="form-control" formControlName="contactPerson">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+ 
+        </div>
+        <div class="cov-group cov-textitle">
+            <label class="primaryColor">¿Ha tenido contacto estrecho (menor a 2 metros por 15 minutos sin protección respiratoria) con una persona con 
+                síntomas respiratorios y usted no sabe si tiene COVID-19 positivo?</label>
+                <select class="form-control" formControlName="closeContact">
+                    <option class="ligthColor" value="">Selecciona una opcion</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">¿Le han realizado prueba de covid-19 con muestra en sangre que ha sido positiva?</label>
+            <select class="form-control" formControlName="bloodTest">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+  
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">¿Le han realizado prueba de covid-19 con muestra en nariz que ha sido positiva?</label>
+            <select class="form-control" formControlName="noseTest">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+        
+        </div>
+        <div class="cov-group cov-textitle">
+            <label class="primaryColor">¿Está en aislamiento preventivo porque ha sido diagnosticado de Covid-19?</label>
+            <select class="form-control" formControlName="positiveIsolation">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+
+        </div>
+        <div class="cov-group cov-textitle ">
+            <label class="primaryColor">¿ Ha tenido incapacidad temporal por caso asociado a Covid-19?</label>
+            <select class="form-control" formControlName="positiveDisability">
+                <option class="ligthColor" value="">Selecciona una opcion</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+            </select>
+          
+        </div>
+       
+        <h4 class="cov-parf">CONTACTO ESTRECHO</h4>
+        <p class="cov-parf">A continuación relacione los lugares y personas (fuera de su nucleo familiar o su compañero de trabajo) con quienes haya tenido un contacto estrecho (exposición sin tapabocas, compartiendo un espacio menor a dos metros por mas de 15 minutos) durante el día de hoy.
+        </p>
+        <br>
+        <div class="cov-group ">
+            <label class="primaryColor">Lugares fuera de la empresa</label>
+            <div class="cov-text">
+                <textarea class="text-area text-may" id="textarea" formControlName="placeOutside" 
+                    maxlength="255" placeholder="Maximo 255 caracteres" required></textarea>
+
+            </div>
+
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Lugares y/o areas dentro de la empresa</label>
+            <div class="cov-text">
+                <textarea class="text-area text-may" id="textarea" formControlName="placeInside" 
+                    maxlength="255" placeholder="Maximo 255 caracteres" required></textarea>
+                   
+            </div>
+        </div>
+        <div class="cov-group ">
+            <label class="primaryColor">Personas</label>
+            <div class="cov-text">
+                <textarea class="text-area text-may" id="textarea" formControlName="persons" 
+                    maxlength="255" placeholder="Maximo 255 caracteres" required></textarea>
+                  
+            </div>
+        </div>
+            <div class="cov-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="cov-container-button">
+                    <button type="reset"  class="cov-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+

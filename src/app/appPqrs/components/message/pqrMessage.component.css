@@ -1,0 +1,503 @@
+.demo-table {
+    width: 100%;
+  }
+  
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+  .mes-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.mes-container-button{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 20px 10px 0px;
+}
+.mes-group{
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+.mes-group >input{
+    margin: 0px 5px 0px 0px;
+}
+mat-paginator{
+    margin-top: 10px;
+}
+.mes-table{
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    margin-right: 20px !important;
+    max-width: 100%;
+}
+th{
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+}
+tr{
+    background-color: #ffffff;
+}
+tr:hover{
+    background-color: #eeeeee;
+}
+.mat-column-active{
+    text-align: center !important;
+}
+.mat-column-Acciones{
+    text-align: center !important;
+}
+.mes-container-loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.mes-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.mes-butonsearch{
+    margin-right: 20px;  
+ } 
+ .mes-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.mes-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.mes-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.mes-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.mes-text{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.mes-container-button{
+    display: flex;
+    width: 100%;
+}
+.mes-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 11px;
+}
+.mes-butto{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #197763;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+
+
+
+.mes-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.mes-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.mes-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.mes-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.mes-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .mes-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .mes-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.mes-control{
+    display: flex;
+    height: 40px;
+}
+.text-area{
+    height: 98px;
+}
+#textarea {
+    font-family: arial, verdana, ms sans serif;
+    font-size: 12pt;
+    color: #354a5f;
+    background-color: rgb(255, 255, 255);
+    }
+
+    .inputfile + label {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: black;
+        display: inline-block;
+    }
+    
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        background-color: red;
+    }
+
+
+.mes-attachment{
+    display: flex;
+    height: 100px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--ligth);
+}
+.mes-attachment-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    max-height: 100px;
+    padding: 5px;
+    overflow: auto;
+}
+.mes-container-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 78px;
+    width: 88px;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.mes-container-file:hover{
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3), 0px 7px 11px 0px rgba(0, 0, 0, 0.15), 0px 2px 19px 0px rgba(0, 0, 0, 0.13);
+}
+.mes-container-file p{
+    text-align: center;
+    max-width: 88px;
+    flex-grow: 1;
+    margin: 5px 0px 0px 0px;
+    font-size: 16px;
+    color: var(--primary);
+}
+.mes-attachment-attach{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mes-gro{
+    display: flex;
+    align-items: center;
+    width: calc(51.2% - 20px);
+}
+.mes-title{
+    font-size: 14px;
+    color: var(--primary);
+    margin:0px;
+}
+.mes-control{
+    display: flex;
+    height: 40px;
+}
+.mes-container-search{
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    margin: 0px 20px;
+    border-bottom: 1px solid var(--ligth);
+}
+.mes-margin{
+    margin-bottom: 60px;
+}
+.invalid-text{
+    color: rgb(206, 98, 98);
+    font-size: small;
+    font-family: sans-serif;
+    margin-left: 5px;
+}
+.text-may{
+    text-transform:uppercase;
+}
+.mes-pars{
+    color: gray;
+    font-size: x-small;
+    font-family: sans-serif;
+}
+.mes-bot{
+    margin-bottom: 62px;
+}
+.mes-vis{
+    visibility:hidden;
+}
+.mes-fea{
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.mes-feagroup{
+    display: flex;
+    flex-direction: column;
+    width: calc(45% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+
+.mes-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.mes-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.mes-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+.mes-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.mes-attachment{
+    display: flex;
+    height: 100px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--ligth);
+}
+.mes-attachment-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    max-height: 100px;
+    padding: 5px;
+    overflow: auto;
+}
+.mes-container-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 78px;
+    width: 88px;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.mes-container-file:hover{
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3), 0px 7px 11px 0px rgba(0, 0, 0, 0.15), 0px 2px 19px 0px rgba(0, 0, 0, 0.13);
+}
+.mes-container-file p{
+    text-align: center;
+    max-width: 88px;
+    flex-grow: 1;
+    margin: 5px 0px 0px 0px;
+    font-size: 16px;
+    color: var(--primary);
+}
+.mes-color{
+    width: 40px;
+    margin-top: 10px;
+    background-color: #0091ea;
+    border-color: #0091ea;
+}
+/* Structure */
+.example-container {
+    position: relative;
+  }
+  
+  .example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-rate-limit-reached {
+    max-width: 360px;
+    text-align: center;
+  }
+  
+  /* Column Widths */
+  .mat-column-number,
+  .mat-column-state {
+    max-width: 64px;
+  }
+  
+  .mat-column-created {
+    max-width: 124px;
+  }
+  .detail-card{
+    display: flex;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 5px;
+    margin-top: 30px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.detail-content-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    width: 50px;
+}
+.detail-content{
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 10px 0px 0px 0px;
+    width: calc(50% - 50px);
+}
+.detail-title{
+    color: var(--primary);
+    margin: 0px;
+}
+.detail-subtitle{
+    color: var(--ligth);
+}

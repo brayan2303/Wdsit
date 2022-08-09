@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+    <div class="bsc-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Listado de Variables</p>
+    <div class="bsc-form">
+        <ng-container *ngFor="let v of variableList">
+            <div *ngIf="v.type==='Variable'" class="bsc-group">
+                <label class="primaryColor">{{v.name}}</label>
+                <input *ngIf="v.defaultValue===0" id="{{v.formulaVariableId}}|{{v.name}}|{{v.detailVariableId}}" type="number" value="{{v.value}}" class="form-control" placeholder="{{v.name}}">
+                <input *ngIf="v.defaultValue!=0" disabled id="{{v.formulaVariableId}}|{{v.name}}|{{v.detailVariableId}}" type="number" value="{{v.defaultValue}}" class="form-control" placeholder="{{v.name}}">
+            </div>
+            <p *ngIf="v.type==='Operador' && v.name==='Suma'" class="bsc-operator">+</p>
+            <p *ngIf="v.type==='Operador' && v.name==='Resta'" class="bsc-operator">-</p>
+            <p *ngIf="v.type==='Operador' && v.name==='Multiplicacion'" class="bsc-operator">*</p>
+            <p *ngIf="v.type==='Operador' && v.name==='Division'" class="bsc-operator">/</p>
+            <p *ngIf="v.type==='Operador' && v.name==='Parentesis Apertura'" class="bsc-operator">(</p>
+            <p *ngIf="v.type==='Operador' && v.name==='Parentesis Cierre'" class="bsc-operator">)</p>
+        </ng-container>
+        <button mat-mini-fab class="bsc-button green" matTooltip="Guardar" matTooltipPosition="above" matTooltipClass="tooltip"
+            (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</div>

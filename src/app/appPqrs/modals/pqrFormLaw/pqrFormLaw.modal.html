@@ -1,0 +1,41 @@
+<div mat-dialog-content>
+    <div class="pqr-close">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Politica y Ley (Home) Pagina principal</p>
+    <form [formGroup]="form" class="pqr-form">
+        <div class="pqr-text">
+            <textarea class="text-area" name="descriptionLaw" formControlName="descriptionLaw"
+                placeholder="Politica y ley"></textarea>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Lenguaje</label>
+            <select formControlName="languageId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una opcion</option>
+                <option *ngFor="let c of languageList" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+            <div *ngIf="this.data.formId != 0" class="pqr-group-checkbox">
+                <label class="primaryColor">Activo</label>
+                <div class="pqr-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                    <div class="pqr-checkbox">
+                        <input id="check" formControlName="active" type="checkbox">
+                        <label class="pqr-label" for="check">
+                            <mat-icon>done</mat-icon>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="pqr-group">
+                <label class="primaryColor">Guardar</label>
+                <div class="pqr-container-button">
+                    <button class="pqr-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                        matTooltipClass="tooltip" mat-raised-button (click)="save()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
+        </div>
+    </form>
+</div>

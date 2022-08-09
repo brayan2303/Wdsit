@@ -1,0 +1,145 @@
+<div class="pro-container">
+    <p class="title">Listado de Actividades</p>
+    <div class="pro-form">
+        <div class="pro-group">
+            <label class="primaryColor">Año</label>
+            <select [(ngModel)]="year" class="form-control" (change)="getPerspective()">
+                <option class="ligthColor" value="0">Seleccione un año</option>
+                <option *ngFor="let y of yearList" value="{{y}}">{{y}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Proceso</label>
+            <select [(ngModel)]="perspectiveId" class="form-control" (change)="getStrategicObjetive()">
+                <option class="ligthColor" value="0">Seleccione un proceso</option>
+                <option *ngFor="let p of perspectiveList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Objetivo </label>
+            <select [(ngModel)]="strategicObjetiveId" class="form-control" (change)="getWorkPlan()">
+                <option class="ligthColor" value="0">Seleccione un objetivo </option>
+                <option *ngFor="let s of strategicObjetiveList" value="{{s.id}}">{{s.name}}</option>
+            </select>
+        </div>
+        <div class="pro-group">
+            <label class="primaryColor">Plan de Trabajo</label>
+            <select [(ngModel)]="workPlanId" class="form-control" (change)="getActivity()">
+                <option class="ligthColor" value="0">Seleccione un plan de trabajo</option>
+                <option *ngFor="let w of workPlanList" value="{{w.id}}">{{w.name}}</option>
+            </select>
+        </div>
+    </div>
+    <table #table class="pro-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">
+                <div *ngIf="item.id===activityId" class="pro-active"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="percentage">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Porcentaje</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.percentage}}%</td>
+        </ng-container>
+        <ng-container matColumnDef="deliverables">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Entregables</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.deliverables}}</td>
+        </ng-container>
+        <ng-container matColumnDef="deliverDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Entrega</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.deliverDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="workPlan">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Plan de Trabajo</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.workPlan}}</td>
+        </ng-container>
+        <ng-container matColumnDef="responsibleUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario Responsable</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.responsibleUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario Creacion</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let item" (click)="getItem(item.id)">{{item.status}}</td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Cerrar" matTooltipPosition="above" matTooltipClass="tooltip" (click)="close(item.id)">
+                    <mat-icon class="red-color">close</mat-icon>
+                </button>
+                <button *ngIf="item.status==='Abierto'" mat-icon-button matTooltip="Agregar Avance" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="addItem(item.id)">
+                    <mat-icon class="green-color">add</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="pro-container-loader">
+        <div class="pro-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    <p *ngIf="activityId!=0" class="title">Listado de Avances</p>
+    <div *ngIf="activityId!=0" class="pro-item-container">
+        <p *ngIf="advanceList.length===0" [ngStyle]="{'margin': '0px','text-align':'center','color':'var(--primary)'}">Sin
+            Avances!</p>
+        <div *ngFor="let i of advanceList" class="pro-item-card">
+            <div class="pro-item-content">
+                <div class="pro-item-information">
+                    <p class="pro-item-title">Descripcion</p>
+                    <p class="pro-item-subtitle">{{i.description}}</p>
+                </div>
+                <div class="pro-item-information" [ngStyle]="{'flex-grow': '0','margin-right':'20px'}">
+                    <p class="pro-item-title">Fecha</p>
+                    <p class="pro-item-subtitle">{{i.creationDate}}</p>
+                </div>
+                <div class="pro-item-actions">
+                    <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                        (click)="deleteItem(i.id)">
+                        <mat-icon class="red-color">close</mat-icon>
+                    </button>
+                    <input #file hidden type="file" (change)="attachFile(i.id,$event.target.files)">
+                    <button mat-icon-button matTooltip="Adjuntar Archivo" matTooltipPosition="above"
+                        matTooltipClass="tooltip" (click)="file.click()">
+                        <mat-icon class="orange-color">attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="pro-item-files">
+                <div *ngIf="loadingFile" class="pro-container-loader">
+                    <div class="pro-loader"></div>
+                </div>
+                <div *ngIf="fileList.length >0" class="pro-container-file">
+                    <ng-container *ngFor="let f of fileList">
+                        <div *ngIf="f.advanceId === i.id" class="pro-card-files" matTooltip="{{f.name}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                            <p>{{f.type}}</p>
+                            <div class="pro-card-actions">
+                                <button mat-icon-button matTooltip="Descargar" matTooltipPosition="right"
+                                    matTooltipClass="tooltip" (click)="downloadFile(f)">
+                                    <mat-icon class="blue-color">cloud_download</mat-icon>
+                                </button>
+                                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="right"
+                                    matTooltipClass="tooltip" (click)="deleteFile(i.id,f.name)">
+                                    <mat-icon class="red-color">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

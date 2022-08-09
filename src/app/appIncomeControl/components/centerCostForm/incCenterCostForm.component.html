@@ -1,0 +1,8 @@
+<div class="centerCost-main">
+    <p class="centerCost-title">Por favor selecciona un centro de costo</p>
+    <div class="centerCost-content">
+        <button *ngFor="let center of centerCostList" class="centerCost-button" type="button"
+            mat-raised-button (click)="onClick($event.srcElement)"
+            value="{{center.id}}">{{center.description}}</button>
+    </div>
+</div>

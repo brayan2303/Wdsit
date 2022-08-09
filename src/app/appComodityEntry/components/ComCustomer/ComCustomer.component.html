@@ -1,0 +1,93 @@
+<div class="coms-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="coms-form">
+
+        <div class="coms-group">
+            <label class="primaryColor">Proyecto</label>
+            <input name="project" formControlName="project" class="form-control text-may" placeholder="Proyecto">
+            <div class="invalid-text" *ngIf="form.get('project').invalid && form.get('project').touched">Ingrese un valor valido</div>
+        </div>
+        
+        <div class="coms-group">
+            <label class="primaryColor">Cliente</label>
+            <select formControlName="customerId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione un Cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.id}}">{{c.description}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('customerId').invalid && form.get('customerId').touched">Seleccione una opcion valida</div>
+        </div>
+
+        <div *ngIf="editing != 0" class="coms-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="coms-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="coms-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="coms-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="coms-container-button">
+                <button type="reset" class="coms-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="coms-container-button">
+        <div class="coms-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #table class="coms-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="project">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</th>
+            <td mat-cell *matCellDef="let item">{{item.project}}</td>
+        </ng-container>
+        <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+            <td mat-cell *matCellDef="let item">{{item.customer}}</td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+            <td mat-cell *matCellDef="let item">{{item.user}}</td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="edit(item)">
+                    <mat-icon class="blue-color">create</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+</div>

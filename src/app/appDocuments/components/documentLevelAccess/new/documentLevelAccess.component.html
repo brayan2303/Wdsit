@@ -1,0 +1,41 @@
+<div class="docLevel-container">
+    <p class="title">{{tittle}}</p>
+    <form [formGroup]="form" class="docLevel-form">
+        <div class="docLevel-group">
+            <label class="primaryColor">Codigo</label>
+            <input name="code" formControlName="code" type="text" class="form-control text-may" placeholder="Codigo">
+            <div class="invalid-text" *ngIf="form.get('code').invalid && form.get('code').touched">Ingrese código valido
+            </div>
+        </div>
+
+        <div class="docLevel-group">
+            <label class="primaryColor">Descripcion</label>
+            <input name="description" formControlName="description" type="text" class="form-control text-may"
+                placeholder="Descripcion">
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese
+                una descripción valida</div>
+        </div>
+
+        <div *ngIf="docLevelformId != 0" class="docLevel-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="docLevel-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="docLevel-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="docLevel-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="docLevel-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="docLevel-container-button">
+                <button class="docLevel-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right"
+                    matTooltipClass="tooltip" [disabled]="!form.valid" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

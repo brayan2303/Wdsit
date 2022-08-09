@@ -1,0 +1,224 @@
+.actfix-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.actfix-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+}
+.actfix-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.actfix-text{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.actfix-container-button{
+    display: flex;
+    width: 100%;
+}
+.actfix-button{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #0091ea;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+.actfix-butto{
+    font-size: 14px;
+    width: 150px;
+    height: 30px;
+    line-height: 0px;
+    color: var(--secundary);
+    background-color: #197763;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    margin-bottom: 10px;
+}
+
+
+
+.actfix-group-checkbox{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.actfix-container-checkbox{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.actfix-checkbox{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    border: 1px solid var(--primary);
+}
+input[type=checkbox]{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    opacity: 0;
+}
+.actfix-label{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background:transparent;
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.actfix-label mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+input[type=checkbox]:checked + .user-label{
+    background-color:var(--green);
+}
+input[type=checkbox]:checked + .user-label + mat-icon{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    color: white;
+}
+.actfix-control{
+    display: flex;
+    height: 40px;
+}
+.text-area{
+    height: 98px;
+}
+#textarea {
+    font-family: arial, verdana, ms sans serif;
+    font-size: 12pt;
+    color: #354a5f;
+    background-color: rgb(255, 255, 255);
+    }
+
+    .inputfile + label {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: black;
+        display: inline-block;
+    }
+    
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        background-color: red;
+    }
+
+
+.actfix-attachment{
+    display: flex;
+    height: 100px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--ligth);
+}
+.actfix-attachment-content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    max-height: 100px;
+    padding: 5px;
+    overflow: auto;
+}
+.actfix-container-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 78px;
+    width: 88px;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.actfix-container-file:hover{
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3), 0px 7px 11px 0px rgba(0, 0, 0, 0.15), 0px 2px 19px 0px rgba(0, 0, 0, 0.13);
+}
+.actfix-container-file p{
+    text-align: center;
+    max-width: 88px;
+    flex-grow: 1;
+    margin: 5px 0px 0px 0px;
+    font-size: 16px;
+    color: var(--primary);
+}
+.actfix-attachment-attach{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actfix-gro{
+    display: flex;
+    align-items: center;
+    width: calc(51.2% - 20px);
+}
+.actfix-title{
+    font-size: 14px;
+    color: var(--primary);
+    margin:0px;
+}
+.actfix-control{
+    display: flex;
+    height: 40px;
+}
+.actfix-container-search{
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    margin: 0px 20px;
+    border-bottom: 1px solid var(--ligth);
+}
+.actfix-margin{
+    margin-bottom: 60px;
+}
+.invalid-text{
+    color: rgb(206, 98, 98);
+    font-size: small;
+    font-family: sans-serif;
+    margin-left: 5px;
+}
+.actfix-may{
+    text-transform:uppercase;
+}
+.actfix-pars{
+    color: gray;
+    font-size: x-small;
+    font-family: sans-serif;
+}
+.actfix-bot{
+    margin-bottom: 62px;
+}

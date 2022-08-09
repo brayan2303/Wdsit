@@ -1,0 +1,17 @@
+<div class="income-progress" *ngIf="isProgress">
+    <svg class="income-circular">
+        <circle class="income-path" cx="75" cy="75" r="50" fill="none" stroke-width="7" stroke-miterlimit="2"></circle>
+    </svg>
+</div>
+<div class="income-container">
+    <div class="income-header">
+        <p class="income-title">BIENVENIDO A WODEN COLOMBIA S.A.S</p>
+    </div>
+    <app-incSearchForm (searchEmit1)="onSelectPerson($event)" (searchEmit2)="onRegistry($event)" *ngIf="activeForm ==='form1'"></app-incSearchForm>
+    <app-incDataForm [genPersonModel]="genPersonEntity" (dataEmit)="onSelectOption($event)" *ngIf="activeForm === 'form2'"></app-incDataForm>
+    <app-incSegmentForm (segmentEmit)="onSelectSegment($event)" *ngIf="activeForm === 'form3'"></app-incSegmentForm>
+    <app-incCenterCostForm [segmentId]="segmentId" (centerCostEmit)="onSelectCenterCost($event)" *ngIf="activeForm === 'form4'"></app-incCenterCostForm>
+    <app-incCustomerForm [isData]="isData" (customerEmit)="onSelectCustomer($event)" *ngIf="activeForm === 'form5'"></app-incCustomerForm>
+    <app-incExitForm (exitEmit1)="onSubmit($event)" (exitEmit2)="activeForm=$event" *ngIf="activeForm === 'form6'"></app-incExitForm>
+    <app-incFinishForm (finishEmit)="onSubmit($event)" *ngIf="activeForm === 'form7'"></app-incFinishForm>
+</div>

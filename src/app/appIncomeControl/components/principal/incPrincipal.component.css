@@ -1,0 +1,73 @@
+/* Clases personalizadas */
+.income-progress{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+.income-circular{
+    animation: rotate 1s linear infinite;
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+.income-path{
+    stroke-dasharray: 250;
+    stroke-dashoffset: 0;
+    stroke:#B6463A;
+    animation:dash 2s linear infinite,color 4s linear infinite;
+    stroke-linecap: round;
+}
+@keyframes rotate{
+    100%{
+     transform: rotate(360deg);
+    }
+}
+@keyframes dash{
+    0%{
+     stroke-dashoffset: 0;
+    }
+    50%{
+     stroke-dashoffset: 150;
+    }
+    100%{
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes color{
+    0%,100%{
+        stroke: #d62d20;
+    }
+    25%{
+        stroke: #0057e7;
+    }
+    50%{
+        stroke: #008744;
+    }
+    75%{
+        stroke: #ffa700;
+    }
+}
+.income-container{
+    height: 100%;
+    width: 100%;
+}
+.income-header{
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 100%;
+    background-color: #FF7700;
+}
+.income-title{
+    font-size: 32px;
+    font-weight: bold;
+    font-family: Roboto;
+    letter-spacing: 1px;
+    color: white;
+}

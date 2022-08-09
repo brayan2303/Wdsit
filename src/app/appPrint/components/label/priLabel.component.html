@@ -1,0 +1,52 @@
+<div class="label-container">
+    <p class="title">{{priLabelEntity.section}} - {{priLabelEntity.name}}</p>
+    <div class="label-form">
+        <div class="label-group">
+            <label class="primaryColor">Impresora</label>
+            <select [(ngModel)]="printerId" class="form-control">
+                <option class="ligthColor" value="0">Seleccione una impresora</option>
+                <option *ngFor="let p of printerList" value="{{p.id}}">{{p.name}}</option>
+            </select>
+        </div>
+        <div *ngFor="let f of fieldList;let i=index;" class="label-group">
+            <div *ngIf="f.automatic != true ; else notEqual">
+                <!--; else notEqual-->
+                <label class="primaryColor">{{f.name}}</label>
+                <input id="{{f.id}}" type="text" class="form-control text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" name="{{i+1}}" placeholder="{{f.name}}"
+                    (keydown)="onKeyPressed($event)">
+            </div>
+            <ng-template #notEqual>
+                <label class="primaryColor">{{f.name}}</label>
+                <input id="{{f.id}}" type="text" class="form-control text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();"name="{{i+1}}" placeholder="{{f.name}}" 
+                    (keydown)="onKeyPressed($event)" readonly="true">
+            </ng-template>
+        </div>
+        <div class="label-container-button">
+            <button mat-mini-fab class="blue" [ngStyle]="{'margin-top':'20px'}" matTooltip="Imprimir"
+                matTooltipPosition="above" matTooltipClass="tooltip" (click)="print()">
+                <mat-icon>print</mat-icon>
+            </button>
+        </div>
+    </div>
+    <table mat-table [dataSource]="data" #table>
+        <ng-container *ngFor="let c of headers;let i=index;">
+            <ng-container *ngIf="c !='Acciones'" matColumnDef="{{c}}">
+                <th mat-header-cell *matHeaderCellDef>{{c | uppercase}}</th>
+                <td mat-cell *matCellDef="let item">{{item[headersMapped[i]]}}</td>
+            </ng-container>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let i=index;">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="deleteRow(i)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="headers"></tr>
+        <tr mat-row *matRowDef="let row; columns: headers;"></tr>
+    </table>
+    <div class="label-container-count">Total de registros: {{count}}</div>
+</div>

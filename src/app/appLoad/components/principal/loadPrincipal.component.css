@@ -1,0 +1,195 @@
+.rep-toolbar{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0px !important;
+    height: var(--toolbarHeight) !important;
+    width: 100%;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+}
+.rep-toolbar-image{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: var(--sidenavWidth);
+    height: 100%;
+}
+.rep-toolbar-image img{
+    height: 80%;
+}
+.rep-toolbar-title{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.rep-toolbar-options{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
+    height: 100%;
+}
+.rep-container{
+    position: fixed;
+    top: var(--toolbarHeight);
+    display: flex;
+    height: calc(100vh - var(--toolbarHeight));
+    width: 100%;
+}
+.rep-sidenav{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    height: calc(100% - var(--toolbarHeight));
+    width: var(--sidenavWidth);
+    box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.5);
+    transition: left 0.3s ease;
+}
+.rep-sidenav-close{
+    left: calc(var(--sidenavWidth) * -1);
+    transition: left 0.3s ease;
+}
+.rep-sidenav-header{
+    display: flex;
+    border-bottom: 1px solid var(--ligth);
+}
+.rep-sidenav-header img{
+    height: 90px;
+    width: 90px;
+    margin: 20px 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.rep-sidenav-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+.rep-sidenav-content{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 20px;
+}
+.rep-navigation{
+    padding-left: 20px;
+    margin-bottom: 20px !important;
+}
+.rep-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 60px;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 0px;
+    transition: margin-left 0.2s linear;
+}
+.rep-section:hover{
+    margin-left: 10px;
+    transition: margin-left 0.2s linear;
+}
+.rep-section-title{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+.rep-section-icon{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    height: 30px !important;
+    width: 30px !important;
+    transition: all 0.2s linear;
+}
+.rep-section-icon a{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.rep-section-icon-open{
+    transform: rotate(180deg);
+    transition: transform 0.2s linear;
+}
+.rep-module{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--primary);
+    border-bottom: 1px solid var(--ligth);
+}
+.rep-module a{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 20px 40px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: padding 0.2s linear;
+}
+.rep-module a:hover{
+    padding-left: 50px;
+    transition: padding-left 0.2s linear;
+}
+.rep-content{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 20px;
+    flex-grow: 1;
+    margin-left: var(--sidenavWidth);
+    transition: margin-left 0.3s ease;
+    overflow-y: auto;
+}
+.rep-content-close{
+    margin-left: 0px;
+    transition: margin-left 0.3s ease;
+}
+mat-paginator{
+    margin-top: 10px;
+}
+table{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+    margin-right: 20px !important;
+    max-width: 100%;
+    margin-top: 20px;
+}
+.user-table{
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+    margin-right: 20px !important;
+    max-width: 100%;
+}
+th{
+    font-size: 14px;
+    color: var(--primary);
+    vertical-align: middle;
+}
+td{
+    font-size: 14px;
+    color: var(--ligth);
+    vertical-align: middle;
+}
+.mat-column-active{
+    text-align: center !important;
+}
+.mat-column-Acciones{
+    text-align: center !important;
+}
+.user-container-button{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px 10px 0px;
+}
+.user-group{
+    display: flex;
+    align-items: center;
+    width: 300px;
+}

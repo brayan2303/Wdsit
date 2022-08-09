@@ -1,0 +1,48 @@
+<div class="centerCost-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="centerCost-form">
+        <div class="centerCost-group">
+            <label class="primaryColor">Codigo</label>
+            <input formControlName="code" type="text" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="centerCost-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control" placeholder="Descripcion">
+        </div>
+        <div class="centerCost-group">
+            <label class="primaryColor">Segmento</label>
+            <select formControlName="segmentId" class="form-control">
+                <option class="ligthColor" value="">Seleccione un segmento</option>
+                <option *ngFor="let s of segmentList" value="{{s.id}}">{{s.description}}</option>
+            </select>
+        </div>
+        <div class="centerCost-group-checkbox">
+            <label class="primaryColor">Control de ingresos</label>
+            <div class="centerCost-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="centerCost-checkbox">
+                    <input id="incomeActive" formControlName="incomeActive" type="checkbox">
+                    <label class="centerCost-label" for="incomeActive">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="centerCostId != 0" class="centerCost-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="centerCost-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="centerCost-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="centerCost-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="centerCost-container-button">
+            <button class="centerCost-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

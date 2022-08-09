@@ -1,0 +1,30 @@
+<div class="position-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="position-form">
+        <div class="position-group">
+            <label class="primaryColor">Codigo</label>
+            <input formControlName="code" type="text" class="form-control" placeholder="Codigo">
+        </div>
+        <div class="position-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control" placeholder="Descripcion">
+        </div>
+        <div *ngIf="positionId != 0" class="position-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="position-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="position-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="position-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="position-container-button">
+            <button class="position-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

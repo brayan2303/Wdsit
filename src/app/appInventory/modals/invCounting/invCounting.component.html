@@ -1,0 +1,94 @@
+<div class="loc-container">
+    <div *ngIf="this.dataSource.data.length == 0; else notEqual">
+        <div class="loc-close">
+            <button mat-icon-button (click)="close()">
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+    </div>
+    <ng-template #notEqual>
+    </ng-template>
+    <p class="title">Registro de inventario por cantidades </p>
+    <br>
+    <div *ngIf="this.compare != this.invGeneralInitE.quantity ; else notequalCount">
+        <p class="primaryColor">Cantidad de total registrada: {{this.compare}}</p>
+        </div>
+        <ng-template #notequalCount>
+            <p class="primaryColor">Cantidad de total registrada: {{this.compare}}</p>
+        </ng-template>
+    <br>
+    
+        <div class="loc-form">
+            <div *ngIf="this.dataSource.data.length == 1; else notCrossing">
+            <div class="loc-group">
+                <input class="form-control" hidden [(ngModel)]="countingType" #counting type="text" placeholder="Cantidad" (keyup.enter)="validador($event)" (keydown.Tab)="validador($event)">
+                <br>
+            </div>
+        </div>
+        <ng-template #notCrossing>
+            <div class="loc-group">
+                <label class="primaryColor">Cantidad</label>
+                <input class="form-control" [(ngModel)]="countingType" #counting type="text" placeholder="Cantidad" (keyup.enter)="validador($event)" (keydown.Tab)="validador($event)">
+                <br>
+            </div>
+        </ng-template>
+            <div *ngIf="this.dataSource.data.length > 0">
+                <div class="loc-group loc-end">
+                    <label class="primaryColor"></label>
+                    <br>
+                    <button class="inv-button" mat-raised-button matTooltip="Cerrar conteo" (click)="init()">
+                        <mat-icon>highlight_off</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <table #table class="loc-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="conteo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Conteo</th>
+            <td mat-cell *matCellDef="let item">{{item.conteo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let item">{{item.codigo}}</td>
+        </ng-container>
+        <ng-container matColumnDef="goodDeft">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Good / Deft</th>
+            <td mat-cell *matCellDef="let item">{{item.goodDeft}}</td>
+        </ng-container>
+        <ng-container matColumnDef="counting">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+            <td mat-cell *matCellDef="let item">{{item.counting}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario de creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de creacion</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+                <!--
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        -->
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

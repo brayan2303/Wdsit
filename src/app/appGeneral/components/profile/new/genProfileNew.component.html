@@ -1,0 +1,33 @@
+<div class="profile-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="newForm" class="profile-form">
+        <div class="profile-group">
+            <label class="primaryColor">Aplicacion</label>
+            <select formControlName="applicationId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una aplicacion</option>
+                <option *ngFor="let a of applicationList" value="{{a.id}}">{{a.name}}</option>
+            </select>
+        </div>
+        <div class="profile-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div *ngIf="profileId != 0" class="profile-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="profile-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="profile-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="profile-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="profile-container-button">
+            <button class="profile-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!newForm.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

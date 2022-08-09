@@ -1,0 +1,30 @@
+<div class="actfix-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="actfix-form">
+        <div class="actfix-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+        <div *ngIf="ActFixTypeEntryformId != 0" class="actfix-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="actfix-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="actfix-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="actfix-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="actfix-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="actfix-container-button">
+                <button type="reset" class="actfix-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid"
+                    matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

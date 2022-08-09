@@ -1,0 +1,95 @@
+<div class="loc-container">
+    <p class="title">Listado</p>
+      <br>
+      <div class="loc-group">
+        <label class="primaryColor">Cliente</label>
+        <label class="primaryColor">{{customer.description}}</label>
+       
+    </div>
+        <br>
+        <div class>
+        <input id="serials" #serials hidden type="file" accept=".xlsx" (change)="load($event.target.files)">
+        <button mat-mini-fab class="blue" matTooltip="{{uploading?'Cargando ':'Cargar '}}" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="serials.click()" >
+            <mat-icon >cloud_upload</mat-icon>
+        </button>
+
+        <button reset mat-mini-fab class="blue loc-but" matTooltip="Exportar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="download()">
+            <mat-icon>cloud_download</mat-icon>
+        </button>
+
+        <button type="reset" mat-mini-fab class="red loc-but" matTooltip="Eliminar" matTooltipPosition="above"
+            matTooltipClass="tooltip" (click)="delete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </div>
+    <br>
+    <br>
+    <div *ngIf="loading" class="loc-container-loader">
+        <div class="loc-loader"></div>
+    </div>
+    <table class="loc-table" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="Material">
+            <th mat-header-cell *matHeaderCellDef>Material</th>
+            <td mat-cell *matCellDef="let item">{{item.material}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Texto breve de material">
+            <th mat-header-cell *matHeaderCellDef>Texto breve de material</th>
+            <td mat-cell *matCellDef="let item">{{item.textMaterial}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Número de serie">
+            <th mat-header-cell *matHeaderCellDef>Número de serie</th>
+            <td mat-cell *matCellDef="let item">{{item.numSerie}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Fabricante número de serie">
+            <th mat-header-cell *matHeaderCellDef>Fabricante número de serie</th>
+            <td mat-cell *matCellDef="let item">{{item.factoryNumSerie}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Almacén">
+            <th mat-header-cell *matHeaderCellDef>Almacén</th>
+            <td mat-cell *matCellDef="let item">{{item.warehouse}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Lote">
+            <th mat-header-cell *matHeaderCellDef>Lote</th>
+            <td mat-cell *matCellDef="let item">{{item.lot}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Lote de stock">
+            <th mat-header-cell *matHeaderCellDef>Lote de stock</th>
+            <td mat-cell *matCellDef="let item">{{item.lotStock}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Status del sistema">
+            <th mat-header-cell *matHeaderCellDef>Status del sistema</th>
+            <td mat-cell *matCellDef="let item">{{item.statusSystem}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Modificado el">
+            <th mat-header-cell *matHeaderCellDef>Modificado el</th>
+            <td mat-cell *matCellDef="let item">{{item.modificationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Modificado por">
+            <th mat-header-cell *matHeaderCellDef>Modificado por</th>
+            <td mat-cell *matCellDef="let item">{{item.modificationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Creado por">
+            <th mat-header-cell *matHeaderCellDef>Creado por</th>
+            <td mat-cell *matCellDef="let item">{{item.creation}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Creado el">
+            <th mat-header-cell *matHeaderCellDef>Creado el</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Tp.stocks (contab.refer.)">
+            <th mat-header-cell *matHeaderCellDef>Tp.stocks (contab.refer.)</th>
+            <td mat-cell *matCellDef="let item">{{item.tpStock}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Materiales">
+            <th mat-header-cell *matHeaderCellDef>Materiales</th>
+            <td mat-cell *matCellDef="let item">{{item.materialTwo}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+</div>

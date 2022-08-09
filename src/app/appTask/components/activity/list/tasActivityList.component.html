@@ -1,0 +1,72 @@
+<div class="activity-container">
+    <p class="title">Listado de actividades</p>
+    <div class="activity-container-button">
+        <button mat-mini-fab class="green" matTooltip="Crear" matTooltipPosition="above" matTooltipClass="tooltip"
+            (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button routerLink="/tasPrincipal/task/list" mat-mini-fab class="blue" matTooltip="Listado de Tareas"
+            matTooltipPosition="above" matTooltipClass="tooltip">
+            <mat-icon>list</mat-icon>
+        </button>
+    </div>
+    <p *ngIf="activityList.length === 0" class="activity-empty">Sin actividades</p>
+    <div class="activity-content">
+        <div *ngFor="let item of activityList" class="activity-activity">
+            <div class="activity-content-information">
+                <div class="activity-activity-information">
+                    <p class="activity-title">{{item.title}}</p>
+                    <p class="activity-note">{{item.note}}</p>
+                </div>
+                <div class="activity-activity-actions">
+                    <p class="activity-status"
+                        [ngStyle]="{'color': item.status === 'Pendiente' ? 'var(--red)':'var(--green)'}">{{item.status}}
+                    </p>
+                    <div class="activity-actions">
+                        <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="delete(item.id)">
+                            <mat-icon class="red-color">delete</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Editar" matTooltipPosition="above" matTooltipClass="tooltip"
+                            (click)="edit(item.id)">
+                            <mat-icon class="blue-color">create</mat-icon>
+                        </button>
+                        <input #image hidden type="file" accept="images" multiple
+                            (change)="attach(item.id,$event.target.files)">
+                        <button mat-icon-button matTooltip="Adjuntar archivo" matTooltipPosition="above"
+                            matTooltipClass="tooltip" (click)="image.click()">
+                            <mat-icon class="primaryColor">attach_file</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Cerrar" matTooltipPosition="above" matTooltipClass="tooltip"
+                            (click)="close(item.id,item.status)">
+                            <mat-icon class="orange-color">close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-activity-files">
+                <p class="activity-files">Archivos adjuntos</p>
+                <p *ngIf="fileList.length===0" class="activity-empty">Sin archivos</p>
+                <div class="fil-container-files">
+                    <div *ngFor="let f of fileList" class="fil-card-files" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <div class="fil-card-actions">
+                            <button mat-icon-button matTooltip="Descargar" matTooltipPosition="below"
+                                matTooltipClass="tooltip" (click)="downloadFile(f)">
+                                <mat-icon class="blue-color">cloud_download</mat-icon>
+                            </button>
+                            <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="right"
+                                matTooltipClass="tooltip" (click)="deleteFile(f.activityId,f.name)">
+                                <mat-icon class="red-color">delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="loading" class="activity-container-loader">
+    <div class="activity-loader"></div>
+</div>
+</div>

@@ -1,0 +1,45 @@
+<div class="sectionNew-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="sectionNew-form">
+        <div class="sectionNew-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="sectionNew-group">
+            <label class="primaryColor">Icono</label>
+            <input formControlName="icon" type="text" class="form-control" placeholder="Icono">
+        </div>
+        <div class="sectionNew-group">
+            <label class="primaryColor">Color</label>
+            <input formControlName="color" type="color" class="form-control" placeholder="Color" matTooltip="{{form.controls.color.value}}" matTooltipPosition="above" matTooltipClass="tooltip">
+        </div>
+        <div class="sectionNew-group">
+            <label class="primaryColor">Aplicacion</label>
+            <select formControlName="applicationId" class="form-control">
+                <option class="ligthColor" value="">Seleccione una aplicacion</option>
+                <option *ngFor="let app of applicationList" value="{{app.id}}">{{app.name}}</option>
+            </select>
+        </div>
+        <div class="sectionNew-group">
+            <label class="primaryColor">Posicion</label>
+            <input formControlName="position" type="number" min="0" class="form-control" placeholder="Posicion">
+        </div>
+        <div *ngIf="sectionId != 0" class="sectionNew-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="sectionNew-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="sectionNew-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="sectionNew-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="sectionNew-container-button">
+            <button class="sectionNew-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

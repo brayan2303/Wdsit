@@ -1,0 +1,16 @@
+<div mat-dialog-content>
+    <p class="title">Respuesta </p>
+    <div class="act-detail-container">
+        <textarea class="text-area text-may" [(ngModel)]="answer" placeholder="Escriba su respuesta"></textarea>
+    </div>
+    <div class="acts-group">
+        <label class="primaryColor">Guardar</label>
+        <div class="acts-container-button">
+            <button class="acts-button" mat-raised-button matTooltip="Guardar"
+                matTooltipPosition="right" matTooltipClass="tooltip" mat-raised-button (click)="save()"> 
+            
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

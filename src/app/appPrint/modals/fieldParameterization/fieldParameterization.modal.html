@@ -1,0 +1,34 @@
+
+<div mat-dialog-content>
+    <div class="label-container-button">
+        <button mat-icon-button (click)="close()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Parametrizacion</p>
+    <table class="label-table" mat-table [dataSource]="dataSource" #table>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Codigo</th>
+            <td mat-cell *matCellDef="let item">{{item.code}}</td>
+        </ng-container>
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Posicion</th>
+            <td mat-cell *matCellDef="let item">{{item.position}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Parametrizacion" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="calculate(item.id, this.data.labelId)">
+                    <mat-icon class="green-color">table_view</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+</div>

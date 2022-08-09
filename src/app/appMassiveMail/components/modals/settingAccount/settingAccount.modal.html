@@ -1,0 +1,56 @@
+<div mat-dialog-content>
+    <div fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" fxLayout="row wrap" class="form">
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Correo</label>
+            <input formControlName="mail" type="text" class="form-control" placeholder="Correo">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Cargo</label>
+            <input formControlName="position" type="text" class="form-control" placeholder="Cargo">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Proveedor</label>
+            <select [(ngModel)]="providerName" [ngModelOptions]="{standalone: true}" class="form-control" (change)="selectProvider()">
+                <option class="ligthColor" value="">Seleccione un proveddor</option>
+                <option value="smtp.gmail.com;587">Gmail</option>
+                <option value="smtp.office365.com;587">Office 365</option>
+                <option value="smtp-mail.outlook.com;587">Outlook</option>
+                <option value="smtp.mail.yahoo.com;465">Yahoo!</option>
+            </select>
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Puerto</label>
+            <input formControlName="port" type="number" disabled class="form-control" placeholder="Puerto">
+        </div>
+        <div fxLayout="column" fxFlex="calc(50% - 20px)" class="group">
+            <label class="primaryColor">Contraseña</label>
+            <input formControlName="password" type="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <div *ngIf="data.masAccount!=null" class="group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button mat-mini-fab class="button green" matTooltip="Guardar" matTooltipPosition="left"
+            matTooltipClass="tooltip" [disabled]="!form.valid"
+            [ngClass]="{'ligthBackground':!form.valid,'green':form.valid}" (click)="save()">
+            <mat-icon>done</mat-icon>
+        </button>
+    </form>
+</div>

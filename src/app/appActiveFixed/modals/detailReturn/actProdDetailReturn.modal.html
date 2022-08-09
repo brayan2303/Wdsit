@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <p class="title">Detalle </p>
+    <div class="act-detail-container">
+        <div class="act-detail-card">
+            <div class="act-detail-content">
+                <p class="act-detail-title">Archivos</p>
+                <div class="act-detail-container-file">
+                    <p *ngIf="filetList.length===0" class="act-detail-subtitle">Sin Archivos</p>
+                    <div *ngFor="let f of filetList;" class="act-detail-content-file" matTooltip="{{f.name}}"
+                        matTooltipPosition="above" matTooltipClass="tooltip">
+                        <p>{{f.type}}</p>
+                        <button mat-icon-button matTooltip="Descargar" matTooltipPosition="right"
+                            matTooltipClass="tooltip" (click)="downloadFile(f)">
+                            <mat-icon class="blue-color">cloud_download</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+.dashBoardReport-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.dashBoardReport-form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+}
+
+.dashBoardReport-group{
+    display: flex;
+    flex-direction: column;
+    width: calc(30% - 20px);
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.mat-mini-fab{
+    background-color: #2196f3;
+    margin: 15px 15px 0px 0px
+}
+.dashBoardReport-container-perspective{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+.dashBoardReport-perspective{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+.dashBoardReport-perspective:hover{
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.3), 0px 7px 11px 0px rgba(0, 0, 0, 0.15), 0px 2px 19px 0px rgba(0, 0, 0, 0.13);
+}
+.dashBoardReport-perspective-title{
+    font-size: 14px;
+    margin: 0px;
+    color: var(--primary);
+}
+.dashBoardReport-container-perspective{
+    text-align:center;
+}
+.dashBoardReport-perspective-subtitle{
+    font-size: 14px;
+    margin: 5px 0px 0px 0px;
+    color: var(--ligth);
+    text-align: center;
+}
+.dashBoardReport-container-chart{
+    display: flex;
+}
+apx-chart{
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 400px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+.loc-container-loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.loc-loader{
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid rgb(53, 74, 95);
+    border-bottom: 6px solid rgb(53, 74, 95);
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+.loc-rotate{
+    animation: rotate 3s linear infinite;
+}
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateX(0deg);
+    }
+    50% {
+        -webkit-transform: rotateX(360deg);
+    }
+    100% {
+        -webkit-transform: rotateX(0deg);
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(360deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+

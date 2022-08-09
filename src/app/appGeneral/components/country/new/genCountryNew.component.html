@@ -1,0 +1,26 @@
+<div class="country-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="country-form">
+        <div class="country-group">
+            <label class="primaryColor">Nombre</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div *ngIf="countryId != 0" class="country-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="country-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="country-checkbox">
+                    <input id="active" formControlName="active" type="checkbox">
+                    <label class="country-label" for="active">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="country-container-button">
+            <button class="country-button" mat-raised-button matTooltip="Guardar" matTooltipPosition="right" matTooltipClass="tooltip" [disabled]="!form.valid" (click)="onClick()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
+

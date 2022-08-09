@@ -1,0 +1,145 @@
+<div class="tra-container">
+    <p class="title">Consultar Serial</p>
+    <div class="tra-form">
+        <div class="tra-group">
+            <label class="primaryColor">Cliente</label>
+            <select [(ngModel)]="customer" class="form-control" [ngStyle]="{'margin-bottom':'5px'}" (change)="selectCustomer()">
+                <option class="ligthColor" value="">Seleccione un cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.description}}">{{c.description}}</option>
+            </select>
+        </div>
+        <div class="tra-group">
+            <label class="primaryColor">Serial</label>
+            <div fxLayout>
+                <input [(ngModel)]="serial" type="text" class="form-control" [ngStyle]="{'margin-right':'5px'}"
+                    placeholder="Serial">
+                <button mat-mini-fab class="blue" matTooltip="Buscar" matTooltipPosition="above"
+                    matTooltipClass="tooltip" (click)="getSystem()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="tra-container-system">
+        <div *ngIf="loading1" class="tra-container-loader">
+            <div class="tra-loader"></div>
+        </div>
+        <div *ngIf="!loading1 && wmsSap" class="tra-system" (click)="getFase('WMS SAP')">
+            <span>WMS SAP</span>
+            <mat-icon class="red-color">poll</mat-icon>
+        </div>
+        <div *ngIf="!loading1 && wmsWoden" class="tra-system" (click)="getFase('WMS WODEN')">
+            <span>WMS WODEN</span>
+            <mat-icon class="blue-color">stacked_bar_chart</mat-icon>
+        </div>
+    </div>
+    <span *ngIf="timelineList.length > 0" class="title">Linea de Tiempo</span>
+    <div *ngIf="timelineList.length > 0" class="tra-container-timeline">
+        <ng-container *ngFor="let t of timelineList">
+            <div class="tra-timeline-content" matTooltip="{{t.description}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                <div class="tra-timeline-circle" matTooltip="{{t.observations}}" matTooltipPosition="above" matTooltipClass="tooltip">
+                    <mat-icon>done</mat-icon>
+                </div>
+                <div class="tra-timeline-information">
+                    <span class="tra-title">{{t.fase | titlecase}}</span>
+                    <span class="tra-subtitle">{{t.user | titlecase}}</span>
+                    <span class="tra-subtitle">{{t.date}}</span>
+                </div>
+                <div class="tra-timeline-line"></div>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="loading2" class="tra-container-loader">
+        <div class="tra-loader"></div>
+    </div>
+    <span *ngIf="faseList.length>0" class="title">Fases</span>
+    <div *ngIf="faseList.length>0" class="tra-container-fases">
+        <div *ngFor="let f of faseList" class="tra-fase" [ngClass]="{'tra-fase-hover':f.id!=0}" [ngStyle]="{'cursor':f.id===0?'default':'pointer'}" (click)="getDetail(f.name,f.id)">
+            <mat-icon [ngStyle]="{'color':f.id===0?'var(--ligth)':'var(--primary)'}">{{f.icon}}</mat-icon>
+            <span [ngStyle]="{'margin-top':'5px','color':f.id===0?'var(--ligth)':'var(--primary)'}">{{f.name}}</span>
+        </div>
+    </div>
+    <div *ngIf="loading3" class="tra-container-loader">
+        <div class="tra-loader"></div>
+    </div>
+    <span *ngIf="detail.fase!=null" class="title">Detalle {{fase}}</span>
+    <div *ngIf="detail.fase!=null" class="tra-container-detail">
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">date_range</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Fecha</span>
+                <span class="tra-subtitle">{{detail.date}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">timer</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Hora</span>
+                <span class="tra-subtitle">{{detail.hour}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">account_circle</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Usuario</span>
+                <span class="tra-subtitle">{{detail.user}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">view_module</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Pallet</span>
+                <span class="tra-subtitle">{{detail.pallet}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">inventory_2</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Caja</span>
+                <span class="tra-subtitle">{{detail.box}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">place</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Ubicacion</span>
+                <span class="tra-subtitle">{{detail.location}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">error</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Falla</span>
+                <span class="tra-subtitle">{{detail.failure}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">recycling</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Motivo Scrap</span>
+                <span class="tra-subtitle">{{detail.scrapReason}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">engineering</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Tecnico</span>
+                <span class="tra-subtitle">{{detail.technical}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">info</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Estado</span>
+                <span class="tra-subtitle">{{detail.status}}</span>
+            </div>       
+        </div>
+        <div class="tra-detail">
+            <mat-icon class="tra-icon">wysiwyg</mat-icon>
+            <div class="tra-information">
+                <span class="tra-title">Descripcion</span>
+                <span class="tra-subtitle">{{detail.description}}</span>
+            </div>       
+        </div>
+    </div>
+</div>

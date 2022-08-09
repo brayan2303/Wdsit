@@ -1,0 +1,175 @@
+<div class="coms-container">
+    <p class="title">Ingreso a SAP B1</p>
+    
+    <div class="coms-form">
+        <div class="coms-group">
+            <label class="primaryColor">Numero de Ingreso</label>
+            <input  [(ngModel)]="entrySapB1Id" type="number" class="form-control text-may">
+        </div>
+        
+        <div class="coms-group">
+            <button mat-mini-fab class="coms-float-button blue" matTooltip="Buscar Ingreso"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="searchEntryById(this.entrySapB1Id)">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+        <div class="coms-group">
+            <button mat-mini-fab class="coms-float-button blue" matTooltip="Nuevo Ingreso"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="newEntry()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="coms-form">
+        <div class="coms-group">
+            <label class="primaryColor">Cliente</label>
+            <select [(ngModel)]="customerId" class="form-control" (change)="getLocationList()">
+                <option class="ligthColor" value="0" selected>Seleccione un Cliente</option>
+                <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+            </select>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Ubicacion</label>
+            <select [(ngModel)]="location" class="form-control">
+                <option class="ligthColor" value="0" selected>Seleccione una Ubicacion</option>
+                <option *ngFor="let c of locationList" value="{{c.location}}">{{c.location}}</option>
+            </select>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Entrada</label>
+            <label class="primaryColor">{{this.entryData.id}}</label>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Cliente</label>
+            <label class="primaryColor">{{this.entryData.customerName}}</label>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Ubicacion</label>
+            <label class="primaryColor">{{this.entryData.location}}</label>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Usuario Creacion</label>
+            <label class="primaryColor">{{this.entryData.userName}}</label>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Estado</label>
+            <label class="primaryColor">{{this.entryData.state}}</label>
+        </div>
+
+        <div class="coms-group">
+            <label class="primaryColor">Documento Entrada</label>
+            <label class="primaryColor">{{this.entryData.documentCode}}</label>
+        </div>
+
+    </div>
+
+    <div *ngIf="!this.validateCharge" class="coms-form">
+        <div class="coms-group">
+            <label class="primaryColor">Progreso de ingreso</label>
+            <mat-progress-bar  mode="determinate" value="{{this.valueCharge}}"></mat-progress-bar>
+        </div>
+    </div>
+
+    <div *ngIf="this.validateCharge" class="coms-form">
+        <div class="coms-group-botton">
+            <label class="primaryColor">Agregar Ingreso</label>
+            <button mat-mini-fab class="coms-float-button green" matTooltip="Agregar ingreso"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="loadEntrys()">
+                <mat-icon>post_add</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="this.validateQuantity" class="coms-group-botton">
+            <label class="primaryColor">Cargar Entrada</label>
+            <button  mat-mini-fab class="coms-float-button green" matTooltip="Agregar ingreso"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="loadArticles()">
+                <mat-icon>playlist_add</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="this.validateEntry == true && this.searchSap == true" class="coms-group-botton">
+            <label class="primaryColor">Ingreso SAPBO</label>
+            <button  mat-mini-fab class="coms-float-button green" matTooltip="Agregar ingreso"
+                matTooltipPosition="left" matTooltipClass="tooltip" (click)="loadToSap()">
+                <mat-icon>import_export</mat-icon>
+            </button>
+        </div>
+    </div>
+    
+    <div class="coms-container-button">
+        <div class="coms-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+
+    <ng-container>
+        <table class="coms-table" mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero</th>
+                <td mat-cell *matCellDef="let item">{{item.number}}</td>
+            </ng-container>
+            <ng-container matColumnDef="customerName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+                <td mat-cell *matCellDef="let item">{{item.customerName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="origin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Origen</th>
+                <td mat-cell *matCellDef="let item">{{item.origin}}</td>
+            </ng-container>
+            <ng-container matColumnDef="originType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Origen</th>
+                <td mat-cell *matCellDef="let item">{{item.originType}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let i=index;">
+                    <button *ngIf="this.searchSap" mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip" 
+                    (click)="deleteEntry(i)">
+                        <mat-icon class="red-color">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
+        <div *ngIf="loading" class="report-container-loader">
+            <div class="report-loader"></div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+    </ng-container>
+
+    <div class="coms-container-button">
+        <div class="coms-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filterLoading($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+        </div>
+    </div>
+    <table #tableLoading class="coms-table" mat-table [dataSource]="dataSourceLoading" matSortLoading>
+        <ng-container matColumnDef="sapCode">
+            <th mat-header-cell *matHeaderCellDef>Codigo Sap</th>
+            <td mat-cell *matCellDef="let item">{{item.sapCode}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sapCodeDescription">
+            <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+            <td mat-cell *matCellDef="let item">{{item.sapCodeDescription}}</td>
+        </ng-container>
+        <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+            <td mat-cell *matCellDef="let item">{{item.quantity}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsLoading"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsLoading;"></tr>
+    </table>
+    <div *ngIf="loadingArticles" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator #paginatorLoading [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+
+
+</div>

@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+    <p class="title">Selecciona un cliente</p>
+    <select  class="form-control" [(ngModel)]="customerId" (change)="close()" >
+        <option value="0" disabled>Selecciona un cliente</option>
+        <option *ngFor="let c of customerList" value="{{c.customerId}}">{{c.customer}}</option>
+    </select>
+</div>

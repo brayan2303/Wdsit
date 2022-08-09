@@ -1,0 +1,14 @@
+.boton5 {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0.2em 1.0em;
+    background: #0c84f5;
+    position:center;
+    border: 2px solid #0c84f5;
+    outline: 1px solid;
+    outline-color: rgba(22, 67, 218, 0.4);
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+    margin-left: 70px;
+    box-shadow: 2px 2px 5px #999;
+  }

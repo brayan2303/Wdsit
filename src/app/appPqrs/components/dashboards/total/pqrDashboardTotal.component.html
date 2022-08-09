@@ -1,0 +1,42 @@
+<div class="pqr-container">
+    <p class="title">Dashboard Total</p>
+    <div class="pqr-form">
+        <div class="pqr-group">
+            <label class="primaryColor">Fecha Inicial</label>
+            <div class="pqr-form-control">
+                <input id="date1" matInput [matDatepicker]="datePicker1" class="form-control" disabled>
+                <mat-datepicker-toggle matSuffix [for]="datePicker1"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker1 disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <div class="pqr-group">
+            <label class="primaryColor">Fecha Final</label>
+            <div class="pqr-form-control">
+                <input id="date2" matInput [matDatepicker]="datePicker2" class="form-control"
+                    disabled>
+                <mat-datepicker-toggle matSuffix [for]="datePicker2"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker2 disabled="false"></mat-datepicker>
+            </div>
+        </div>
+        <button mat-mini-fab class="pqr-button blue" matTooltip="Buscar" matTooltipPosition="right" matTooltipClass="tooltip"
+            (click)="getPqrs()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    <div class="pqr-container-card">
+        <div *ngFor="let p of pqrList" class="pqr-card">
+            <span class="pqr-title">{{p.name}}</span>
+            <br>
+            <br>
+            <span class="pqr-subtitle" [ngStyle]="{'color':'#076597'}">{{p.value}}</span>
+            <br>
+        </div>
+    </div>
+    <div class="pqr-container-chart">
+        <div *ngIf="data.length>0" class="pqr-chart">
+            <canvas baseChart [datasets]="multiBarChart.data" [labels]="multiBarChart.labels" [options]="multiBarChart.options"
+                [legend]="multiBarChart.legend" [chartType]="multiBarChart.type">
+            </canvas>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+.dev-toolbar{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0px !important;
+    height: var(--toolbarHeight) !important;
+    width: 100%;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.5);
+}
+.dev-toolbar-image{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: var(--sidenavWidth);
+    height: 100%;
+}
+.dev-toolbar-image img{
+    height: 80%;
+    cursor: pointer;
+}
+.dev-toolbar-title{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.dev-toolbar-options{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
+    height: 100%;
+}
+.dev-container{
+    position: fixed;
+    top: var(--toolbarHeight);
+    display: flex;
+    height: calc(100vh - var(--toolbarHeight));
+    width: 100%;
+}
+.dev-sidenav{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    height: calc(100% - var(--toolbarHeight));
+    width: var(--sidenavWidth);
+    box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.5);
+    transition: left 0.3s ease;
+}
+.dev-sidenav-close{
+    left: calc(var(--sidenavWidth) * -1);
+    transition: left 0.3s ease;
+}
+.dev-sidenav-header{
+    display: flex;
+    border-bottom: 1px solid var(--ligth);
+}
+.dev-sidenav-header img{
+    height: 90px;
+    width: 90px;
+    margin: 20px 10px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.dev-sidenav-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+.dev-sidenav-content{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 20px;
+}
+.dev-navigation{
+    padding-left: 20px;
+    margin-bottom: 20px !important;
+}
+.dev-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 60px;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 0px;
+    transition: margin-left 0.2s linear;
+}
+.dev-section:hover{
+    margin-left: 10px;
+    transition: margin-left 0.2s linear;
+}
+.dev-section-title{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+.dev-section-icon{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    height: 30px !important;
+    width: 30px !important;
+    transition: all 0.2s linear;
+}
+.dev-section-icon a{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.dev-section-icon-open{
+    transform: rotate(180deg);
+    transition: transform 0.2s linear;
+}
+.dev-module{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--primary);
+    border-bottom: 1px solid var(--ligth);
+}
+.dev-module a{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 20px 40px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: padding 0.2s linear;
+}
+.dev-module a:hover{
+    padding-left: 50px;
+    transition: padding-left 0.2s linear;
+}
+.dev-content{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 20px;
+    flex-grow: 1;
+    margin-left: var(--sidenavWidth);
+    transition: margin-left 0.3s ease;
+    overflow-y: auto;
+}
+.dev-content-close{
+    margin-left: 0px;
+    transition: margin-left 0.3s ease;
+}
+
+

@@ -1,0 +1,47 @@
+<div mat-dialog-content>
+    <div class="close" fxLayout fxLayoutAlign="flex-end">
+        <button mat-icon-button (click)="close(false)">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <p class="title">Detalle Prueba N°2 </p>
+    <div class="act-detail-container">
+        <div *ngFor="let c  of covFormEntity">
+            <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#E63B48'}">event</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de Prueba</p>
+                    <p class="act-detail-subtitle">{{c.dateSecondProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#16881F'}">calendar_today</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de ejecucion</p>
+                    <p class="act-detail-subtitle">{{c.dateExecutionSecondProof}}</p>
+                </div>
+            </div>
+             <div class="act-detail-card">
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#162B88'}">article</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Resultado de prueba</p>
+                    <p class="act-detail-subtitle">{{c.resultSecondProof}}</p>
+                </div>
+                <div class="act-detail-content-icon">
+                    <mat-icon [ngStyle]="{'color':'#168886'}">date_range</mat-icon>
+                </div>
+                <div class="act-detail-content">
+                    <p class="act-detail-title">Fecha de notificacion</p>
+                    <p class="act-detail-subtitle">{{c.dateNotificationResultSecond}}</p>
+                </div>
+            </div>
+            <div *ngIf="loading" class="act-detail-container-loader">
+                <div class="act-detail-loader"></div>
+            </div>
+        </div>
+    </div>
+</div>

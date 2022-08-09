@@ -1,0 +1,143 @@
+<div class="report-container">
+    <p class="title">Seguimiento Teletrabajo</p>
+    <div class="report-container-button">
+        <div class="report-group">
+            <input type="text" class="form-control" placeholder="Filtrar" (keyup)="filter($event)">
+            <mat-icon class="blue-color">search</mat-icon>
+            <button mat-mini-fab class="blue cov-butonsearch" matTooltip="Recargar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="search()">
+                <mat-icon>find_replace</mat-icon>
+            </button>
+            <button mat-mini-fab class="blue" matTooltip="Exportar" matTooltipPosition="above" matTooltipClass="tooltip"
+                (click)="download()">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+
+        </div>
+    </div>
+    <table #table class="report-table" mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="identificationUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>N° identificacion</th>
+            <td mat-cell *matCellDef="let item">{{item.identificationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationUser">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre y apellido</th>
+            <td mat-cell *matCellDef="let item">{{item.creationUser}}</td>
+        </ng-container>
+        <ng-container matColumnDef="carPosition">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cargo</th>
+            <td mat-cell *matCellDef="let item">{{item.carPosition}}</td>
+        </ng-container>
+        <ng-container matColumnDef="area">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Area</th>
+            <td mat-cell *matCellDef="let item">{{item.area}}</td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+            <td mat-cell *matCellDef="let item">{{item.city}}</td>
+        </ng-container>
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+            <td mat-cell *matCellDef="let item">{{item.creationDate}}</td>
+        </ng-container>
+        <ng-container matColumnDef="meetingPlace">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar de trabajo</th>
+            <td mat-cell *matCellDef="let item">{{item.meetingPlace}}</td>
+        </ng-container>
+        <ng-container matColumnDef="cough">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tos</th>
+            <td mat-cell *matCellDef="let item">{{item.cough}}</td>
+        </ng-container>
+        <ng-container matColumnDef="bodyPain">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dolor de cuerpo</th>
+            <td mat-cell *matCellDef="let item">{{item.bodyPain}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fatigue">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fatiga o cansancio</th>
+            <td mat-cell *matCellDef="let item">{{item.fatigue}}</td>
+        </ng-container>
+        <ng-container matColumnDef="soreThroat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dolor de garganta</th>
+            <td mat-cell *matCellDef="let item">{{item.soreThroat}}</td>
+        </ng-container>
+        <ng-container matColumnDef="headache">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dolor de cabeza</th>
+            <td mat-cell *matCellDef="let item">{{item.headache }}</td>
+        </ng-container>
+        <ng-container matColumnDef="runnyNose">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Flujo nasal</th>
+            <td mat-cell *matCellDef="let item">{{item.runnyNose}}</td>
+        </ng-container>
+        <ng-container matColumnDef="respiratoryDistress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Dificultad al respirar</th>
+            <td mat-cell *matCellDef="let item">{{item.respiratoryDistress }}</td>
+        </ng-container>
+        <ng-container matColumnDef="smellStaste">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Perdida de olor o gusto</th>
+            <td mat-cell *matCellDef="let item">{{item.smellStaste}}</td>
+        </ng-container>
+        <ng-container matColumnDef="temperature">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Temperatura</th>
+            <td mat-cell *matCellDef="let item">{{item.temperature}}</td>
+        </ng-container>
+        <ng-container matColumnDef="contactPerson">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto con personas</th>
+            <td mat-cell *matCellDef="let item">{{item.contactPerson}}</td>
+        </ng-container>
+        <ng-container matColumnDef="closeContact">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto estrecho</th>
+            <td mat-cell *matCellDef="let item">{{item.closeContact}}</td>
+        </ng-container>
+        <ng-container matColumnDef="bloodTest">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prueba de sangre</th>
+            <td mat-cell *matCellDef="let item">{{item.bloodTest}}</td>
+        </ng-container>
+        <ng-container matColumnDef="noseTest">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prueba nasal</th>
+            <td mat-cell *matCellDef="let item">{{item.noseTest}}</td>
+        </ng-container>
+        <ng-container matColumnDef="positiveIsolation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Aislamiento preventivo</th>
+            <td mat-cell *matCellDef="let item">{{item.positiveIsolation}}</td>
+        </ng-container>
+        <ng-container matColumnDef="positiveDisability">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Incapacidad temporal</th>
+            <td mat-cell *matCellDef="let item">{{item.positiveDisability}}</td>
+        </ng-container>
+        <ng-container matColumnDef="placeOutside">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar dentro de la empresa</th>
+            <td mat-cell *matCellDef="let item">{{item.placeOutside}}</td>
+        </ng-container>
+        <ng-container matColumnDef="placeInside">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar fuera de la empresa</th>
+            <td mat-cell *matCellDef="let item">{{item.placeInside}}</td>
+        </ng-container>
+        <ng-container matColumnDef="persons">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Personas</th>
+            <td mat-cell *matCellDef="let item">{{item.persons}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Activo</th>
+            <td mat-cell *matCellDef="let item">
+                <mat-icon *ngIf="item.active" class="green-color">done</mat-icon>
+                <mat-icon *ngIf="!item.active" class="red-color">clear</mat-icon>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-icon-button matTooltip="Eliminar" matTooltipPosition="above" matTooltipClass="tooltip"
+                    (click)="delete(item.id)">
+                    <mat-icon class="red-color">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+    <div *ngIf="loading" class="report-container-loader">
+        <div class="report-loader"></div>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20, 30, 40, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

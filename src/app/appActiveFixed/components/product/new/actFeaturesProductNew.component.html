@@ -1,0 +1,62 @@
+<div class="actfix-container">
+    <p class="title">{{title}}</p>
+    <form [formGroup]="form" class="actfix-form">
+        <div class="actfix-group">
+            <label class="primaryColor">Nombre</label>
+            <input name="name" formControlName="name" class="form-control text-may" placeholder="Nombre">
+            <div class="invalid-text" *ngIf="form.get('name').invalid && form.get('name').touched">Ingrese un nombre valido</div>
+        </div>
+     
+        <div class="actfix-group">
+            <label class="primaryColor">Descripcion</label>
+            <input formControlName="description" type="text" class="form-control text-may" placeholder="Descripcion">
+            <div class="invalid-text" *ngIf="form.get('description').invalid && form.get('description').touched">Ingrese una descripcion valida</div>
+        </div>
+        <div class="actfix-group">
+            <label class="primaryColor">Tipo de producto</label>
+            <select formControlName="type" class="form-control">
+                <option class="ligthColor" value="">Seleccione un tipo de entrada</option>
+                <option *ngFor="let c of typeProductList" value="{{c.name}}">{{c.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('type').invalid && form.get('type').touched">Ingrese un tipo valido</div>
+        </div>
+        <div class="actfix-group">
+            <label class="primaryColor">Proveedor</label>
+            <select formControlName="supplier" class="form-control" >
+                <option *ngFor="let c of supplierListt" value="{{c.id}}">{{c.name}}</option>
+            </select>
+            <div class="invalid-text" *ngIf="form.get('supplier').invalid && form.get('supplier').touched">Seleccione una opcion valida</div>
+        </div>
+        <div class="actfix-group-checkbox">
+            <label class="primaryColor">Asignacion multiple</label>
+            <div class="actfix-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="actfix-checkbox">
+                    <input id="actfix" formControlName="multipleAssignment" type="checkbox">
+                    <label class="actfix-label" for="actfix">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="ActFixProductformId != 0" class="actfix-group-checkbox">
+            <label class="primaryColor">Activo</label>
+            <div class="actfix-container-checkbox" matRipple [matRippleCentered]="true" [matRippleRadius]="40">
+                <div class="actfix-checkbox">
+                    <input id="check" formControlName="active" type="checkbox">
+                    <label class="actfix-label" for="check">
+                        <mat-icon>done</mat-icon>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="actfix-group">
+            <label class="primaryColor">Guardar</label>
+            <div class="actfix-container-button">
+                <button type="reset" class="actfix-button" mat-raised-button matTooltip="Guardar" mat-raised-button [disabled]="!form.valid" matTooltipPosition="right" matTooltipClass="tooltip" (click)="save()">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

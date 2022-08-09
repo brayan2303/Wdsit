@@ -1,0 +1,8 @@
+<div mat-dialog-content>
+    <div class="country-container-button">
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <app-genCountryNew (closeDialog)="onClose()" [countryId]="countryId"></app-genCountryNew>
+</div>
